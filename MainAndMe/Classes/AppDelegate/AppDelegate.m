@@ -8,9 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LayoutManager.h"
-
-#import "RootNavigationController.h"
-#import "RootViewController.h"
+#import "ReachabilityManager.h"
 
 @interface AppDelegate()
 
@@ -28,7 +26,7 @@
 
     [[LayoutManager shared] application:application
           didFinishLaunchingWithOptions:launchOptions];
-
+    [ReachabilityManager shared];
     [self.window makeKeyAndVisible];
     return YES;
 }

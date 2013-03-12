@@ -11,6 +11,7 @@
 #import "AlertManager.h"
 #import "LoginSignUpManager.h"
 #import "MBProgressHUD.h"
+#import "ReachabilityManager.h"
 
 @interface SignUpViewController ()
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -209,9 +210,15 @@
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 - (IBAction)signUpButtonClicked:(id)sender {
     if ([self validateTextFields]) {
         [self hideKeyboard];
+        
+        if (![ReachabilityManager isReachable]) {
+            [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+            return;
+        }
         
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [LoginSignUpManager signUpWithEmail:_emailTextField.text

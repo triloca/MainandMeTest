@@ -14,6 +14,7 @@
 #import "DataManager.h"
 #import "UserDefaultsManager.h"
 #import "MBProgressHUD.h"
+#import "ReachabilityManager.h"
 
 @interface LoginViewController ()
 @property (unsafe_unretained, nonatomic) IBOutlet UITextField *emailTextField;
@@ -74,6 +75,11 @@
 - (IBAction)loginButtonClicked:(id)sender {
     if ([self isTextFieldsValid]) {
         [self hideKeyBoard];
+        
+        if (![ReachabilityManager isReachable]) {
+            [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+            return;
+        }
         
         [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [[LoginSignUpManager shared] loginWithEmail:_emailTextField.text

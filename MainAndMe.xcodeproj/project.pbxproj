@@ -50,6 +50,9 @@
 		D93C0FB516EFCE1600A4472E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FB416EFCE1600A4472E /* MBProgressHUD.m */; };
 		D93C0FB916EFD7AB00A4472E /* UserDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FB816EFD7AB00A4472E /* UserDefaultsManager.m */; };
 		D93C0FBE16EFDDCF00A4472E /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FBD16EFDDCF00A4472E /* DataManager.m */; };
+		D93C0FC316EFE94500A4472E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FC216EFE94500A4472E /* Reachability.m */; };
+		D93C0FC616EFE97B00A4472E /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FC516EFE97B00A4472E /* ReachabilityManager.m */; };
+		D93C0FC816EFEC3600A4472E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D93C0FC716EFEC3600A4472E /* SystemConfiguration.framework */; };
 		D9D796CB16EEAD5200C494D7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D796C916EEAD5200C494D7 /* LoginViewController.m */; };
 		D9D796CC16EEAD5200C494D7 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796CA16EEAD5200C494D7 /* LoginViewController.xib */; };
 		D9D796CE16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796CD16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib */; };
@@ -148,6 +151,11 @@
 		D93C0FB816EFD7AB00A4472E /* UserDefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserDefaultsManager.m; path = Classes/Managers/UserDefaults/UserDefaultsManager.m; sourceTree = "<group>"; };
 		D93C0FBC16EFDDCF00A4472E /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = Classes/Managers/DataManager/DataManager.h; sourceTree = "<group>"; };
 		D93C0FBD16EFDDCF00A4472E /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = Classes/Managers/DataManager/DataManager.m; sourceTree = "<group>"; };
+		D93C0FC116EFE94500A4472E /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		D93C0FC216EFE94500A4472E /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		D93C0FC416EFE97B00A4472E /* ReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReachabilityManager.h; path = Classes/Managers/Reachability/ReachabilityManager.h; sourceTree = "<group>"; };
+		D93C0FC516EFE97B00A4472E /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReachabilityManager.m; path = Classes/Managers/Reachability/ReachabilityManager.m; sourceTree = "<group>"; };
+		D93C0FC716EFEC3600A4472E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		D9D796C816EEAD5200C494D7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Classes/Controllers/Login/LoginViewController.h; sourceTree = "<group>"; };
 		D9D796C916EEAD5200C494D7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Classes/Controllers/Login/LoginViewController.m; sourceTree = "<group>"; };
 		D9D796CA16EEAD5200C494D7 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Classes/Controllers/Login/LoginViewController.xib; sourceTree = "<group>"; };
@@ -173,6 +181,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D93C0FC816EFEC3600A4472E /* SystemConfiguration.framework in Frameworks */,
 				D927DA0216EEA5E2002CF45A /* QuartzCore.framework in Frameworks */,
 				D927D99C16EE6A0B002CF45A /* UIKit.framework in Frameworks */,
 				D927D99E16EE6A0B002CF45A /* Foundation.framework in Frameworks */,
@@ -186,6 +195,7 @@
 		D927D98F16EE6A0B002CF45A = {
 			isa = PBXGroup;
 			children = (
+				D93C0FC716EFEC3600A4472E /* SystemConfiguration.framework */,
 				D927D9A116EE6A0B002CF45A /* MainAndMe */,
 				D927D99A16EE6A0B002CF45A /* Frameworks */,
 				D927D99916EE6A0B002CF45A /* Products */,
@@ -251,9 +261,9 @@
 		D927D9AC16EE6A0C002CF45A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D927D9AD16EE6A0C002CF45A /* AppDelegate */,
 				D93C0FB116EFCE1500A4472E /* 3rdParty */,
 				D927D9F616EE9CBF002CF45A /* Managers */,
-				D927D9AD16EE6A0C002CF45A /* AppDelegate */,
 				D927D9D516EE6A0C002CF45A /* RootViewControllers */,
 				D927D9E416EE8B78002CF45A /* Controllers */,
 				D927D9B116EE6A0C002CF45A /* Utility */,
@@ -379,6 +389,7 @@
 		D927D9F616EE9CBF002CF45A /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				D93C0FBF16EFE8BE00A4472E /* Reachability */,
 				D93C0FBB16EFDDA200A4472E /* DataManager */,
 				D93C0FB616EFD77300A4472E /* UserDefaults */,
 				D93C0FA916EFBC8400A4472E /* Alert */,
@@ -486,6 +497,7 @@
 		D93C0FB116EFCE1500A4472E /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				D93C0FC016EFE94500A4472E /* Reachability */,
 				D93C0FB216EFCE1600A4472E /* MBProgressHUD */,
 			);
 			name = 3rdParty;
@@ -517,6 +529,24 @@
 				D93C0FBD16EFDDCF00A4472E /* DataManager.m */,
 			);
 			name = DataManager;
+			sourceTree = "<group>";
+		};
+		D93C0FBF16EFE8BE00A4472E /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0FC416EFE97B00A4472E /* ReachabilityManager.h */,
+				D93C0FC516EFE97B00A4472E /* ReachabilityManager.m */,
+			);
+			name = Reachability;
+			sourceTree = "<group>";
+		};
+		D93C0FC016EFE94500A4472E /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0FC116EFE94500A4472E /* Reachability.h */,
+				D93C0FC216EFE94500A4472E /* Reachability.m */,
+			);
+			path = Reachability;
 			sourceTree = "<group>";
 		};
 		D9D796C716EEAD2600C494D7 /* Login */ = {
@@ -678,6 +708,8 @@
 				D93C0FB516EFCE1600A4472E /* MBProgressHUD.m in Sources */,
 				D93C0FB916EFD7AB00A4472E /* UserDefaultsManager.m in Sources */,
 				D93C0FBE16EFDDCF00A4472E /* DataManager.m in Sources */,
+				D93C0FC316EFE94500A4472E /* Reachability.m in Sources */,
+				D93C0FC616EFE97B00A4472E /* ReachabilityManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
