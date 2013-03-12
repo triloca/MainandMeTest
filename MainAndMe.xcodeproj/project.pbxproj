@@ -36,7 +36,17 @@
 		D927D9FC16EEA1A2002CF45A /* UIViewController+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = D927D9FB16EEA1A0002CF45A /* UIViewController+Common.m */; };
 		D927DA0016EEA325002CF45A /* UIView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = D927D9FF16EEA324002CF45A /* UIView+Common.m */; };
 		D927DA0216EEA5E2002CF45A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D927DA0116EEA5E2002CF45A /* QuartzCore.framework */; };
-		D93C0F8516EFA6A100A4472E /* ServerRequestsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0F8416EFA6A100A4472E /* ServerRequestsManager.m */; };
+		D93C0F8A16EFAB8900A4472E /* LoginSignUpManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0F8916EFAB8900A4472E /* LoginSignUpManager.m */; };
+		D93C0F8E16EFAE9F00A4472E /* APIv1_0.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0F8D16EFAE9F00A4472E /* APIv1_0.m */; };
+		D93C0F9316EFB0EE00A4472E /* NSURLConnectionDelegateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0F9216EFB0EE00A4472E /* NSURLConnectionDelegateHandler.m */; };
+		D93C0FA216EFB17B00A4472E /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0F9716EFB17B00A4472E /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D93C0FA316EFB17B00A4472E /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0F9916EFB17B00A4472E /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D93C0FA416EFB17B00A4472E /* SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0F9B16EFB17B00A4472E /* SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D93C0FA516EFB17B00A4472E /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0F9D16EFB17B00A4472E /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D93C0FA616EFB17B00A4472E /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0F9F16EFB17B00A4472E /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D93C0FA716EFB17B00A4472E /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FA116EFB17B00A4472E /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D93C0FAC16EFBCA700A4472E /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FAB16EFBCA700A4472E /* AlertManager.m */; };
+		D93C0FB016EFBF1100A4472E /* AlertDelegateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FAF16EFBF1100A4472E /* AlertDelegateHandler.m */; };
 		D9D796CB16EEAD5200C494D7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D796C916EEAD5200C494D7 /* LoginViewController.m */; };
 		D9D796CC16EEAD5200C494D7 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796CA16EEAD5200C494D7 /* LoginViewController.xib */; };
 		D9D796CE16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796CD16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib */; };
@@ -106,8 +116,29 @@
 		D927D9FE16EEA323002CF45A /* UIView+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Common.h"; path = "Classes/Utility/Categories/UIView+Common.h"; sourceTree = "<group>"; };
 		D927D9FF16EEA324002CF45A /* UIView+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Common.m"; path = "Classes/Utility/Categories/UIView+Common.m"; sourceTree = "<group>"; };
 		D927DA0116EEA5E2002CF45A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		D93C0F8316EFA6A100A4472E /* ServerRequestsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerRequestsManager.h; path = Classes/Managers/Server/ServerRequestsManager.h; sourceTree = "<group>"; };
-		D93C0F8416EFA6A100A4472E /* ServerRequestsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerRequestsManager.m; path = Classes/Managers/Server/ServerRequestsManager.m; sourceTree = "<group>"; };
+		D93C0F8816EFAB8900A4472E /* LoginSignUpManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginSignUpManager.h; path = Classes/Managers/Server/LoginSignUp/LoginSignUpManager.h; sourceTree = "<group>"; };
+		D93C0F8916EFAB8900A4472E /* LoginSignUpManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginSignUpManager.m; path = Classes/Managers/Server/LoginSignUp/LoginSignUpManager.m; sourceTree = "<group>"; };
+		D93C0F8C16EFAE9F00A4472E /* APIv1_0.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APIv1_0.h; sourceTree = "<group>"; };
+		D93C0F8D16EFAE9F00A4472E /* APIv1_0.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APIv1_0.m; sourceTree = "<group>"; };
+		D93C0F9116EFB0EE00A4472E /* NSURLConnectionDelegateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSURLConnectionDelegateHandler.h; sourceTree = "<group>"; };
+		D93C0F9216EFB0EE00A4472E /* NSURLConnectionDelegateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSURLConnectionDelegateHandler.m; sourceTree = "<group>"; };
+		D93C0F9516EFB17B00A4472E /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		D93C0F9616EFB17B00A4472E /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		D93C0F9716EFB17B00A4472E /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		D93C0F9816EFB17B00A4472E /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		D93C0F9916EFB17B00A4472E /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		D93C0F9A16EFB17B00A4472E /* SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJSON.h; sourceTree = "<group>"; };
+		D93C0F9B16EFB17B00A4472E /* SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJSON.m; sourceTree = "<group>"; };
+		D93C0F9C16EFB17B00A4472E /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		D93C0F9D16EFB17B00A4472E /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		D93C0F9E16EFB17B00A4472E /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		D93C0F9F16EFB17B00A4472E /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		D93C0FA016EFB17B00A4472E /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		D93C0FA116EFB17B00A4472E /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		D93C0FAA16EFBCA700A4472E /* AlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertManager.h; path = Classes/Managers/Alert/AlertManager.h; sourceTree = "<group>"; };
+		D93C0FAB16EFBCA700A4472E /* AlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertManager.m; path = Classes/Managers/Alert/AlertManager.m; sourceTree = "<group>"; };
+		D93C0FAE16EFBF1100A4472E /* AlertDelegateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertDelegateHandler.h; path = Classes/Managers/Alert/Handlers/AlertDelegateHandler.h; sourceTree = "<group>"; };
+		D93C0FAF16EFBF1100A4472E /* AlertDelegateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertDelegateHandler.m; path = Classes/Managers/Alert/Handlers/AlertDelegateHandler.m; sourceTree = "<group>"; };
 		D9D796C816EEAD5200C494D7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Classes/Controllers/Login/LoginViewController.h; sourceTree = "<group>"; };
 		D9D796C916EEAD5200C494D7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Classes/Controllers/Login/LoginViewController.m; sourceTree = "<group>"; };
 		D9D796CA16EEAD5200C494D7 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Classes/Controllers/Login/LoginViewController.xib; sourceTree = "<group>"; };
@@ -232,6 +263,8 @@
 		D927D9B116EE6A0C002CF45A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				D93C0F9416EFB17B00A4472E /* JSON */,
+				D93C0F8F16EFB0EE00A4472E /* Handlers */,
 				D927D9B216EE6A0C002CF45A /* Categories */,
 			);
 			name = Utility;
@@ -336,6 +369,8 @@
 		D927D9F616EE9CBF002CF45A /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				D93C0FA916EFBC8400A4472E /* Alert */,
+				D93C0F8B16EFAE9F00A4472E /* API */,
 				D93C0F8616EFA6A600A4472E /* Layout */,
 				D93C0F8216EFA67600A4472E /* Server */,
 			);
@@ -345,8 +380,7 @@
 		D93C0F8216EFA67600A4472E /* Server */ = {
 			isa = PBXGroup;
 			children = (
-				D93C0F8316EFA6A100A4472E /* ServerRequestsManager.h */,
-				D93C0F8416EFA6A100A4472E /* ServerRequestsManager.m */,
+				D93C0F8716EFAB4700A4472E /* Login SignUp */,
 			);
 			name = Server;
 			sourceTree = "<group>";
@@ -358,6 +392,83 @@
 				D927D9F816EE9E46002CF45A /* LayoutManager.m */,
 			);
 			name = Layout;
+			sourceTree = "<group>";
+		};
+		D93C0F8716EFAB4700A4472E /* Login SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0F8816EFAB8900A4472E /* LoginSignUpManager.h */,
+				D93C0F8916EFAB8900A4472E /* LoginSignUpManager.m */,
+			);
+			name = "Login SignUp";
+			sourceTree = "<group>";
+		};
+		D93C0F8B16EFAE9F00A4472E /* API */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0F8C16EFAE9F00A4472E /* APIv1_0.h */,
+				D93C0F8D16EFAE9F00A4472E /* APIv1_0.m */,
+			);
+			name = API;
+			path = Classes/Managers/API;
+			sourceTree = "<group>";
+		};
+		D93C0F8F16EFB0EE00A4472E /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0F9016EFB0EE00A4472E /* NSURLConnection */,
+			);
+			name = Handlers;
+			path = Classes/Utility/Handlers;
+			sourceTree = "<group>";
+		};
+		D93C0F9016EFB0EE00A4472E /* NSURLConnection */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0F9116EFB0EE00A4472E /* NSURLConnectionDelegateHandler.h */,
+				D93C0F9216EFB0EE00A4472E /* NSURLConnectionDelegateHandler.m */,
+			);
+			path = NSURLConnection;
+			sourceTree = "<group>";
+		};
+		D93C0F9416EFB17B00A4472E /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0F9516EFB17B00A4472E /* JSON.h */,
+				D93C0F9616EFB17B00A4472E /* NSObject+SBJSON.h */,
+				D93C0F9716EFB17B00A4472E /* NSObject+SBJSON.m */,
+				D93C0F9816EFB17B00A4472E /* NSString+SBJSON.h */,
+				D93C0F9916EFB17B00A4472E /* NSString+SBJSON.m */,
+				D93C0F9A16EFB17B00A4472E /* SBJSON.h */,
+				D93C0F9B16EFB17B00A4472E /* SBJSON.m */,
+				D93C0F9C16EFB17B00A4472E /* SBJsonBase.h */,
+				D93C0F9D16EFB17B00A4472E /* SBJsonBase.m */,
+				D93C0F9E16EFB17B00A4472E /* SBJsonParser.h */,
+				D93C0F9F16EFB17B00A4472E /* SBJsonParser.m */,
+				D93C0FA016EFB17B00A4472E /* SBJsonWriter.h */,
+				D93C0FA116EFB17B00A4472E /* SBJsonWriter.m */,
+			);
+			name = JSON;
+			path = Classes/Utility/JSON;
+			sourceTree = "<group>";
+		};
+		D93C0FA916EFBC8400A4472E /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0FAD16EFBEDB00A4472E /* Handlers */,
+				D93C0FAA16EFBCA700A4472E /* AlertManager.h */,
+				D93C0FAB16EFBCA700A4472E /* AlertManager.m */,
+			);
+			name = Alert;
+			sourceTree = "<group>";
+		};
+		D93C0FAD16EFBEDB00A4472E /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0FAE16EFBF1100A4472E /* AlertDelegateHandler.h */,
+				D93C0FAF16EFBF1100A4472E /* AlertDelegateHandler.m */,
+			);
+			name = Handlers;
 			sourceTree = "<group>";
 		};
 		D9D796C716EEAD2600C494D7 /* Login */ = {
@@ -505,7 +616,17 @@
 				D9D796CB16EEAD5200C494D7 /* LoginViewController.m in Sources */,
 				D9D796E216EECD6B00C494D7 /* SignUpViewController.m in Sources */,
 				D9D796E916EED24300C494D7 /* NSString+Common.m in Sources */,
-				D93C0F8516EFA6A100A4472E /* ServerRequestsManager.m in Sources */,
+				D93C0F8A16EFAB8900A4472E /* LoginSignUpManager.m in Sources */,
+				D93C0F8E16EFAE9F00A4472E /* APIv1_0.m in Sources */,
+				D93C0F9316EFB0EE00A4472E /* NSURLConnectionDelegateHandler.m in Sources */,
+				D93C0FA216EFB17B00A4472E /* NSObject+SBJSON.m in Sources */,
+				D93C0FA316EFB17B00A4472E /* NSString+SBJSON.m in Sources */,
+				D93C0FA416EFB17B00A4472E /* SBJSON.m in Sources */,
+				D93C0FA516EFB17B00A4472E /* SBJsonBase.m in Sources */,
+				D93C0FA616EFB17B00A4472E /* SBJsonParser.m in Sources */,
+				D93C0FA716EFB17B00A4472E /* SBJsonWriter.m in Sources */,
+				D93C0FAC16EFBCA700A4472E /* AlertManager.m in Sources */,
+				D93C0FB016EFBF1100A4472E /* AlertDelegateHandler.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

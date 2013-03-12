@@ -11,4 +11,10 @@
 
 + (LoginSignUpManager*)shared;
 
++ (void)signUpWithEmail:(NSString*)email
+               password:(NSString*)password
+               userName:(NSString*)userName
+                success:(void(^) (NSString* token, NSString* email)) success
+                failure:(void(^) (NSError* error, NSString* errorString)) failure
+              exception:(void(^) (NSString* exceptionString))exception;
 @end

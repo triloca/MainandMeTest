@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "SignUpViewController.h"
+#import "NSString+Common.h"
 
 @interface LoginViewController ()
 @property (unsafe_unretained, nonatomic) IBOutlet UITextField *emailTextField;
@@ -66,6 +67,7 @@
 #pragma mark - Buttons Action
 
 - (IBAction)loginButtonClicked:(id)sender {
+    
 }
 - (IBAction)facebookButtonClicked:(id)sender {
 }
@@ -148,5 +150,16 @@
 - (void)hideKeyBoard{
     [_emailTextField resignFirstResponder];
     [_passwordTextField resignFirstResponder];
+}
+
+- (BOOL)isTextFieldsValid{
+    
+    if (![_emailTextField.text isValidEmail]) {
+        return NO;
+    }
+    if (_passwordTextField.text.length < 6) {
+        return NO;
+    }
+    return YES;
 }
 @end

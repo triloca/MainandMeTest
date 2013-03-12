@@ -10,7 +10,7 @@
 
 
 @interface AlertManager()
-
+@property (assign, nonatomic) NSInteger alertsCount;
 @end
 
 
@@ -34,9 +34,27 @@
     self = [super init];
     if (self) {
    		// your initialization here
+        _alertsCount = 0;
     }
     return self;
 }
 
-#pragma mark - 
+#pragma mark -
+
+- (void)showAlertWithCallBack:(void (^)())callBack
+                        title:(NSString*)title
+                      message:(NSString*)message
+            cancelButtonTitle:(NSString*)cancelButtonTitle
+            otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION
+             {
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+    
+    [alertView show];
+
+}
 @end
