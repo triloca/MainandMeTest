@@ -10,6 +10,7 @@
 #import "RootNavigationController.h"
 #import "RootViewController.h"
 #import "SplashScreenViewController.h"
+#import "LoginViewController.h"
 
 
 @interface LayoutManager()
@@ -52,12 +53,21 @@
 #pragma mark- Load GUI
 
 - (void) loadGUI{
+    
+    
     SplashScreenViewController* splashScreenViewController = [SplashScreenViewController loadFromXIB_Or_iPhone5_XIB];
+    __unsafe_unretained SplashScreenViewController* weak_splashScreenViewController = splashScreenViewController;
+    splashScreenViewController.timeOutBlock = ^(){
+        [weak_splashScreenViewController.navigationController popViewControllerAnimated:NO];
+    };
+    
+    LoginViewController* loginViewController = [LoginViewController loadFromXIB_Or_iPhone5_XIB];
     
     self.rootTabBarController = [RootViewController new];
     
     self.rootNavigationController = [RootNavigationController new];
     _rootNavigationController.viewControllers = [NSArray arrayWithObject:_rootTabBarController];
+    [_rootNavigationController pushViewController:loginViewController animated:NO];
     [_rootNavigationController pushViewController:splashScreenViewController animated:NO];
     
     _appDelegate.window.rootViewController = self.rootNavigationController;

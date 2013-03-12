@@ -36,6 +36,22 @@
 		D927D9FC16EEA1A2002CF45A /* UIViewController+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = D927D9FB16EEA1A0002CF45A /* UIViewController+Common.m */; };
 		D927DA0016EEA325002CF45A /* UIView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = D927D9FF16EEA324002CF45A /* UIView+Common.m */; };
 		D927DA0216EEA5E2002CF45A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D927DA0116EEA5E2002CF45A /* QuartzCore.framework */; };
+		D93C0F8516EFA6A100A4472E /* ServerRequestsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0F8416EFA6A100A4472E /* ServerRequestsManager.m */; };
+		D9D796CB16EEAD5200C494D7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D796C916EEAD5200C494D7 /* LoginViewController.m */; };
+		D9D796CC16EEAD5200C494D7 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796CA16EEAD5200C494D7 /* LoginViewController.xib */; };
+		D9D796CE16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796CD16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib */; };
+		D9D796D116EEB0AA00C494D7 /* login_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D9D796D016EEB0AA00C494D7 /* login_background.png */; };
+		D9D796D816EEB34B00C494D7 /* create_account.png in Resources */ = {isa = PBXBuildFile; fileRef = D9D796D216EEB34B00C494D7 /* create_account.png */; };
+		D9D796D916EEB34B00C494D7 /* email_pwd_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D9D796D316EEB34B00C494D7 /* email_pwd_bg.png */; };
+		D9D796DA16EEB34B00C494D7 /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = D9D796D416EEB34B00C494D7 /* login.png */; };
+		D9D796DB16EEB34B00C494D7 /* main_and_me.png in Resources */ = {isa = PBXBuildFile; fileRef = D9D796D516EEB34B00C494D7 /* main_and_me.png */; };
+		D9D796DC16EEB34B00C494D7 /* signin_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = D9D796D616EEB34B00C494D7 /* signin_facebook.png */; };
+		D9D796DD16EEB34B00C494D7 /* signin_twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = D9D796D716EEB34B00C494D7 /* signin_twitter.png */; };
+		D9D796E216EECD6B00C494D7 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D796E016EECD6B00C494D7 /* SignUpViewController.m */; };
+		D9D796E316EECD6B00C494D7 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796E116EECD6B00C494D7 /* SignUpViewController.xib */; };
+		D9D796E616EECF7A00C494D7 /* back_button.png in Resources */ = {isa = PBXBuildFile; fileRef = D9D796E516EECF7A00C494D7 /* back_button.png */; };
+		D9D796E916EED24300C494D7 /* NSString+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D796E816EED24300C494D7 /* NSString+Common.m */; };
+		D9D796EB16EED4CE00C494D7 /* SignUpViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796EA16EED4CE00C494D7 /* SignUpViewController_iPhone5.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +106,26 @@
 		D927D9FE16EEA323002CF45A /* UIView+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIView+Common.h"; path = "Classes/Utility/Categories/UIView+Common.h"; sourceTree = "<group>"; };
 		D927D9FF16EEA324002CF45A /* UIView+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIView+Common.m"; path = "Classes/Utility/Categories/UIView+Common.m"; sourceTree = "<group>"; };
 		D927DA0116EEA5E2002CF45A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		D93C0F8316EFA6A100A4472E /* ServerRequestsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerRequestsManager.h; path = Classes/Managers/Server/ServerRequestsManager.h; sourceTree = "<group>"; };
+		D93C0F8416EFA6A100A4472E /* ServerRequestsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerRequestsManager.m; path = Classes/Managers/Server/ServerRequestsManager.m; sourceTree = "<group>"; };
+		D9D796C816EEAD5200C494D7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Classes/Controllers/Login/LoginViewController.h; sourceTree = "<group>"; };
+		D9D796C916EEAD5200C494D7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Classes/Controllers/Login/LoginViewController.m; sourceTree = "<group>"; };
+		D9D796CA16EEAD5200C494D7 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Classes/Controllers/Login/LoginViewController.xib; sourceTree = "<group>"; };
+		D9D796CD16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController_iPhone5.xib; path = Classes/Controllers/Login/LoginViewController_iPhone5.xib; sourceTree = "<group>"; };
+		D9D796D016EEB0AA00C494D7 /* login_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login_background.png; path = Resources/Images/Login/login_background.png; sourceTree = "<group>"; };
+		D9D796D216EEB34B00C494D7 /* create_account.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = create_account.png; path = Resources/Images/Login/create_account.png; sourceTree = "<group>"; };
+		D9D796D316EEB34B00C494D7 /* email_pwd_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = email_pwd_bg.png; path = Resources/Images/Login/email_pwd_bg.png; sourceTree = "<group>"; };
+		D9D796D416EEB34B00C494D7 /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = login.png; path = Resources/Images/Login/login.png; sourceTree = "<group>"; };
+		D9D796D516EEB34B00C494D7 /* main_and_me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = main_and_me.png; path = Resources/Images/Login/main_and_me.png; sourceTree = "<group>"; };
+		D9D796D616EEB34B00C494D7 /* signin_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = signin_facebook.png; path = Resources/Images/Login/signin_facebook.png; sourceTree = "<group>"; };
+		D9D796D716EEB34B00C494D7 /* signin_twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = signin_twitter.png; path = Resources/Images/Login/signin_twitter.png; sourceTree = "<group>"; };
+		D9D796DF16EECD6B00C494D7 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpViewController.h; path = Classes/Controllers/SignUp/SignUpViewController.h; sourceTree = "<group>"; };
+		D9D796E016EECD6B00C494D7 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpViewController.m; path = Classes/Controllers/SignUp/SignUpViewController.m; sourceTree = "<group>"; };
+		D9D796E116EECD6B00C494D7 /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SignUpViewController.xib; path = Classes/Controllers/SignUp/SignUpViewController.xib; sourceTree = "<group>"; };
+		D9D796E516EECF7A00C494D7 /* back_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button.png; sourceTree = "<group>"; };
+		D9D796E716EED24300C494D7 /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Common.h"; path = "Classes/Utility/Categories/NSString+Common.h"; sourceTree = "<group>"; };
+		D9D796E816EED24300C494D7 /* NSString+Common.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Common.m"; path = "Classes/Utility/Categories/NSString+Common.m"; sourceTree = "<group>"; };
+		D9D796EA16EED4CE00C494D7 /* SignUpViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SignUpViewController_iPhone5.xib; path = Classes/Controllers/SignUp/SignUpViewController_iPhone5.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +240,8 @@
 		D927D9B216EE6A0C002CF45A /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				D9D796E716EED24300C494D7 /* NSString+Common.h */,
+				D9D796E816EED24300C494D7 /* NSString+Common.m */,
 				D927D9FE16EEA323002CF45A /* UIView+Common.h */,
 				D927D9FF16EEA324002CF45A /* UIView+Common.m */,
 				D927D9B316EE6A0C002CF45A /* NSArray+Common.h */,
@@ -257,6 +295,8 @@
 		D927D9E416EE8B78002CF45A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D9D796DE16EECD4E00C494D7 /* SignUp */,
+				D9D796C716EEAD2600C494D7 /* Login */,
 				D927D9F316EE9A99002CF45A /* SplashScreen */,
 			);
 			name = Controllers;
@@ -265,6 +305,7 @@
 		D927D9EB16EE9845002CF45A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D9D796CF16EEB09A00C494D7 /* Login */,
 				D927D9EC16EE9869002CF45A /* Base */,
 			);
 			name = Images;
@@ -273,6 +314,7 @@
 		D927D9EC16EE9869002CF45A /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				D9D796E416EECF7A00C494D7 /* Buttons */,
 				D927D9ED16EE98AD002CF45A /* Default-568h@2x.png */,
 				D927D9EE16EE98AD002CF45A /* Default.png */,
 				D927D9EF16EE98AD002CF45A /* Default@2x.png */,
@@ -294,10 +336,73 @@
 		D927D9F616EE9CBF002CF45A /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				D93C0F8616EFA6A600A4472E /* Layout */,
+				D93C0F8216EFA67600A4472E /* Server */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		D93C0F8216EFA67600A4472E /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0F8316EFA6A100A4472E /* ServerRequestsManager.h */,
+				D93C0F8416EFA6A100A4472E /* ServerRequestsManager.m */,
+			);
+			name = Server;
+			sourceTree = "<group>";
+		};
+		D93C0F8616EFA6A600A4472E /* Layout */ = {
+			isa = PBXGroup;
+			children = (
 				D927D9F716EE9E46002CF45A /* LayoutManager.h */,
 				D927D9F816EE9E46002CF45A /* LayoutManager.m */,
 			);
-			name = Managers;
+			name = Layout;
+			sourceTree = "<group>";
+		};
+		D9D796C716EEAD2600C494D7 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D9D796C816EEAD5200C494D7 /* LoginViewController.h */,
+				D9D796C916EEAD5200C494D7 /* LoginViewController.m */,
+				D9D796CA16EEAD5200C494D7 /* LoginViewController.xib */,
+				D9D796CD16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		D9D796CF16EEB09A00C494D7 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				D9D796D216EEB34B00C494D7 /* create_account.png */,
+				D9D796D316EEB34B00C494D7 /* email_pwd_bg.png */,
+				D9D796D416EEB34B00C494D7 /* login.png */,
+				D9D796D516EEB34B00C494D7 /* main_and_me.png */,
+				D9D796D616EEB34B00C494D7 /* signin_facebook.png */,
+				D9D796D716EEB34B00C494D7 /* signin_twitter.png */,
+				D9D796D016EEB0AA00C494D7 /* login_background.png */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		D9D796DE16EECD4E00C494D7 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				D9D796DF16EECD6B00C494D7 /* SignUpViewController.h */,
+				D9D796E016EECD6B00C494D7 /* SignUpViewController.m */,
+				D9D796E116EECD6B00C494D7 /* SignUpViewController.xib */,
+				D9D796EA16EED4CE00C494D7 /* SignUpViewController_iPhone5.xib */,
+			);
+			name = SignUp;
+			sourceTree = "<group>";
+		};
+		D9D796E416EECF7A00C494D7 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				D9D796E516EECF7A00C494D7 /* back_button.png */,
+			);
+			name = Buttons;
+			path = Resources/Images/Base/Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -356,6 +461,18 @@
 				D927D9F116EE98AD002CF45A /* Default.png in Resources */,
 				D927D9F216EE98AD002CF45A /* Default@2x.png in Resources */,
 				D927D9F516EE9BAF002CF45A /* SplashScreenViewController_iPhone5.xib in Resources */,
+				D9D796CC16EEAD5200C494D7 /* LoginViewController.xib in Resources */,
+				D9D796CE16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib in Resources */,
+				D9D796D116EEB0AA00C494D7 /* login_background.png in Resources */,
+				D9D796D816EEB34B00C494D7 /* create_account.png in Resources */,
+				D9D796D916EEB34B00C494D7 /* email_pwd_bg.png in Resources */,
+				D9D796DA16EEB34B00C494D7 /* login.png in Resources */,
+				D9D796DB16EEB34B00C494D7 /* main_and_me.png in Resources */,
+				D9D796DC16EEB34B00C494D7 /* signin_facebook.png in Resources */,
+				D9D796DD16EEB34B00C494D7 /* signin_twitter.png in Resources */,
+				D9D796E316EECD6B00C494D7 /* SignUpViewController.xib in Resources */,
+				D9D796E616EECF7A00C494D7 /* back_button.png in Resources */,
+				D9D796EB16EED4CE00C494D7 /* SignUpViewController_iPhone5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,6 +502,10 @@
 				D927D9F916EE9E46002CF45A /* LayoutManager.m in Sources */,
 				D927D9FC16EEA1A2002CF45A /* UIViewController+Common.m in Sources */,
 				D927DA0016EEA325002CF45A /* UIView+Common.m in Sources */,
+				D9D796CB16EEAD5200C494D7 /* LoginViewController.m in Sources */,
+				D9D796E216EECD6B00C494D7 /* SignUpViewController.m in Sources */,
+				D9D796E916EED24300C494D7 /* NSString+Common.m in Sources */,
+				D93C0F8516EFA6A100A4472E /* ServerRequestsManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,7 +555,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
@@ -443,6 +565,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -464,11 +587,14 @@
 		D927D9E016EE6A0C002CF45A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MainAndMe/Supporting Files/MainAndMe-Prefix.pch";
 				INFOPLIST_FILE = "MainAndMe/Supporting Files/MainAndMe-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -492,6 +618,7 @@
 				D927D9E016EE6A0C002CF45A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

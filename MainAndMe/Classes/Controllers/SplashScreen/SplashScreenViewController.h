@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SplashScreenViewController : UIViewController
-
+@property (copy, nonatomic) void (^timeOutBlock)();
 @end
