@@ -39,6 +39,25 @@
     return [NSDictionary dictionary];
 }
 
+- (id)safeArrayObjectAtIndex:(NSInteger)index{
+    
+    id obj = [self safeObjectAtIndex:index];
+    if ([obj isKindOfClass:[NSArray class]]) {
+        return obj;
+    }
+    return [NSArray array];
+}
+
+- (id)safeStringObjectAtIndex:(NSInteger)index{
+    
+    id obj = [self safeObjectAtIndex:index];
+    if ([obj isKindOfClass:[NSString class]]) {
+        return obj;
+    }
+    return @"";
+}
+
+
 + (NSArray*)safeArrayWithArray:(NSArray*)array{
   if (array && [array isKindOfClass:[NSArray class]]) {
     return [NSArray arrayWithArray:(NSArray*)array];

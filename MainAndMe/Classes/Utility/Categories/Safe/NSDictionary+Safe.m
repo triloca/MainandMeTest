@@ -53,6 +53,14 @@
     return [NSDictionary dictionary];
 }
 
+- (id)safeNSNumberObjectForKey:(id)key{
+    
+    id obj = [self safeObjectForKey:key];
+    if ([obj isKindOfClass:[NSNumber class]]) {
+        return obj;
+    }
+    return [NSNumber numberWithBool:NO];
+}
 
 + safeDictionaryWithObjectsAndKeysEndNSNull:(id)value, ... {
     va_list  arguments;

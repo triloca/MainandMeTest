@@ -8,6 +8,9 @@
 
 #import "SignUpViewController.h"
 #import "NSString+Common.h"
+#import "AlertManager.h"
+#import "LoginSignUpManager.h"
+#import "MBProgressHUD.h"
 
 @interface SignUpViewController ()
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -164,13 +167,9 @@
 
 
 - (void)showAlertWithText:(NSString*)text{
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                        message:text
-                                                       delegate:nil
-                                              cancelButtonTitle:@"Ok"
-                                              otherButtonTitles:nil];
     
-    [alertView show];
+    [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                        message:text];
 }
 
 - (void)clearAllTextFields{
@@ -211,7 +210,30 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (IBAction)signUpButtonClicked:(id)sender {
-    [self validateTextFields];
+    if ([self validateTextFields]) {
+        [self hideKeyboard];
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [LoginSignUpManager signUpWithEmail:_emailTextField.text
+                                   password:_passwordTextField.text
+                                   userName:_userNameTextField.text
+                                    success:^(NSString *token, NSString *email) {
+                                        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                        [[AlertManager shared] showOkAlertWithTitle:@"Success"
+                                                                            message:@"You successfully signed up to use Main And Me"];
+                                        [self clearAllTextFields];
+                                        [self.navigationController popViewControllerAnimated:YES];
+                                    }
+                                    failure:^(NSError *error, NSString *errorString) {
+                                        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                        [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                            message:errorString];
+                                    }
+                                  exception:^(NSString *exceptionString) {
+                                      [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                      [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                  }];
+    }
 }
 
 @end

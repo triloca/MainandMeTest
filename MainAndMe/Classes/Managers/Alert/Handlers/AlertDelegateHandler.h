@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface AlertDelegateHandler : NSObject
-
+@interface AlertDelegateHandler : NSObject <UIAlertViewDelegate>
++ (AlertDelegateHandler*)alertDelegateHandlerWith:(void (^)(UIAlertView* alertView, NSInteger buttonIndex))didClickedButtonBlock;
 @end

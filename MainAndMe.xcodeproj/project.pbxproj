@@ -47,6 +47,9 @@
 		D93C0FA716EFB17B00A4472E /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FA116EFB17B00A4472E /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D93C0FAC16EFBCA700A4472E /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FAB16EFBCA700A4472E /* AlertManager.m */; };
 		D93C0FB016EFBF1100A4472E /* AlertDelegateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FAF16EFBF1100A4472E /* AlertDelegateHandler.m */; };
+		D93C0FB516EFCE1600A4472E /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FB416EFCE1600A4472E /* MBProgressHUD.m */; };
+		D93C0FB916EFD7AB00A4472E /* UserDefaultsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FB816EFD7AB00A4472E /* UserDefaultsManager.m */; };
+		D93C0FBE16EFDDCF00A4472E /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FBD16EFDDCF00A4472E /* DataManager.m */; };
 		D9D796CB16EEAD5200C494D7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D796C916EEAD5200C494D7 /* LoginViewController.m */; };
 		D9D796CC16EEAD5200C494D7 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796CA16EEAD5200C494D7 /* LoginViewController.xib */; };
 		D9D796CE16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796CD16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib */; };
@@ -139,6 +142,12 @@
 		D93C0FAB16EFBCA700A4472E /* AlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertManager.m; path = Classes/Managers/Alert/AlertManager.m; sourceTree = "<group>"; };
 		D93C0FAE16EFBF1100A4472E /* AlertDelegateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlertDelegateHandler.h; path = Classes/Managers/Alert/Handlers/AlertDelegateHandler.h; sourceTree = "<group>"; };
 		D93C0FAF16EFBF1100A4472E /* AlertDelegateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AlertDelegateHandler.m; path = Classes/Managers/Alert/Handlers/AlertDelegateHandler.m; sourceTree = "<group>"; };
+		D93C0FB316EFCE1600A4472E /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		D93C0FB416EFCE1600A4472E /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		D93C0FB716EFD7AB00A4472E /* UserDefaultsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserDefaultsManager.h; path = Classes/Managers/UserDefaults/UserDefaultsManager.h; sourceTree = "<group>"; };
+		D93C0FB816EFD7AB00A4472E /* UserDefaultsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserDefaultsManager.m; path = Classes/Managers/UserDefaults/UserDefaultsManager.m; sourceTree = "<group>"; };
+		D93C0FBC16EFDDCF00A4472E /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataManager.h; path = Classes/Managers/DataManager/DataManager.h; sourceTree = "<group>"; };
+		D93C0FBD16EFDDCF00A4472E /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DataManager.m; path = Classes/Managers/DataManager/DataManager.m; sourceTree = "<group>"; };
 		D9D796C816EEAD5200C494D7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Classes/Controllers/Login/LoginViewController.h; sourceTree = "<group>"; };
 		D9D796C916EEAD5200C494D7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Classes/Controllers/Login/LoginViewController.m; sourceTree = "<group>"; };
 		D9D796CA16EEAD5200C494D7 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Classes/Controllers/Login/LoginViewController.xib; sourceTree = "<group>"; };
@@ -242,6 +251,7 @@
 		D927D9AC16EE6A0C002CF45A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D93C0FB116EFCE1500A4472E /* 3rdParty */,
 				D927D9F616EE9CBF002CF45A /* Managers */,
 				D927D9AD16EE6A0C002CF45A /* AppDelegate */,
 				D927D9D516EE6A0C002CF45A /* RootViewControllers */,
@@ -369,6 +379,8 @@
 		D927D9F616EE9CBF002CF45A /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				D93C0FBB16EFDDA200A4472E /* DataManager */,
+				D93C0FB616EFD77300A4472E /* UserDefaults */,
 				D93C0FA916EFBC8400A4472E /* Alert */,
 				D93C0F8B16EFAE9F00A4472E /* API */,
 				D93C0F8616EFA6A600A4472E /* Layout */,
@@ -469,6 +481,42 @@
 				D93C0FAF16EFBF1100A4472E /* AlertDelegateHandler.m */,
 			);
 			name = Handlers;
+			sourceTree = "<group>";
+		};
+		D93C0FB116EFCE1500A4472E /* 3rdParty */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0FB216EFCE1600A4472E /* MBProgressHUD */,
+			);
+			name = 3rdParty;
+			path = Classes/3rdParty;
+			sourceTree = "<group>";
+		};
+		D93C0FB216EFCE1600A4472E /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0FB316EFCE1600A4472E /* MBProgressHUD.h */,
+				D93C0FB416EFCE1600A4472E /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		D93C0FB616EFD77300A4472E /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0FB716EFD7AB00A4472E /* UserDefaultsManager.h */,
+				D93C0FB816EFD7AB00A4472E /* UserDefaultsManager.m */,
+			);
+			name = UserDefaults;
+			sourceTree = "<group>";
+		};
+		D93C0FBB16EFDDA200A4472E /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0FBC16EFDDCF00A4472E /* DataManager.h */,
+				D93C0FBD16EFDDCF00A4472E /* DataManager.m */,
+			);
+			name = DataManager;
 			sourceTree = "<group>";
 		};
 		D9D796C716EEAD2600C494D7 /* Login */ = {
@@ -627,6 +675,9 @@
 				D93C0FA716EFB17B00A4472E /* SBJsonWriter.m in Sources */,
 				D93C0FAC16EFBCA700A4472E /* AlertManager.m in Sources */,
 				D93C0FB016EFBF1100A4472E /* AlertDelegateHandler.m in Sources */,
+				D93C0FB516EFCE1600A4472E /* MBProgressHUD.m in Sources */,
+				D93C0FB916EFD7AB00A4472E /* UserDefaultsManager.m in Sources */,
+				D93C0FBE16EFDDCF00A4472E /* DataManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

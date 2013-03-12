@@ -10,10 +10,16 @@
 #import "APIv1_0.h"
 #import "NSURLConnectionDelegateHandler.h"
 #import "JSON.h"
+#import "UserDefaultsManager.h"
 
 
 @interface LoginSignUpManager()
-
+@property (strong, nonatomic) NSString* email;
+@property (strong, nonatomic) NSString* password;
+@property (strong, nonatomic) NSString* userId;
+@property (strong, nonatomic) NSString* accessToken;
+@property (strong, nonatomic) NSString* username;
+@property (strong, nonatomic) NSString* authtoken;
 @end
 
 
@@ -60,7 +66,7 @@
                          exception:exception];
     }
     @catch (NSException *exc) {
-        exception(@"Exeption, SingUp create");
+        exception(@"Exeption\n SingUp create");
     }
     
 }
@@ -83,7 +89,7 @@
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
                                                        timeoutInterval:20];
     [request setHTTPMethod:@"POST"];
-    
+    //[[NSArray array] objectAtIndex:5]; //! To test exception
     NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
         NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"%@", returnString);
@@ -100,14 +106,12 @@
             NSString* keyString = @"";
             
             if ([messagesValues count] > 0) {
-                NSArray* message = [messagesValues objectAtIndex:0];
-                if ([message count] > 0) {
-                    valueString = [message objectAtIndex:0];
-                }
+                NSArray* message = [messagesValues safeArrayObjectAtIndex:0];
+                valueString = [message safeStringObjectAtIndex:0];
             }
             
             if ([messageKeys count] > 0) {
-                keyString = [messageKeys objectAtIndex:0];
+                keyString = [messageKeys safeStringObjectAtIndex:0];
             }
             
             messageString = [NSString stringWithFormat:@"%@ %@", keyString, valueString];
@@ -129,6 +133,57 @@
     [connection start];
 }
 
+//! Login request
+-(void)loginWithEmail:(NSString*)email
+             password:(NSString*)password
+              success:(void(^) (NSDictionary* user)) success
+              failure:(void(^) (NSError* error, NSString* errorString)) failure
+            exception:(void(^) (NSString* exceptionString))exception{
+    
+    self.email = email;
+    self.password = password;
+    self.userId = nil;
+    self.accessToken = nil;
+    self.username = nil;
+    self.authtoken = nil;
+    
+    
+    NSString* urlString =
+    [NSString stringWithFormat:@"%@/users/sign_in?[user_login][password]=%@&[user_login][email]=%@", [APIv1_0 serverUrl], password, email];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:20];
+    [request setHTTPMethod:@"POST"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        if ([self isDataValid:value]) {
+            
+            [[UserDefaultsManager shared] saveStandardLogin:_email
+                                                   password:_password];
+            
+            NSDictionary* user = [value safeDictionaryObjectForKey:@"user"];
+            success(user);
+        }else{
+            NSString* messageString = [value safeStringObjectForKey:@"message"];
+            
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    }eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+}
 
 #pragma mark - Privat Methods
 //! Validate request

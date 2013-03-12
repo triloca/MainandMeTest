@@ -17,4 +17,11 @@
                 success:(void(^) (NSString* token, NSString* email)) success
                 failure:(void(^) (NSError* error, NSString* errorString)) failure
               exception:(void(^) (NSString* exceptionString))exception;
+
+//! Login request
+-(void)loginWithEmail:(NSString*)email
+             password:(NSString*)password
+              success:(void(^) (NSDictionary* user)) success
+              failure:(void(^) (NSError* error, NSString* errorString)) failure
+            exception:(void(^) (NSString* exceptionString))exception;
 @end

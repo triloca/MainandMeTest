@@ -15,6 +15,7 @@
 - (id)safeNumberObjectForKey:(id)key;
 - (id)safeArrayObjectForKey:(id)key;
 - (id)safeDictionaryObjectForKey:(id)key;
+- (id)safeNSNumberObjectForKey:(id)key;
 + safeDictionaryWithObjectsAndKeysEndNSNull:(id)value, ...;
 + (NSDictionary*)safeDictionaryWithDictionary:(NSDictionary*)dictionary;
 @end

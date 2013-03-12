@@ -7,6 +7,11 @@
 //
 
 #import "AlertManager.h"
+#import "AlertDelegateHandler.h"
+#import <objc/runtime.h>
+
+
+static char kAlertHandlerObjectKey;
 
 
 @interface AlertManager()
@@ -41,19 +46,51 @@
 
 #pragma mark -
 
-- (void)showAlertWithCallBack:(void (^)())callBack
+- (void)showOkAlertWithTitle:(NSString*)title{
+    [self showAlertWithCallBack:nil
+                          title:title
+                        message:nil
+              cancelButtonTitle:@"Ok"
+              otherButtonTitles:nil];
+}
+
+- (void)showOkAlertWithTitle:(NSString*)title message:(NSString*)message{
+    [self showAlertWithCallBack:nil
+                          title:title
+                        message:message
+              cancelButtonTitle:@"Ok"
+              otherButtonTitles:nil];
+}
+
+- (void)showAlertWithCallBack:(void (^)(UIAlertView *alertView, NSInteger buttonIndex))callBack
                         title:(NSString*)title
                       message:(NSString*)message
             cancelButtonTitle:(NSString*)cancelButtonTitle
-            otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION
-             {
+            otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION{
+    
+   AlertDelegateHandler* alertDelegateHandler =
+    [AlertDelegateHandler alertDelegateHandlerWith:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        if (callBack){
+            callBack(alertView, buttonIndex);
+        }
+    }];
     
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
                                                         message:message
-                                                       delegate:nil
-                                              cancelButtonTitle:@"Ok"
+                                                       delegate:alertDelegateHandler
+                                              cancelButtonTitle:cancelButtonTitle
                                               otherButtonTitles:nil];
     
+    va_list args;
+    va_start(args, otherButtonTitles);
+    for (NSString *arg = otherButtonTitles; arg != nil; arg = va_arg(args, NSString*))
+    {
+        [alertView addButtonWithTitle:arg];
+    }
+    va_end(args);
+
+    
+    objc_setAssociatedObject(alertView, &kAlertHandlerObjectKey, alertDelegateHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [alertView show];
 
 }

@@ -9,6 +9,11 @@
 #import "LoginViewController.h"
 #import "SignUpViewController.h"
 #import "NSString+Common.h"
+#import "AlertManager.h"
+#import "LoginSignUpManager.h"
+#import "DataManager.h"
+#import "UserDefaultsManager.h"
+#import "MBProgressHUD.h"
 
 @interface LoginViewController ()
 @property (unsafe_unretained, nonatomic) IBOutlet UITextField *emailTextField;
@@ -67,7 +72,31 @@
 #pragma mark - Buttons Action
 
 - (IBAction)loginButtonClicked:(id)sender {
-    
+    if ([self isTextFieldsValid]) {
+        [self hideKeyBoard];
+        
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[LoginSignUpManager shared] loginWithEmail:_emailTextField.text
+                                           password:_passwordTextField.text
+                                            success:^(NSDictionary *user) {
+                                                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                
+                                                [DataManager shared].userId = [user safeStringObjectForKey:@"id"];
+                                                [DataManager shared].api_token = [user safeStringObjectForKey:@"api_token"];
+                                                
+                                                [[UserDefaultsManager shared] saveReturnedUsername:[user safeStringObjectForKey:@"name"]];
+                                                [self.navigationController popViewControllerAnimated:NO];
+                                            }
+                                            failure:^(NSError *error, NSString *errorString) {
+                                                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                    message:errorString];
+                                            }
+                                          exception:^(NSString *exceptionString) {
+                                              [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                              [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                          }];
+    }
 }
 - (IBAction)facebookButtonClicked:(id)sender {
 }
@@ -155,9 +184,20 @@
 - (BOOL)isTextFieldsValid{
     
     if (![_emailTextField.text isValidEmail]) {
+        [[AlertManager shared] showAlertWithCallBack:nil
+                                               title:@"Invalid email"
+                                             message:nil
+                                   cancelButtonTitle:@"Ok"
+                                   otherButtonTitles:nil];
         return NO;
     }
-    if (_passwordTextField.text.length < 6) {
+    if (_passwordTextField.text.length == 0) {
+        [[AlertManager shared] showAlertWithCallBack:nil
+                                               title:@"Please enter password"
+                                             message:nil
+                                   cancelButtonTitle:@"Ok"
+                                   otherButtonTitles:nil];
+
         return NO;
     }
     return YES;
