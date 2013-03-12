@@ -1,25 +1,25 @@
 //
-//  ServerRequestsManager.m
+//  AlertManager.m
 //  MainAndMe
 //
 //  Created by Sasha on 3/12/13.
 //  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
 //
 
-#import "ServerRequestsManager.h"
+#import "AlertManager.h"
 
 
-@interface ServerRequestsManager()
+@interface AlertManager()
 
 @end
 
 
-@implementation ServerRequestsManager
+@implementation AlertManager
 
 #pragma mark - Shared Instance and Init
-+ (ServerRequestsManager *)shared {
++ (AlertManager *)shared {
     
-    static ServerRequestsManager *shared = nil;
+    static AlertManager *shared = nil;
     static dispatch_once_t oncePredicate;
     
     dispatch_once(&oncePredicate, ^{

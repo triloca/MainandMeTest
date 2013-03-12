@@ -1,5 +1,5 @@
 //
-//  ServerRequestsManager.h
+//  AlertManager.h
 //  MainAndMe
 //
 //  Created by Sasha on 3/12/13.
@@ -7,8 +7,8 @@
 //
 
 
-@interface ServerRequestsManager : NSObject
+@interface AlertManager : NSObject
 
-+ (ServerRequestsManager*)shared;
++ (AlertManager*)shared;
 
 @end
