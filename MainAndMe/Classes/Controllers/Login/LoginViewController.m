@@ -59,6 +59,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self checkLastLogin];
 }
 
 
@@ -75,33 +76,7 @@
 - (IBAction)loginButtonClicked:(id)sender {
     if ([self isTextFieldsValid]) {
         [self hideKeyBoard];
-        
-        if (![ReachabilityManager isReachable]) {
-            [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
-            return;
-        }
-        
-        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [[LoginSignUpManager shared] loginWithEmail:_emailTextField.text
-                                           password:_passwordTextField.text
-                                            success:^(NSDictionary *user) {
-                                                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                
-                                                [DataManager shared].userId = [user safeStringObjectForKey:@"id"];
-                                                [DataManager shared].api_token = [user safeStringObjectForKey:@"api_token"];
-                                                
-                                                [[UserDefaultsManager shared] saveReturnedUsername:[user safeStringObjectForKey:@"name"]];
-                                                [self.navigationController popViewControllerAnimated:NO];
-                                            }
-                                            failure:^(NSError *error, NSString *errorString) {
-                                                [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                                [[AlertManager shared] showOkAlertWithTitle:@"Error"
-                                                                                    message:errorString];
-                                            }
-                                          exception:^(NSString *exceptionString) {
-                                              [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                              [[AlertManager shared] showOkAlertWithTitle:exceptionString];
-                                          }];
+        [self standardLoginWith:_emailTextField.text password:_passwordTextField.text];
     }
 }
 - (IBAction)facebookButtonClicked:(id)sender {
@@ -208,4 +183,45 @@
     }
     return YES;
 }
+
+- (void)checkLastLogin{
+    NSString* lastLoginType = [[UserDefaultsManager shared] lastLoginType];
+    if ([lastLoginType isEqualToString:kLoginTypeStandard]) {
+        [self standardLoginWith:[[UserDefaultsManager shared] email]
+                       password:[[UserDefaultsManager shared] password]];
+    }
+}
+
+
+- (void)standardLoginWith:(NSString*)email password:(NSString*)password{
+
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[LoginSignUpManager shared] loginWithEmail:email
+                                       password:password
+                                        success:^(NSDictionary *user) {
+                                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                            
+                                            [DataManager shared].userId = [user safeStringObjectForKey:@"id"];
+                                            [DataManager shared].api_token = [user safeStringObjectForKey:@"api_token"];
+                                            
+                                            [[UserDefaultsManager shared] saveReturnedUsername:[user safeStringObjectForKey:@"name"]];
+                                            [self.navigationController popViewControllerAnimated:NO];
+                                        }
+                                        failure:^(NSError *error, NSString *errorString) {
+                                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                            [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                message:errorString];
+                                        }
+                                      exception:^(NSString *exceptionString) {
+                                          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                          [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                      }];
+
+}
+
 @end

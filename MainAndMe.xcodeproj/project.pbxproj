@@ -262,10 +262,10 @@
 			isa = PBXGroup;
 			children = (
 				D927D9AD16EE6A0C002CF45A /* AppDelegate */,
-				D93C0FB116EFCE1500A4472E /* 3rdParty */,
-				D927D9F616EE9CBF002CF45A /* Managers */,
 				D927D9D516EE6A0C002CF45A /* RootViewControllers */,
 				D927D9E416EE8B78002CF45A /* Controllers */,
+				D927D9F616EE9CBF002CF45A /* Managers */,
+				D93C0FB116EFCE1500A4472E /* 3rdParty */,
 				D927D9B116EE6A0C002CF45A /* Utility */,
 			);
 			name = Classes;
@@ -348,6 +348,7 @@
 		D927D9E416EE8B78002CF45A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D93C0FC916EFF2A400A4472E /* Main */,
 				D9D796DE16EECD4E00C494D7 /* SignUp */,
 				D9D796C716EEAD2600C494D7 /* Login */,
 				D927D9F316EE9A99002CF45A /* SplashScreen */,
@@ -547,6 +548,13 @@
 				D93C0FC216EFE94500A4472E /* Reachability.m */,
 			);
 			path = Reachability;
+			sourceTree = "<group>";
+		};
+		D93C0FC916EFF2A400A4472E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Main;
 			sourceTree = "<group>";
 		};
 		D9D796C716EEAD2600C494D7 /* Login */ = {

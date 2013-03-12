@@ -66,7 +66,16 @@
     [_userDefaults synchronize];
 }
 
-- (void)isLastLogin{
-
+- (NSString*)lastLoginType{
+    return [_userDefaults objectForKey:kLoginType];
 }
+
+- (NSString*)email{
+    return [_userDefaults objectForKey:kUserEmail];
+}
+
+- (NSString*)password{
+    return [_userDefaults objectForKey:kUserPassword];
+}
+
 @end

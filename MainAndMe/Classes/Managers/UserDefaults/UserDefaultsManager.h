@@ -26,4 +26,7 @@
 + (UserDefaultsManager*)shared;
 - (void)saveStandardLogin:(NSString*)email password:(NSString*)password;
 - (void)saveReturnedUsername:(NSString*)username;
+- (NSString*)lastLoginType;
+- (NSString*)email;
+- (NSString*)password;
 @end
