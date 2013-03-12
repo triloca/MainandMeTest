@@ -1,0 +1,21 @@
+//
+// Prefix header for all source files of the 'MainAndMe' target in the 'MainAndMe' project
+//
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+    #import "NSArray+Common.h"
+    #import "NSDictionary+Types.h"
+    #import "UIColor+Additions.h"
+    #import "UIImage+Resizing.h"
+    #import "UIImageView+UNNetworking.h"
+    #import "UIViewController+Spiner.h"
+    #import "NSString+MD5.h"
+
+    #import "SafeCategories.h"
+    #import "UIViewController+Common.h"
+
+    #define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
+
+#endif
