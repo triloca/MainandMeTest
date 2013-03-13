@@ -11,6 +11,7 @@
 #import "NSURLConnectionDelegateHandler.h"
 #import "JSON.h"
 #import "UserDefaultsManager.h"
+#import "DataManager.h"
 
 
 @interface LoginSignUpManager()
@@ -185,6 +186,57 @@
     [connection start];
 }
 
+////! Logout request
+//-(void)logoutWithSuccess:(void(^) (NSDictionary* user)) success
+//                 failure:(void(^) (NSError* error, NSString* errorString)) failure
+//               exception:(void(^) (NSString* exceptionString))exception{
+//    
+//    self.email = nil;
+//    self.password = nil;
+//    self.userId = nil;
+//    self.accessToken = nil;
+//    self.username = nil;
+//    self.authtoken = nil;
+//    
+//    
+//    NSString* urlString =
+//    [NSString stringWithFormat:@"%@/users/sign_in?[user_login][password]=%@&[user_login][email]=%@", [APIv1_0 serverUrl], password, email];
+//    
+//    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+//    
+//    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+//                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+//                                                       timeoutInterval:20];
+//    [request setHTTPMethod:@"POST"];
+//    
+//    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+//        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//        NSLog(@"%@", returnString);
+//        id value = [returnString JSONValue];
+//        if ([self isDataValid:value]) {
+//            
+//            [[UserDefaultsManager shared] saveStandardLogin:_email
+//                                                   password:_password];
+//            
+//            NSDictionary* user = [value safeDictionaryObjectForKey:@"user"];
+//            success(user);
+//        }else{
+//            NSString* messageString = [value safeStringObjectForKey:@"message"];
+//            
+//            failure(nil, messageString);
+//        }
+//        
+//    } failure:^(NSURLConnection *connection, NSError *error) {
+//        failure(error, error.localizedDescription);
+//    }eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+//        exception(exceptionMessage);
+//    }];
+//    
+//    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+//    [connection start];
+//}
+
+
 #pragma mark - Privat Methods
 //! Validate request
 - (BOOL)isDataValid:(id)value{
@@ -199,5 +251,17 @@
     return NO;
 }
 
+- (void)logout{
+    
+    self.email = nil;
+    self.password = nil;
+    self.userId = nil;
+    self.accessToken = nil;
+    self.username = nil;
+    self.authtoken = nil;
+    
+    [[UserDefaultsManager shared] clearOldLoginSettings];
+    [[DataManager shared] clearUserInfo];
+}
 
 @end

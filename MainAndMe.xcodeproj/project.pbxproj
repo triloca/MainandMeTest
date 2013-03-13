@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D908EE0016F0F2AB004B2405 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D908EDFF16F0F2AB004B2405 /* FacebookSDK.framework */; };
+		D908EE0316F0F2C5004B2405 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D908EE0116F0F2C5004B2405 /* FacebookSDKResources.bundle */; };
+		D908EE0416F0F2C5004B2405 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D908EE0216F0F2C5004B2405 /* FBUserSettingsViewResources.bundle */; };
+		D908EE0816F0F2FE004B2405 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D908EE0516F0F2FD004B2405 /* AdSupport.framework */; };
+		D908EE0916F0F2FE004B2405 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D908EE0616F0F2FD004B2405 /* Security.framework */; };
+		D908EE0A16F0F2FE004B2405 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D908EE0716F0F2FE004B2405 /* Social.framework */; };
 		D927D99C16EE6A0B002CF45A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D927D99B16EE6A0B002CF45A /* UIKit.framework */; };
 		D927D99E16EE6A0B002CF45A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D927D99D16EE6A0B002CF45A /* Foundation.framework */; };
 		D927D9A016EE6A0B002CF45A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D927D99F16EE6A0B002CF45A /* CoreGraphics.framework */; };
@@ -53,6 +59,21 @@
 		D93C0FC316EFE94500A4472E /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FC216EFE94500A4472E /* Reachability.m */; };
 		D93C0FC616EFE97B00A4472E /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FC516EFE97B00A4472E /* ReachabilityManager.m */; };
 		D93C0FC816EFEC3600A4472E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D93C0FC716EFEC3600A4472E /* SystemConfiguration.framework */; };
+		D93C0FCD16EFF34700A4472E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FCB16EFF34700A4472E /* MainViewController.m */; };
+		D93C0FCE16EFF34700A4472E /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FCC16EFF34700A4472E /* MainViewController.xib */; };
+		D93C0FD316EFF43000A4472E /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FD116EFF43000A4472E /* ProfileViewController.m */; };
+		D93C0FD416EFF43000A4472E /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FD216EFF43000A4472E /* ProfileViewController.xib */; };
+		D93C0FDA16EFFBC200A4472E /* TabBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = D93C0FD816EFFBC200A4472E /* TabBarView.m */; };
+		D93C0FDB16EFFBC200A4472E /* TabBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FD916EFFBC200A4472E /* TabBarView.xib */; };
+		D93C0FE016EFFCE800A4472E /* camera_button.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FDD16EFFCE800A4472E /* camera_button.png */; };
+		D93C0FE116EFFCE800A4472E /* camera_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FDE16EFFCE800A4472E /* camera_button_selected.png */; };
+		D93C0FE216EFFCE800A4472E /* tab_bar_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FDF16EFFCE800A4472E /* tab_bar_background.png */; };
+		D93C0FE716F0349400A4472E /* main_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FE316F0349400A4472E /* main_button_selected.png */; };
+		D93C0FE816F0349400A4472E /* main_button.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FE416F0349400A4472E /* main_button.png */; };
+		D93C0FE916F0349400A4472E /* me_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FE516F0349400A4472E /* me_button_selected.png */; };
+		D93C0FEA16F0349400A4472E /* me_button.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FE616F0349400A4472E /* me_button.png */; };
+		D93C0FEC16F03CA200A4472E /* MainViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FEB16F03CA200A4472E /* MainViewController_iPhone5.xib */; };
+		D93C0FEE16F03CB200A4472E /* ProfileViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FED16F03CB200A4472E /* ProfileViewController_iPhone5.xib */; };
 		D9D796CB16EEAD5200C494D7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D796C916EEAD5200C494D7 /* LoginViewController.m */; };
 		D9D796CC16EEAD5200C494D7 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796CA16EEAD5200C494D7 /* LoginViewController.xib */; };
 		D9D796CE16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796CD16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib */; };
@@ -71,6 +92,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D908EDFF16F0F2AB004B2405 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		D908EE0116F0F2C5004B2405 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
+		D908EE0216F0F2C5004B2405 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBUserSettingsViewResources.bundle; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
+		D908EE0516F0F2FD004B2405 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		D908EE0616F0F2FD004B2405 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D908EE0716F0F2FE004B2405 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		D927D99816EE6A0B002CF45A /* MainAndMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MainAndMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D927D99B16EE6A0B002CF45A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D927D99D16EE6A0B002CF45A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -156,6 +183,24 @@
 		D93C0FC416EFE97B00A4472E /* ReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReachabilityManager.h; path = Classes/Managers/Reachability/ReachabilityManager.h; sourceTree = "<group>"; };
 		D93C0FC516EFE97B00A4472E /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReachabilityManager.m; path = Classes/Managers/Reachability/ReachabilityManager.m; sourceTree = "<group>"; };
 		D93C0FC716EFEC3600A4472E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		D93C0FCA16EFF34700A4472E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Classes/Controllers/Main/MainViewController.h; sourceTree = "<group>"; };
+		D93C0FCB16EFF34700A4472E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Classes/Controllers/Main/MainViewController.m; sourceTree = "<group>"; };
+		D93C0FCC16EFF34700A4472E /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainViewController.xib; path = Classes/Controllers/Main/MainViewController.xib; sourceTree = "<group>"; };
+		D93C0FD016EFF43000A4472E /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileViewController.h; path = Classes/Controllers/Profile/ProfileViewController.h; sourceTree = "<group>"; };
+		D93C0FD116EFF43000A4472E /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileViewController.m; path = Classes/Controllers/Profile/ProfileViewController.m; sourceTree = "<group>"; };
+		D93C0FD216EFF43000A4472E /* ProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileViewController.xib; path = Classes/Controllers/Profile/ProfileViewController.xib; sourceTree = "<group>"; };
+		D93C0FD716EFFBC200A4472E /* TabBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TabBarView.h; path = Classes/RootViewControllers/Views/TabBarView.h; sourceTree = "<group>"; };
+		D93C0FD816EFFBC200A4472E /* TabBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabBarView.m; path = Classes/RootViewControllers/Views/TabBarView.m; sourceTree = "<group>"; };
+		D93C0FD916EFFBC200A4472E /* TabBarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TabBarView.xib; path = Classes/RootViewControllers/Views/TabBarView.xib; sourceTree = "<group>"; };
+		D93C0FDD16EFFCE800A4472E /* camera_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_button.png; sourceTree = "<group>"; };
+		D93C0FDE16EFFCE800A4472E /* camera_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_button_selected.png; sourceTree = "<group>"; };
+		D93C0FDF16EFFCE800A4472E /* tab_bar_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tab_bar_background.png; sourceTree = "<group>"; };
+		D93C0FE316F0349400A4472E /* main_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_button_selected.png; sourceTree = "<group>"; };
+		D93C0FE416F0349400A4472E /* main_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_button.png; sourceTree = "<group>"; };
+		D93C0FE516F0349400A4472E /* me_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_button_selected.png; sourceTree = "<group>"; };
+		D93C0FE616F0349400A4472E /* me_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_button.png; sourceTree = "<group>"; };
+		D93C0FEB16F03CA200A4472E /* MainViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainViewController_iPhone5.xib; path = Classes/Controllers/Main/MainViewController_iPhone5.xib; sourceTree = "<group>"; };
+		D93C0FED16F03CB200A4472E /* ProfileViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProfileViewController_iPhone5.xib; path = Classes/Controllers/Profile/ProfileViewController_iPhone5.xib; sourceTree = "<group>"; };
 		D9D796C816EEAD5200C494D7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Classes/Controllers/Login/LoginViewController.h; sourceTree = "<group>"; };
 		D9D796C916EEAD5200C494D7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Classes/Controllers/Login/LoginViewController.m; sourceTree = "<group>"; };
 		D9D796CA16EEAD5200C494D7 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Classes/Controllers/Login/LoginViewController.xib; sourceTree = "<group>"; };
@@ -181,11 +226,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D908EE0816F0F2FE004B2405 /* AdSupport.framework in Frameworks */,
+				D908EE0916F0F2FE004B2405 /* Security.framework in Frameworks */,
+				D908EE0A16F0F2FE004B2405 /* Social.framework in Frameworks */,
 				D93C0FC816EFEC3600A4472E /* SystemConfiguration.framework in Frameworks */,
 				D927DA0216EEA5E2002CF45A /* QuartzCore.framework in Frameworks */,
 				D927D99C16EE6A0B002CF45A /* UIKit.framework in Frameworks */,
 				D927D99E16EE6A0B002CF45A /* Foundation.framework in Frameworks */,
 				D927D9A016EE6A0B002CF45A /* CoreGraphics.framework in Frameworks */,
+				D908EE0016F0F2AB004B2405 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,7 +244,6 @@
 		D927D98F16EE6A0B002CF45A = {
 			isa = PBXGroup;
 			children = (
-				D93C0FC716EFEC3600A4472E /* SystemConfiguration.framework */,
 				D927D9A116EE6A0B002CF45A /* MainAndMe */,
 				D927D99A16EE6A0B002CF45A /* Frameworks */,
 				D927D99916EE6A0B002CF45A /* Products */,
@@ -213,6 +261,13 @@
 		D927D99A16EE6A0B002CF45A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D908EE0516F0F2FD004B2405 /* AdSupport.framework */,
+				D908EE0616F0F2FD004B2405 /* Security.framework */,
+				D908EE0716F0F2FE004B2405 /* Social.framework */,
+				D908EE0116F0F2C5004B2405 /* FacebookSDKResources.bundle */,
+				D908EE0216F0F2C5004B2405 /* FBUserSettingsViewResources.bundle */,
+				D908EDFF16F0F2AB004B2405 /* FacebookSDK.framework */,
+				D93C0FC716EFEC3600A4472E /* SystemConfiguration.framework */,
 				D927DA0116EEA5E2002CF45A /* QuartzCore.framework */,
 				D927D99B16EE6A0B002CF45A /* UIKit.framework */,
 				D927D99D16EE6A0B002CF45A /* Foundation.framework */,
@@ -337,6 +392,7 @@
 		D927D9D516EE6A0C002CF45A /* RootViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				D93C0FD616EFFB9F00A4472E /* Views */,
 				D927D9D616EE6A0C002CF45A /* RootNavigationController.h */,
 				D927D9D716EE6A0C002CF45A /* RootNavigationController.m */,
 				D927D9D916EE6A0C002CF45A /* RootViewController.h */,
@@ -348,6 +404,7 @@
 		D927D9E416EE8B78002CF45A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D93C0FCF16EFF40F00A4472E /* Profile */,
 				D93C0FC916EFF2A400A4472E /* Main */,
 				D9D796DE16EECD4E00C494D7 /* SignUp */,
 				D9D796C716EEAD2600C494D7 /* Login */,
@@ -359,6 +416,7 @@
 		D927D9EB16EE9845002CF45A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D93C0FDC16EFFCE800A4472E /* TabBar */,
 				D9D796CF16EEB09A00C494D7 /* Login */,
 				D927D9EC16EE9869002CF45A /* Base */,
 			);
@@ -553,8 +611,48 @@
 		D93C0FC916EFF2A400A4472E /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				D93C0FCA16EFF34700A4472E /* MainViewController.h */,
+				D93C0FCB16EFF34700A4472E /* MainViewController.m */,
+				D93C0FCC16EFF34700A4472E /* MainViewController.xib */,
+				D93C0FEB16F03CA200A4472E /* MainViewController_iPhone5.xib */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		D93C0FCF16EFF40F00A4472E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0FD016EFF43000A4472E /* ProfileViewController.h */,
+				D93C0FD116EFF43000A4472E /* ProfileViewController.m */,
+				D93C0FD216EFF43000A4472E /* ProfileViewController.xib */,
+				D93C0FED16F03CB200A4472E /* ProfileViewController_iPhone5.xib */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		D93C0FD616EFFB9F00A4472E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0FD716EFFBC200A4472E /* TabBarView.h */,
+				D93C0FD816EFFBC200A4472E /* TabBarView.m */,
+				D93C0FD916EFFBC200A4472E /* TabBarView.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		D93C0FDC16EFFCE800A4472E /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				D93C0FE316F0349400A4472E /* main_button_selected.png */,
+				D93C0FE416F0349400A4472E /* main_button.png */,
+				D93C0FE516F0349400A4472E /* me_button_selected.png */,
+				D93C0FE616F0349400A4472E /* me_button.png */,
+				D93C0FDD16EFFCE800A4472E /* camera_button.png */,
+				D93C0FDE16EFFCE800A4472E /* camera_button_selected.png */,
+				D93C0FDF16EFFCE800A4472E /* tab_bar_background.png */,
+			);
+			name = TabBar;
+			path = Resources/Images/TabBar;
 			sourceTree = "<group>";
 		};
 		D9D796C716EEAD2600C494D7 /* Login */ = {
@@ -670,6 +768,20 @@
 				D9D796E316EECD6B00C494D7 /* SignUpViewController.xib in Resources */,
 				D9D796E616EECF7A00C494D7 /* back_button.png in Resources */,
 				D9D796EB16EED4CE00C494D7 /* SignUpViewController_iPhone5.xib in Resources */,
+				D93C0FCE16EFF34700A4472E /* MainViewController.xib in Resources */,
+				D93C0FD416EFF43000A4472E /* ProfileViewController.xib in Resources */,
+				D93C0FDB16EFFBC200A4472E /* TabBarView.xib in Resources */,
+				D93C0FE016EFFCE800A4472E /* camera_button.png in Resources */,
+				D93C0FE116EFFCE800A4472E /* camera_button_selected.png in Resources */,
+				D93C0FE216EFFCE800A4472E /* tab_bar_background.png in Resources */,
+				D93C0FE716F0349400A4472E /* main_button_selected.png in Resources */,
+				D93C0FE816F0349400A4472E /* main_button.png in Resources */,
+				D93C0FE916F0349400A4472E /* me_button_selected.png in Resources */,
+				D93C0FEA16F0349400A4472E /* me_button.png in Resources */,
+				D93C0FEC16F03CA200A4472E /* MainViewController_iPhone5.xib in Resources */,
+				D93C0FEE16F03CB200A4472E /* ProfileViewController_iPhone5.xib in Resources */,
+				D908EE0316F0F2C5004B2405 /* FacebookSDKResources.bundle in Resources */,
+				D908EE0416F0F2C5004B2405 /* FBUserSettingsViewResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,6 +830,9 @@
 				D93C0FBE16EFDDCF00A4472E /* DataManager.m in Sources */,
 				D93C0FC316EFE94500A4472E /* Reachability.m in Sources */,
 				D93C0FC616EFE97B00A4472E /* ReachabilityManager.m in Sources */,
+				D93C0FCD16EFF34700A4472E /* MainViewController.m in Sources */,
+				D93C0FD316EFF43000A4472E /* ProfileViewController.m in Sources */,
+				D93C0FDA16EFFBC200A4472E /* TabBarView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,6 +902,10 @@
 		D927D9DF16EE6A0C002CF45A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../Documents/FacebookSDK\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MainAndMe/Supporting Files/MainAndMe-Prefix.pch";
 				INFOPLIST_FILE = "MainAndMe/Supporting Files/MainAndMe-Info.plist";
@@ -801,6 +920,10 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../../../../Documents/FacebookSDK\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MainAndMe/Supporting Files/MainAndMe-Prefix.pch";
 				INFOPLIST_FILE = "MainAndMe/Supporting Files/MainAndMe-Info.plist";

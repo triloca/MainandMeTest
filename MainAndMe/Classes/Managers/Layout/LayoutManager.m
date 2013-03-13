@@ -11,11 +11,13 @@
 #import "RootViewController.h"
 #import "SplashScreenViewController.h"
 #import "LoginViewController.h"
+#import "MainViewController.h"
+#import "ProfileViewController.h"
 
 
 @interface LayoutManager()
 @property (strong, nonatomic) UINavigationController* rootNavigationController;
-@property (strong, nonatomic) UIViewController* rootTabBarController;
+@property (strong, nonatomic) RootViewController* rootTabBarController;
 @end
 
 
@@ -52,7 +54,7 @@
 
 #pragma mark- Load GUI
 
-- (void) loadGUI{
+- (void)loadGUI{
     
     
     SplashScreenViewController* splashScreenViewController = [SplashScreenViewController loadFromXIB_Or_iPhone5_XIB];
@@ -64,6 +66,7 @@
     LoginViewController* loginViewController = [LoginViewController loadFromXIB_Or_iPhone5_XIB];
     
     self.rootTabBarController = [RootViewController new];
+    [self createTabBarControllers];
     
     self.rootNavigationController = [RootNavigationController new];
     _rootNavigationController.viewControllers = [NSArray arrayWithObject:_rootTabBarController];
@@ -73,4 +76,30 @@
     _appDelegate.window.rootViewController = self.rootNavigationController;
 }
 
+
+- (void)createTabBarControllers{
+    MainViewController* mainViewController = [MainViewController loadFromXIB_Or_iPhone5_XIB];
+    ProfileViewController* profileViewController = [ProfileViewController loadFromXIB_Or_iPhone5_XIB];
+    
+    UINavigationController* mainNVC = [[UINavigationController alloc] initWithRootViewController:mainViewController];
+    UINavigationController* profileNVC = [[UINavigationController alloc] initWithRootViewController:profileViewController];
+    
+    mainNVC.navigationBarHidden = YES;
+    profileNVC.navigationBarHidden = YES;
+    
+    _rootTabBarController.rootTabBarController.viewControllers = [NSArray arrayWithObjects:mainNVC, profileNVC, nil];
+}
+
+
+- (void)showLogin{
+    NSArray* controllers = _rootTabBarController.rootTabBarController.viewControllers;
+    [controllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        UINavigationController* controller = (UINavigationController*)obj;
+        [controller popToRootViewControllerAnimated:NO];
+    }];
+    
+    LoginViewController* loginViewController = [LoginViewController loadFromXIB_Or_iPhone5_XIB];
+    [_rootNavigationController popToRootViewControllerAnimated:NO];
+    [_rootNavigationController pushViewController:loginViewController animated:NO];
+}
 @end

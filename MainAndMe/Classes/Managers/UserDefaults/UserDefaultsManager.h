@@ -29,4 +29,5 @@
 - (NSString*)lastLoginType;
 - (NSString*)email;
 - (NSString*)password;
+- (void)clearOldLoginSettings;
 @end

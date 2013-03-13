@@ -93,6 +93,7 @@
         
         [UIView animateWithDuration:0.3 animations:^{
             [_scrollView setContentSize:CGSizeMake(0, height)];
+            [_scrollView setContentOffset:CGPointMake(0, 0)];
         } completion:^(BOOL finished) {
             
         }];
@@ -120,6 +121,7 @@
     }else if (textField == _userNameTextField) {
         
         [_userNameTextField resignFirstResponder];
+        [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     }
 }
 

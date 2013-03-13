@@ -115,6 +115,7 @@
         [_passwordTextField becomeFirstResponder];
     }else if (textField == _passwordTextField) {
         [_passwordTextField resignFirstResponder];
+        [_scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     }
     return YES;
 }
@@ -142,6 +143,7 @@
         
         [UIView animateWithDuration:0.3 animations:^{
             [_scrollView setContentSize:CGSizeMake(0, height)];
+            [_scrollView setContentOffset:CGPointMake(0, 0) animated:NO];
         } completion:^(BOOL finished) {
             
         }];

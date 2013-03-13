@@ -14,4 +14,5 @@
 
 + (LayoutManager*)shared;
 - (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+- (void)showLogin;
 @end

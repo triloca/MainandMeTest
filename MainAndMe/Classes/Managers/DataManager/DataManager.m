@@ -40,9 +40,8 @@
 
 #pragma mark - 
 
-- (void)setUserId:(NSString *)userId{
-
-    NSLog(@"yourObject is a: %@", NSStringFromClass([userId class]));
-    _userId = userId;
+- (void)clearUserInfo{
+    _userId = nil;
+    _api_token = nil;
 }
 @end

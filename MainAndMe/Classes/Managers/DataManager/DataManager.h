@@ -13,5 +13,5 @@
 @property (strong, nonatomic) NSString* api_token;
 
 + (DataManager*)shared;
-
+- (void)clearUserInfo;
 @end

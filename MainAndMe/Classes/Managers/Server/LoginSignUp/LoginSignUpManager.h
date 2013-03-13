@@ -24,4 +24,8 @@
               success:(void(^) (NSDictionary* user)) success
               failure:(void(^) (NSError* error, NSString* errorString)) failure
             exception:(void(^) (NSString* exceptionString))exception;
+
+//! Logout
+- (void)logout;
+
 @end
