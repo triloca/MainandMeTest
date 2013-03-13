@@ -16,6 +16,8 @@
 #import "MBProgressHUD.h"
 #import "ReachabilityManager.h"
 
+
+
 @interface LoginViewController ()
 @property (unsafe_unretained, nonatomic) IBOutlet UITextField *emailTextField;
 @property (unsafe_unretained, nonatomic) IBOutlet UITextField *passwordTextField;
@@ -80,6 +82,11 @@
     }
 }
 - (IBAction)facebookButtonClicked:(id)sender {
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
+    [self openFBSession];
 }
 - (IBAction)twitterButtonClicked:(id)sender {
 }
@@ -191,6 +198,16 @@
     if ([lastLoginType isEqualToString:kLoginTypeStandard]) {
         [self standardLoginWith:[[UserDefaultsManager shared] email]
                        password:[[UserDefaultsManager shared] password]];
+    }else if ([lastLoginType isEqualToString:kLoginTypeViaFacebook]) {
+        
+        [self authenticaeThroughFacebook:[[UserDefaultsManager shared] userId]
+                                userName:[[UserDefaultsManager shared] userName]
+                                   email:[[UserDefaultsManager shared] email]
+                             accessToken:[FBSession activeSession].accessToken];
+        
+    }else if ([lastLoginType isEqualToString:kLoginTypeViaTwitter]) {
+        [self standardLoginWith:[[UserDefaultsManager shared] email]
+                       password:[[UserDefaultsManager shared] password]];
     }
 }
 
@@ -226,4 +243,96 @@
 
 }
 
+
+#pragma mark - Facebook
+
+- (void)openFBSession {
+    
+    NSArray* permissions = [[NSArray alloc] initWithObjects:@"publish_stream",@"email", nil];
+    [FBSession.activeSession closeAndClearTokenInformation];
+    
+    if (FBSession.activeSession.isOpen) {
+        [self loadMeFacebook];
+    } else {
+        
+        [FBSession openActiveSessionWithPublishPermissions:permissions
+                                           defaultAudience:FBSessionDefaultAudienceFriends
+                                              allowLoginUI:YES
+                                         completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                                             [self sessionStateChanged:session state:status error:error];
+                                         }];
+        
+    }
+}
+
+- (void)sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error {
+    switch (state) {
+        case FBSessionStateOpen: {
+            [self loadMeFacebook];
+        }
+            break;
+        case FBSessionStateClosed:
+        case FBSessionStateClosedLoginFailed:
+            [FBSession.activeSession closeAndClearTokenInformation];
+            break;
+        default:
+            break;
+    }
+    
+    if (error != nil) {
+        [[AlertManager shared] showOkAlertWithTitle:@"Error" message:error.localizedDescription];
+    }
+}
+
+- (void)loadMeFacebook {
+    
+    [FBRequestConnection
+     startForMeWithCompletionHandler:^(FBRequestConnection *connection, id <FBGraphUser> user, NSError *error) {
+         if (!error) {
+             NSString* userName = user.name;
+             NSString* user_id = user.id;
+             NSString* email = [user objectForKey:@"email"];
+             
+             [self authenticaeThroughFacebook:user_id
+                                     userName:userName
+                                        email:email
+                                  accessToken:[FBSession activeSession].accessToken];
+             
+         }else{
+             [[AlertManager shared] showOkAlertWithTitle:@"Error" message:@"Facebook fail"];
+         }
+     }];
+}
+
+- (void)authenticaeThroughFacebook:(NSString*)user_id
+                          userName:(NSString*)userName
+                             email:(NSString*)email
+                       accessToken:(NSString*)accessToken{
+    
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [LoginSignUpManager loginViaSocialWithUserId:user_id
+                                     accessToken:accessToken
+                                       authtoken:nil
+                                           email:email
+                                        username:userName
+                                            type:@"facebook"
+                                         success:^(NSString *userId, NSString *api_token) {
+                                             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                             [self.navigationController popViewControllerAnimated:NO];
+                                         }
+                                         failure:^(NSError *error, NSString *errorString) {
+                                             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                             [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                 message:errorString];
+                                         }
+                                       exception:^(NSString *exceptionString) {
+                                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                           [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                       }];
+}
 @end

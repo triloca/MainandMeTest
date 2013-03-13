@@ -25,9 +25,17 @@
 
 + (UserDefaultsManager*)shared;
 - (void)saveStandardLogin:(NSString*)email password:(NSString*)password;
+- (void)saveFacebookLogin:(NSString*)userId
+                 userName:(NSString*)userName
+              accessToken:(NSString*)accessToken
+                    email:(NSString*)email;
 - (void)saveReturnedUsername:(NSString*)username;
 - (NSString*)lastLoginType;
 - (NSString*)email;
 - (NSString*)password;
+- (NSString*)userId;
+- (NSString*)accessToken;
+- (NSString*)authtoken;
+- (NSString*)userName;
 - (void)clearOldLoginSettings;
 @end

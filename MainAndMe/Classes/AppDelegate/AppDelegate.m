@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "LayoutManager.h"
 #import "ReachabilityManager.h"
+#import "FacebookSDK/FacebookSDK.h"
 
 @interface AppDelegate()
 
@@ -69,4 +70,19 @@
      See also applicationDidEnterBackground:.
      */
 }
+
+#pragma mark - Facebook
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [FBSession.activeSession handleOpenURL:url];
+}
+
+// For iOS 4.2+ support
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    
+    return [FBSession.activeSession handleOpenURL:url];
+}
+
 @end

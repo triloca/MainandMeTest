@@ -49,10 +49,25 @@
     [_userDefaults synchronize];
 }
 
+- (void)saveFacebookLogin:(NSString*)userId
+                 userName:(NSString*)userName
+              accessToken:(NSString*)accessToken
+                    email:(NSString*)email{
+    
+    [self clearOldLoginSettings];
+    [_userDefaults setObject:kLoginTypeViaFacebook forKey:kLoginType];
+    [_userDefaults setObject:email forKey:kUserEmail];
+    [_userDefaults setObject:userId forKey:kUserId];
+    [_userDefaults setObject:userName forKey:kUsername];
+    [_userDefaults setObject:accessToken forKey:kUserAccessToken];
+    [_userDefaults synchronize];
+}
+
 - (void)clearOldLoginSettings{
     [_userDefaults removeObjectForKey:kUserEmail];
     [_userDefaults removeObjectForKey:kUserPassword];
     [_userDefaults removeObjectForKey:kUserId];
+    [_userDefaults removeObjectForKey:kUsername];
     [_userDefaults removeObjectForKey:kUserAccessToken];
     [_userDefaults removeObjectForKey:kUserAuthtoken];
     [_userDefaults removeObjectForKey:kLoginType];
@@ -72,6 +87,23 @@
 
 - (NSString*)email{
     return [_userDefaults objectForKey:kUserEmail];
+}
+
+- (NSString*)userId{
+    return [_userDefaults objectForKey:kUserId];
+}
+
+- (NSString*)userName{
+    return [_userDefaults objectForKey:kUsername];
+}
+
+
+- (NSString*)accessToken{
+    return [_userDefaults objectForKey:kUserAccessToken];
+}
+
+- (NSString*)authtoken{
+    return [_userDefaults objectForKey:kUserAuthtoken];
 }
 
 - (NSString*)password{

@@ -72,6 +72,35 @@
     
 }
 
+//! Login via social request
++ (void)loginViaSocialWithUserId:(NSString*)userId
+                     accessToken:(NSString*)accessToken
+                       authtoken:(NSString*)authtoken
+                           email:(NSString*)email
+                        username:(NSString*)username
+                            type:(NSString*)type
+                         success:(void(^) (NSString* userId, NSString* api_token)) success
+                         failure:(void(^) (NSError* error, NSString* errorString)) failure
+                       exception:(void(^) (NSString* exceptionString))exception{
+
+    
+    @try {
+        [[self shared] loginViaSocialWithUserId:userId
+                                    accessToken:accessToken
+                                      authtoken:authtoken
+                                          email:email
+                                       username:username
+                                           type:type
+                                        success:success
+                                        failure:failure
+                                      exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(@"Exeption\n Login Via Social create");
+    }
+}
+
+
 
 - (void)signUpWithEmail:(NSString*)email
                password:(NSString*)password
@@ -186,6 +215,87 @@
     [connection start];
 }
 
+//! Login via social request
+-(void)loginViaSocialWithUserId:(NSString*)userId
+                    accessToken:(NSString*)accessToken
+                      authtoken:(NSString*)authtoken
+                          email:(NSString*)email
+                       username:(NSString*)username
+                           type:(NSString*)type
+                        success:(void(^) (NSString* userId, NSString* api_token)) success
+                        failure:(void(^) (NSError* error, NSString* errorString)) failure
+                      exception:(void(^) (NSString* exceptionString))exception{
+    
+    
+    self.userId = userId;
+    self.accessToken = accessToken;
+    self.authtoken = authtoken;
+    self.email = email;
+    self.username = username;
+    self.password = nil;
+    
+    if (_email == nil || [_email isEqualToString:@"null"]) {
+        _email = @"";
+    }
+    
+    NSString* urlString = @"";
+    if ([type isEqualToString:@"facebook"]) {
+        urlString =
+        [NSString stringWithFormat:@"%@/authenticae/create?omniauth[uid]=%@&omniauth[provider]=%@&omniauth[credentials][token]=%@&omniauth[credentials][secret]=&omniauth[info][email]=%@&omniauth[info][name]=%@&omniauth[info][image]=&omniauth[info][terms]=%@", [APIv1_0 serverUrl], userId, type, accessToken, email, username, @"1"];
+        
+    }else if ([type isEqualToString:@"twitter"]) {
+        urlString =
+        [NSString stringWithFormat:@"%@/authenticae/create?omniauth[uid]=%@&omniauth[provider]=%@&omniauth[credentials][token]=%@&omniauth[credentials][secret]=&omniauth[info][email]=%@&omniauth[info][name]=%@&omniauth[info][image]=&omniauth[info][terms]=%@", [APIv1_0 serverUrl], userId, type, authtoken, email, username, @"1"];
+    }
+    
+    NSLog(@"urlString = %@", urlString);
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    NSLog(@"urlString = %@", urlString);
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:20];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        if ([self isDataValid:value]) {
+            
+            if ([type isEqualToString:@"facebook"]) {
+                [[UserDefaultsManager shared] saveFacebookLogin:_userId
+                                                       userName:_username
+                                                    accessToken:_accessToken
+                                                          email:_email];
+            }else {
+                //[userDefaults setObject:kLoginTypeViaTwitter forKey:kLoginType];
+            }
+            
+            NSDictionary* user = [value safeDictionaryObjectForKey:@"user"];
+            NSString* userId = [NSString stringWithFormat:@"%d", [[user valueForKeyPath:@"id"] intValue]];
+            NSString* token = [user safeStringObjectForKey:@"api_token"];
+            [DataManager shared].userId = userId;
+            [DataManager shared].api_token = token;
+            
+            success(userId, token);
+        }else{
+            NSString* messageString = [value safeStringObjectForKey:@"message"];
+            messageString = [NSString stringWithFormat:@"%@ %@", messageString, @"Server API Error!"];
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    } eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+}
+
+
 ////! Logout request
 //-(void)logoutWithSuccess:(void(^) (NSDictionary* user)) success
 //                 failure:(void(^) (NSError* error, NSString* errorString)) failure
@@ -251,6 +361,48 @@
     return NO;
 }
 
+- (void)saveDefoultsForLogin{
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    if (_email) {
+        [userDefaults setObject:_email forKey:kUserEmail];
+    }else{
+        [userDefaults removeObjectForKey:kUserEmail];
+    }
+    
+    if (_password) {
+        [userDefaults setObject:_password forKey:kUserPassword];
+    }else{
+        [userDefaults removeObjectForKey:kUserPassword];
+    }
+    
+    if (_userId) {
+        [userDefaults setObject:_userId forKey:kUserId];
+    }else{
+        [userDefaults removeObjectForKey:kUserId];
+    }
+    if (_accessToken) {
+        [userDefaults setObject:_accessToken forKey:kUserAccessToken];
+    }else{
+        [userDefaults removeObjectForKey:kUserAccessToken];
+    }
+    if (_username) {
+        [userDefaults setObject:_username forKey:kUsername];
+    }else{
+        [userDefaults removeObjectForKey:kUsername];
+    }
+    if (_authtoken) {
+        [userDefaults setObject:_username forKey:kUserAuthtoken];
+    }else{
+        [userDefaults removeObjectForKey:kUserAuthtoken];
+    }
+    
+    
+    //[userDefaults removeObjectForKey:kLoginType]; //! For testing only
+    [userDefaults synchronize];
+}
+
+
 - (void)logout{
     
     self.email = nil;
@@ -260,6 +412,7 @@
     self.username = nil;
     self.authtoken = nil;
     
+    [FBSession.activeSession closeAndClearTokenInformation];
     [[UserDefaultsManager shared] clearOldLoginSettings];
     [[DataManager shared] clearUserInfo];
 }

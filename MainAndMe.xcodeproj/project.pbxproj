@@ -13,6 +13,7 @@
 		D908EE0816F0F2FE004B2405 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D908EE0516F0F2FD004B2405 /* AdSupport.framework */; };
 		D908EE0916F0F2FE004B2405 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D908EE0616F0F2FD004B2405 /* Security.framework */; };
 		D908EE0A16F0F2FE004B2405 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D908EE0716F0F2FE004B2405 /* Social.framework */; };
+		D908EE0C16F0FA4F004B2405 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D908EE0B16F0FA4F004B2405 /* Accounts.framework */; };
 		D927D99C16EE6A0B002CF45A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D927D99B16EE6A0B002CF45A /* UIKit.framework */; };
 		D927D99E16EE6A0B002CF45A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D927D99D16EE6A0B002CF45A /* Foundation.framework */; };
 		D927D9A016EE6A0B002CF45A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D927D99F16EE6A0B002CF45A /* CoreGraphics.framework */; };
@@ -98,6 +99,7 @@
 		D908EE0516F0F2FD004B2405 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		D908EE0616F0F2FD004B2405 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D908EE0716F0F2FE004B2405 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		D908EE0B16F0FA4F004B2405 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		D927D99816EE6A0B002CF45A /* MainAndMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MainAndMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D927D99B16EE6A0B002CF45A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D927D99D16EE6A0B002CF45A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -226,6 +228,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D908EE0C16F0FA4F004B2405 /* Accounts.framework in Frameworks */,
+				D908EE0016F0F2AB004B2405 /* FacebookSDK.framework in Frameworks */,
 				D908EE0816F0F2FE004B2405 /* AdSupport.framework in Frameworks */,
 				D908EE0916F0F2FE004B2405 /* Security.framework in Frameworks */,
 				D908EE0A16F0F2FE004B2405 /* Social.framework in Frameworks */,
@@ -234,7 +238,6 @@
 				D927D99C16EE6A0B002CF45A /* UIKit.framework in Frameworks */,
 				D927D99E16EE6A0B002CF45A /* Foundation.framework in Frameworks */,
 				D927D9A016EE6A0B002CF45A /* CoreGraphics.framework in Frameworks */,
-				D908EE0016F0F2AB004B2405 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +264,7 @@
 		D927D99A16EE6A0B002CF45A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D908EE0B16F0FA4F004B2405 /* Accounts.framework */,
 				D908EE0516F0F2FD004B2405 /* AdSupport.framework */,
 				D908EE0616F0F2FD004B2405 /* Security.framework */,
 				D908EE0716F0F2FE004B2405 /* Social.framework */,
@@ -910,6 +914,10 @@
 				GCC_PREFIX_HEADER = "MainAndMe/Supporting Files/MainAndMe-Prefix.pch";
 				INFOPLIST_FILE = "MainAndMe/Supporting Files/MainAndMe-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lsqlite3.0",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -928,6 +936,10 @@
 				GCC_PREFIX_HEADER = "MainAndMe/Supporting Files/MainAndMe-Prefix.pch";
 				INFOPLIST_FILE = "MainAndMe/Supporting Files/MainAndMe-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-lsqlite3.0",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;

@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
 //
 
+#import "FacebookSDK/FacebookSDK.h"
 
 @interface LoginSignUpManager : NSObject
 
@@ -17,6 +18,17 @@
                 success:(void(^) (NSString* token, NSString* email)) success
                 failure:(void(^) (NSError* error, NSString* errorString)) failure
               exception:(void(^) (NSString* exceptionString))exception;
+
+//! Login via social request
++ (void)loginViaSocialWithUserId:(NSString*)userId
+                     accessToken:(NSString*)accessToken
+                       authtoken:(NSString*)authtoken
+                           email:(NSString*)email
+                        username:(NSString*)username
+                            type:(NSString*)type
+                         success:(void(^) (NSString* userId, NSString* api_token)) success
+                         failure:(void(^) (NSError* error, NSString* errorString)) failure
+                       exception:(void(^) (NSString* exceptionString))exception;
 
 //! Login request
 -(void)loginWithEmail:(NSString*)email
