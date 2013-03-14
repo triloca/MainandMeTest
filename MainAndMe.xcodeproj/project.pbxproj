@@ -106,6 +106,10 @@
 		D9C29F2A16F12C7D00A419DC /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C29F1F16F12C7D00A419DC /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D9C29F2B16F12C7D00A419DC /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C29F2116F12C7D00A419DC /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D9C29F2C16F12C7D00A419DC /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C29F2316F12C7D00A419DC /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		D9C29F3116F15F8500A419DC /* OveralyView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C29F2F16F15F8500A419DC /* OveralyView.m */; };
+		D9C29F3216F15F8500A419DC /* OveralyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9C29F3016F15F8500A419DC /* OveralyView.xib */; };
+		D9C29F3516F1604600A419DC /* overaly.png in Resources */ = {isa = PBXBuildFile; fileRef = D9C29F3416F1604600A419DC /* overaly.png */; };
+		D9C29F3716F1610600A419DC /* OveralyView_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9C29F3616F1610600A419DC /* OveralyView_iPhone5.xib */; };
 		D9D796CB16EEAD5200C494D7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D796C916EEAD5200C494D7 /* LoginViewController.m */; };
 		D9D796CC16EEAD5200C494D7 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796CA16EEAD5200C494D7 /* LoginViewController.xib */; };
 		D9D796CE16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796CD16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib */; };
@@ -311,6 +315,11 @@
 		D9C29F2116F12C7D00A419DC /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		D9C29F2216F12C7D00A419DC /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		D9C29F2316F12C7D00A419DC /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		D9C29F2E16F15F8500A419DC /* OveralyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OveralyView.h; path = Classes/Controllers/Main/Views/OveralyView.h; sourceTree = "<group>"; };
+		D9C29F2F16F15F8500A419DC /* OveralyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OveralyView.m; path = Classes/Controllers/Main/Views/OveralyView.m; sourceTree = "<group>"; };
+		D9C29F3016F15F8500A419DC /* OveralyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OveralyView.xib; path = Classes/Controllers/Main/Views/OveralyView.xib; sourceTree = "<group>"; };
+		D9C29F3416F1604600A419DC /* overaly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overaly.png; sourceTree = "<group>"; };
+		D9C29F3616F1610600A419DC /* OveralyView_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OveralyView_iPhone5.xib; path = Classes/Controllers/Main/Views/OveralyView_iPhone5.xib; sourceTree = "<group>"; };
 		D9D796C816EEAD5200C494D7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Classes/Controllers/Login/LoginViewController.h; sourceTree = "<group>"; };
 		D9D796C916EEAD5200C494D7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Classes/Controllers/Login/LoginViewController.m; sourceTree = "<group>"; };
 		D9D796CA16EEAD5200C494D7 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Classes/Controllers/Login/LoginViewController.xib; sourceTree = "<group>"; };
@@ -540,6 +549,7 @@
 		D927D9EB16EE9845002CF45A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D9C29F3316F1604600A419DC /* Main */,
 				D93C0FDC16EFFCE800A4472E /* TabBar */,
 				D9D796CF16EEB09A00C494D7 /* Login */,
 				D927D9EC16EE9869002CF45A /* Base */,
@@ -738,6 +748,7 @@
 		D93C0FC916EFF2A400A4472E /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				D9C29F2D16F15F5500A419DC /* Views */,
 				D93C0FCA16EFF34700A4472E /* MainViewController.h */,
 				D93C0FCB16EFF34700A4472E /* MainViewController.m */,
 				D93C0FCC16EFF34700A4472E /* MainViewController.xib */,
@@ -902,6 +913,26 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
+		D9C29F2D16F15F5500A419DC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D9C29F3616F1610600A419DC /* OveralyView_iPhone5.xib */,
+				D9C29F2E16F15F8500A419DC /* OveralyView.h */,
+				D9C29F2F16F15F8500A419DC /* OveralyView.m */,
+				D9C29F3016F15F8500A419DC /* OveralyView.xib */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		D9C29F3316F1604600A419DC /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				D9C29F3416F1604600A419DC /* overaly.png */,
+			);
+			name = Main;
+			path = Resources/Images/Main;
+			sourceTree = "<group>";
+		};
 		D9D796C716EEAD2600C494D7 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -1032,6 +1063,9 @@
 				D9C29EFC16F12C0A00A419DC /* jQueryInject.txt in Resources */,
 				D9C29EFD16F12C0A00A419DC /* jQueryInjectLandscape.txt in Resources */,
 				D9C29F0F16F12C0A00A419DC /* twitter_load.png in Resources */,
+				D9C29F3216F15F8500A419DC /* OveralyView.xib in Resources */,
+				D9C29F3516F1604600A419DC /* overaly.png in Resources */,
+				D9C29F3716F1610600A419DC /* OveralyView_iPhone5.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1109,6 +1143,7 @@
 				D9C29F2A16F12C7D00A419DC /* AFURLConnectionOperation.m in Sources */,
 				D9C29F2B16F12C7D00A419DC /* AFXMLRequestOperation.m in Sources */,
 				D9C29F2C16F12C7D00A419DC /* UIImageView+AFNetworking.m in Sources */,
+				D9C29F3116F15F8500A419DC /* OveralyView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

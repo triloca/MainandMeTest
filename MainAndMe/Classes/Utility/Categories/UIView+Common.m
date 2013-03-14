@@ -229,6 +229,29 @@
     }
 }
 
++ (id)loadViewFromXIB_or_iPhone5_XIB {
+    
+    NSArray *topLevelObjects = nil;
+    
+    if(IS_IPHONE_5){
+        NSString* xibName = [NSString stringWithFormat:@"%@_iPhone5", NSStringFromClass(self)];
+        topLevelObjects = [[NSBundle mainBundle] loadNibNamed:xibName
+                                                                 owner:nil
+                                                               options:nil];
+    }else{
+        topLevelObjects = [[NSBundle mainBundle] loadNibNamed:NSStringFromClass(self)
+                                                        owner:nil
+                                                      options:nil];
+    }
+
+    if ( [topLevelObjects count] > 0 ) {
+        return [topLevelObjects objectAtIndex:0];
+    } else {
+        return nil;
+    }
+}
+
+
 + (id)loadViewFromXIBWithName:(NSString*)xibName {
     NSArray *topLevelObjects = [[NSBundle mainBundle] loadNibNamed:xibName owner:nil options:nil];
     if ( [topLevelObjects count] > 0 ) {

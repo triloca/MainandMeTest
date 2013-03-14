@@ -7,6 +7,8 @@
 //
 
 #import "ProfileViewController.h"
+#import "LoginSignUpManager.h"
+#import "LayoutManager.h"
 
 @interface ProfileViewController ()
 
@@ -33,6 +35,12 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (IBAction)logoutButtonClicked:(id)sender {
+    [[LoginSignUpManager shared] logout];
+    [[LayoutManager shared] showLogin];
 }
 
 @end

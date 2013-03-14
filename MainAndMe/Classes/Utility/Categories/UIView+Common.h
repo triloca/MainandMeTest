@@ -34,6 +34,7 @@
 - (void)rotateAnimationWithDuration:(CGFloat)duration;
 
 + (id)loadViewFromXIB;
++ (id)loadViewFromXIB_or_iPhone5_XIB;
 + (id)loadViewFromXIBWithName:(NSString*)xibName;
 
 @end

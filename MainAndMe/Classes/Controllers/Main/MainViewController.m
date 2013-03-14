@@ -9,6 +9,8 @@
 #import "MainViewController.h"
 #import "LoginSignUpManager.h"
 #import "LayoutManager.h"
+#import "OveralyView.h"
+#import "UIView+Common.h"
 
 @interface MainViewController ()
 
@@ -29,6 +31,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    [self showOveralyView];
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,9 +40,22 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)logoutButtonClicked:(id)sender {
-    [[LoginSignUpManager shared] logout];
-    [[LayoutManager shared] showLogin];
-}
 
+- (void)showOveralyView{
+    
+    OveralyView* overalyView = [OveralyView loadViewFromXIB_or_iPhone5_XIB];
+    __unsafe_unretained OveralyView* weak_overlyView = overalyView;
+    
+    overalyView.didClickOveraly = ^{
+        [UIView animateWithDuration:0.3
+                         animations:^{
+                             weak_overlyView.alpha = 0;
+                         }
+                         completion:^(BOOL finished) {
+                             [weak_overlyView removeFromSuperview];
+                         }];
+    };
+    
+    [[LayoutManager shared].appDelegate.window addSubview:overalyView];
+}
 @end
