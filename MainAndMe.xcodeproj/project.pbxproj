@@ -106,10 +106,15 @@
 		D9C29F2A16F12C7D00A419DC /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C29F1F16F12C7D00A419DC /* AFURLConnectionOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D9C29F2B16F12C7D00A419DC /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C29F2116F12C7D00A419DC /* AFXMLRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D9C29F2C16F12C7D00A419DC /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C29F2316F12C7D00A419DC /* UIImageView+AFNetworking.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		D9C29F3116F15F8500A419DC /* OveralyView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C29F2F16F15F8500A419DC /* OveralyView.m */; };
-		D9C29F3216F15F8500A419DC /* OveralyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9C29F3016F15F8500A419DC /* OveralyView.xib */; };
+		D9C29F3116F15F8500A419DC /* OverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = D9C29F2F16F15F8500A419DC /* OverlayView.m */; };
+		D9C29F3216F15F8500A419DC /* OverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9C29F3016F15F8500A419DC /* OverlayView.xib */; };
 		D9C29F3516F1604600A419DC /* overaly.png in Resources */ = {isa = PBXBuildFile; fileRef = D9C29F3416F1604600A419DC /* overaly.png */; };
-		D9C29F3716F1610600A419DC /* OveralyView_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9C29F3616F1610600A419DC /* OveralyView_iPhone5.xib */; };
+		D9C29F3716F1610600A419DC /* OverlayView_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9C29F3616F1610600A419DC /* OverlayView_iPhone5.xib */; };
+		D9C29F3D16F16AAE00A419DC /* back_but@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9C29F3916F16AAE00A419DC /* back_but@2x.png */; };
+		D9C29F3E16F16AAE00A419DC /* grid_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9C29F3A16F16AAE00A419DC /* grid_button@2x.png */; };
+		D9C29F3F16F16AAE00A419DC /* navigation_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9C29F3B16F16AAE00A419DC /* navigation_bar@2x.png */; };
+		D9C29F4016F16AAE00A419DC /* page_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9C29F3C16F16AAE00A419DC /* page_button@2x.png */; };
+		D9C29F4216F16CE200A419DC /* search_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9C29F4116F16CE200A419DC /* search_button@2x.png */; };
 		D9D796CB16EEAD5200C494D7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9D796C916EEAD5200C494D7 /* LoginViewController.m */; };
 		D9D796CC16EEAD5200C494D7 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796CA16EEAD5200C494D7 /* LoginViewController.xib */; };
 		D9D796CE16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9D796CD16EEAD7A00C494D7 /* LoginViewController_iPhone5.xib */; };
@@ -315,11 +320,16 @@
 		D9C29F2116F12C7D00A419DC /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		D9C29F2216F12C7D00A419DC /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		D9C29F2316F12C7D00A419DC /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
-		D9C29F2E16F15F8500A419DC /* OveralyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OveralyView.h; path = Classes/Controllers/Main/Views/OveralyView.h; sourceTree = "<group>"; };
-		D9C29F2F16F15F8500A419DC /* OveralyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OveralyView.m; path = Classes/Controllers/Main/Views/OveralyView.m; sourceTree = "<group>"; };
-		D9C29F3016F15F8500A419DC /* OveralyView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OveralyView.xib; path = Classes/Controllers/Main/Views/OveralyView.xib; sourceTree = "<group>"; };
+		D9C29F2E16F15F8500A419DC /* OverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OverlayView.h; path = Classes/Controllers/Main/Views/OverlayView.h; sourceTree = "<group>"; };
+		D9C29F2F16F15F8500A419DC /* OverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OverlayView.m; path = Classes/Controllers/Main/Views/OverlayView.m; sourceTree = "<group>"; };
+		D9C29F3016F15F8500A419DC /* OverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OverlayView.xib; path = Classes/Controllers/Main/Views/OverlayView.xib; sourceTree = "<group>"; };
 		D9C29F3416F1604600A419DC /* overaly.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overaly.png; sourceTree = "<group>"; };
-		D9C29F3616F1610600A419DC /* OveralyView_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OveralyView_iPhone5.xib; path = Classes/Controllers/Main/Views/OveralyView_iPhone5.xib; sourceTree = "<group>"; };
+		D9C29F3616F1610600A419DC /* OverlayView_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = OverlayView_iPhone5.xib; path = Classes/Controllers/Main/Views/OverlayView_iPhone5.xib; sourceTree = "<group>"; };
+		D9C29F3916F16AAE00A419DC /* back_but@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back_but@2x.png"; sourceTree = "<group>"; };
+		D9C29F3A16F16AAE00A419DC /* grid_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grid_button@2x.png"; sourceTree = "<group>"; };
+		D9C29F3B16F16AAE00A419DC /* navigation_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_bar@2x.png"; sourceTree = "<group>"; };
+		D9C29F3C16F16AAE00A419DC /* page_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "page_button@2x.png"; sourceTree = "<group>"; };
+		D9C29F4116F16CE200A419DC /* search_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_button@2x.png"; sourceTree = "<group>"; };
 		D9D796C816EEAD5200C494D7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = Classes/Controllers/Login/LoginViewController.h; sourceTree = "<group>"; };
 		D9D796C916EEAD5200C494D7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = Classes/Controllers/Login/LoginViewController.m; sourceTree = "<group>"; };
 		D9D796CA16EEAD5200C494D7 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Classes/Controllers/Login/LoginViewController.xib; sourceTree = "<group>"; };
@@ -560,6 +570,7 @@
 		D927D9EC16EE9869002CF45A /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				D9C29F3816F16AAE00A419DC /* Navigation */,
 				D9D796E416EECF7A00C494D7 /* Buttons */,
 				D927D9ED16EE98AD002CF45A /* Default-568h@2x.png */,
 				D927D9EE16EE98AD002CF45A /* Default.png */,
@@ -916,10 +927,10 @@
 		D9C29F2D16F15F5500A419DC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D9C29F3616F1610600A419DC /* OveralyView_iPhone5.xib */,
-				D9C29F2E16F15F8500A419DC /* OveralyView.h */,
-				D9C29F2F16F15F8500A419DC /* OveralyView.m */,
-				D9C29F3016F15F8500A419DC /* OveralyView.xib */,
+				D9C29F3616F1610600A419DC /* OverlayView_iPhone5.xib */,
+				D9C29F2E16F15F8500A419DC /* OverlayView.h */,
+				D9C29F2F16F15F8500A419DC /* OverlayView.m */,
+				D9C29F3016F15F8500A419DC /* OverlayView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -931,6 +942,19 @@
 			);
 			name = Main;
 			path = Resources/Images/Main;
+			sourceTree = "<group>";
+		};
+		D9C29F3816F16AAE00A419DC /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				D9C29F4116F16CE200A419DC /* search_button@2x.png */,
+				D9C29F3916F16AAE00A419DC /* back_but@2x.png */,
+				D9C29F3A16F16AAE00A419DC /* grid_button@2x.png */,
+				D9C29F3B16F16AAE00A419DC /* navigation_bar@2x.png */,
+				D9C29F3C16F16AAE00A419DC /* page_button@2x.png */,
+			);
+			name = Navigation;
+			path = Resources/Images/Base/Navigation;
 			sourceTree = "<group>";
 		};
 		D9D796C716EEAD2600C494D7 /* Login */ = {
@@ -1063,9 +1087,14 @@
 				D9C29EFC16F12C0A00A419DC /* jQueryInject.txt in Resources */,
 				D9C29EFD16F12C0A00A419DC /* jQueryInjectLandscape.txt in Resources */,
 				D9C29F0F16F12C0A00A419DC /* twitter_load.png in Resources */,
-				D9C29F3216F15F8500A419DC /* OveralyView.xib in Resources */,
+				D9C29F3216F15F8500A419DC /* OverlayView.xib in Resources */,
 				D9C29F3516F1604600A419DC /* overaly.png in Resources */,
-				D9C29F3716F1610600A419DC /* OveralyView_iPhone5.xib in Resources */,
+				D9C29F3716F1610600A419DC /* OverlayView_iPhone5.xib in Resources */,
+				D9C29F3D16F16AAE00A419DC /* back_but@2x.png in Resources */,
+				D9C29F3E16F16AAE00A419DC /* grid_button@2x.png in Resources */,
+				D9C29F3F16F16AAE00A419DC /* navigation_bar@2x.png in Resources */,
+				D9C29F4016F16AAE00A419DC /* page_button@2x.png in Resources */,
+				D9C29F4216F16CE200A419DC /* search_button@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1143,7 +1172,7 @@
 				D9C29F2A16F12C7D00A419DC /* AFURLConnectionOperation.m in Sources */,
 				D9C29F2B16F12C7D00A419DC /* AFXMLRequestOperation.m in Sources */,
 				D9C29F2C16F12C7D00A419DC /* UIImageView+AFNetworking.m in Sources */,
-				D9C29F3116F15F8500A419DC /* OveralyView.m in Sources */,
+				D9C29F3116F15F8500A419DC /* OverlayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

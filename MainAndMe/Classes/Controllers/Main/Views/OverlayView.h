@@ -7,6 +7,6 @@
 //
 
 
-@interface OveralyView : UIView
-@property (copy, nonatomic) void (^didClickOveraly)();
+@interface OverlayView : UIView
+@property (copy, nonatomic) void (^didClickOverlay)();
 @end

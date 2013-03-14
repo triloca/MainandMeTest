@@ -101,6 +101,45 @@
     }
 }
 
+//! Login request
++ (void)loginWithEmail:(NSString*)email
+              password:(NSString*)password
+               success:(void(^) (NSDictionary* user)) success
+               failure:(void(^) (NSError* error, NSString* errorString)) failure
+             exception:(void(^) (NSString* exceptionString))exception{
+
+    @try {
+        [[self shared] loginWithEmail:email
+                             password:password
+                              success:success
+                              failure:failure
+                            exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(@"Exeption\n Login With Email create");
+    }
+
+}
+
++ (void)forgotPasswordForEmail:(NSString*)email
+                       success:(void(^)()) success
+                       failure:(void(^) (NSError* error, NSString* errorString)) failure
+                     exception:(void(^) (NSString* exceptionString))exception{
+   
+   
+    @try {
+          [[self shared] forgotPasswordForEmail:email
+                                  success:success
+                                  failure:failure
+                                exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(@"Exeption\n Forgot Password Email create");
+    }
+
+  
+}
+
 
 
 - (void)signUpWithEmail:(NSString*)email
@@ -165,11 +204,11 @@
 }
 
 //! Login request
--(void)loginWithEmail:(NSString*)email
-             password:(NSString*)password
-              success:(void(^) (NSDictionary* user)) success
-              failure:(void(^) (NSError* error, NSString* errorString)) failure
-            exception:(void(^) (NSString* exceptionString))exception{
+- (void)loginWithEmail:(NSString*)email
+              password:(NSString*)password
+               success:(void(^) (NSDictionary* user)) success
+               failure:(void(^) (NSError* error, NSString* errorString)) failure
+             exception:(void(^) (NSString* exceptionString))exception{
     
     self.email = email;
     self.password = password;
@@ -214,6 +253,51 @@
     
     NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
     [connection start];
+}
+
+- (void)forgotPasswordForEmail:(NSString*)email
+                       success:(void(^)()) success
+                       failure:(void(^) (NSError* error, NSString* errorString)) failure
+                     exception:(void(^) (NSString* exceptionString))exception{
+
+    self.email = nil;
+    self.password = nil;
+    self.userId = nil;
+    self.accessToken = nil;
+    self.username = nil;
+    self.authtoken = nil;
+    
+    
+    NSString* urlString =
+    [NSString stringWithFormat:@"%@/users/send_reset_password_token?email=%@", [APIv1_0 serverUrl], email];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:20];
+    [request setHTTPMethod:@"POST"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        if ([self isValidPasswordReset:value]) {
+            success();
+        }else{
+            NSString* messageString = [value safeStringObjectForKey:@"error"];
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    }eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+
 }
 
 //! Login via social request
@@ -366,6 +450,22 @@
     }
     return NO;
 }
+
+
+//! Validate request
+- (BOOL)isValidPasswordReset:(id)value{
+    if ([value isKindOfClass:[NSDictionary class]]) {
+        NSDictionary* dict = (NSDictionary*)value;
+        if ([[dict safeStringObjectForKey:@"message"] isEqualToString:@"OK"]) {
+            return YES;
+        }else{
+            return NO;
+        }
+    }
+    return NO;
+}
+
+
 
 - (void)saveDefoultsForLogin{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

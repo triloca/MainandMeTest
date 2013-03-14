@@ -104,6 +104,22 @@
     [self.navigationController pushViewController:signUpViewController animated:YES];
 }
 
+- (IBAction)forgotPasswordButtonClicked:(id)sender {
+    [self hideKeyBoard];
+    
+    if (_emailTextField.text.length == 0) {
+        [[AlertManager shared] showOkAlertWithTitle:@"Enter Email address"];
+        [_emailTextField becomeFirstResponder];
+        return;
+    }
+    if (![_emailTextField.text isValidEmail]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"Enter valid Email"];
+        [_emailTextField becomeFirstResponder];
+        return;
+    }
+    
+    [self forgotPasswordRequest];
+}
 
 #pragma mark - TextField Delegate
 
@@ -234,26 +250,53 @@
     }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[LoginSignUpManager shared] loginWithEmail:email
-                                       password:password
-                                        success:^(NSDictionary *user) {
-                                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                            
-                                            [DataManager shared].userId = [user safeStringObjectForKey:@"id"];
-                                            [DataManager shared].api_token = [user safeStringObjectForKey:@"api_token"];
-                                            
-                                            [[UserDefaultsManager shared] saveReturnedUsername:[user safeStringObjectForKey:@"name"]];
-                                            [self.navigationController popViewControllerAnimated:NO];
-                                        }
-                                        failure:^(NSError *error, NSString *errorString) {
-                                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                            [[AlertManager shared] showOkAlertWithTitle:@"Error"
-                                                                                message:errorString];
-                                        }
-                                      exception:^(NSString *exceptionString) {
-                                          [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                          [[AlertManager shared] showOkAlertWithTitle:exceptionString];
-                                      }];
+    [LoginSignUpManager loginWithEmail:email
+                              password:password
+                               success:^(NSDictionary *user) {
+                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                   
+                                   [DataManager shared].userId = [user safeStringObjectForKey:@"id"];
+                                   [DataManager shared].api_token = [user safeStringObjectForKey:@"api_token"];
+                                   
+                                   [[UserDefaultsManager shared] saveReturnedUsername:[user safeStringObjectForKey:@"name"]];
+                                   [self.navigationController popViewControllerAnimated:NO];
+                               }
+                               failure:^(NSError *error, NSString *errorString) {
+                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                   [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                       message:errorString];
+                               }
+                             exception:^(NSString *exceptionString) {
+                                 [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                 [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                             }];
+
+}
+
+
+- (void)forgotPasswordRequest{
+
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [LoginSignUpManager forgotPasswordForEmail:_emailTextField.text
+                                       success:^{
+                                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                           [[AlertManager shared] showOkAlertWithTitle:@"Password was reset successfully" message:@"Please check your Email"];
+                                           [[UserDefaultsManager shared] clearOldLoginSettings];
+                                       }
+                                       failure:^(NSError *error, NSString *errorString) {
+                                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                           [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                               message:errorString];
+                                       }
+                                     exception:^(NSString *exceptionString) {
+                                         [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                         [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                     }];
 
 }
 

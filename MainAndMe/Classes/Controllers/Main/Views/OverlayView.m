@@ -6,24 +6,24 @@
 //  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
 //
 
-#import "OveralyView.h"
+#import "OverlayView.h"
 
 
-@interface OveralyView()
+@interface OverlayView()
 
 @end
 
 
-@implementation OveralyView
+@implementation OverlayView
 
 - (void)awakeFromNib{
     // Init code
 }
 
 
-- (IBAction)overalyButtonClicked:(id)sender {
-    if (_didClickOveraly) {
-        _didClickOveraly();
+- (IBAction)overlayButtonClicked:(id)sender {
+    if (_didClickOverlay) {
+        _didClickOverlay();
     }
 }
 

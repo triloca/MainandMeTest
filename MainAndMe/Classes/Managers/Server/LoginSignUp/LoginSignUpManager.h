@@ -31,11 +31,18 @@
                        exception:(void(^) (NSString* exceptionString))exception;
 
 //! Login request
--(void)loginWithEmail:(NSString*)email
-             password:(NSString*)password
-              success:(void(^) (NSDictionary* user)) success
-              failure:(void(^) (NSError* error, NSString* errorString)) failure
-            exception:(void(^) (NSString* exceptionString))exception;
++ (void)loginWithEmail:(NSString*)email
+              password:(NSString*)password
+               success:(void(^) (NSDictionary* user)) success
+               failure:(void(^) (NSError* error, NSString* errorString)) failure
+             exception:(void(^) (NSString* exceptionString))exception;
+
+//! Login request
++ (void)forgotPasswordForEmail:(NSString*)email
+                       success:(void(^)()) success
+                       failure:(void(^) (NSError* error, NSString* errorString)) failure
+                     exception:(void(^) (NSString* exceptionString))exception;
+
 
 //! Logout
 - (void)logout;

@@ -9,7 +9,7 @@
 #import "MainViewController.h"
 #import "LoginSignUpManager.h"
 #import "LayoutManager.h"
-#import "OveralyView.h"
+#import "OverlayView.h"
 #import "UIView+Common.h"
 
 @interface MainViewController ()
@@ -43,10 +43,10 @@
 
 - (void)showOveralyView{
     
-    OveralyView* overalyView = [OveralyView loadViewFromXIB_or_iPhone5_XIB];
-    __unsafe_unretained OveralyView* weak_overlyView = overalyView;
+    OverlayView* overalyView = [OverlayView loadViewFromXIB_or_iPhone5_XIB];
+    __unsafe_unretained OverlayView* weak_overlyView = overalyView;
     
-    overalyView.didClickOveraly = ^{
+    overalyView.didClickOverlay = ^{
         [UIView animateWithDuration:0.3
                          animations:^{
                              weak_overlyView.alpha = 0;
