@@ -15,7 +15,7 @@
 #import "UserDefaultsManager.h"
 #import "MBProgressHUD.h"
 #import "ReachabilityManager.h"
-
+#import "TwitterManager.h"
 
 
 @interface LoginViewController ()
@@ -89,6 +89,12 @@
     [self openFBSession];
 }
 - (IBAction)twitterButtonClicked:(id)sender {
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
+    [self loginToTwitter];
+
 }
 - (IBAction)createAccountButtonClicked:(id)sender {
     
@@ -194,6 +200,12 @@
 }
 
 - (void)checkLastLogin{
+
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
+    
     NSString* lastLoginType = [[UserDefaultsManager shared] lastLoginType];
     if ([lastLoginType isEqualToString:kLoginTypeStandard]) {
         [self standardLoginWith:[[UserDefaultsManager shared] email]
@@ -206,8 +218,10 @@
                              accessToken:[FBSession activeSession].accessToken];
         
     }else if ([lastLoginType isEqualToString:kLoginTypeViaTwitter]) {
-        [self standardLoginWith:[[UserDefaultsManager shared] email]
-                       password:[[UserDefaultsManager shared] password]];
+        [self authenticaeThroughTwitter:[[UserDefaultsManager shared] userId]
+                               userName:[[UserDefaultsManager shared] userName]
+                                  email:[[UserDefaultsManager shared] email]
+                              authtoken:[[UserDefaultsManager shared] authtoken]];
     }
 }
 
@@ -335,4 +349,161 @@
                                            [[AlertManager shared] showOkAlertWithTitle:exceptionString];
                                        }];
 }
+
+#pragma mark - Twitter
+
+- (void)loginToTwitter{
+ 
+    [[TwitterManager sharedInstance] setLoginSuccess:^(TwitterManager *twitterManager) {
+       [self showEmailAlert];
+    }
+                                             failure:^(TwitterManager *twitterManager, NSError *error) {
+                                                 NSLog(@"Login to Twitter failed");
+                                             }];
+    
+    UIViewController* oAuthTwitterController = [[TwitterManager sharedInstance] oAuthTwitterController];
+    if (oAuthTwitterController) {
+        
+        [self presentModalViewController:oAuthTwitterController animated:YES];
+    }else{
+        [self showEmailAlert];
+    }
+}
+
+
+
+- (void)openTwitterSession{
+ 
+//    UIViewController *controller =
+//    [SA_OAuthTwitterController controllerToEnterCredentialsWithTwitterEngine:[TwitterManager shared].engine
+//                                                                    delegate:self];
+//    
+//    if (controller) {
+//        [self.navigationController presentModalViewController:controller animated:YES];
+//    }
+//    else {
+//        [self showEmailAlert];
+//    }
+//
+}
+
+- (void)showEmailInvalidAlert{
+    
+    [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        [self showEmailAlert];
+    }
+                                           title:@"Error"
+                                         message:@"Invalid email, try again"
+                               cancelButtonTitle:@"Ok"
+                               otherButtonTitles:nil];
+}
+
+
+- (void)showEmailAlert {
+    [[AlertManager shared] showTextFieldAlertWithCallBack:^(UIAlertView *alertView, UITextField *textField, NSInteger buttonIndex) {
+        [textField resignFirstResponder];
+        
+        if (buttonIndex == 1) {
+            if ([textField.text isValidEmail]) {
+                [self authenticaeThroughTwitter:textField.text];
+            }else{
+                [self showEmailInvalidAlert];
+            }
+        
+        }
+     
+        
+    }
+                                                    title:@"Enter your account email"
+                                                  message:@"Email"
+                                              placeholder:@"Enter email"
+                                                   active:YES
+                                        cancelButtonTitle:@"Cancel"
+                                        otherButtonTitles:@"Ok", nil];
+
+}
+
+
+- (void)authenticaeThroughTwitter:(NSString*)email{
+
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
+
+    
+    [self authenticaeThroughTwitter:[[UserDefaultsManager shared] userId]
+                           userName:[[UserDefaultsManager shared] userName]
+                              email:email
+                          authtoken:[[UserDefaultsManager shared] authtoken]];
+}
+
+- (void)authenticaeThroughTwitter:(NSString*)user_id
+                         userName:(NSString*)userName
+                            email:(NSString*)email
+                        authtoken:(NSString*)authtoken{
+    
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [LoginSignUpManager loginViaSocialWithUserId:user_id
+                                     accessToken:nil
+                                       authtoken:authtoken
+                                           email:email
+                                        username:userName
+                                            type:@"twitter"
+                                         success:^(NSString *userId, NSString *api_token) {
+                                             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                             [self.navigationController popViewControllerAnimated:NO];
+                                         }
+                                         failure:^(NSError *error, NSString *errorString) {
+                                             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                             [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                 message:errorString];
+                                         }
+                                       exception:^(NSString *exceptionString) {
+                                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                           [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                       }];
+}
+
+
+
+
+- (void)storeCachedTwitterOAuthData:(NSString *)data forUsername:(NSString *)username {
+    NSLog(@"data = %@", data);
+    NSLog(@"username = %@", username);
+    
+    NSArray *firstSplit = [data componentsSeparatedByString:@"&"];
+    //    NSLog(@"%@",[[firstSplit objectAtIndex:2] objectForKey:@"user_id"]);
+    NSArray *secondsplit = [[firstSplit objectAtIndex:2] componentsSeparatedByString:@"="];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    [defaults setObject:data forKey:@"authData"];
+    [defaults setObject:username forKey:@"twittername"];
+    [defaults setObject:[secondsplit objectAtIndex:1] forKey:@"userId"];
+    
+    NSLog(@"%@", username);
+    [defaults synchronize];
+    
+    [self showEmailAlert];
+    //	NSString *Str=[_engine getUserInformationFor:username];
+    //	NSLog(@"%@",Str);
+   
+    
+//    for (UIButton *customButton in customButtons) {
+//        customButton.layer.cornerRadius = 5.0f;
+//        customButton.clipsToBounds = YES;
+//    }
+}
+
+- (NSString *)cachedTwitterOAuthDataForUsername:(NSString *)username {
+    NSLog(@"%@", username);
+    NSLog(@"%@", [[NSUserDefaults standardUserDefaults] objectForKey:@"twittername"]);
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"authData"];
+}
+
 @end

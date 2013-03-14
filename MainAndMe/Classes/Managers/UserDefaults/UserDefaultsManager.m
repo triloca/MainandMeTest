@@ -63,6 +63,7 @@
     [_userDefaults synchronize];
 }
 
+
 - (void)clearOldLoginSettings{
     [_userDefaults removeObjectForKey:kUserEmail];
     [_userDefaults removeObjectForKey:kUserPassword];
@@ -81,6 +82,39 @@
     [_userDefaults synchronize];
 }
 
+#pragma mark - Twitter
+- (void)saveTwitterAuthData:(NSString*)string forUsername:(NSString *)username{
+    [_userDefaults setObject:string forKey:kCachedTwitterAuthData];
+    [_userDefaults synchronize];
+    
+}
+
+- (NSString*)twitterAuthDataForUsername:(NSString *)username{
+    return [_userDefaults objectForKey:kCachedTwitterAuthData];
+}
+
+- (void)clearTwitterAuthData{
+    [_userDefaults removeObjectForKey:kCachedTwitterAuthData];
+    [_userDefaults synchronize];
+}
+
+- (void)saveTwitterLogin:(NSString*)userName
+               authToken:(NSString*)authToken
+                  userId:(NSString*)userId
+                  email:(NSString*)email{
+    
+    [self clearOldLoginSettings];
+    [_userDefaults setObject:kLoginTypeViaTwitter forKey:kLoginType];
+    [_userDefaults setObject:userId forKey:kUserId];
+    [_userDefaults setObject:userName forKey:kUsername];
+    [_userDefaults setObject:authToken forKey:kUserAuthtoken];
+    [_userDefaults setObject:email forKey:kUserEmail];
+    [_userDefaults synchronize];
+}
+
+
+
+#pragma mark - 
 - (NSString*)lastLoginType{
     return [_userDefaults objectForKey:kLoginType];
 }

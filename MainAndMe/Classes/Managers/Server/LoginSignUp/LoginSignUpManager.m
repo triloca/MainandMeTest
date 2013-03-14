@@ -12,6 +12,7 @@
 #import "JSON.h"
 #import "UserDefaultsManager.h"
 #import "DataManager.h"
+#import "TwitterManager.h"
 
 
 @interface LoginSignUpManager()
@@ -268,7 +269,10 @@
                                                     accessToken:_accessToken
                                                           email:_email];
             }else {
-                //[userDefaults setObject:kLoginTypeViaTwitter forKey:kLoginType];
+                [[UserDefaultsManager shared] saveTwitterLogin:_username
+                                                     authToken:_authtoken
+                                                        userId:_userId
+                                                         email:_email];
             }
             
             NSDictionary* user = [value safeDictionaryObjectForKey:@"user"];
@@ -285,8 +289,10 @@
         }
         
     } failure:^(NSURLConnection *connection, NSError *error) {
+        [[UserDefaultsManager shared] clearOldLoginSettings];
         failure(error, error.localizedDescription);
     } eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        [[UserDefaultsManager shared] clearOldLoginSettings];
         exception(exceptionMessage);
     }];
 
@@ -413,8 +419,9 @@
     self.authtoken = nil;
     
     [FBSession.activeSession closeAndClearTokenInformation];
-    [[UserDefaultsManager shared] clearOldLoginSettings];
+    [[TwitterManager sharedInstance] logout];
     [[DataManager shared] clearUserInfo];
+    [[UserDefaultsManager shared] clearOldLoginSettings];
 }
 
 @end

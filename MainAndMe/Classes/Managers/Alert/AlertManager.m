@@ -14,7 +14,7 @@
 static char kAlertHandlerObjectKey;
 
 
-@interface AlertManager()
+@interface AlertManager() <UITextFieldDelegate>
 @property (assign, nonatomic) NSInteger alertsCount;
 @end
 
@@ -94,4 +94,84 @@ static char kAlertHandlerObjectKey;
     [alertView show];
 
 }
+
+
+- (void)showTextFieldAlertWithCallBack:(void (^)(UIAlertView *alertView, UITextField* textField, NSInteger buttonIndex))callBack
+                                 title:(NSString*)title
+                               message:(NSString*)message
+                           placeholder:(NSString*)placeholder
+                                active:(BOOL)active
+            cancelButtonTitle:(NSString*)cancelButtonTitle
+            otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION{
+    
+        
+    CGRect frame = CGRectMake(14, 45, 255, 23);
+     
+    UITextField* textField = [[UITextField alloc] initWithFrame:frame];
+    textField.borderStyle = UITextBorderStyleBezel;
+    textField.textColor = [UIColor blackColor];
+    textField.textAlignment = NSTextAlignmentCenter;
+    textField.font = [UIFont systemFontOfSize:14.0];
+    textField.placeholder = placeholder;
+    textField.backgroundColor = [UIColor whiteColor];
+    textField.autocorrectionType = UITextAutocorrectionTypeNo; // no auto correction support
+    textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    textField.keyboardType = UIKeyboardTypeEmailAddress; // use the default type input method (entire keyboard)
+    textField.returnKeyType = UIReturnKeyDone;
+    textField.delegate = self;
+    textField.clearButtonMode = UITextFieldViewModeWhileEditing; // has a clear 'x' button to the right
+    
+    AlertDelegateHandler* alertDelegateHandler =
+    [AlertDelegateHandler alertDelegateHandlerWith:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        if (callBack){
+            callBack(alertView, textField, buttonIndex);
+        }
+    }];
+
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:alertDelegateHandler
+                                              cancelButtonTitle:cancelButtonTitle
+                                              otherButtonTitles:nil];
+    
+    va_list args;
+    va_start(args, otherButtonTitles);
+    for (NSString *arg = otherButtonTitles; arg != nil; arg = va_arg(args, NSString*))
+    {
+        [alertView addButtonWithTitle:arg];
+    }
+    va_end(args);
+    
+    
+    objc_setAssociatedObject(alertView, &kAlertHandlerObjectKey, alertDelegateHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    [alertView addSubview:textField];
+    if (active){
+        [textField becomeFirstResponder];
+    }
+    [alertView show];
+    
+}
+
+#pragma mark - TextField Delegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    return YES;
+}
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
+
+
 @end

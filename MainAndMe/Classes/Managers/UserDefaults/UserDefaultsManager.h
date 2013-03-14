@@ -21,6 +21,9 @@
 
 #define kReturnedUsername               @"kReturnedUsername"
 
+#define kCachedTwitterAuthData    @"kCachedTwitterAuthData"
+
+
 @interface UserDefaultsManager : NSObject
 
 + (UserDefaultsManager*)shared;
@@ -38,4 +41,13 @@
 - (NSString*)authtoken;
 - (NSString*)userName;
 - (void)clearOldLoginSettings;
+
+//! Twitter
+- (void)saveTwitterAuthData:(NSString*)string forUsername:(NSString *)username;
+- (NSString*)twitterAuthDataForUsername:(NSString *)username;
+- (void)clearTwitterAuthData;
+- (void)saveTwitterLogin:(NSString*)userName
+               authToken:(NSString*)authToken
+                  userId:(NSString*)userId
+                   email:(NSString*)email;
 @end

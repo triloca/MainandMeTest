@@ -19,4 +19,11 @@
 
 - (void)showOkAlertWithTitle:(NSString*)title;
 - (void)showOkAlertWithTitle:(NSString*)title message:(NSString*)message;
+- (void)showTextFieldAlertWithCallBack:(void (^)(UIAlertView *alertView, UITextField* textField, NSInteger buttonIndex))callBack
+                                 title:(NSString*)title
+                               message:(NSString*)message
+                           placeholder:(NSString*)placeholder
+                                active:(BOOL)value
+                     cancelButtonTitle:(NSString*)cancelButtonTitle
+                     otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 @end
