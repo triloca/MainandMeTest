@@ -14,4 +14,7 @@
 
 + (DataManager*)shared;
 - (void)clearUserInfo;
++ (NSString*)howLongAgo:(NSDate*)date;
++ (NSDate*)dateFromString:(NSString*)dateString;
+
 @end

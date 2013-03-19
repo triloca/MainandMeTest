@@ -7,10 +7,12 @@
 //
 
 #import "AppDelegate.h"
+#import "MainViewController.h"
 
 @interface LayoutManager : NSObject
 
 @property (assign, nonatomic) AppDelegate* appDelegate;
+@property (strong, nonatomic) MainViewController* mainViewController;
 
 + (LayoutManager*)shared;
 - (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;

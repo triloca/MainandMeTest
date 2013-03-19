@@ -254,11 +254,7 @@
                               password:password
                                success:^(NSDictionary *user) {
                                    [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
-                                   
-                                   [DataManager shared].userId = [user safeStringObjectForKey:@"id"];
-                                   [DataManager shared].api_token = [user safeStringObjectForKey:@"api_token"];
-                                   
-                                   [[UserDefaultsManager shared] saveReturnedUsername:[user safeStringObjectForKey:@"name"]];
+                                
                                    [self.navigationController popViewControllerAnimated:NO];
                                }
                                failure:^(NSError *error, NSString *errorString) {

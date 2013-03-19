@@ -1,9 +1,9 @@
 //
 //  UIImageView+UNNetworking.h
-//  MainAndMe
+//  UNNetworkingExample
 //
-//  Created by Sasha on 3/11/13.
-//  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
+//  Created by Alexander Bukov on 7/28/12.
+//  Copyright (c) 2012 Company. All rights reserved.
 //
 
 
@@ -52,6 +52,8 @@ typedef enum {
                        failure:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error))failure
                       progress:(void (^)(NSURLRequest *request, NSHTTPURLResponse *response, float progress))progress;
 
+//! Method remove progress view from supper view
+- (void)removeProgressView;
 
 //! Call this method if you need clear memory cache
 + (void)clearMemoryImageCache;

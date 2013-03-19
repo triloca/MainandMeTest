@@ -11,8 +11,8 @@
 #import "RootViewController.h"
 #import "SplashScreenViewController.h"
 #import "LoginViewController.h"
-#import "MainViewController.h"
 #import "ProfileViewController.h"
+#import "LocationManager.h"
 
 
 @interface LayoutManager()
@@ -56,7 +56,6 @@
 
 - (void)loadGUI{
     
-    
     SplashScreenViewController* splashScreenViewController = [SplashScreenViewController loadFromXIB_Or_iPhone5_XIB];
     __unsafe_unretained SplashScreenViewController* weak_splashScreenViewController = splashScreenViewController;
     splashScreenViewController.timeOutBlock = ^(){
@@ -81,6 +80,8 @@
     MainViewController* mainViewController = [MainViewController loadFromXIB_Or_iPhone5_XIB];
     ProfileViewController* profileViewController = [ProfileViewController loadFromXIB_Or_iPhone5_XIB];
     
+    _mainViewController = mainViewController;
+    
     UINavigationController* mainNVC = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     UINavigationController* profileNVC = [[UINavigationController alloc] initWithRootViewController:profileViewController];
     
@@ -92,11 +93,13 @@
 
 
 - (void)showLogin{
+    
     NSArray* controllers = _rootTabBarController.rootTabBarController.viewControllers;
     [controllers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         UINavigationController* controller = (UINavigationController*)obj;
         [controller popToRootViewControllerAnimated:NO];
     }];
+    [_rootTabBarController.rootTabBarController setSelectedIndex:0];
     
     LoginViewController* loginViewController = [LoginViewController loadFromXIB_Or_iPhone5_XIB];
     [_rootNavigationController popToRootViewControllerAnimated:NO];

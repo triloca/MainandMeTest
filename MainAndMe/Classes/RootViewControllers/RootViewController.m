@@ -47,6 +47,8 @@
     __unsafe_unretained RootViewController* weakSelf = self;
     _tabBarView.tabButtonDown = ^(UIButton* sender, NSInteger index){
         [weakSelf.rootTabBarController setSelectedIndex:index];
+//        UINavigationController* navVC = [weakSelf.rootTabBarController.viewControllers safeObjectAtIndex:index];
+//        [navVC popToRootViewControllerAnimated:NO]; //! Add if needed
     };
 
     _tabBarView.tabPhotoButtonClicked = ^(UIButton* sender){

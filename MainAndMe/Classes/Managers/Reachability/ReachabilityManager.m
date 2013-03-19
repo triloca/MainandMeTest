@@ -51,6 +51,7 @@
                                                object:nil];
     
     self.reachability = [Reachability reachabilityForInternetConnection];
+    //self.reachability = [Reachability reachabilityWithHostname:@"http://mainandme-test.herokuapp.com"];
     [_reachability startNotifier];
 }
 

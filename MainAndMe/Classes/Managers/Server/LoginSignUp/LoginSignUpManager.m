@@ -238,6 +238,13 @@
                                                    password:_password];
             
             NSDictionary* user = [value safeDictionaryObjectForKey:@"user"];
+            NSString* userId = [NSString stringWithFormat:@"%d", [[user valueForKeyPath:@"id"] intValue]];
+            NSString* token = [user safeStringObjectForKey:@"api_token"];
+            [DataManager shared].userId = userId;
+            [DataManager shared].api_token = token;
+            
+            [[UserDefaultsManager shared] saveReturnedUsername:[user safeStringObjectForKey:@"name"]];
+
             success(user);
         }else{
             NSString* messageString = [value safeStringObjectForKey:@"message"];

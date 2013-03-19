@@ -9,6 +9,7 @@
 
 #import "UIViewController+Spiner.h"
 #import <objc/runtime.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface UIViewController (_Spiner)
 @property (readwrite, nonatomic, retain, setter = un_setSpinerView:) UIActivityIndicatorView* un_spinerView;
@@ -146,6 +147,14 @@ static char kUNSpinerNameDictionaryObjectKey;
     self.un_spinerView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
     self.un_spinerView.contentMode = UIViewContentModeCenter;
     [self.un_spinerView startAnimating];
+    
+    UIView* backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 75, 75)];
+    backgroundView.backgroundColor = [UIColor colorWithWhite:0.05 alpha:0.9];
+    backgroundView.layer.cornerRadius = 10;
+    backgroundView.center = CGPointMake(CGRectGetMidX(self.un_spinerView.bounds), CGRectGetMidY(self.un_spinerView.bounds));
+    
+    [self.un_spinerView addSubview:backgroundView];
+    [self.un_spinerView sendSubviewToBack:backgroundView];
     
     [self.view addSubview:self.un_spinerView];
     

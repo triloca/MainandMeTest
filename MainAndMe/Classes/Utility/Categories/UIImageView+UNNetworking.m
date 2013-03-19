@@ -1,15 +1,17 @@
 //
 //  UIImageView+UNNetworking.m
-//  MainAndMe
+//  UNNetworkingExample
 //
-//  Created by Sasha on 3/11/13.
-//  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
+//  Created by Alexander Bukov on 7/28/12.
+//  Copyright (c) 2012 Company. All rights reserved.
 //
 
 
 #import <objc/runtime.h>
+#import <CommonCrypto/CommonHMAC.h>
 #import <Foundation/Foundation.h>
 #import "UIImageView+UNNetworking.h"
+
 
 //! Memory cache class interface.
 @interface UNImageCache : NSCache
@@ -48,6 +50,7 @@
 
 @end
 
+
 //! Load image operation interface.
 @interface LoadOperation : NSOperation
 
@@ -85,6 +88,21 @@ static char kUNProgressObjectKey;
 @dynamic un_imageRequest;
 @dynamic un_progressView;
 @end
+
+
+#pragma mark -
+#pragma mark  Additional categories
+
+//! Catecory for MD5 string
+@interface NSString (UN_MD5)
+- (NSString *)un_md5String;
+@end
+
+//! Category for resizing image
+@interface UIImage(UN_Resizing)
+- (UIImage*)imageResizedToSize:(CGSize)size;
+@end
+
 
 #pragma mark -
 #pragma mark  UIImageView (UNNetworking)
@@ -166,7 +184,10 @@ static char kUNProgressObjectKey;
 + (void)clearFileImageCache{
     [[[self class] un_sharedFileCache] removeAllFiles];
 }
+
+
 #pragma mark -
+#pragma mark  Image load methods
 
 //! load without progress view
 - (void)setImageWithURLRequest:(NSURLRequest *)urlRequest 
@@ -292,7 +313,7 @@ static char kUNProgressObjectKey;
                         resImage = image;
                         break;
                     case UNImageSizePolicyResizeToRect:
-                        resImage = [self resizeImage:image toSize:self.bounds.size];
+                        resImage = [image imageResizedToSize:self.bounds.size];
                         break;
                     case UNImageSizePolicyScaleAspectFill:;
                         resImage = [self scaleImage:image scaleValue:MAX(horizontalRatio, verticalRatio)];
@@ -380,7 +401,7 @@ static char kUNProgressObjectKey;
         
         UIProgressView* progressView = [[UIProgressView alloc] initWithProgressViewStyle:stile];
         
-        //! If iOS >= 5.0 can set colors.
+        //! If iOS >= 5.0, set colors.
         if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0f) {
             if (progressTintColor) {
                 progressView.progressTintColor = progressTintColor;
@@ -393,17 +414,26 @@ static char kUNProgressObjectKey;
         progressView.frame = CGRectMake(0, 0, size.width, 9);
         progressView.center = CGPointMake(CGRectGetMidX(self.bounds), self.bounds.size.height - 9 * transformValue);
         
+        
+        
         if (transformValue != 1) { // transform progress view if it height < 9
             CGAffineTransform transform = progressView.transform;
             progressView.transform = CGAffineTransformScale(transform, transformValue, transformValue);
         }
-        
+        progressView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
         [self addSubview:progressView];
         [self un_setProgressView:progressView];
+        
+        
     }
     return [self un_progressView]; 
 }
 
+//! Method remove progress view from supper view
+- (void)removeProgressView{
+    [[self un_progressView] removeFromSuperview];
+    self.un_progressView = nil;
+}
 
 //! Cancel and nil load operation(main thread only)
 - (void)unCancelImageRequestOperation {
@@ -418,38 +448,11 @@ static char kUNProgressObjectKey;
     
     CGSize size = CGSizeMake(image.size.width * scaleValue, image.size.height * scaleValue);
     
-    return [self resizeImage:image toSize:size];
-}
-
-//! Resize image method
-- (UIImage*)resizeImage:(UIImage*)image 
-                 toSize:(CGSize)size
-{
-	// Check for Retina display and then double the size of image (we assume size is in points)
-	if ([[UIScreen mainScreen] respondsToSelector: @selector(scale)])
-	{
-		CGFloat scale = [[UIScreen mainScreen] scale];
-		
-		size.width  *= scale;
-		size.height *= scale;
-	}
-    
-	// Create context on which image will be drawn
-	UIGraphicsBeginImageContext(size);
-	
-	// Draw image on this context used provided size
-	[image drawInRect: CGRectMake(0, 0, size.width, size.height)];
-	
-	// Convert context to an image
-	UIImage* resizedImage = UIGraphicsGetImageFromCurrentImageContext();    
-    
-	// Remove context
-	UIGraphicsEndImageContext();
-	
-	return resizedImage;
+    return [image imageResizedToSize:size];
 }
 
 @end
+
 
 #pragma mark -
 #pragma mark  UNImageCache
@@ -528,20 +531,20 @@ static inline NSString* UNFileCacheKeyFromURLRequest(NSURLRequest* request, CGSi
     
     switch (sizePolicy) {
         case UNImageSizePolicyOriginalSize:
-            return [[[request URL] absoluteString] md5String];
+            return [[[request URL] absoluteString] un_md5String];
             break;
         case UNImageSizePolicyResizeToRect:
-            return [[[[request URL] absoluteString] stringByAppendingFormat:@"andThumbSize%fx%f", size.width, size.height] md5String];
+            return [[[[request URL] absoluteString] stringByAppendingFormat:@"andThumbSize%fx%f", size.width, size.height] un_md5String];
             break;
         case UNImageSizePolicyScaleAspectFill:
-            return [[[[request URL] absoluteString] stringByAppendingFormat:@"andThumbSize%fx%fScaleAspectFill", size.width, size.height] md5String];
+            return [[[[request URL] absoluteString] stringByAppendingFormat:@"andThumbSize%fx%fScaleAspectFill", size.width, size.height] un_md5String];
             break;
         case UNImageSizePolicyScaleAspectFit:
-            return [[[[request URL] absoluteString] stringByAppendingFormat:@"andThumbSize%fx%fScaleAspectFit", size.width, size.height] md5String];
+            return [[[[request URL] absoluteString] stringByAppendingFormat:@"andThumbSize%fx%fScaleAspectFit", size.width, size.height] un_md5String];
             break;
             
         default:
-            return [[[request URL] absoluteString] md5String];
+            return [[[request URL] absoluteString] un_md5String];
             break;
     }
 }
@@ -783,34 +786,56 @@ static dispatch_queue_t file_queue() {
     [super cancel];
 }
 
+@end
 
-//! Resize image method
-- (UIImage*)resizeImage:(UIImage*)image 
-                 toSize:(CGSize)size
+
+#pragma mark -
+#pragma mark  Additional categories
+ 
+@implementation NSString (UN_MD5)
+
+- (NSString *)un_md5String
 {
-	// Check for Retina display and then double the size of image (we assume size is in points)
-	if ([[UIScreen mainScreen] respondsToSelector: @selector(scale)])
-	{
-		CGFloat scale = [[UIScreen mainScreen] scale];
-		
-		size.width  *= scale;
-		size.height *= scale;
+	if ([self length] == 0) {
+		return nil;
 	}
-    
-	
-	// Create context on which image will be drawn
-	UIGraphicsBeginImageContext(size);
-	
-	// Draw image on this context used provided size
-	[image drawInRect: CGRectMake(0, 0, size.width, size.height)];
-	
-	// Convert context to an image
-	UIImage* resizedImage = UIGraphicsGetImageFromCurrentImageContext();    
-    
-	// Remove context
-	UIGraphicsEndImageContext();
-	
-	return resizedImage;
+	// Borrowed from: http://stackoverflow.com/questions/652300/using-md5-hash-on-a-string-in-cocoa
+	const char *cStr = [self UTF8String];
+	unsigned char result[16];
+	CC_MD5(cStr, (CC_LONG)strlen(cStr), result);
+	return [NSString stringWithFormat:@"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7],result[8], result[9], result[10], result[11],result[12], result[13], result[14], result[15]]; 	
+}
+@end
+
+
+//! Category for resizing image
+@implementation UIImage(UN_Resizing)
+
+- (UIImage*)imageResizedToSize:(CGSize)size
+    {
+    // Check for Retina display and then double the size of image (we assume size is in points)
+    if ([[UIScreen mainScreen] respondsToSelector: @selector(scale)])
+    {
+        CGFloat scale = [[UIScreen mainScreen] scale];
+        
+        size.width  *= scale;
+        size.height *= scale;
+    }
+
+    // Create context on which image will be drawn
+    UIGraphicsBeginImageContext(size);
+
+    // Draw image on this context used provided size
+    [self drawInRect: CGRectMake(0, 0, size.width, size.height)];
+
+    // Convert context to an image
+    UIImage* resizedImage = UIGraphicsGetImageFromCurrentImageContext();    
+
+    // Remove context
+    UIGraphicsEndImageContext();
+
+    return resizedImage;
 }
 
 @end
+
