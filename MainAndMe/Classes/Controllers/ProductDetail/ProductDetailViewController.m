@@ -21,6 +21,7 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "UserDefaultsManager.h"
+#import "FacebookSDK/FacebookSDK.h"
 
 @interface ProductDetailViewController ()
 <UIActionSheetDelegate,
@@ -109,6 +110,10 @@ MFMessageComposeViewControllerDelegate>
 }
 
 #pragma mark - Buttons Action
+- (void)fBbuttonClicked{
+    [self openFBSession];
+}
+
 - (IBAction)backButtonClicked:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -227,7 +232,7 @@ MFMessageComposeViewControllerDelegate>
             NSLog(@"Cancel");
         }
         else if (buttonIndex == 0) {
-            //[self fBbuttonClicked];
+            [self fBbuttonClicked];
         }
         else if (buttonIndex == 1) {
             //[self twitterButtonClicked];
@@ -451,5 +456,104 @@ MFMessageComposeViewControllerDelegate>
     
 }
 
+- (void)openFBSession {
+    
+    if (FBSession.activeSession.isOpen) {
+        [self loadMeFacebook];
+    } else {
+        
+        if (![ReachabilityManager isReachable]) {
+            [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+            return;
+        }
+        
+        NSArray* permissions = [[NSArray alloc] initWithObjects:@"publish_stream",@"email", nil];
+        [FBSession.activeSession closeAndClearTokenInformation];
+        [self showSpinnerWithName:@"ProductDetailViewController"];
+        [FBSession openActiveSessionWithPublishPermissions:permissions
+                                           defaultAudience:FBSessionDefaultAudienceFriends
+                                              allowLoginUI:YES
+                                         completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                                             [self hideSpinnerWithName:@"ProductDetailViewController"];
+                                             [self sessionStateChanged:session state:status error:error];
+                                         }];
+        
+    }
+}
+
+- (void)sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error {
+    switch (state) {
+        case FBSessionStateOpen: {
+            [self loadMeFacebook];
+        }
+            break;
+        case FBSessionStateClosed:
+        case FBSessionStateClosedLoginFailed:
+            [FBSession.activeSession closeAndClearTokenInformation];
+            break;
+        default:
+            break;
+    }
+    
+    if (error != nil) {
+        [[AlertManager shared] showOkAlertWithTitle:@"Error" message:error.localizedDescription];
+    }
+}
+
+- (void)loadMeFacebook {
+    
+    [self showSpinnerWithName:@"ProductDetailViewController"];
+    [FBRequestConnection
+     startForMeWithCompletionHandler:^(FBRequestConnection *connection, id <FBGraphUser> user, NSError *error) {
+         [self hideSpinnerWithName:@"ProductDetailViewController"];
+         if (!error) {
+             
+             [self postToWall:user.id];
+             
+         }else{
+             [[AlertManager shared] showOkAlertWithTitle:@"Error" message:error.localizedDescription];
+         }
+     }];
+}
+
+- (void)postToWall:(NSString*)facebookId{
+    
+    NSString* imageUrl = [[_productInfo safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"full"];
+    NSString* description = [NSString stringWithFormat:@"%@\n %@",
+                             _productDetailsCell.postedByLabel.text,
+                             _productDetailsCell.storeNameLabel.text];
+    
+    NSMutableDictionary* params = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                   @"254708664663458", @"app_id",
+                                   @"http://mainandme-staging-s.herokuapp.com", @"link",
+                                   imageUrl, @"picture",
+                                   @"Main And Me", @"name",
+                                   @"Product", @"caption",
+                                   description, @"description",
+                                   @"Main And Me application",  @"message",
+                                   nil];
+    
+    
+    [self showSpinnerWithName:@"ProductDetailViewController"];
+    
+    //Post to wall.
+    [FBRequestConnection startWithGraphPath:[NSString stringWithFormat:@"%@/feed", facebookId]
+                                 parameters:params HTTPMethod:@"POST"
+                          completionHandler:^(FBRequestConnection *connection, id result, NSError *error)
+     {
+         [self hideSpinnerWithName:@"ProductDetailViewController"];
+         
+         if (error)
+         {
+             [[AlertManager shared] showOkAlertWithTitle:@"Error" message:error.localizedDescription];
+         }
+         else
+         {
+             [[AlertManager shared] showOkAlertWithTitle:@"Sucess" message:@"Posted to Facebook successfuly"];
+         }
+         
+     }];
+    
+}
 
 @end

@@ -14,4 +14,21 @@
                      success:(void(^) (NSArray* products)) success
                      failure:(void(^) (NSError* error, NSString* errorString)) failure
                    exception:(void(^) (NSString* exceptionString))exception;
+
++ (void)likeStore:(NSString*)storeId
+          success:(void(^) ()) success
+          failure:(void(^) (NSError* error, NSString* errorString)) failure
+        exception:(void(^) (NSString* exceptionString))exception;
+
++ (void)followStore:(NSString*)storeId
+            success:(void(^) ()) success
+            failure:(void(^) (NSError* error, NSString* errorString)) failure
+          exception:(void(^) (NSString* exceptionString))exception;
+
++ (void)rateStore:(NSString*)storeId
+             rate:(NSInteger)rate
+          success:(void(^) ()) success
+          failure:(void(^) (NSError* error, NSString* errorString)) failure
+        exception:(void(^) (NSString* exceptionString))exception;
+
 @end
