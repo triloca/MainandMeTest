@@ -11,6 +11,7 @@
 #import "SA_OAuthTwitterController.h"
 #import "AFNetworking.h"
 #import "UserDefaultsManager.h"
+#import "NSURLConnectionDelegateHandler.h"
 
 #define kTwitterOAuthConsumerKey		@"CGLJ4SdxPBnJG4ygNsAs1Q"
 #define kTwitterOAuthConsumerSecret	    @"CBSHV5bsvSO2tr17tCr1xreEwTbV8WoO6nwBfyGSsUM"
@@ -66,6 +67,23 @@ SA_OAuthTwitterEngineDelegate, MGTwitterEngineDelegate>
         _followersArray = [NSMutableArray new];
     }
     return self;
+}
+
+
++ (void)loadTinyUrlForUrl:(NSString*) url
+                  success:(void(^) (NSString* tinyUrl)) success
+                  failure:(void(^) (NSError* error, NSString* errorString)) failure
+                exception:(void(^) (NSString* exceptionString))exception{
+    @try {
+        [[self sharedInstance] loadTinyUrlForUrl:url
+                                         success:success
+                                         failure:failure
+                                       exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(@"Exeption\n Load TinyUrl create");
+    }
+
 }
 
 - (UIViewController*)oAuthTwitterController{
@@ -186,12 +204,13 @@ SA_OAuthTwitterEngineDelegate, MGTwitterEngineDelegate>
 #pragma mark TwitterEngineDelegate
 - (void) requestSucceeded: (NSString *) requestIdentifier
 {
-	NSLog(@"Request %@ succeeded", requestIdentifier);
+    if (_requestSuccessBlock) {
+        _requestSuccessBlock(self);
+    }
 }
 
 - (void) requestFailed: (NSString *) requestIdentifier withError: (NSError *) error
 {
-	NSLog(@"Request %@ failed with error: %@", requestIdentifier, error);
     if (_requestFailureBlock) {
         _requestFailureBlock(self, error);
     }
@@ -324,7 +343,7 @@ SA_OAuthTwitterEngineDelegate, MGTwitterEngineDelegate>
             failure:(void (^)(TwitterManager *, NSError *))failureBlock{
     self.requestSuccessBlock = successBlock;
     self.requestFailureBlock = failureBlock;
-    [_twitter sendDirectMessage:@"Wellcome to POGO" to:idString];
+    [_twitter sendDirectMessage:@"Wellcome to Main And Me" to:idString];
     
 //    if (idString == nil) {
 //        idString = @"";
@@ -357,5 +376,49 @@ SA_OAuthTwitterEngineDelegate, MGTwitterEngineDelegate>
 //    [operation start];
 }
 
+
+- (void)sendUpdate:(NSString*)text
+           success:(void (^)(TwitterManager *))successBlock
+           failure:(void (^)(TwitterManager *, NSError *))failureBlock{
+    self.requestSuccessBlock = successBlock;
+    self.requestFailureBlock = failureBlock;
+    [_twitter sendUpdate:text];
+}
+
+- (void)loadTinyUrlForUrl:(NSString*) url
+                     success:(void(^) (NSString* tinyUrl)) success
+                     failure:(void(^) (NSError* error, NSString* errorString)) failure
+                   exception:(void(^) (NSString* exceptionString))exception{
+    
+    NSString* urlString =
+    [NSString stringWithFormat:@"http://tinyurl.com/api-create.php?url=%@", url];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:20];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", returnString);
+    
+        if ([returnString isKindOfClass:[NSString class]]) {
+            success(returnString);
+        }else{
+            failure(nil, @"Server Error");
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    }eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+    
+}
 
 @end

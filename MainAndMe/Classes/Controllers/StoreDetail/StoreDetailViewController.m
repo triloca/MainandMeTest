@@ -26,6 +26,7 @@
 #import "RSTapRateView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FacebookSDK/FacebookSDK.h"
+#import "TwitterManager.h"
 
 
 static NSString *kProductCellIdentifier = @"ProductCell";
@@ -166,7 +167,7 @@ RSTapRateViewDelegate>
             [self fBbuttonClicked];
         }
         else if (buttonIndex == 1) {
-            //[self twitterButtonClicked];
+            [self twitterButtonClicked];
         }
         else if (buttonIndex == 2) {
             [self sendMail];
@@ -356,6 +357,10 @@ RSTapRateViewDelegate>
 
 - (void)fBbuttonClicked{
     [self openFBSession];
+}
+
+- (void)twitterButtonClicked{
+    [self loginToTwitter];
 }
 
 - (ProductCell*)productCellForIndexPath:(NSIndexPath*)indexPath{
@@ -642,6 +647,62 @@ RSTapRateViewDelegate>
          
      }];
     
+}
+
+#pragma mark - Twitter
+- (void)loginToTwitter{
+    
+    [[TwitterManager sharedInstance] setLoginSuccess:^(TwitterManager *twitterManager) {
+        [self sendUpdate];
+    }
+                                             failure:^(TwitterManager *twitterManager, NSError *error) {
+                                                 [[AlertManager shared] showOkAlertWithTitle:@"Error" message:@"Login to Twitter failed"];
+                                             }];
+    
+    UIViewController* oAuthTwitterController = [[TwitterManager sharedInstance] oAuthTwitterController];
+    if (oAuthTwitterController) {
+        
+        [self presentModalViewController:oAuthTwitterController animated:YES];
+    }else{
+        [self sendUpdate];
+    }
+}
+
+- (void)sendUpdate{
+   
+    [TwitterManager loadTinyUrlForUrl:[[_storeInfo safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"full"]
+                              success:^(NSString *tinyUrl) {
+                                  NSString* name = [_storeInfo safeStringObjectForKey:@"name"];
+                                  name = [name stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
+                                  NSString* text = [NSString stringWithFormat:@"Main And Me app\n%@\n%@", name, tinyUrl];
+                                  [self sendUpdateWithMessage:text];
+                              }
+                              failure:^(NSError *error, NSString *errorString) {
+                                  [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                  [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                      message:errorString];
+                              }
+                            exception:^(NSString *exceptionString) {
+                                [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                            }];
+}
+
+- (void)sendUpdateWithMessage:(NSString*)message{
+    
+    [self showSpinnerWithName:@"StoreDetailViewController"];
+    [[TwitterManager sharedInstance] sendUpdate:message
+                                        success:^(TwitterManager *manager) {
+                                            [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                            static dispatch_once_t onceToken;
+                                            dispatch_once(&onceToken, ^{
+                                                [[AlertManager shared] showOkAlertWithTitle:@"Sucess"
+                                                                                    message:@"Posted to Twitter successfuly"];
+                                            });
+                                        }
+                                        failure:^(TwitterManager *manager, NSError *error) {
+                                            [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                        }];
 }
 
 @end

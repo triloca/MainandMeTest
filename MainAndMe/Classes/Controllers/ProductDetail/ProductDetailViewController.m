@@ -22,6 +22,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "UserDefaultsManager.h"
 #import "FacebookSDK/FacebookSDK.h"
+#import "TwitterManager.h"
 
 @interface ProductDetailViewController ()
 <UIActionSheetDelegate,
@@ -235,7 +236,7 @@ MFMessageComposeViewControllerDelegate>
             [self fBbuttonClicked];
         }
         else if (buttonIndex == 1) {
-            //[self twitterButtonClicked];
+            [self twitterButtonClicked];
         }
         else if (buttonIndex == 2) {
              [self sendMail];
@@ -336,7 +337,9 @@ MFMessageComposeViewControllerDelegate>
 
 }
 
-
+- (void)twitterButtonClicked{
+    [self loginToTwitter];
+}
 
 - (void)loadProfileInfo{
     
@@ -554,6 +557,64 @@ MFMessageComposeViewControllerDelegate>
          
      }];
     
+}
+
+#pragma mark - Twitter
+- (void)loginToTwitter{
+    
+    [[TwitterManager sharedInstance] setLoginSuccess:^(TwitterManager *twitterManager) {
+        [self sendUpdate];
+    }
+                                             failure:^(TwitterManager *twitterManager, NSError *error) {
+                                                 [[AlertManager shared] showOkAlertWithTitle:@"Error" message:@"Login to Twitter failed"];
+                                             }];
+    
+    UIViewController* oAuthTwitterController = [[TwitterManager sharedInstance] oAuthTwitterController];
+    if (oAuthTwitterController) {
+        
+        [self presentModalViewController:oAuthTwitterController animated:YES];
+    }else{
+        [self sendUpdate];
+    }
+}
+
+- (void)sendUpdate{
+    
+    [TwitterManager loadTinyUrlForUrl:[[_productInfo safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"full"]
+                              success:^(NSString *tinyUrl) {
+                                  NSString* name = [_productInfo safeStringObjectForKey:@"name"];
+                                  name = [name stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
+                                  NSString* text = [NSString stringWithFormat:@"Main And Me app\n%@\n%@", name, tinyUrl];
+                                  [self sendUpdateWithMessage:text];
+                              }
+                              failure:^(NSError *error, NSString *errorString) {
+                                  [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                  [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                      message:errorString];
+                              }
+                            exception:^(NSString *exceptionString) {
+                                [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                            }];
+}
+
+- (void)sendUpdateWithMessage:(NSString*)message{
+    
+    [self showSpinnerWithName:@"StoreDetailViewController"];
+    [[TwitterManager sharedInstance] sendUpdate:message
+                                        success:^(TwitterManager *manager) {
+                                            [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                            static dispatch_once_t onceToken;
+                                            dispatch_once(&onceToken, ^{
+                                                [[AlertManager shared] showOkAlertWithTitle:@"Sucess"
+                                                                                    message:@"Posted to Twitter successfuly"];
+                                            });
+                                        }
+                                        failure:^(TwitterManager *manager, NSError *error) {
+                                            [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                            [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                message:@"Please wait few minutes, you can't post to twitter very often."];
+                                        }];
 }
 
 @end
