@@ -7,11 +7,12 @@
 //
 
 #import "ProductDetailsCell.h"
+#import "UILabel+Common.h"
 
-
-@interface ProductDetailsCell()
+@interface ProductDetailsCell()<RTLabelDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *personImageView;
+@property (weak, nonatomic) IBOutlet UIButton *storeNameButton;
 
 @end
 
@@ -20,6 +21,7 @@
 
 - (void)awakeFromNib{
     // Init code
+    _storeNameLabel.textColor = [UIColor colorWithRed:125/255.0f green:121/255.0f blue:127/255.0f alpha:1];
 }
 
 
@@ -91,6 +93,41 @@
                                            failure:nil
                                           progress:nil];
     
+}
+
+- (void)setName:(NSString*)name{
+    
+    _storeNameLabel.text = name;
+    [_storeNameLabel resizeToStretch];
+    CGRect rc = _storeNameLabel.frame;
+    if (rc.size.width > 250){
+        rc.size.width = 250;
+    }
+    
+    _storeNameLabel.frame = rc;
+    
+    UIView* lineView = [UIView new];
+    lineView.frame = CGRectMake(0, rc.size.height - 3, rc.size.width, 1);
+    lineView.backgroundColor = [UIColor grayColor];
+    [_storeNameLabel addSubview:lineView];
+    _storeNameLabel.backgroundColor = [UIColor clearColor];
+    _storeNameButton.frame = _storeNameLabel.frame;
+}
+
+- (IBAction)storeNameButtonDown:(id)sender {
+    _storeNameLabel.textColor = [UIColor colorWithRed:81/255.0f green:55/255.0f blue:16/255.0f alpha:1];
+}
+
+- (IBAction)storeNameButtonClicked:(id)sender {
+    _storeNameLabel.textColor = [UIColor colorWithRed:125/255.0f green:121/255.0f blue:127/255.0f alpha:1];
+    if (_didClickStoreName) {
+        _didClickStoreName(self);
+    }
+
+}
+
+- (IBAction)storeNameButtonUpOutside:(id)sender {
+    _storeNameLabel.textColor = [UIColor colorWithRed:125/255.0f green:121/255.0f blue:127/255.0f alpha:1];
 }
 
 @end

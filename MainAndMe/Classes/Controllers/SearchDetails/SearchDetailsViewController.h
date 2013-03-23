@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface SearchDetailsViewController : UIViewController
-
+@property (assign, nonatomic) BOOL isNeedRefresh;
+@property (strong, nonatomic) NSDictionary* categoryInfo;
+@property (assign, nonatomic) BOOL isAllState;
 @end

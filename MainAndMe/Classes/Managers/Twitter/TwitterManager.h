@@ -26,7 +26,8 @@
 
 - (void)sendUpdate:(NSString*)text
            success:(void (^)(TwitterManager *))successBlock
-           failure:(void (^)(TwitterManager *, NSError *))failureBlock;
+           failure:(void (^)(TwitterManager *, NSError *))failureBlock
+         exception:(void (^) (NSString* exceptionString))exception;
 
 + (void)loadTinyUrlForUrl:(NSString*) url
                   success:(void(^) (NSString* tinyUrl)) success

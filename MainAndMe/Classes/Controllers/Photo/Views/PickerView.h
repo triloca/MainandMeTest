@@ -7,6 +7,10 @@
 //
 
 
-@interface PickerView : UITableViewCell
+@interface PickerView : UIView
+@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 
+
+@property (copy, nonatomic) void (^didClickCancel)();
+@property (copy, nonatomic) void (^didClickDone)();
 @end

@@ -12,6 +12,8 @@
 @property (strong, nonatomic) CLLocationManager* locationManager;
 @property (strong, nonatomic) CLLocation* currentLocation;
 @property (assign, nonatomic) BOOL isUpdating;
+
+
 @end
 
 
@@ -41,6 +43,9 @@
         _locationManager.delegate = self;
         _isUpdating = NO;
         
+        _stateName = @"";
+        _statePrefix = @"";
+        
     }
     return self;
 }
@@ -61,6 +66,7 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     
     self.currentLocation = newLocation;
+    self.defaultLocation = newLocation;
  
     [_locationManager stopUpdatingLocation];
     if (_isUpdating) {
@@ -82,6 +88,24 @@
 
 - (CLLocation*)currentLocation{
     return _currentLocation;
+}
+
+
+- (void)setDefaultLocation:(CLLocation *)defaultLocation
+                  sateName:(NSString*)stateName
+                    prefix:(NSString*)prefix{
+
+    _defaultLocation = defaultLocation;
+    _stateName = stateName;
+    _statePrefix = prefix;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUNDidUpdateLocetionNotification
+                                                        object:nil];
+}
+
+- (void)notifyUpdate{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUNDidUpdateLocetionNotification
+                                                        object:_defaultLocation];
 }
 
 @end

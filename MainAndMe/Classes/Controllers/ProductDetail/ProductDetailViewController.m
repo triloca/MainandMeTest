@@ -23,6 +23,9 @@
 #import "UserDefaultsManager.h"
 #import "FacebookSDK/FacebookSDK.h"
 #import "TwitterManager.h"
+#import "RTLabel.h"
+#import "StoreDetailsManager.h"
+#import "StoreDetailViewController.h"
 
 @interface ProductDetailViewController ()
 <UIActionSheetDelegate,
@@ -64,7 +67,14 @@ MFMessageComposeViewControllerDelegate>
     
     NSString* imageUrl = [[_productInfo safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"full"];
     [_productDetailsCell setProductImageURLString:imageUrl];
-    _productDetailsCell.storeNameLabel.text = [_productInfo safeStringObjectForKey:@"store_name"];
+    
+    [_productDetailsCell setName:[_productInfo safeStringObjectForKey:@"store_name"]];
+    
+    
+    __weak ProductDetailViewController* weak_self = self;
+    _productDetailsCell.didClickStoreName = ^(ProductDetailsCell* cell){
+        [weak_self loadStoreById:[[weak_self.productInfo safeNumberObjectForKey:@"store_id"] stringValue]];
+    };
   
     NSDate* date = [DataManager dateFromString:[_productInfo safeStringObjectForKey:@"created_at"]];
     _productDetailsCell.agoLabel.text = [DataManager howLongAgo:date];
@@ -303,9 +313,7 @@ MFMessageComposeViewControllerDelegate>
             [self presentModalViewController:controller animated:YES];
         } else {
             [[AlertManager shared] showOkAlertWithTitle:@"Can't Share via SMS"];
-            //  [[UIApplication sharedApplication] openURL: [NSURL URLWithString:[NSString stringWithFormat:@"sms:%@",number]]];
         }
-        
     }
 }
 
@@ -385,6 +393,31 @@ MFMessageComposeViewControllerDelegate>
     
 }
 
+
+- (void)loadStoreById:(NSString*)storeId{
+
+    [self showSpinnerWithName:@"ProductDetailViewController"];
+    [StoreDetailsManager loadStoreByStoreId:storeId
+                                    success:^(NSDictionary* store) {
+                                        [self hideSpinnerWithName:@"ProductDetailViewController"];
+                                        [self showStoreWithInfo:store];
+                                    }
+                                    failure:^(NSError *error, NSString *errorString) {
+                                        [self hideSpinnerWithName:@"ProductDetailViewController"];
+                                        [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                            message:errorString];
+                                    }
+                                  exception:^(NSString *exceptionString) {
+                                      [self hideSpinnerWithName:@"ProductDetailViewController"];
+                                      [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                  }];
+}
+
+- (void)showStoreWithInfo:(NSDictionary*)store{
+    StoreDetailViewController* storeDetailViewController = [StoreDetailViewController loadFromXIB_Or_iPhone5_XIB];
+    storeDetailViewController.storeInfo = store;
+    [self.navigationController pushViewController:storeDetailViewController animated:YES];
+}
 
 - (NSArray*)sortComments:(NSArray*)comments{
     
@@ -580,30 +613,33 @@ MFMessageComposeViewControllerDelegate>
 
 - (void)sendUpdate{
     
+    [self showSpinnerWithName:@"ProductDetailViewController"];
     [TwitterManager loadTinyUrlForUrl:[[_productInfo safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"full"]
                               success:^(NSString *tinyUrl) {
+                                  [self hideSpinnerWithName:@"ProductDetailViewController"];
+                                  
                                   NSString* name = [_productInfo safeStringObjectForKey:@"name"];
                                   name = [name stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
                                   NSString* text = [NSString stringWithFormat:@"Main And Me app\n%@\n%@", name, tinyUrl];
                                   [self sendUpdateWithMessage:text];
                               }
                               failure:^(NSError *error, NSString *errorString) {
-                                  [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                  [self hideSpinnerWithName:@"ProductDetailViewController"];
                                   [[AlertManager shared] showOkAlertWithTitle:@"Error"
                                                                       message:errorString];
                               }
                             exception:^(NSString *exceptionString) {
-                                [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                [self hideSpinnerWithName:@"ProductDetailViewController"];
                                 [[AlertManager shared] showOkAlertWithTitle:exceptionString];
                             }];
 }
 
 - (void)sendUpdateWithMessage:(NSString*)message{
     
-    [self showSpinnerWithName:@"StoreDetailViewController"];
+    [self showSpinnerWithName:@"ProductDetailViewController"];
     [[TwitterManager sharedInstance] sendUpdate:message
                                         success:^(TwitterManager *manager) {
-                                            [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                            [self hideSpinnerWithName:@"ProductDetailViewController"];
                                             static dispatch_once_t onceToken;
                                             dispatch_once(&onceToken, ^{
                                                 [[AlertManager shared] showOkAlertWithTitle:@"Sucess"
@@ -611,10 +647,15 @@ MFMessageComposeViewControllerDelegate>
                                             });
                                         }
                                         failure:^(TwitterManager *manager, NSError *error) {
-                                            [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                            [self hideSpinnerWithName:@"ProductDetailViewController"];
                                             [[AlertManager shared] showOkAlertWithTitle:@"Error"
                                                                                 message:@"Please wait few minutes, you can't post to twitter very often."];
+                                        }exception:^(NSString* exceptionString){
+                                            [self hideSpinnerWithName:@"ProductDetailViewController"];
+                                            [[AlertManager shared] showOkAlertWithTitle:exceptionString];
                                         }];
 }
+
+
 
 @end

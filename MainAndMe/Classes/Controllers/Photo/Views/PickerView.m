@@ -10,6 +10,8 @@
 
 
 @interface PickerView()
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @end
 
@@ -18,34 +20,22 @@
 
 - (void)awakeFromNib{
     // Init code
+    _cancelButton.target = self;
+    _cancelButton.action = @selector(cancelButtonClicked);
+    _doneButton.target = self;
+    _doneButton.action = @selector(doneButtonClicked);
 }
 
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
+- (void)cancelButtonClicked{
+    if (_didClickCancel) {
+        _didClickCancel();
+    }
 }
 
-
-- (void) layoutSubviews {
-    [super layoutSubviews];
-    
-    //    if(UI_USER_INTERFACE_IDIOM()!=UIUserInterfaceIdiomPad)
-    //    {
-    //    }
-    //    
-    
-    //    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-    //    
-    //    if (UIInterfaceOrientationIsLandscape(orientation))
-    //    {
-    //    }
-    
-    //    self.customImageView.frame = CGRectMake(2, 2, 40, 40);
-    //    self.customLable.frame = CGRectMake(50, 2, 100, 40);
-    
+- (void)doneButtonClicked{
+    if (_didClickDone) {
+        _didClickDone();
+    }
 }
 
 @end

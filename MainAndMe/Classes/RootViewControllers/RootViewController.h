@@ -10,5 +10,5 @@
 @interface RootViewController : UIViewController
 
 @property (strong, nonatomic) UITabBarController* rootTabBarController;
-
+- (void)hidePhotoView;
 @end

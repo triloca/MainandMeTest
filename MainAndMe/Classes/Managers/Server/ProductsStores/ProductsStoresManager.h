@@ -29,16 +29,27 @@ typedef enum {
 
 + (ProductsStoresManager*)shared;
 
-+(void)loadPlaceInfo:(CGFloat)latnear
-             lngnear:(CGFloat)lngnear
-             success:(void(^) (NSString* name)) success
-             failure:(void(^) (NSError* error, NSString* errorString)) failure
-           exception:(void(^) (NSString* exceptionString))exception;
++ (void)loadPlaceInfo:(CGFloat)latnear
+              lngnear:(CGFloat)lngnear
+              success:(void(^) (NSString* name, NSString* prefix)) success
+              failure:(void(^) (NSError* error, NSString* errorString)) failure
+            exception:(void(^) (NSString* exceptionString))exception;
 
-+(void)searchWithSearchType:(SearchType)type
-               searchFilter:(SearchFilter)filter
-                    success:(void(^) (NSArray* objects)) success
-                    failure:(void(^) (NSError* error, NSString* errorString)) failure
-                  exception:(void(^) (NSString* exceptionString))exception;
++ (void)searchWithSearchType:(SearchType)type
+                searchFilter:(SearchFilter)filter
+                     success:(void(^) (NSArray* objects)) success
+                     failure:(void(^) (NSError* error, NSString* errorString)) failure
+                   exception:(void(^) (NSString* exceptionString))exception;
 
+//! Search with type
++ (void)uploadItemWithType:(NSString*)type
+                     price:(NSString*)price
+                  category:(NSString*)category
+                      name:(NSString*)name
+                 storeName:(NSString*)storeName
+               description:(NSString*)description
+                     image:(UIImage*)image
+                   success:(void(^) (NSDictionary* object)) success
+                   failure:(void(^) (NSError* error, NSString* errorString)) failure
+                 exception:(void(^) (NSString* exceptionString))exception;
 @end

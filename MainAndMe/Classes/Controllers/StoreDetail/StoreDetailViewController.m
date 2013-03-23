@@ -110,7 +110,7 @@ RSTapRateViewDelegate>
                            forControlEvents:UIControlEventTouchUpInside];
     
     
-  //  [self loadProfileInfo];
+    [self loadProfileInfo];
   //  [self loadWithlist];
     [self loadProducts];
     
@@ -670,8 +670,10 @@ RSTapRateViewDelegate>
 
 - (void)sendUpdate{
    
+    [self showSpinnerWithName:@"StoreDetailViewController"];
     [TwitterManager loadTinyUrlForUrl:[[_storeInfo safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"full"]
                               success:^(NSString *tinyUrl) {
+                                  [self hideSpinnerWithName:@"StoreDetailViewController"];
                                   NSString* name = [_storeInfo safeStringObjectForKey:@"name"];
                                   name = [name stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
                                   NSString* text = [NSString stringWithFormat:@"Main And Me app\n%@\n%@", name, tinyUrl];
@@ -702,6 +704,10 @@ RSTapRateViewDelegate>
                                         }
                                         failure:^(TwitterManager *manager, NSError *error) {
                                             [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                        }
+                                      exception:^(NSString* exceptionString){
+                                            [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                            [[AlertManager shared] showOkAlertWithTitle:exceptionString];
                                         }];
 }
 

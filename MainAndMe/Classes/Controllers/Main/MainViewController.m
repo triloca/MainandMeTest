@@ -29,6 +29,7 @@
 #import "ProductDetailsManager.h"
 #import "NSMutableArray+Safe.h"
 #import "StorePageCell.h"
+#import "LocationManager.h"
 
 
 typedef enum {
@@ -121,13 +122,11 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     self.refreshControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
     [self.refreshControl addTarget:self action:@selector(refreshCurrentList:) forControlEvents:UIControlEventValueChanged];
     
-     [self setTitleText:@"Loading ..."];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didUpdateLocation:)
                                                  name:kUNDidUpdateLocetionNotification
                                                object:nil];
-    
+
     _barTriangleImageView.hidden = YES;
 
 }
@@ -276,12 +275,12 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 }
 
 - (IBAction)titleButtonClicked:(id)sender {
-    AddressViewController* addressViewController = [AddressViewController loadFromXIB_Or_iPhone5_XIB];
+    AddressViewController* addressViewController = [AddressViewController new];
     [self.navigationController pushViewController:addressViewController animated:YES];
 }
 
 - (IBAction)searchButtonClicked:(id)sender {
-    SearchViewController* searchViewController = [SearchViewController loadFromXIB_Or_iPhone5_XIB];
+    SearchViewController* searchViewController = [SearchViewController new];
     [self.navigationController pushViewController:searchViewController animated:YES];
 }
 
@@ -609,17 +608,21 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     }
 }
 
-#pragma mark - LocationManager Notification
 - (void)didUpdateLocation:(NSNotification*)notif{
+    [self setTitleText:@"Loading..."];
     [self loadLocationName];
 }
 
 - (void)loadLocationName{
     
-    [ProductsStoresManager loadPlaceInfo:[LocationManager shared].currentLocation.coordinate.latitude
-                                 lngnear:[LocationManager shared].currentLocation.coordinate.longitude
-                                 success:^(NSString *name) {
-                                     [self setTitleText:name];
+    [ProductsStoresManager loadPlaceInfo:[LocationManager shared].defaultLocation.coordinate.latitude
+                                 lngnear:[LocationManager shared].defaultLocation.coordinate.longitude
+                                 success:^(NSString* name, NSString* prefix) {
+                                     
+                                     NSString* title = [NSString stringWithFormat:@"%@, %@",
+                                                        name, prefix];
+                                     [self setTitleText:title];
+                                     
                                  }
                                  failure:^(NSError *error, NSString *errorString) {
                                      NSString* text = @"Address not found";

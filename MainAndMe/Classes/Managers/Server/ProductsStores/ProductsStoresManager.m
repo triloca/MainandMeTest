@@ -13,6 +13,9 @@
 #import "NSArray+Safe.h"
 #import "JSON.h"
 #import <CoreLocation/CoreLocation.h> 
+#import "LocationManager.h"
+#import "DataManager.h"
+#import "NSData+Base64.h"
 
 
 @interface ProductsStoresManager()
@@ -49,7 +52,7 @@
 //! Load place info
 + (void)loadPlaceInfo:(CGFloat)latnear
               lngnear:(CGFloat)lngnear
-              success:(void(^) (NSString* name)) success
+              success:(void(^) (NSString* name, NSString* prefix)) success
               failure:(void(^) (NSError* error, NSString* errorString)) failure
             exception:(void(^) (NSString* exceptionString))exception{
     @try {
@@ -82,34 +85,49 @@
     }
 }
 
+//! Search with type
++ (void)uploadItemWithType:(NSString*)type
+                     price:(NSString*)price
+                  category:(NSString*)category
+                      name:(NSString*)name
+                 storeName:(NSString*)storeName
+               description:(NSString*)description
+                     image:(UIImage*)image
+                   success:(void(^) (NSDictionary* object)) success
+                   failure:(void(^) (NSError* error, NSString* errorString)) failure
+                 exception:(void(^) (NSString* exceptionString))exception{
+
+    @try {
+        [[self shared] uploadItemWithType:type
+                                    price:price
+                                 category:category
+                                     name:name
+                                storeName:storeName
+                              description:description
+                                    image:image
+                                  success:success
+                                  failure:failure
+                                exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(@"Exeption\n Upload Item create");
+    }
+}
+
 #pragma mark - 
 //! Load place info
 -(void)loadPlaceInfo:(CGFloat)latnear
              lngnear:(CGFloat)lngnear
-              success:(void(^) (NSString* name)) success
+              success:(void(^) (NSString* name, NSString* prefix)) success
               failure:(void(^) (NSError* error, NSString* errorString)) failure
             exception:(void(^) (NSString* exceptionString))exception{
     
-        
-//    CLGeocoder* geoCoder = [CLGeocoder new];
-//    CLLocation* location = [[CLLocation alloc] initWithLatitude:latnear
-//                                                      longitude:lngnear];
-                          
-//    [geoCoder reverseGeocodeLocation:location
-//                   completionHandler:^(NSArray *placemarks, NSError *error) {
-//         
-//         CLPlacemark *placemark = [placemarks objectAtIndex:0];
-//         
-//         NSDictionary* addressDictionary = placemark.addressDictionary;
-//         
-//         [addressDictionary safeStringObjectForKey:@"Name"];
-//     }];
     
- 
-    
+//    latnear = 37.683039;
+//    lngnear = -92.666373;
     //"http://ws.geonames.org/findNearbyPostalCodes?lat=%f&lng=%f"
     NSString* urlString =
-    [NSString stringWithFormat:@"http://ws.geonames.org/findNearbyPostalCodesJSON?lat=%f&lng=%f", latnear, lngnear];
+    [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=false", latnear, lngnear];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
@@ -122,11 +140,31 @@
         NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSLog(@"%@", returnString);
         id value = [returnString JSONValue];
-        NSArray* postalCodes = [value safeArrayObjectForKey:@"postalCodes"];
-        NSDictionary* postalCode = [postalCodes safeDictionaryObjectAtIndex:0];
-        NSString* adminName1 = [postalCode safeStringObjectForKey:@"adminName1"];
+       
         
-        success(adminName1);
+        NSArray* postalCodes = [value safeArrayObjectForKey:@"results"];
+        NSDictionary* dict = [postalCodes safeDictionaryObjectAtIndex:0];
+        NSArray* address_components = [dict safeArrayObjectForKey:@"address_components"];
+        
+        NSString* cityName = @"";
+        NSString* statePrefix = @"";
+        NSString* statePrefixHalp = @"";
+        
+        
+        for (id obj in address_components) {
+            NSDictionary* address_dict = (NSDictionary*)obj;
+            if ([[address_dict safeArrayObjectForKey:@"types"] containsObject:@"administrative_area_level_1"]) {
+                statePrefix = [address_dict safeStringObjectForKey:@"short_name"];
+            }
+            if ([[address_dict safeArrayObjectForKey:@"types"] containsObject:@"locality"]) {
+                cityName = [address_dict safeStringObjectForKey:@"long_name"];
+                statePrefixHalp = [address_dict safeStringObjectForKey:@"short_name"];
+            }
+        }
+        if (statePrefix.length > 2) {
+            statePrefix = statePrefixHalp;
+        }
+        success(cityName, statePrefix);
         
     } failure:^(NSURLConnection *connection, NSError *error) {
         failure(error, error.localizedDescription);
@@ -145,8 +183,6 @@
                     failure:(void(^) (NSError* error, NSString* errorString)) failure
                   exception:(void(^) (NSString* exceptionString))exception{
 
-   
-    //[[NSArray new] objectAtIndex:5]; to test exception
    NSString* urlString = [self urlFrom:type filter:filter];
 
     _lastSearchFilter = filter;
@@ -154,7 +190,9 @@
     
     if (type == SearchTypeProducts && filter == SearchFilterNone) {
         
-        urlString = [NSString stringWithFormat:urlString, 42.313, -72.63];//?
+        urlString = [NSString stringWithFormat:urlString,
+                     [LocationManager shared].defaultLocation.coordinate.latitude,
+                     [LocationManager shared].defaultLocation.coordinate.latitude];
         urlString = [NSString stringWithFormat:@"%@%@", [APIv1_0 serverUrl], urlString];
     }else{
         urlString = [NSString stringWithFormat:@"%@%@", [APIv1_0 serverUrl], urlString];
@@ -169,8 +207,6 @@
     
     NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
         
-      
-        //[[NSArray new] objectAtIndex:5]; //to test exception
         NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         //NSLog(@"%@", returnString);
         id value = [returnString JSONValue];
@@ -195,6 +231,125 @@
     [connection start];
 
 }
+
+//! Search with type
+- (void)uploadItemWithType:(NSString*)type
+                     price:(NSString*)price
+                  category:(NSString*)category
+                      name:(NSString*)name
+                 storeName:(NSString*)storeName
+               description:(NSString*)description
+                     image:(UIImage*)image
+                   success:(void(^) (NSDictionary* object)) success
+                   failure:(void(^) (NSError* error, NSString* errorString)) failure
+                 exception:(void(^) (NSString* exceptionString))exception{
+    
+    NSString* urlString =
+    [NSString stringWithFormat:@"%@/products?token=%@&product[name]=%@&product[price]=%@&product[store_name]=%@&product[category]=%@&product[description]=%@&image_name=image.jpg", [APIv1_0 serverUrl], [DataManager shared].api_token, name, price, storeName, category, description];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:30];
+
+    [request setHTTPMethod:@"POST"];
+
+   // image = [UIImage imageNamed:@"back_but@2x.png"];
+    
+    NSString *photo64string = [UIImageJPEGRepresentation(image, 0.3) base64EncodedString];
+    //NSLog(@"%@", photo64string);
+    NSData* imageData = [photo64string dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody:imageData];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        
+        if ([value isKindOfClass:[NSDictionary class]]) {
+            if ([value safeObjectForKey:@"errors"] == nil) {
+                success(value);
+            }else{
+                NSString* messageString = [[[value safeDictionaryObjectForKey:@"errors"] safeArrayObjectForKey:@"base"] safeStringObjectAtIndex:0];
+                failure(nil, messageString);
+            }
+        }else{
+            NSString* messageString = @"Server API Error";
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    } eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+    
+}
+
+//! Search with type
+- (void)uploadStoreWithName:(NSString*)name
+                     price:(NSString*)price
+                  category:(NSString*)category
+                      name:(NSString*)name
+                 storeName:(NSString*)storeName
+               description:(NSString*)description
+                     image:(UIImage*)image
+                   success:(void(^) (NSDictionary* object)) success
+                   failure:(void(^) (NSError* error, NSString* errorString)) failure
+                 exception:(void(^) (NSString* exceptionString))exception{
+    
+    NSString* urlString =
+    [NSString stringWithFormat:@"%@/products?token=%@&product[name]=%@&product[price]=%@&product[store_name]=%@&product[category]=%@&product[description]=%@&image_name=image.jpg", [APIv1_0 serverUrl], [DataManager shared].api_token, name, price, storeName, category, description];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:30];
+    
+    [request setHTTPMethod:@"POST"];
+    
+    // image = [UIImage imageNamed:@"back_but@2x.png"];
+    
+    NSString *photo64string = [UIImageJPEGRepresentation(image, 0.3) base64EncodedString];
+    //NSLog(@"%@", photo64string);
+    NSData* imageData = [photo64string dataUsingEncoding:NSUTF8StringEncoding];
+    [request setHTTPBody:imageData];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        
+        if ([value isKindOfClass:[NSDictionary class]]) {
+            if ([value safeObjectForKey:@"errors"] == nil) {
+                success(value);
+            }else{
+                NSString* messageString = [[[value safeDictionaryObjectForKey:@"errors"] safeArrayObjectForKey:@"base"] safeStringObjectAtIndex:0];
+                failure(nil, messageString);
+            }
+        }else{
+            NSString* messageString = @"Server API Error";
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    } eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+    
+}
+
 
 #pragma mark - Privat Methods
 //! Validate request

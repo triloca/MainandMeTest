@@ -109,6 +109,23 @@
     }
 }
 
++ (void)loadStoreByStoreId:(NSString*)storeId
+                   success:(void(^) (NSDictionary* store)) success
+                   failure:(void(^) (NSError* error, NSString* errorString)) failure
+                 exception:(void(^) (NSString* exceptionString))exception{
+
+    @try {
+        [[self shared] loadStoreByStoreId:storeId
+                                  success:success
+                                  failure:failure
+                                exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(@"Exeption\n Store Info create");
+    }
+
+}
+
 #pragma mark -
 
 - (void)loadProductsForStore:(NSString*)storeId
@@ -148,6 +165,43 @@
     
 }
 
+
+- (void)loadStoreByStoreId:(NSString*)storeId
+                   success:(void(^) (NSDictionary* store)) success
+                   failure:(void(^) (NSError* error, NSString* errorString)) failure
+                 exception:(void(^) (NSString* exceptionString))exception{
+    
+    NSString* urlString =
+    [NSString stringWithFormat:@"%@/stores/%@", [APIv1_0 serverUrl], storeId];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:20];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        if ([self isDataValid:value]) {
+            success(value);
+        }else{
+            NSString* messageString = [value safeStringObjectForKey:@"error"];
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    }eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+    
+}
 
 - (void)likeStore:(NSString*)storeId
           success:(void(^) ()) success

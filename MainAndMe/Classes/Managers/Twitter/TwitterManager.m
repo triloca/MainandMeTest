@@ -379,10 +379,18 @@ SA_OAuthTwitterEngineDelegate, MGTwitterEngineDelegate>
 
 - (void)sendUpdate:(NSString*)text
            success:(void (^)(TwitterManager *))successBlock
-           failure:(void (^)(TwitterManager *, NSError *))failureBlock{
-    self.requestSuccessBlock = successBlock;
-    self.requestFailureBlock = failureBlock;
-    [_twitter sendUpdate:text];
+           failure:(void (^)(TwitterManager *, NSError *))failureBlock
+         exception:(void (^) (NSString* exceptionString))exception{
+    @try {
+        self.requestSuccessBlock = successBlock;
+        self.requestFailureBlock = failureBlock;
+        [_twitter sendUpdate:text];
+    }
+    @catch (NSException *exce) {
+        exception(@"Exeption\n Send Update create");
+    }
+   
+   
 }
 
 - (void)loadTinyUrlForUrl:(NSString*) url

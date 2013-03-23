@@ -12,6 +12,7 @@
 #import "JSON.h"
 #import "DataManager.h"
 
+
 @interface ProductDetailsManager()
 
 @end

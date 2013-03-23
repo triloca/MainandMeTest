@@ -31,4 +31,9 @@
           failure:(void(^) (NSError* error, NSString* errorString)) failure
         exception:(void(^) (NSString* exceptionString))exception;
 
++ (void)loadStoreByStoreId:(NSString*)storeId
+                   success:(void(^) (NSDictionary* store)) success
+                   failure:(void(^) (NSError* error, NSString* errorString)) failure
+                 exception:(void(^) (NSString* exceptionString))exception;
+
 @end

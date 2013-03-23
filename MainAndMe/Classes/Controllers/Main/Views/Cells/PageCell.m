@@ -75,6 +75,7 @@
     NSDate* date = [DataManager dateFromString:[cellData safeStringObjectForKey:@"created_at"]];
     _agoLabel.text = [DataManager howLongAgo:date];
     
+    _nameLabel.text = [NSString stringWithFormat:@"Posted By %@ in", @""];
     
     _cellData = cellData;
     
@@ -82,6 +83,7 @@
 
 - (void)setCellProfileData:(NSDictionary *)cellProfileData{
     [self setPersonImageURLString:[cellProfileData safeStringObjectForKey:@"avatar_url"]];
+    _nameLabel.text = [NSString stringWithFormat:@"Posted By %@ in", [cellProfileData safeStringObjectForKey:@"name"]];
 }
 
 

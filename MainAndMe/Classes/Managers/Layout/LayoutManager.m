@@ -8,7 +8,6 @@
 
 #import "LayoutManager.h"
 #import "RootNavigationController.h"
-#import "RootViewController.h"
 #import "SplashScreenViewController.h"
 #import "LoginViewController.h"
 #import "ProfileViewController.h"
@@ -16,8 +15,7 @@
 
 
 @interface LayoutManager()
-@property (strong, nonatomic) UINavigationController* rootNavigationController;
-@property (strong, nonatomic) RootViewController* rootTabBarController;
+
 @end
 
 

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PhotoViewController : UIViewController
-
+- (void)setPhoto:(UIImage*)photo;
 @end
