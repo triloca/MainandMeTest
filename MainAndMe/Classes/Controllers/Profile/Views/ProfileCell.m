@@ -10,7 +10,7 @@
 
 
 @interface ProfileCell()
-@property (weak, nonatomic) IBOutlet UIView *coverView;
+@property (weak, nonatomic) IBOutlet UIImageView *backImageView;
 
 @end
 
@@ -28,16 +28,15 @@
     
     // Configure the view for the selected state
     if (selected) {
-        _coverView.hidden = NO;
+        _backImageView.image = [UIImage imageNamed:@"list_selecter_bar@2x.png"];
     }else{
-    
+        
         [UIView animateWithDuration:0.3
                          animations:^{
-                             _coverView.alpha = 0;
+                             _backImageView.image = [UIImage imageNamed:@"all_store_active_list_bar@2x.png"];
                          }
                          completion:^(BOOL finished) {
-                             _coverView.hidden = YES;
-                             _coverView.alpha = 1;
+                             
                          }];
     }
 }

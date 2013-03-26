@@ -9,6 +9,6 @@
 
 @interface ProfileCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *agoLabel;
+@property (weak, nonatomic) IBOutlet UILabel *personNameLabel;
 
 @end
