@@ -11,4 +11,5 @@
 
 @interface StoreMapViewController : UIViewController
 @property (assign, nonatomic) CLLocationCoordinate2D coordinate;
+@property (strong, nonatomic) NSDictionary* storeInfo;
 @end

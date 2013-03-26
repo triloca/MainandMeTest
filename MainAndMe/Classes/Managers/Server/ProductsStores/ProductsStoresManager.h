@@ -41,15 +41,28 @@ typedef enum {
                      failure:(void(^) (NSError* error, NSString* errorString)) failure
                    exception:(void(^) (NSString* exceptionString))exception;
 
-//! Search with type
-+ (void)uploadItemWithType:(NSString*)type
-                     price:(NSString*)price
-                  category:(NSString*)category
-                      name:(NSString*)name
-                 storeName:(NSString*)storeName
-               description:(NSString*)description
-                     image:(UIImage*)image
-                   success:(void(^) (NSDictionary* object)) success
-                   failure:(void(^) (NSError* error, NSString* errorString)) failure
-                 exception:(void(^) (NSString* exceptionString))exception;
+
++ (void)uploadProductWithName:(NSString*)name
+                        price:(NSString*)price
+                     category:(NSString*)category
+                    storeName:(NSString*)storeName
+                  description:(NSString*)description
+                        image:(UIImage*)image
+                      success:(void(^) (NSDictionary* object)) success
+                      failure:(void(^) (NSError* error, NSString* errorString)) failure
+                    exception:(void(^) (NSString* exceptionString))exception;
+
+
+//! Upload Store
++ (void)uploadStoreWithName:(NSString*)name
+                    country:(NSString*)country
+                      state:(NSString*)state
+                     street:(NSString*)street
+                       city:(NSString*)city
+                    zipCode:(NSString*)zipCode
+                description:(NSString*)description
+                      image:(UIImage*)image
+                    success:(void(^) (NSDictionary* object)) success
+                    failure:(void(^) (NSError* error, NSString* errorString)) failure
+                  exception:(void(^) (NSString* exceptionString))exception;
 @end

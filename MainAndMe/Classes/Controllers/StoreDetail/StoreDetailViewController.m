@@ -132,6 +132,7 @@ RSTapRateViewDelegate>
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([[_storeInfo safeNumberObjectForKey:@"lat"] floatValue],
                                                                    [[_storeInfo safeNumberObjectForKey:@"lng"] floatValue]);
     storeMapViewController.coordinate = coordinate;
+    storeMapViewController.storeInfo = _storeInfo;
     [self.navigationController pushViewController:storeMapViewController animated:YES];
 }
 
@@ -147,6 +148,31 @@ RSTapRateViewDelegate>
     UIActionSheet *shareActionSheet = [[UIActionSheet alloc] initWithTitle:@"Share" delegate:self
                                                          cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Facebook", @"Twitter", @"Email", @"SMS", nil];
     shareActionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    
+    UIButton *button = [[shareActionSheet subviews] safeObjectAtIndex:1];
+    [button setTitleColor:[UIColor colorWithRed:99/255.0f green:116/255.0f blue:94/255.0f alpha:1]
+                 forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:127/255.0f green:166/255.0f blue:94/255.0f alpha:1]
+                 forState:UIControlStateHighlighted];
+    
+    button = [[shareActionSheet subviews] safeObjectAtIndex:2];
+    [button setTitleColor:[UIColor colorWithRed:99/255.0f green:116/255.0f blue:94/255.0f alpha:1]
+                 forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:127/255.0f green:166/255.0f blue:94/255.0f alpha:1]
+                 forState:UIControlStateHighlighted];
+    
+    button = [[shareActionSheet subviews] safeObjectAtIndex:3];
+    [button setTitleColor:[UIColor colorWithRed:99/255.0f green:116/255.0f blue:94/255.0f alpha:1]
+                 forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:127/255.0f green:166/255.0f blue:94/255.0f alpha:1]
+                 forState:UIControlStateHighlighted];
+    
+    button = [[shareActionSheet subviews] safeObjectAtIndex:4];
+    [button setTitleColor:[UIColor colorWithRed:99/255.0f green:116/255.0f blue:94/255.0f alpha:1]
+                 forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithRed:127/255.0f green:166/255.0f blue:94/255.0f alpha:1]
+                 forState:UIControlStateHighlighted];
+
     [shareActionSheet showInView:[LayoutManager shared].appDelegate.window];
 }
 
@@ -180,6 +206,11 @@ RSTapRateViewDelegate>
     @catch (NSException *exception) {
         [[AlertManager shared] showOkAlertWithTitle:@"Share Exception"];
     }
+}
+
+- (void)willPresentActionSheet:(UIActionSheet *)actionSheet {
+    UIColor* backColor = [UIColor colorWithRed:205/255.0f green:133/255.0f blue:63/255.0f alpha:0.7];
+    [[actionSheet layer] setBackgroundColor:backColor.CGColor];
 }
 
 #pragma mark - Table view data source

@@ -34,4 +34,16 @@
                       success:(void(^) (NSArray* communities)) success
                       failure:(void(^) (NSError* error, NSString* errorString)) failure
                     exception:(void(^) (NSString* exceptionString))exception;
+
+//! Load Stores For Category
++ (void)loadProductLikesForUser:(NSString*)userId
+                        success:(void(^) (NSArray* objects)) success
+                        failure:(void(^) (NSError* error, NSString* errorString)) failure
+                      exception:(void(^) (NSString* exceptionString))exception;
+
+//! Load Wishlist
++ (void)loadWishlistById:(NSString*)wishlistId
+                 success:(void(^) (NSArray* objects)) success
+                 failure:(void(^) (NSError* error, NSString* errorString)) failure
+               exception:(void(^) (NSString* exceptionString))exception;
 @end

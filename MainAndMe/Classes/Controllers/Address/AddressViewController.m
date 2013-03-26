@@ -66,6 +66,7 @@
 }
 
 - (void)viewDidUnload {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self setTitleTextLabel:nil];
     [self setTableView:nil];
     [self setSearchTextField:nil];

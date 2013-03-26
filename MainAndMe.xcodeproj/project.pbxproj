@@ -113,6 +113,26 @@
 		D93C0FE816F0349400A4472E /* main_button.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FE416F0349400A4472E /* main_button.png */; };
 		D93C0FE916F0349400A4472E /* me_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FE516F0349400A4472E /* me_button_selected.png */; };
 		D93C0FEA16F0349400A4472E /* me_button.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FE616F0349400A4472E /* me_button.png */; };
+		D93F493F16FE4CC800FE151E /* followe_bar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93F493B16FE4CC800FE151E /* followe_bar_bg@2x.png */; };
+		D93F494016FE4CC800FE151E /* posted_user_ic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93F493C16FE4CC800FE151E /* posted_user_ic@2x.png */; };
+		D93F494116FE4CC800FE151E /* profile_list_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93F493D16FE4CC800FE151E /* profile_list_bar@2x.png */; };
+		D93F494216FE4CC800FE151E /* profile_tob_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93F493E16FE4CC800FE151E /* profile_tob_bar@2x.png */; };
+		D93F494816FE6C8D00FE151E /* MyWishlistViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93F494416FE6C8D00FE151E /* MyWishlistViewController_iPhone5.xib */; };
+		D93F494916FE6C8D00FE151E /* MyWishlistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93F494616FE6C8D00FE151E /* MyWishlistViewController.m */; };
+		D93F494A16FE6C8D00FE151E /* MyWishlistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93F494716FE6C8D00FE151E /* MyWishlistViewController.xib */; };
+		D93F494F16FE76E300FE151E /* MyLikesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93F494D16FE76E300FE151E /* MyLikesViewController.m */; };
+		D93F495016FE76E300FE151E /* MyLikesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93F494E16FE76E300FE151E /* MyLikesViewController.xib */; };
+		D93F495516FEA55800FE151E /* WishlistDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93F495316FEA55800FE151E /* WishlistDetailsViewController.m */; };
+		D93F495616FEA55800FE151E /* WishlistDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93F495416FEA55800FE151E /* WishlistDetailsViewController.xib */; };
+		D93F495C16FEAFE100FE151E /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93F495916FEAFE100FE151E /* AboutViewController.m */; };
+		D93F495D16FEAFE100FE151E /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93F495A16FEAFE100FE151E /* AboutViewController.xib */; };
+		D93F495E16FEAFE100FE151E /* AboutViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93F495B16FEAFE100FE151E /* AboutViewController_iPhone5.xib */; };
+		D93F496416FEB19000FE151E /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93F496116FEB19000FE151E /* SettingsViewController.m */; };
+		D93F496516FEB19000FE151E /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93F496216FEB19000FE151E /* SettingsViewController.xib */; };
+		D93F496616FEB19000FE151E /* SettingsViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93F496316FEB19000FE151E /* SettingsViewController_iPhone5.xib */; };
+		D93F496816FEB4C700FE151E /* MyLikesViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93F496716FEB4C700FE151E /* MyLikesViewController_iPhone5.xib */; };
+		D93F496A16FEB54800FE151E /* WishlistDetailsViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93F496916FEB54800FE151E /* WishlistDetailsViewController_iPhone5.xib */; };
+		D93F496C16FEC0F800FE151E /* dot.png in Resources */ = {isa = PBXBuildFile; fileRef = D93F496B16FEC0F800FE151E /* dot.png */; };
 		D94076ED16F27BD70000E21B /* navigation_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D94076EB16F27BD70000E21B /* navigation_bar@2x.png */; };
 		D94076EE16F27BD70000E21B /* search_icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D94076EC16F27BD70000E21B /* search_icon@2x.png */; };
 		D94076F416F27D020000E21B /* Perec-SuperNegra.otf in Resources */ = {isa = PBXBuildFile; fileRef = D94076F116F27D020000E21B /* Perec-SuperNegra.otf */; };
@@ -179,6 +199,15 @@
 		D940778516F2F93E0000E21B /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D940778316F2F93E0000E21B /* AddressViewController.m */; };
 		D940778616F2F93E0000E21B /* AddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D940778416F2F93E0000E21B /* AddressViewController.xib */; };
 		D940778816F2F98D0000E21B /* MainViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D940778716F2F98B0000E21B /* MainViewController_iPhone5.xib */; };
+		D95EAE421700F2A60081BED0 /* add_detail_form_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D95EAE3F1700F2A60081BED0 /* add_detail_form_background.png */; };
+		D95EAE431700F2A60081BED0 /* add_details_form_hr.png in Resources */ = {isa = PBXBuildFile; fileRef = D95EAE401700F2A60081BED0 /* add_details_form_hr.png */; };
+		D95EAE441700F2A60081BED0 /* add_details_form_photo_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D95EAE411700F2A60081BED0 /* add_details_form_photo_bg.png */; };
+		D95EAE461700F3290081BED0 /* add_details_save_details_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = D95EAE451700F3290081BED0 /* add_details_save_details_btn.png */; };
+		D95EAE481700F3750081BED0 /* right_arrow_circle_btn.png in Resources */ = {isa = PBXBuildFile; fileRef = D95EAE471700F3750081BED0 /* right_arrow_circle_btn.png */; };
+		D95EAE511701309F0081BED0 /* SearchStoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D95EAE4B1701309F0081BED0 /* SearchStoreViewController.m */; };
+		D95EAE521701309F0081BED0 /* SearchStoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D95EAE4C1701309F0081BED0 /* SearchStoreViewController.xib */; };
+		D95EAE531701309F0081BED0 /* SearchStoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D95EAE4F1701309F0081BED0 /* SearchStoreCell.m */; };
+		D95EAE541701309F0081BED0 /* SearchStoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D95EAE501701309F0081BED0 /* SearchStoreCell.xib */; };
 		D96709D416F7D66B00CF27C4 /* StorePageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D96709D216F7D66B00CF27C4 /* StorePageCell.m */; };
 		D96709D516F7D66B00CF27C4 /* StorePageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D96709D316F7D66B00CF27C4 /* StorePageCell.xib */; };
 		D96709D716F7E01E00CF27C4 /* invite_friends_submit.png in Resources */ = {isa = PBXBuildFile; fileRef = D96709D616F7E01E00CF27C4 /* invite_friends_submit.png */; };
@@ -425,6 +454,31 @@
 		D93C0FE416F0349400A4472E /* main_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = main_button.png; sourceTree = "<group>"; };
 		D93C0FE516F0349400A4472E /* me_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_button_selected.png; sourceTree = "<group>"; };
 		D93C0FE616F0349400A4472E /* me_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_button.png; sourceTree = "<group>"; };
+		D93F493B16FE4CC800FE151E /* followe_bar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "followe_bar_bg@2x.png"; sourceTree = "<group>"; };
+		D93F493C16FE4CC800FE151E /* posted_user_ic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "posted_user_ic@2x.png"; sourceTree = "<group>"; };
+		D93F493D16FE4CC800FE151E /* profile_list_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_list_bar@2x.png"; sourceTree = "<group>"; };
+		D93F493E16FE4CC800FE151E /* profile_tob_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_tob_bar@2x.png"; sourceTree = "<group>"; };
+		D93F494416FE6C8D00FE151E /* MyWishlistViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyWishlistViewController_iPhone5.xib; path = Classes/Controllers/MyWishlist/MyWishlistViewController_iPhone5.xib; sourceTree = "<group>"; };
+		D93F494516FE6C8D00FE151E /* MyWishlistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyWishlistViewController.h; path = Classes/Controllers/MyWishlist/MyWishlistViewController.h; sourceTree = "<group>"; };
+		D93F494616FE6C8D00FE151E /* MyWishlistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyWishlistViewController.m; path = Classes/Controllers/MyWishlist/MyWishlistViewController.m; sourceTree = "<group>"; };
+		D93F494716FE6C8D00FE151E /* MyWishlistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyWishlistViewController.xib; path = Classes/Controllers/MyWishlist/MyWishlistViewController.xib; sourceTree = "<group>"; };
+		D93F494C16FE76E300FE151E /* MyLikesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLikesViewController.h; sourceTree = "<group>"; };
+		D93F494D16FE76E300FE151E /* MyLikesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLikesViewController.m; sourceTree = "<group>"; };
+		D93F494E16FE76E300FE151E /* MyLikesViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyLikesViewController.xib; sourceTree = "<group>"; };
+		D93F495216FEA55800FE151E /* WishlistDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishlistDetailsViewController.h; sourceTree = "<group>"; };
+		D93F495316FEA55800FE151E /* WishlistDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistDetailsViewController.m; sourceTree = "<group>"; };
+		D93F495416FEA55800FE151E /* WishlistDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WishlistDetailsViewController.xib; sourceTree = "<group>"; };
+		D93F495816FEAFE100FE151E /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		D93F495916FEAFE100FE151E /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		D93F495A16FEAFE100FE151E /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
+		D93F495B16FEAFE100FE151E /* AboutViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController_iPhone5.xib; sourceTree = "<group>"; };
+		D93F496016FEB19000FE151E /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		D93F496116FEB19000FE151E /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		D93F496216FEB19000FE151E /* SettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
+		D93F496316FEB19000FE151E /* SettingsViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsViewController_iPhone5.xib; sourceTree = "<group>"; };
+		D93F496716FEB4C700FE151E /* MyLikesViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyLikesViewController_iPhone5.xib; sourceTree = "<group>"; };
+		D93F496916FEB54800FE151E /* WishlistDetailsViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WishlistDetailsViewController_iPhone5.xib; sourceTree = "<group>"; };
+		D93F496B16FEC0F800FE151E /* dot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dot.png; sourceTree = "<group>"; };
 		D94076EB16F27BD70000E21B /* navigation_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "navigation_bar@2x.png"; sourceTree = "<group>"; };
 		D94076EC16F27BD70000E21B /* search_icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search_icon@2x.png"; sourceTree = "<group>"; };
 		D94076F116F27D020000E21B /* Perec-SuperNegra.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Perec-SuperNegra.otf"; sourceTree = "<group>"; };
@@ -503,6 +557,17 @@
 		D940778316F2F93E0000E21B /* AddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressViewController.m; path = Classes/Controllers/Address/AddressViewController.m; sourceTree = "<group>"; };
 		D940778416F2F93E0000E21B /* AddressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddressViewController.xib; path = Classes/Controllers/Address/AddressViewController.xib; sourceTree = "<group>"; };
 		D940778716F2F98B0000E21B /* MainViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainViewController_iPhone5.xib; path = Classes/Controllers/Main/MainViewController_iPhone5.xib; sourceTree = "<group>"; };
+		D95EAE3F1700F2A60081BED0 /* add_detail_form_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_detail_form_background.png; path = Resources/Images/Settings/add_detail_form_background.png; sourceTree = "<group>"; };
+		D95EAE401700F2A60081BED0 /* add_details_form_hr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_details_form_hr.png; path = Resources/Images/Settings/add_details_form_hr.png; sourceTree = "<group>"; };
+		D95EAE411700F2A60081BED0 /* add_details_form_photo_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_details_form_photo_bg.png; path = Resources/Images/Settings/add_details_form_photo_bg.png; sourceTree = "<group>"; };
+		D95EAE451700F3290081BED0 /* add_details_save_details_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_details_save_details_btn.png; path = Resources/Images/Settings/add_details_save_details_btn.png; sourceTree = "<group>"; };
+		D95EAE471700F3750081BED0 /* right_arrow_circle_btn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = right_arrow_circle_btn.png; path = Resources/Images/Settings/right_arrow_circle_btn.png; sourceTree = "<group>"; };
+		D95EAE4A1701309F0081BED0 /* SearchStoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchStoreViewController.h; sourceTree = "<group>"; };
+		D95EAE4B1701309F0081BED0 /* SearchStoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchStoreViewController.m; sourceTree = "<group>"; };
+		D95EAE4C1701309F0081BED0 /* SearchStoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchStoreViewController.xib; sourceTree = "<group>"; };
+		D95EAE4E1701309F0081BED0 /* SearchStoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchStoreCell.h; sourceTree = "<group>"; };
+		D95EAE4F1701309F0081BED0 /* SearchStoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchStoreCell.m; sourceTree = "<group>"; };
+		D95EAE501701309F0081BED0 /* SearchStoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchStoreCell.xib; sourceTree = "<group>"; };
 		D96709D116F7D66B00CF27C4 /* StorePageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StorePageCell.h; sourceTree = "<group>"; };
 		D96709D216F7D66B00CF27C4 /* StorePageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StorePageCell.m; sourceTree = "<group>"; };
 		D96709D316F7D66B00CF27C4 /* StorePageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StorePageCell.xib; sourceTree = "<group>"; };
@@ -987,6 +1052,12 @@
 		D927D9E416EE8B78002CF45A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D95EAE491701309E0081BED0 /* SearchStore */,
+				D93F495F16FEB18C00FE151E /* Settings */,
+				D93F495716FEAFDF00FE151E /* About */,
+				D93F495116FEA55500FE151E /* WishlistDetails */,
+				D93F494B16FE76E100FE151E /* MyLikes */,
+				D93F494316FE6C1E00FE151E /* MyWishlists */,
 				D992586916FBF0AC00490D86 /* Photo */,
 				D99F600416FAB6640009384E /* Community */,
 				D9072B6916F95B6800E7F168 /* SearchDetails */,
@@ -1009,6 +1080,8 @@
 		D927D9EB16EE9845002CF45A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				D95EAE3E1700F2900081BED0 /* Settings */,
+				D93F493A16FE4CC800FE151E /* Profile */,
 				D992586F16FC099100490D86 /* Photo */,
 				D9072B5016F943E000E7F168 /* Search */,
 				D9072B4416F8E96F00E7F168 /* Rate */,
@@ -1246,11 +1319,11 @@
 		D93C0FCF16EFF40F00A4472E /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				D92F4EA416FD7F5A00D86717 /* ProfileViewController_iPhone5.xib */,
 				D9383C7516FCEB7A003E379B /* Views */,
 				D93C0FD016EFF43000A4472E /* ProfileViewController.h */,
 				D93C0FD116EFF43000A4472E /* ProfileViewController.m */,
 				D93C0FD216EFF43000A4472E /* ProfileViewController.xib */,
+				D92F4EA416FD7F5A00D86717 /* ProfileViewController_iPhone5.xib */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -1278,6 +1351,77 @@
 			);
 			name = TabBar;
 			path = Resources/Images/TabBar;
+			sourceTree = "<group>";
+		};
+		D93F493A16FE4CC800FE151E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D93F493B16FE4CC800FE151E /* followe_bar_bg@2x.png */,
+				D93F493C16FE4CC800FE151E /* posted_user_ic@2x.png */,
+				D93F493D16FE4CC800FE151E /* profile_list_bar@2x.png */,
+				D93F493E16FE4CC800FE151E /* profile_tob_bar@2x.png */,
+			);
+			name = Profile;
+			path = Resources/Images/Profile;
+			sourceTree = "<group>";
+		};
+		D93F494316FE6C1E00FE151E /* MyWishlists */ = {
+			isa = PBXGroup;
+			children = (
+				D93F494416FE6C8D00FE151E /* MyWishlistViewController_iPhone5.xib */,
+				D93F494516FE6C8D00FE151E /* MyWishlistViewController.h */,
+				D93F494616FE6C8D00FE151E /* MyWishlistViewController.m */,
+				D93F494716FE6C8D00FE151E /* MyWishlistViewController.xib */,
+			);
+			name = MyWishlists;
+			sourceTree = "<group>";
+		};
+		D93F494B16FE76E100FE151E /* MyLikes */ = {
+			isa = PBXGroup;
+			children = (
+				D93F496716FEB4C700FE151E /* MyLikesViewController_iPhone5.xib */,
+				D93F494C16FE76E300FE151E /* MyLikesViewController.h */,
+				D93F494D16FE76E300FE151E /* MyLikesViewController.m */,
+				D93F494E16FE76E300FE151E /* MyLikesViewController.xib */,
+			);
+			name = MyLikes;
+			path = Classes/Controllers/MyLikes;
+			sourceTree = "<group>";
+		};
+		D93F495116FEA55500FE151E /* WishlistDetails */ = {
+			isa = PBXGroup;
+			children = (
+				D93F496916FEB54800FE151E /* WishlistDetailsViewController_iPhone5.xib */,
+				D93F495216FEA55800FE151E /* WishlistDetailsViewController.h */,
+				D93F495316FEA55800FE151E /* WishlistDetailsViewController.m */,
+				D93F495416FEA55800FE151E /* WishlistDetailsViewController.xib */,
+			);
+			name = WishlistDetails;
+			path = Classes/Controllers/WishlistDetails;
+			sourceTree = "<group>";
+		};
+		D93F495716FEAFDF00FE151E /* About */ = {
+			isa = PBXGroup;
+			children = (
+				D93F495816FEAFE100FE151E /* AboutViewController.h */,
+				D93F495916FEAFE100FE151E /* AboutViewController.m */,
+				D93F495A16FEAFE100FE151E /* AboutViewController.xib */,
+				D93F495B16FEAFE100FE151E /* AboutViewController_iPhone5.xib */,
+			);
+			name = About;
+			path = Classes/Controllers/About;
+			sourceTree = "<group>";
+		};
+		D93F495F16FEB18C00FE151E /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D93F496016FEB19000FE151E /* SettingsViewController.h */,
+				D93F496116FEB19000FE151E /* SettingsViewController.m */,
+				D93F496216FEB19000FE151E /* SettingsViewController.xib */,
+				D93F496316FEB19000FE151E /* SettingsViewController_iPhone5.xib */,
+			);
+			name = Settings;
+			path = Classes/Controllers/Settings;
 			sourceTree = "<group>";
 		};
 		D94076EF16F27D020000E21B /* Fonts */ = {
@@ -1436,6 +1580,40 @@
 			name = Address;
 			sourceTree = "<group>";
 		};
+		D95EAE3E1700F2900081BED0 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				D95EAE471700F3750081BED0 /* right_arrow_circle_btn.png */,
+				D95EAE451700F3290081BED0 /* add_details_save_details_btn.png */,
+				D95EAE3F1700F2A60081BED0 /* add_detail_form_background.png */,
+				D95EAE401700F2A60081BED0 /* add_details_form_hr.png */,
+				D95EAE411700F2A60081BED0 /* add_details_form_photo_bg.png */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
+		D95EAE491701309E0081BED0 /* SearchStore */ = {
+			isa = PBXGroup;
+			children = (
+				D95EAE4A1701309F0081BED0 /* SearchStoreViewController.h */,
+				D95EAE4B1701309F0081BED0 /* SearchStoreViewController.m */,
+				D95EAE4C1701309F0081BED0 /* SearchStoreViewController.xib */,
+				D95EAE4D1701309F0081BED0 /* Views */,
+			);
+			name = SearchStore;
+			path = Classes/Controllers/SearchStore;
+			sourceTree = "<group>";
+		};
+		D95EAE4D1701309F0081BED0 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D95EAE4E1701309F0081BED0 /* SearchStoreCell.h */,
+				D95EAE4F1701309F0081BED0 /* SearchStoreCell.m */,
+				D95EAE501701309F0081BED0 /* SearchStoreCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		D96709D816F7E2D600CF27C4 /* StoreDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -1500,11 +1678,11 @@
 		D992586916FBF0AC00490D86 /* Photo */ = {
 			isa = PBXGroup;
 			children = (
-				D92F4EA216FD5ED700D86717 /* PhotoViewController_iPhone5.xib */,
 				D992587A16FC0D2900490D86 /* View */,
 				D992586A16FBF0DD00490D86 /* PhotoViewController.h */,
 				D992586B16FBF0DD00490D86 /* PhotoViewController.m */,
 				D992586C16FBF0DD00490D86 /* PhotoViewController.xib */,
+				D92F4EA216FD5ED700D86717 /* PhotoViewController_iPhone5.xib */,
 			);
 			name = Photo;
 			sourceTree = "<group>";
@@ -1690,6 +1868,7 @@
 		D9C29F3316F1604600A419DC /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				D93F496B16FEC0F800FE151E /* dot.png */,
 				D96709DF16F7E83A00CF27C4 /* header_map_pin_btn.png */,
 				D96709E016F7E83A00CF27C4 /* profile_header_follow_btn.png */,
 				D96709D616F7E01E00CF27C4 /* invite_friends_submit.png */,
@@ -1962,6 +2141,28 @@
 				D9383C7A16FCEB7A003E379B /* ProfileCell.xib in Resources */,
 				D92F4EA316FD5ED700D86717 /* PhotoViewController_iPhone5.xib in Resources */,
 				D92F4EA516FD7F5A00D86717 /* ProfileViewController_iPhone5.xib in Resources */,
+				D93F493F16FE4CC800FE151E /* followe_bar_bg@2x.png in Resources */,
+				D93F494016FE4CC800FE151E /* posted_user_ic@2x.png in Resources */,
+				D93F494116FE4CC800FE151E /* profile_list_bar@2x.png in Resources */,
+				D93F494216FE4CC800FE151E /* profile_tob_bar@2x.png in Resources */,
+				D93F494816FE6C8D00FE151E /* MyWishlistViewController_iPhone5.xib in Resources */,
+				D93F494A16FE6C8D00FE151E /* MyWishlistViewController.xib in Resources */,
+				D93F495016FE76E300FE151E /* MyLikesViewController.xib in Resources */,
+				D93F495616FEA55800FE151E /* WishlistDetailsViewController.xib in Resources */,
+				D93F495D16FEAFE100FE151E /* AboutViewController.xib in Resources */,
+				D93F495E16FEAFE100FE151E /* AboutViewController_iPhone5.xib in Resources */,
+				D93F496516FEB19000FE151E /* SettingsViewController.xib in Resources */,
+				D93F496616FEB19000FE151E /* SettingsViewController_iPhone5.xib in Resources */,
+				D93F496816FEB4C700FE151E /* MyLikesViewController_iPhone5.xib in Resources */,
+				D93F496A16FEB54800FE151E /* WishlistDetailsViewController_iPhone5.xib in Resources */,
+				D93F496C16FEC0F800FE151E /* dot.png in Resources */,
+				D95EAE421700F2A60081BED0 /* add_detail_form_background.png in Resources */,
+				D95EAE431700F2A60081BED0 /* add_details_form_hr.png in Resources */,
+				D95EAE441700F2A60081BED0 /* add_details_form_photo_bg.png in Resources */,
+				D95EAE461700F3290081BED0 /* add_details_save_details_btn.png in Resources */,
+				D95EAE481700F3750081BED0 /* right_arrow_circle_btn.png in Resources */,
+				D95EAE521701309F0081BED0 /* SearchStoreViewController.xib in Resources */,
+				D95EAE541701309F0081BED0 /* SearchStoreCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2076,6 +2277,13 @@
 				D992587E16FC0D4F00490D86 /* PickerView.m in Sources */,
 				D9383C7416FCDC85003E379B /* NSData+Base64.m in Sources */,
 				D9383C7916FCEB7A003E379B /* ProfileCell.m in Sources */,
+				D93F494916FE6C8D00FE151E /* MyWishlistViewController.m in Sources */,
+				D93F494F16FE76E300FE151E /* MyLikesViewController.m in Sources */,
+				D93F495516FEA55800FE151E /* WishlistDetailsViewController.m in Sources */,
+				D93F495C16FEAFE100FE151E /* AboutViewController.m in Sources */,
+				D93F496416FEB19000FE151E /* SettingsViewController.m in Sources */,
+				D95EAE511701309F0081BED0 /* SearchStoreViewController.m in Sources */,
+				D95EAE531701309F0081BED0 /* SearchStoreCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

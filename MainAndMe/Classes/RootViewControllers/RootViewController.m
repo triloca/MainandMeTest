@@ -83,6 +83,7 @@ UIActionSheetDelegate>
 }
 
 - (void)loadPhotoButtonClicked:(id)sender{
+    
     UIActionSheet *shareActionSheet = [[UIActionSheet alloc]
                                        initWithTitle:nil
                                        delegate:self

@@ -13,6 +13,8 @@
 #import "SearchManager.h"
 #import "AlertManager.h"
 #import "ProductsStoresManager.h"
+#import "ProductDetailViewController.h"
+#import "SearchStoreViewController.h"
 
 @interface PhotoViewController ()<UIPickerViewDataSource, UIPickerViewDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
@@ -36,11 +38,17 @@
 @property (weak, nonatomic) IBOutlet UITextView *storeDescriptionTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *storePhotoImageView;
 
+@property (strong, nonatomic) NSString* priceValue;
+
+
 @property (assign, nonatomic) BOOL isStoreState;
 
 @property (strong, nonatomic) PickerView* pickerView;
 @property (strong, nonatomic) NSArray* priceRangeArray;
 @property (strong, nonatomic) NSArray* categoryArray;
+@property (strong, nonatomic) NSArray* statesArray;
+@property (strong, nonatomic) NSDictionary* statesDictionary;
+@property (assign, nonatomic) NSInteger stateIndex;
 
 @property (assign, nonatomic) BOOL isKeyBoardVisible;
 @property (assign, nonatomic) BOOL isPickerVisible;
@@ -87,7 +95,7 @@
     _priceRangeArray = [NSArray arrayWithObjects:
                         @"$50-$100", @"$100-$200", @"$200-$300",
                         @"$300-$400", @">500", nil];
-      
+    
     _pickerView = [PickerView loadViewFromXIB];
     
     __weak PhotoViewController* weakSelf = self;
@@ -113,6 +121,7 @@
     _storeScrollView.frame = _scrollView.frame;
     
     [self loadCategories];
+    [self loadAddresses];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -157,7 +166,15 @@
 - (IBAction)doneButtonClicked:(id)sender {
     [self hideKeyboard];
     [self hideCategoryPicker];
-    [self uploadItem];
+    if (_scrollView.hidden == NO) {
+        if ([self validateProduct]) {
+            [self uploadProducts];
+        }
+    }else if (_storeScrollView.hidden == NO) {
+        if ([self validateStore]) {
+            [self uploadStore];
+        }
+    }
 }
 
 - (IBAction)itemButtonClicked:(id)sender {
@@ -224,20 +241,49 @@
         _pickerView.pickerView.tag = 1;
         [_pickerView.pickerView reloadAllComponents];
         [_pickerView.pickerView selectRow:0 inComponent:0 animated:NO];
-        [self showCategoryPicker];
-        [self hideKeyboard];
-        [self scrollToTextField:textField];
+        if ([_categoryArray count] > 0) {
+            [self pickerView:_pickerView.pickerView didSelectRow:0 inComponent:0];
+            [self showCategoryPicker];
+            [self hideKeyboard];
+            [self scrollToTextField:textField];
+        }else{
+            [[AlertManager shared] showOkAlertWithTitle:@"Category list is empty.\nPlease reload page."];
+        }
         return NO;
     }
     if (_priceTextField == textField) {
         _pickerView.pickerView.tag = 0;
         [_pickerView.pickerView reloadAllComponents];
         [_pickerView.pickerView selectRow:0 inComponent:0 animated:NO];
+        [self pickerView:_pickerView.pickerView didSelectRow:0 inComponent:0];
         [self showCategoryPicker];
         [self hideKeyboard];
         [self scrollToTextField:textField];
         return NO;
     }
+    
+    if (_stateTextField == textField) {
+        _pickerView.pickerView.tag = 2;
+        [_pickerView.pickerView reloadAllComponents];
+        [_pickerView.pickerView selectRow:0 inComponent:0 animated:NO];
+        if ([_statesArray count] > 0) {
+            [self pickerView:_pickerView.pickerView didSelectRow:0 inComponent:0];
+            [self showCategoryPicker];
+            [self hideKeyboard];
+            [self scrollToTextField:textField];
+        }else{
+            [[AlertManager shared] showOkAlertWithTitle:@"State list is empty.\nPlease reload page."];
+        }
+        return NO;
+    }
+
+    if (_storeNameTextField == textField) {
+        [self hideKeyboard];
+        [self hideCategoryPicker];
+        [self showStoreSearch];
+        return NO;
+    }
+    
     [self hideCategoryPicker];
     [self scrollToTextField:textField];
     return YES;
@@ -296,26 +342,55 @@
 
     if (pickerView.tag == 0) {
        _priceTextField.text = [_priceRangeArray safeStringObjectAtIndex:row];
-    }else{
+        switch (row) {
+            case 0:
+                _priceValue = @"75";
+                break;
+            case 1:
+                _priceValue = @"150";
+                break;
+            case 2:
+                _priceValue = @"250";
+                break;
+            case 3:
+                _priceValue = @"350";
+                break;
+            case 4:
+                _priceValue = @"500";
+                break;
+
+                
+            default:
+                break;
+        }
+    }else if (pickerView.tag == 1) {
         _categoryTextField.text = [[_categoryArray safeDictionaryObjectAtIndex:row] safeStringObjectForKey:@"name"];
+    }else if (pickerView.tag == 2) {
+        _stateTextField.text = [[_statesArray safeDictionaryObjectAtIndex:row] safeStringObjectForKey:@"Name"];
+        _stateIndex = row;
     }
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component; {
     if (pickerView.tag == 0) {
         return [_priceRangeArray count];
-    }else {
+    }else if (pickerView.tag == 1) {
         return [_categoryArray count];
+    }else if (pickerView.tag == 2) {
+        return [_statesArray count];
     }
+    return 0;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component; {
     if (pickerView.tag == 0) {
-        return [_priceRangeArray objectAtIndex:(NSUInteger) row];
+        return [_priceRangeArray safeStringObjectAtIndex:row];
+    }else if (pickerView.tag == 1) {
+        return [[_categoryArray safeDictionaryObjectAtIndex:row] safeObjectForKey:@"name"];
+    }else if (pickerView.tag == 2) {
+        return [[_statesArray safeDictionaryObjectAtIndex:row] safeObjectForKey:@"Name"];
     }
-    else {
-        return [[_categoryArray objectAtIndex:(NSUInteger) row] objectForKey:@"name"];
-    }
+    return @"";
 }
 
 #pragma mark - Privat Methods
@@ -432,6 +507,7 @@
     [SearchManager loadCcategiriesSuccess:^(NSArray *categories) {
         [self hideSpinnerWithName:@"PhotoViewController"];
         _categoryArray = categories;
+        [_pickerView.pickerView reloadAllComponents];
     }
                                   failure:^(NSError *error, NSString *errorString) {
                                       [self hideSpinnerWithName:@"PhotoViewController"];
@@ -445,19 +521,18 @@
 }
 
 
-- (void)uploadItem{
+- (void)uploadProducts{
     
     [self showSpinnerWithName:@"PhotoViewController"];
-    [ProductsStoresManager uploadItemWithType:@""
-                                        price:@"100"
+    [ProductsStoresManager uploadProductWithName:_nameTextField.text
+                                        price:_priceValue
                                      category:_categoryTextField.text
-                                         name:_nameTextField.text
                                     storeName:_storeNameTextField.text
                                   description:_descriptionTextView.text
                                         image:_photo
                                       success:^(NSDictionary *object) {
                                           [self hideSpinnerWithName:@"PhotoViewController"];
-                                          
+                                          [self showAlertForProduct];
                                       }
                                       failure:^(NSError *error, NSString *errorString) {
                                           [self hideSpinnerWithName:@"PhotoViewController"];
@@ -471,5 +546,152 @@
 
 }
 
+
+- (void)uploadStore{
+    
+    NSString* statePrefix = [[_statesArray safeDictionaryObjectAtIndex:_stateIndex] safeStringObjectForKey:@"Prefix"];
+    
+    [self showSpinnerWithName:@"PhotoViewController"];
+    [ProductsStoresManager uploadStoreWithName:_storefrontNameTextField.text
+                                       country:_countryTextField.text
+                                         state:statePrefix
+                                        street:_streetTextField.text
+                                          city:_cityTextField.text
+                                       zipCode:_postalCodeTextField.text
+                                   description:_storeDescriptionTextView.text
+                                         image:_photo
+                                       success:^(NSDictionary *object) {
+                                           [self hideSpinnerWithName:@"PhotoViewController"];
+                                           [self showAlertForStore];
+
+                                       }
+                                       failure:^(NSError *error, NSString *errorString) {
+                                           [self hideSpinnerWithName:@"PhotoViewController"];
+                                           [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                               message:errorString];
+
+                                       }
+                                     exception:^(NSString *exceptionString) {
+                                         [self hideSpinnerWithName:@"PhotoViewController"];
+                                         [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                     }];
+    
+}
+
+
+- (BOOL)validateProduct{
+    
+    if (_nameTextField.text.length == 0) {
+        [[AlertManager shared] showOkAlertWithTitle:@"Enter name."];
+        return NO;
+    }
+    if (_priceTextField.text.length == 0) {
+        [[AlertManager shared] showOkAlertWithTitle:@"Enter price."];
+        return NO;
+    }
+    return YES;
+}
+
+- (BOOL)validateStore{
+    
+    if (_storefrontNameTextField.text.length == 0) {
+        [[AlertManager shared] showOkAlertWithTitle:@"Enter name."];
+        return NO;
+    }
+    if (_stateTextField.text.length == 0) {
+        [[AlertManager shared] showOkAlertWithTitle:@"Select state."];
+        return NO;
+    }
+    return YES;
+}
+
+
+- (void)showAlertForProduct{
+    
+    [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        
+        [self hideKeyboard];
+        [self hideCategoryPicker];
+        [[LayoutManager shared].rootTabBarController hidePhotoView];
+    }
+                                           title:@"Success"
+                                         message:@"Product loaded."
+                               cancelButtonTitle:@"Ok"
+                               otherButtonTitles:nil];
+}
+
+- (void)showAlertForStore{
+    
+    [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        
+        [self hideKeyboard];
+        [self hideCategoryPicker];
+        [[LayoutManager shared].rootTabBarController hidePhotoView];
+    }
+                                           title:@"Success"
+                                         message:@"Store loaded."
+                               cancelButtonTitle:@"Ok"
+                               otherButtonTitles:nil];
+}
+
+
+- (void)showStoreSearch{
+    SearchStoreViewController* searchStoreViewController = [SearchStoreViewController new];
+    [[LayoutManager shared].rootNavigationController pushViewController:searchStoreViewController animated:YES];
+    
+}
+
+- (void)loadAddresses{
+    
+    [self showSpinnerWithName:@"PhotoViewController"];
+    
+    [SearchManager loadStatesSuccess:^(NSDictionary* states) {
+        [self hideSpinnerWithName:@"PhotoViewController"];
+        _statesDictionary = states;
+        [self convertStates];
+    }
+                             failure:^(NSError *error, NSString *errorString) {
+                                 [self hideSpinnerWithName:@"PhotoViewController"];
+                                 [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                     message:errorString];
+                             }
+                           exception:^(NSString *exceptionString) {
+                               [self hideSpinnerWithName:@"PhotoViewController"];
+                               [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                           }];
+}
+
+- (void)convertStates{
+    
+    NSMutableArray* resultArray = [NSMutableArray new];
+    NSArray* keys = [_statesDictionary allKeys];
+    for (id obj in keys){
+        if ([obj isKindOfClass:[NSString class]]) {
+            NSString* state = [_statesDictionary safeStringObjectForKey:obj];
+            NSDictionary* dict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                  obj, @"Prefix",
+                                  state, @"Name",
+                                  nil];
+            [resultArray addObject:dict];
+        }
+        
+    }
+    
+    _statesArray = [NSArray safeArrayWithArray:resultArray];
+    _statesArray = [self sortAddresses:_statesArray];
+    [_pickerView.pickerView reloadAllComponents];
+    
+}
+
+- (NSArray*)sortAddresses:(NSArray*)array{
+    NSArray *sorteArray = [array sortedArrayUsingComparator:^(id a, id b) {
+        NSString *first = [a safeStringObjectForKey:@"Name"];
+        NSString *second = [b safeStringObjectForKey:@"Name"];
+        return [first caseInsensitiveCompare:second];
+    }];
+    
+    return sorteArray;
+    
+}
 
 @end

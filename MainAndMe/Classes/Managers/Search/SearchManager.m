@@ -115,8 +115,43 @@
     @catch (NSException *exc) {
         exception(@"Exeption\n Load Community create");
     }
-
 }
+
+//! Load Likes For Products
++ (void)loadProductLikesForUser:(NSString*)userId
+                        success:(void(^) (NSArray* objects)) success
+                        failure:(void(^) (NSError* error, NSString* errorString)) failure
+                      exception:(void(^) (NSString* exceptionString))exception{
+
+    @try {
+        [[self shared] loadProductLikesForUser:userId
+                                       success:success
+                                       failure:failure
+                                     exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(@"Exeption\n Load Likes For Products create");
+    }
+}
+
+
+//! Load Wishlist
++ (void)loadWishlistById:(NSString*)wishlistId
+                 success:(void(^) (NSArray* objects)) success
+                 failure:(void(^) (NSError* error, NSString* errorString)) failure
+               exception:(void(^) (NSString* exceptionString))exception{
+    @try {
+        [[self shared] loadWishlistById:wishlistId
+                                success:success
+                                failure:failure
+                              exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(@"Exeption\n Load Wishlist Info create");
+    }
+}
+
+
 #pragma mark - 
 - (void)loadCcategiriesSuccess:(void(^) (NSArray* categories)) success
                        failure:(void(^) (NSError* error, NSString* errorString)) failure
@@ -161,6 +196,89 @@
                   exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString = [NSString stringWithFormat:@"%@/categories/%@/stores", [APIv1_0 serverUrl], categoryId];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:30];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        
+        if ([value isKindOfClass:[NSArray class]]) {
+            
+            success(value);
+            
+        }else{
+            NSString* messageString = @"Server API Error";
+            
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    } eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+    
+}
+
+//! Load Wishlist
+- (void)loadWishlistById:(NSString*)wishlistId
+                 success:(void(^) (NSArray* objects)) success
+                 failure:(void(^) (NSError* error, NSString* errorString)) failure
+               exception:(void(^) (NSString* exceptionString))exception{
+    
+    NSString* urlString = [NSString stringWithFormat:@"%@/product_lists/%@/list_items", [APIv1_0 serverUrl], wishlistId];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:30];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        
+        if ([value isKindOfClass:[NSArray class]]) {
+            
+            success(value);
+            
+        }else{
+            NSString* messageString = @"Server API Error";
+            
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    } eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+}
+
+//! Load Stores For Category
+-(void)loadProductLikesForUser:(NSString*)userId
+                       success:(void(^) (NSArray* objects)) success
+                       failure:(void(^) (NSError* error, NSString* errorString)) failure
+                     exception:(void(^) (NSString* exceptionString))exception{
+    
+    NSString* urlString = [NSString stringWithFormat:@"%@/users/%@/products/likes", [APIv1_0 serverUrl], userId];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
