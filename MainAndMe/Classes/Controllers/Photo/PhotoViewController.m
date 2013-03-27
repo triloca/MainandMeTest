@@ -637,6 +637,9 @@
 
 - (void)showStoreSearch{
     SearchStoreViewController* searchStoreViewController = [SearchStoreViewController new];
+    searchStoreViewController.didSelectStoreName = ^(NSString* name){
+        _storeNameTextField.text = name;
+    };
     [[LayoutManager shared].rootNavigationController pushViewController:searchStoreViewController animated:YES];
     
 }

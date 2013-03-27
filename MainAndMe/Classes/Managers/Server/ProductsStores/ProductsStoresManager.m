@@ -399,7 +399,7 @@
                     exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString =
-    [NSString stringWithFormat:@"%@/products/new_create", [APIv1_0 serverUrl]];
+    [NSString stringWithFormat:@"%@/products", [APIv1_0 serverUrl]];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     

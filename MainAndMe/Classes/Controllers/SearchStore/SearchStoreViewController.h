@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SearchStoreViewController : UIViewController
-
+@property (copy, nonatomic) void (^didSelectStoreName)(NSString* name);
 @end

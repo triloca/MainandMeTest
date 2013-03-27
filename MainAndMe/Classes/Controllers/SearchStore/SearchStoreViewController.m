@@ -13,16 +13,18 @@
 #import "SearchManager.h"
 #import "AlertManager.h"
 #import "SearchDetailsViewController.h"
+#import "MBProgressHUD.h"
+#import "ProductsStoresManager.h"
 
 @interface SearchStoreViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
 @property (strong, nonatomic) NSArray* tableArray;
-@property (strong, nonatomic) NSArray* categoriesArray;
+@property (strong, nonatomic) NSArray* storesArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 
 @property (assign, nonatomic) BOOL isKeyBoardVisible;
-@property (assign, nonatomic) BOOL isAllCategories;
+
 @end
 
 @implementation SearchStoreViewController
@@ -58,7 +60,6 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
-    _isAllCategories = NO;
     [self loadStores];
 }
 
@@ -71,23 +72,17 @@
 
 #pragma mark - Buttons Action
 - (IBAction)backButtonClicked:(id)sender {
+    [_searchTextField resignFirstResponder];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        if (_isAllCategories) {
-            return 1;
-        }else{
-            return 0;
-        }
-    }
     return [_tableArray count];
 }
 
@@ -102,30 +97,35 @@
     
     // Configure the cell...
     
-    if (indexPath.section == 0) {
-        cell.nameLabel.text = @"All Categories";
-    }else{
-        NSDictionary* object = [_tableArray safeDictionaryObjectAtIndex:indexPath.row];
-        cell.nameLabel.text = [object safeStringObjectForKey:@"name"];
-    }
-
+    NSDictionary* object = [_tableArray safeDictionaryObjectAtIndex:indexPath.row];
+    cell.nameLabel.text = [object safeStringObjectForKey:@"name"];
+    cell.addressLabel.text = [object safeStringObjectForKey:@"street"];
+    
     return cell;
 }
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    return;
-    SearchDetailsViewController* searchDetailsViewController = [SearchDetailsViewController new];
-    if (indexPath.section == 0) {
-        searchDetailsViewController.isAllState = YES;
-    }else{
-        NSDictionary* object = [_tableArray safeDictionaryObjectAtIndex:indexPath.row];
-        searchDetailsViewController.categoryInfo = object;
-        searchDetailsViewController.isAllState = NO;
-    }
+
+    NSDictionary* object = [_tableArray safeDictionaryObjectAtIndex:indexPath.row];
     
-    [self.navigationController pushViewController:searchDetailsViewController animated:YES];
+    NSString* message = [NSString stringWithFormat:@"Use '%@' as Store name?", [object safeStringObjectForKey:@"name"]];
+    [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        if (buttonIndex == 0) {
+            if (_didSelectStoreName) {
+                _didSelectStoreName([object safeStringObjectForKey:@"name"]);
+                [_searchTextField resignFirstResponder];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }else{
+            [_tableView reloadData];
+        }
+    }
+                                           title:message
+                                         message:nil
+                               cancelButtonTitle:@"Ok"
+                               otherButtonTitles:@"Cancel", nil];
 }
 
 
@@ -155,36 +155,56 @@
 }
 
 - (IBAction)didChangeValue:(UITextField*)sender {
-    if (sender.text.length > 0) {
-        _isAllCategories = NO;
-    }else{
-        _isAllCategories = YES;
-    }
-    [self applyFilterWith:sender.text];
+   [self applyFilterWith:sender.text];
 }
 
+- (IBAction)addButtonClicked:(id)sender {
+    if (_searchTextField.text.length == 0) {
+        [[AlertManager shared] showOkAlertWithTitle:@"Message"
+                                            message:@"Enter Store name."];
+    }else{
+        NSString* message = [NSString stringWithFormat:@"Use '%@' as Store name?", _searchTextField.text];
+        [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            if (buttonIndex == 0) {
+                if (_didSelectStoreName) {
+                    _didSelectStoreName(_searchTextField.text);
+                    [_searchTextField resignFirstResponder];
+                    [self.navigationController popViewControllerAnimated:YES];
+                }
+            }
+        }
+                                               title:message
+                                             message:nil
+                                   cancelButtonTitle:@"Ok"
+                                   otherButtonTitles:@"Cancel", nil];
+    }
+}
 
 #pragma mark - Privat Methods
 
 - (void)loadStores{
     
-    [self showSpinnerWithName:@"SearchViewController"];
-    [SearchManager loadCcategiriesSuccess:^(NSArray *categories) {
-        [self hideSpinnerWithName:@"SearchViewController"];
-        _categoriesArray = categories;
-        _isAllCategories = YES;
-        [self applyFilterWith:@""];
-        
-    }
-                                  failure:^(NSError *error, NSString *errorString) {
-                                      [self hideSpinnerWithName:@"SearchViewController"];
-                                      [[AlertManager shared] showOkAlertWithTitle:@"Error"
-                                                                          message:errorString];
-                                  }
-                                exception:^(NSString *exceptionString) {
-                                    [self hideSpinnerWithName:@"SearchViewController"];
-                                    [[AlertManager shared] showOkAlertWithTitle:exceptionString];
-                                }];
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [ProductsStoresManager searchWithSearchType:SearchTypeStores
+                                   searchFilter:SearchFilterNone
+                                        success:^(NSArray *objects) {
+                                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                            
+                                            _storesArray = objects;
+                                            
+                                            [self applyFilterWith:@""];
+                                            
+                                        }
+                                        failure:^(NSError *error, NSString *errorString) {
+                                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                            [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                message:errorString];
+                                            
+                                        }exception:^(NSString *exceptionString) {
+                                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                            [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                        }];
+
 }
 
 - (void)updateContentSize{// to privat
@@ -192,7 +212,7 @@
     if (_isKeyBoardVisible) {
         [UIView animateWithDuration:0.3 animations:^{
             CGRect rc = _tableView.frame;
-            rc.size.height -= 160;
+            rc.size.height -= 220;
             _tableView.frame = rc;
             
         } completion:^(BOOL finished) {
@@ -202,7 +222,7 @@
         
         [UIView animateWithDuration:0.3 animations:^{
             CGRect rc = _tableView.frame;
-            rc.size.height += 160;
+            rc.size.height += 220;
             _tableView.frame = rc;
             
         } completion:^(BOOL finished) {
@@ -214,7 +234,7 @@
 - (void)applyFilterWith:(NSString*)name{
     
     if ([name isEqualToString:@""]) {
-        _tableArray = _categoriesArray;
+        _tableArray = _storesArray;
         [_tableView reloadData];
         return;
     }
@@ -230,7 +250,7 @@
     
     
     
-    for (NSDictionary* friend in _categoriesArray) {
+    for (NSDictionary* friend in _storesArray) {
         
         NSString* fixedName =[[friend objectForKey:@"name"] stringByReplacingOccurrencesOfString:@"  " withString:@" "];//some names are separated by double space :(
         

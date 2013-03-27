@@ -204,7 +204,7 @@
 									<bytes key="NSRGB">MC42MzkyMTU3MDc4IDAuNjExNzY0NzI5IDAuNTY4NjI3NDc2NwA</bytes>
 								</object>
 								<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
-								<float key="IBUIMinimumFontSize">17</float>
+								<float key="IBUIMinimumFontSize">10</float>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
@@ -238,7 +238,7 @@
 									<bytes key="NSRGB">MC42MzkyMTU3MDc4IDAuNjExNzY0NzI5IDAuNTY4NjI3NDc2NwA</bytes>
 								</object>
 								<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
-								<float key="IBUIMinimumFontSize">17</float>
+								<float key="IBUIMinimumFontSize">10</float>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 									<int key="IBUIAutocapitalizationType">1</int>
 									<int key="IBUIReturnKeyType">4</int>
@@ -356,7 +356,6 @@
 								<string key="NSFrame">{{40, 273}, {131, 21}}</string>
 								<reference key="NSSuperview" ref="689210068"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -578,7 +577,7 @@
 									<bytes key="NSRGB">MC42MzkyMTU3MDc4IDAuNjExNzY0NzI5IDAuNTY4NjI3NDc2NwA</bytes>
 								</object>
 								<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
-								<float key="IBUIMinimumFontSize">17</float>
+								<float key="IBUIMinimumFontSize">10</float>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 									<int key="IBUIAutocapitalizationType">1</int>
 									<int key="IBUIReturnKeyType">4</int>
@@ -607,7 +606,7 @@
 									<bytes key="NSRGB">MC42MzkyMTU3MDc4IDAuNjExNzY0NzI5IDAuNTY4NjI3NDc2NwA</bytes>
 								</object>
 								<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
-								<float key="IBUIMinimumFontSize">17</float>
+								<float key="IBUIMinimumFontSize">10</float>
 								<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 									<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 								</object>
@@ -751,7 +750,7 @@
 							<bytes key="NSRGB">MC42MzkyMTU3MDc4IDAuNjExNzY0NzI5IDAuNTY4NjI3NDc2NwA</bytes>
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
-						<float key="IBUIMinimumFontSize">17</float>
+						<float key="IBUIMinimumFontSize">10</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">1</int>
 							<int key="IBUIReturnKeyType">4</int>
@@ -780,7 +779,7 @@
 							<bytes key="NSRGB">MC42MzkyMTU3MDc4IDAuNjExNzY0NzI5IDAuNTY4NjI3NDc2NwA</bytes>
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
-						<float key="IBUIMinimumFontSize">17</float>
+						<float key="IBUIMinimumFontSize">10</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">1</int>
 							<int key="IBUIReturnKeyType">4</int>
@@ -891,7 +890,6 @@
 						<string key="NSFrame">{{40, 290}, {131, 21}}</string>
 						<reference key="NSSuperview" ref="95981579"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -1097,7 +1095,7 @@
 							<bytes key="NSRGB">MC42MzkyMTU3MDc4IDAuNjExNzY0NzI5IDAuNTY4NjI3NDc2NwA</bytes>
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
-						<float key="IBUIMinimumFontSize">17</float>
+						<float key="IBUIMinimumFontSize">10</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">1</int>
 							<int key="IBUIReturnKeyType">4</int>
@@ -1126,7 +1124,7 @@
 							<bytes key="NSRGB">MC42MzkyMTU3MDc4IDAuNjExNzY0NzI5IDAuNTY4NjI3NDc2NwA</bytes>
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
-						<float key="IBUIMinimumFontSize">17</float>
+						<float key="IBUIMinimumFontSize">10</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">1</int>
 							<int key="IBUIReturnKeyType">4</int>
@@ -1208,7 +1206,7 @@
 							<bytes key="NSRGB">MC42MzkyMTU3MDc4IDAuNjExNzY0NzI5IDAuNTY4NjI3NDc2NwA</bytes>
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
-						<float key="IBUIMinimumFontSize">17</float>
+						<float key="IBUIMinimumFontSize">10</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">1</int>
 							<int key="IBUIReturnKeyType">4</int>
@@ -1237,7 +1235,7 @@
 							<bytes key="NSRGB">MC42MzkyMTU3MDc4IDAuNjExNzY0NzI5IDAuNTY4NjI3NDc2NwA</bytes>
 						</object>
 						<bool key="IBUIAdjustsFontSizeToFit">YES</bool>
-						<float key="IBUIMinimumFontSize">17</float>
+						<float key="IBUIMinimumFontSize">10</float>
 						<object class="IBUITextInputTraits" key="IBUITextInputTraits">
 							<int key="IBUIAutocapitalizationType">1</int>
 							<int key="IBUIKeyboardType">8</int>
