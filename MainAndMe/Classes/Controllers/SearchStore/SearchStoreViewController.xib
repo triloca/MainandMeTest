@@ -477,17 +477,25 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SearchStoreViewController</string>
 					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<string key="NS.key.0">addButtonClicked:</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<string key="NS.key.0">addButtonClicked:</string>
-						<object class="IBActionInfo" key="NS.object.0">
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="addButtonClicked:">id</string>
+						<string key="backButtonClicked:">id</string>
+						<string key="didChangeValue:">UITextField</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="addButtonClicked:">
 							<string key="name">addButtonClicked:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-					</object>
+						<object class="IBActionInfo" key="backButtonClicked:">
+							<string key="name">backButtonClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="didChangeValue:">
+							<string key="name">didChangeValue:</string>
+							<string key="candidateClassName">UITextField</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="searchTextField">UITextField</string>
 						<string key="tableView">UITableView</string>
@@ -519,7 +527,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="addButton.png">{61, 27}</string>
+			<string key="addButton.png">{134, 56}</string>
 			<string key="back_but@2x.png">{71, 61}</string>
 			<string key="master_bg_@2x.png">{640, 960}</string>
 			<string key="navigation_bar@2x.png">{640, 98}</string>

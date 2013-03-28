@@ -222,7 +222,7 @@
         
         urlString = [NSString stringWithFormat:urlString,
                      [LocationManager shared].defaultLocation.coordinate.latitude,
-                     [LocationManager shared].defaultLocation.coordinate.latitude];
+                     [LocationManager shared].defaultLocation.coordinate.longitude];
         urlString = [NSString stringWithFormat:@"%@%@", [APIv1_0 serverUrl], urlString];
     }else{
         urlString = [NSString stringWithFormat:@"%@%@", [APIv1_0 serverUrl], urlString];

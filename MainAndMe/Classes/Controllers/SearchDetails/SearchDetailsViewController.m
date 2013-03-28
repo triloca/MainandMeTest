@@ -8,6 +8,7 @@
 
 static NSString *kProductCellIdentifier = @"ProductCell";
 static NSString *kStorePageCellIdentifier = @"StorePageCell";
+static NSString *kPageCellIdentifier = @"PageCell";
 
 #import "SearchDetailsViewController.h"
 #import "ProductCell.h"
@@ -19,6 +20,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 #import "SearchManager.h"
 #import "AlertManager.h"
 #import "MBProgressHUD.h"
+#import "ProductDetailViewController.h"
 
 @interface SearchDetailsViewController ()
 @property (strong, nonatomic) NSArray* tableArray;
@@ -58,8 +60,13 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     // Do any additional setup after loading the view from its nib.
    
     _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
-    _titleTextLabel.text = @"Stores";
-   
+    
+    if (_isStoreState) {
+        _titleTextLabel.text = @"Stores";
+    }else{
+        _titleTextLabel.text = @"Products";
+    }
+    
     _isPageStile = NO;
     
     _pageTableProfileArray = [NSMutableArray new];
@@ -68,11 +75,19 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     _pageTableView.hidden = YES;
 
     if (_isAllState) {
-        [self loadStoresForAllCategory];
+        if (_isStoreState) {
+            [self loadStoresForAllCategory];
+        }else{
+            [self loadProductsForAllCategory];
+        }
+    
     }else{
-        [self loadStoresForCategory];
+        if (_isStoreState) {
+            [self loadStoresForCategory];
+        }else{
+            [self loadProductsForCategory];
+        }
     }
-
 }
 
 
@@ -92,7 +107,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 #pragma mark - Buttons Action
 - (IBAction)backButtonClicked:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+   [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)toggleButtonClicked:(id)sender {
@@ -146,8 +161,14 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         ProductCell* cell = [self productCellForIndexPath:indexPath];
         return cell;
     }else{
-        StorePageCell* cell = [self storePageCellForIndexPath:indexPath];
-        return cell;
+        if (_isStoreState) {
+            StorePageCell* cell = [self storePageCellForIndexPath:indexPath];
+            return cell;
+            
+        }else{
+            PageCell* cell = [self pageCellForIndexPath:indexPath];
+            return cell;
+        }
     }
     return nil;
 }
@@ -171,7 +192,11 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         cell.didClickAtIndex = ^(NSInteger selectedIndex){
             NSDictionary* itemData = [_tableArray safeDictionaryObjectAtIndex:selectedIndex];
     
-            [self showStoreDetailWithData:itemData];
+            if (_isStoreState) {
+                [self showStoreDetailWithData:itemData];
+            }else{
+                [self showProductDetailsWithData:itemData];
+            }
         };
     }
     
@@ -217,6 +242,55 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         cell.thirdView.hidden = YES;
     }
     cell.thirdView.coverButton.tag = index + 2;
+    
+    return cell;
+}
+
+
+- (PageCell*)pageCellForIndexPath:(NSIndexPath*)indexPath{
+    
+    PageCell *cell = [_pageTableView dequeueReusableCellWithIdentifier:kPageCellIdentifier];
+    
+    if (cell == nil){
+        cell = [PageCell loadViewFromXIB];
+        //cell.transform = CGAffineTransformMake(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f);
+    }
+    
+    // Configure the cell...
+    
+    NSDictionary* object = [_pageTableArray safeDictionaryObjectAtIndex:indexPath.row];
+    
+    [cell setCellData:object];
+    cell.tag = indexPath.row;
+    
+    id profileInfoObject = [_pageTableProfileArray safeObjectAtIndex:indexPath.row];
+    if ([profileInfoObject isKindOfClass:[NSString class]]) {
+        
+        [ProductDetailsManager loadProfileInfoForUserIdNumber:[object safeNumberObjectForKey:@"user_id"]
+                                                      success:^(NSNumber *userIdNumber, NSDictionary *profile) {
+                                                          
+                                                          NSNumber* cellUserNumber = [cell.cellData safeNumberObjectForKey:@"user_id"];
+                                                          if ([cellUserNumber isEqual:userIdNumber]) {
+                                                              [cell setCellProfileData:profile];
+                                                              [_pageTableProfileArray safeReplaceObjectAtIndex:indexPath.row withObject:profile];
+                                                          }
+                                                      }
+                                                      failure:^(NSNumber *userIdNumber, NSError *error, NSString *errorString) {
+                                                          
+                                                      }
+                                                    exception:^(NSNumber *userIdNumber, NSString *exceptionString) {
+                                                        
+                                                        
+                                                    }];
+    }else if([profileInfoObject isKindOfClass:[NSDictionary class]]){
+        [cell setCellProfileData:profileInfoObject];
+    }
+    
+    cell.didClickAtIndex = ^(NSInteger selectedIndex){
+        
+        NSDictionary* itemData = [_pageTableArray safeDictionaryObjectAtIndex:selectedIndex];
+        [self showProductDetailsWithData:itemData];
+    };
     
     return cell;
 }
@@ -278,6 +352,14 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     [self.navigationController pushViewController:storeDetailViewController animated:YES];
 }
 
+- (void)showProductDetailsWithData:(NSDictionary*)data{
+    
+    ProductDetailViewController* productDetailViewController = [ProductDetailViewController loadFromXIB_Or_iPhone5_XIB];
+    productDetailViewController.productInfo = data;
+    [self.navigationController pushViewController:productDetailViewController animated:YES];
+    
+}
+
 - (void)reloadNeededTable{
     if (_isPageStile) {
         self.pageTableArray = _objectsArray;
@@ -309,6 +391,28 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                            }];
 }
 
+- (void)loadProductsForCategory{
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [SearchManager loadProductsForCategory:[[_categoryInfo safeNumberObjectForKey:@"id"] stringValue]
+                                 success:^(NSArray *objects) {
+                                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                     
+                                     _objectsArray = objects;
+                                     [self reloadNeededTable];
+                                 }
+                                 failure:^(NSError *error, NSString *errorString) {
+                                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                     [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                         message:errorString];
+                                 }
+                               exception:^(NSString *exceptionString) {
+                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                   [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                               }];
+}
+
+
 - (void)loadStoresForAllCategory{
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
@@ -328,6 +432,27 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                                  [[AlertManager shared] showOkAlertWithTitle:exceptionString];
                                              }];
 }
+
+- (void)loadProductsForAllCategory{
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [SearchManager loadProductsForAllCategoryWithSuccess:^(NSArray *objects) {
+        [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+        
+        _objectsArray = objects;
+        [self reloadNeededTable];
+    }
+                                                 failure:^(NSError *error, NSString *errorString) {
+                                                     [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                     [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                         message:errorString];
+                                                 }
+                                               exception:^(NSString *exceptionString) {
+                                                   [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                                   [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                               }];
+}
+
 
 - (void)setPageTableArray:(NSArray *)pageTableArray{
     _pageTableArray = pageTableArray;

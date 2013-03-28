@@ -1,31 +1,33 @@
 //
-//  SearchViewController.m
+//  AddressViewController.m
 //  MainAndMe
 //
 //  Created by Sasha on 3/15/13.
 //
 //
 
-#import "SearchViewController.h"
-#import "SearchCell.h"
+#import "InviteFriendViewController.h"
 #import "UIView+Common.h"
-#import "WishlistCell.h"
-#import "SearchManager.h"
 #import "AlertManager.h"
-#import "SearchDetailsViewController.h"
+#import "FriendCell.h"
+#import "FacebookSDK/FacebookSDK.h"
+#import "SBJSON.h"
 
-@interface SearchViewController ()
+
+
+
+@interface InviteFriendViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
 @property (strong, nonatomic) NSArray* tableArray;
-@property (strong, nonatomic) NSArray* categoriesArray;
+@property (strong, nonatomic) NSArray* friendsArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 
 @property (assign, nonatomic) BOOL isKeyBoardVisible;
-@property (assign, nonatomic) BOOL isAllCategories;
+
 @end
 
-@implementation SearchViewController
+@implementation InviteFriendViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -45,16 +47,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    //_titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
-    if (_isStoreState) {
-        _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:20];
-        _titleTextLabel.text = @"Search Store By Category";
-    }else{
-        _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:20];
-        _titleTextLabel.text = @"Search Product By Category";
-        
-    }
-    
+    _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
+    _titleTextLabel.text = @"Invite Friends";
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)
@@ -66,16 +60,11 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
-    _isAllCategories = NO;
-    [self loadCategories];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    [_tableView reloadData];
+    [self openFBSession];
 }
 
 - (void)viewDidUnload {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self setTitleTextLabel:nil];
     [self setTableView:nil];
     [self setSearchTextField:nil];
@@ -90,56 +79,38 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
-        if (_isAllCategories) {
-            return 1;
-        }else{
-            return 0;
-        }
-    }
     return [_tableArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *kSearchCellIdentifier = @"SearchCell";
+    static NSString *kFriendCellIdentifier = @"FriendCell";
     
-    SearchCell *cell = [tableView dequeueReusableCellWithIdentifier:kSearchCellIdentifier];
-
+    FriendCell *cell = [tableView dequeueReusableCellWithIdentifier:kFriendCellIdentifier];
+    
     if (cell == nil){
-        cell = [SearchCell loadViewFromXIB];
+        cell = [FriendCell loadViewFromXIB];
     }
     
     // Configure the cell...
     
-    if (indexPath.section == 0) {
-        cell.nameLabel.text = @"All Categories";
-    }else{
-        NSDictionary* object = [_tableArray safeDictionaryObjectAtIndex:indexPath.row];
-        cell.nameLabel.text = [object safeStringObjectForKey:@"name"];
-    }
-
+    NSDictionary* object = [_tableArray safeDictionaryObjectAtIndex:indexPath.row];
+    cell.nameLabel.text = [object safeStringObjectForKey:@"name"];
+     NSString* photoUrl = [NSString stringWithFormat:@"http://graph.facebook.com/%@/picture", [object safeStringObjectForKey:@"id"]];
+    [cell setPersonImageURLString:photoUrl];
     return cell;
 }
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-   
-    SearchDetailsViewController* searchDetailsViewController = [SearchDetailsViewController new];
-    if (indexPath.section == 0) {
-        searchDetailsViewController.isAllState = YES;
-    }else{
-        NSDictionary* object = [_tableArray safeDictionaryObjectAtIndex:indexPath.row];
-        searchDetailsViewController.categoryInfo = object;
-        searchDetailsViewController.isAllState = NO;
-    }
-    searchDetailsViewController.isStoreState = _isStoreState;
-    [_searchTextField resignFirstResponder];
-    [self.navigationController pushViewController:searchDetailsViewController animated:YES];
+    NSDictionary* object = [_tableArray safeDictionaryObjectAtIndex:indexPath.row];
+    NSString* friendId = [object safeStringObjectForKey:@"id"];
+    [self inviteFriendWithId:friendId];
+
 }
 
 
@@ -159,7 +130,7 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
     if ([textField.text length] > 0) {
-
+        
     }
 }
 
@@ -168,37 +139,12 @@
     return YES;
 }
 
-- (IBAction)didChangeValue:(UITextField*)sender {
-    if (sender.text.length > 0) {
-        _isAllCategories = NO;
-    }else{
-        _isAllCategories = YES;
-    }
+- (IBAction)didChangeValue:(UITextField *)sender {
     [self applyFilterWith:sender.text];
 }
 
-
 #pragma mark - Privat Methods
 
-- (void)loadCategories{
-    [self showSpinnerWithName:@"SearchViewController"];
-    [SearchManager loadCcategiriesSuccess:^(NSArray *categories) {
-        [self hideSpinnerWithName:@"SearchViewController"];
-        _categoriesArray = categories;
-        _isAllCategories = YES;
-        [self applyFilterWith:@""];
-        
-    }
-                                  failure:^(NSError *error, NSString *errorString) {
-                                      [self hideSpinnerWithName:@"SearchViewController"];
-                                      [[AlertManager shared] showOkAlertWithTitle:@"Error"
-                                                                          message:errorString];
-                                  }
-                                exception:^(NSString *exceptionString) {
-                                    [self hideSpinnerWithName:@"SearchViewController"];
-                                    [[AlertManager shared] showOkAlertWithTitle:exceptionString];
-                                }];
-}
 
 - (void)updateContentSize{// to privat
     
@@ -227,14 +173,12 @@
 - (void)applyFilterWith:(NSString*)name{
     
     if ([name isEqualToString:@""]) {
-        _tableArray = _categoriesArray;
+        _tableArray = [self sortAddresses:_friendsArray];
         [_tableView reloadData];
         return;
     }
     
     NSMutableArray* filterdMutableArray = [NSMutableArray array];
-    
-    
     
     NSArray *searchNames = [[name lowercaseString]componentsSeparatedByString: @" "];
     NSString *firstSearchName = [[searchNames objectAtIndex: 0] lowercaseString];
@@ -243,7 +187,7 @@
     
     
     
-    for (NSDictionary* friend in _categoriesArray) {
+    for (NSDictionary* friend in _friendsArray) {
         
         NSString* fixedName =[[friend objectForKey:@"name"] stringByReplacingOccurrencesOfString:@"  " withString:@" "];//some names are separated by double space :(
         
@@ -276,7 +220,115 @@
     
 }
 
+- (NSArray*)sortAddresses:(NSArray*)array{
+    NSArray *sorteArray = [array sortedArrayUsingComparator:^(id a, id b) {
+        NSString *first = [a safeStringObjectForKey:@"name"];
+        NSString *second = [b safeStringObjectForKey:@"name"];
+        return [first caseInsensitiveCompare:second];
+    }];
+    
+    return sorteArray;
 
+}
+
+- (void)inviteFriendWithId:(NSString*)friendId{
+   
+    [_searchTextField resignFirstResponder];
+    
+    NSMutableDictionary *params =
+    [NSMutableDictionary dictionaryWithObjectsAndKeys:
+     @"Main And Me for iOS", @"name",
+     @"Main and Me is 100% dedicated to local, independent business.", @"description",
+     @"http://mainandme-test.herokuapp.com", @"link",
+     @"http://mainandme-staging-s.herokuapp.com/assets/logo.png", @"picture",
+     nil];
+    
+    [params setObject:friendId forKey:@"to"];
+    
+    [FBWebDialogs presentFeedDialogModallyWithSession:FBSession.activeSession
+                                           parameters:params
+                                              handler:^(FBWebDialogResult result, NSURL *resultURL,NSError *error)
+     {
+         [_tableView reloadData];
+         switch (result) {
+             case FBWebDialogResultDialogCompleted:{
+                 [[AlertManager shared] showOkAlertWithTitle:@"Success" message:@"Invited successfully"];
+                 break;
+             }
+             case FBWebDialogResultDialogNotCompleted:{
+                 [[AlertManager shared] showOkAlertWithTitle:@"Error" message:@"Invitation Failed"];
+                 break;
+             }
+                 
+             default:
+                 break;
+         }
+         
+         if (error) {
+             [[AlertManager shared] showOkAlertWithTitle:@"Error" message:@"Invitation Failed"];
+         }
+     }];
+}
+
+#pragma mark - Facebook
+
+- (void)openFBSession {
+    
+    NSArray* permissions = [[NSArray alloc] initWithObjects:@"publish_stream",@"email", nil];
+    [FBSession.activeSession closeAndClearTokenInformation];
+    
+    if (FBSession.activeSession.isOpen) {
+        [self loadMeFriends];
+    } else {
+        
+        [FBSession openActiveSessionWithPublishPermissions:permissions
+                                           defaultAudience:FBSessionDefaultAudienceFriends
+                                              allowLoginUI:YES
+                                         completionHandler:^(FBSession *session, FBSessionState status, NSError *error) {
+                                             [self sessionStateChanged:session state:status error:error];
+                                         }];
+        
+    }
+}
+
+- (void)sessionStateChanged:(FBSession *)session state:(FBSessionState)state error:(NSError *)error {
+    switch (state) {
+        case FBSessionStateOpen: {
+            [self loadMeFriends];
+        }
+            break;
+        case FBSessionStateClosed:
+        case FBSessionStateClosedLoginFailed:
+            [FBSession.activeSession closeAndClearTokenInformation];
+            break;
+        default:
+            break;
+    }
+    
+    if (error != nil) {
+        [[AlertManager shared] showOkAlertWithTitle:@"Error" message:error.localizedDescription];
+    }
+}
+
+- (void)loadMeFriends {
+    
+    [self showSpinnerWithName:@"Facebook"];
+    FBRequest* request = [[FBRequest alloc] initWithSession:FBSession.activeSession
+                                                  graphPath:@"me/friends?limit=1000"];
+    
+    [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+        [self hideSpinnerWithName:@"Facebook"];
+        if (!error) {
+            if ([result isKindOfClass:[NSDictionary class]]) {
+                _friendsArray = [result safeArrayObjectForKey:@"data"];
+                [self applyFilterWith:@""];
+            }
+        }else{
+            [[AlertManager shared] showOkAlertWithTitle:@"Error" message:@"Facebook fail"];
+        }
+        
+    }];
+}
 
 #pragma mark - Keyboard Notificastion
 

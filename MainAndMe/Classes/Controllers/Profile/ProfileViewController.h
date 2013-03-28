@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ProfileViewController : UIViewController
-
+@property (assign, nonatomic) BOOL isNeedUpdate;
 @end

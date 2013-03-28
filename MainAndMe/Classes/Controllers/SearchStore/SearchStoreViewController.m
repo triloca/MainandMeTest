@@ -119,6 +119,7 @@
                 [self.navigationController popViewControllerAnimated:YES];
             }
         }else{
+            _searchTextField.text = [object safeStringObjectForKey:@"name"];
             [_tableView reloadData];
         }
     }

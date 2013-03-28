@@ -46,4 +46,15 @@
                  success:(void(^) (NSArray* objects)) success
                  failure:(void(^) (NSError* error, NSString* errorString)) failure
                exception:(void(^) (NSString* exceptionString))exception;
+
+//! Load Products For All Category
++ (void)loadProductsForAllCategoryWithSuccess:(void(^) (NSArray* objects)) success
+                                      failure:(void(^) (NSError* error, NSString* errorString)) failure
+                                    exception:(void(^) (NSString* exceptionString))exception;
+
+//! Load Products For Category
++ (void)loadProductsForCategory:(NSString*)categoryId
+                        success:(void(^) (NSArray* objects)) success
+                        failure:(void(^) (NSError* error, NSString* errorString)) failure
+                      exception:(void(^) (NSString* exceptionString))exception;
 @end

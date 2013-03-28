@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SearchViewController : UIViewController
-
+@property (assign, nonatomic) BOOL isStoreState;
 @end

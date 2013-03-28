@@ -458,9 +458,13 @@ RSTapRateViewDelegate>
 
 - (void)loadProfileInfo{
     
+    NSNumber* userId = [_storeInfo safeNumberObjectForKey:@"user_id"];
+    if (userId == nil) {
+        return;
+    }
     [self showSpinnerWithName:@"StoreDetailViewController"];
     
-    [ProductDetailsManager loadProfileInfoForUserIdNumber:[_storeInfo safeNumberObjectForKey:@"user_id"]
+    [ProductDetailsManager loadProfileInfoForUserIdNumber:userId
                                                   success:^(NSNumber *userIdNumber, NSDictionary *profile) {
                                                       [self hideSpinnerWithName:@"StoreDetailViewController"];
                                                       _storeDetailsCell.postedByLabel.text = [NSString

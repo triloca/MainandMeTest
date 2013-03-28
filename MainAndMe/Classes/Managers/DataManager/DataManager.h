@@ -16,5 +16,6 @@
 - (void)clearUserInfo;
 + (NSString*)howLongAgo:(NSDate*)date;
 + (NSDate*)dateFromString:(NSString*)dateString;
++ (NSString*)birthdayFromDate:(NSDate*)date;
 
 @end

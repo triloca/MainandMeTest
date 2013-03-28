@@ -433,19 +433,19 @@
 - (void)jampToNextTextField:(UITextField*)textField{
     if (textField == _nameTextField) {
         
-        [_storeNameTextField becomeFirstResponder];
+        [_nameTextField resignFirstResponder];
     }else if (textField == _storeNameTextField) {
         
         [_descriptionTextView becomeFirstResponder];
     }else if (textField == _storefrontNameTextField) {
         
-        [_countryTextField becomeFirstResponder];
-    }else if (textField == _countryTextField) {
+        [_streetTextField becomeFirstResponder];
+    }else if (textField == _cityTextField) {
         
         [_stateTextField becomeFirstResponder];
     }else if (textField == _stateTextField) {
         
-        [_streetTextField becomeFirstResponder];
+        [_postalCodeTextField becomeFirstResponder];
     }else if (textField == _streetTextField) {
         
         [_cityTextField becomeFirstResponder];
@@ -553,7 +553,7 @@
     
     [self showSpinnerWithName:@"PhotoViewController"];
     [ProductsStoresManager uploadStoreWithName:_storefrontNameTextField.text
-                                       country:_countryTextField.text
+                                       country:@"US"//_countryTextField.text
                                          state:statePrefix
                                         street:_streetTextField.text
                                           city:_cityTextField.text

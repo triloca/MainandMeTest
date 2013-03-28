@@ -112,7 +112,8 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     
     _storefrontButton.titleLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:16];
     _itemsButton.titleLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:16];
-    _addressLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
+    _addressLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:20];
+    _addressLabel.minimumFontSize = 15;
     
     [_recentButton setTitleColor:[_recentButton titleColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted | UIControlStateSelected];
     [_popularButton setTitleColor:[_popularButton titleColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted | UIControlStateSelected];
@@ -281,6 +282,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 - (IBAction)searchButtonClicked:(id)sender {
     SearchViewController* searchViewController = [SearchViewController new];
+    searchViewController.isStoreState = _storefrontButton.selected;
     [self.navigationController pushViewController:searchViewController animated:YES];
 }
 
@@ -637,8 +639,8 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     _addressLabel.text = text;
     [_addressLabel resizeToStretch];
     CGRect rc = _addressLabel.frame;
-    if (rc.size.width > 250){
-        rc.size.width = 250;
+    if (rc.size.width > 200){
+        rc.size.width = 200;
     }
     rc.origin.x = (self.view.frame.size.width - rc.size.width) / 2;
     _addressLabel.frame = rc;

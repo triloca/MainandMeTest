@@ -95,10 +95,10 @@
     return date;
 }
 
-- (void)birthdayFromDate:(NSDate*)date{
++ (NSString*)birthdayFromDate:(NSDate*)date{
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
-
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    return [dateFormatter stringFromDate:date];
 }
 @end

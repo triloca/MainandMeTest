@@ -67,7 +67,7 @@
 
 - (void)updateRegion:(CLLocationCoordinate2D)coordinate{
     
-    CGFloat radius = 20000;
+    CGFloat radius = 250;
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(coordinate, 2 * radius, 2 * radius);
     [_mapView setRegion:region];
     

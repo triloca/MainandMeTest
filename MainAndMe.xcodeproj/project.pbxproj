@@ -24,9 +24,6 @@
 		D9072B6816F951A400E7F168 /* SearchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9072B6716F951A400E7F168 /* SearchCell.xib */; };
 		D9072B6D16F95BA400E7F168 /* SearchDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9072B6B16F95BA400E7F168 /* SearchDetailsViewController.m */; };
 		D9072B6E16F95BA400E7F168 /* SearchDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9072B6C16F95BA400E7F168 /* SearchDetailsViewController.xib */; };
-		D908EE0016F0F2AB004B2405 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D908EDFF16F0F2AB004B2405 /* FacebookSDK.framework */; };
-		D908EE0316F0F2C5004B2405 /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D908EE0116F0F2C5004B2405 /* FacebookSDKResources.bundle */; };
-		D908EE0416F0F2C5004B2405 /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D908EE0216F0F2C5004B2405 /* FBUserSettingsViewResources.bundle */; };
 		D908EE0916F0F2FE004B2405 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D908EE0616F0F2FD004B2405 /* Security.framework */; };
 		D908EE0A16F0F2FE004B2405 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D908EE0716F0F2FE004B2405 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D908EE0C16F0FA4F004B2405 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D908EE0B16F0FA4F004B2405 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -114,6 +111,15 @@
 		D93C0FE916F0349400A4472E /* me_button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FE516F0349400A4472E /* me_button_selected.png */; };
 		D93C0FEA16F0349400A4472E /* me_button.png in Resources */ = {isa = PBXBuildFile; fileRef = D93C0FE616F0349400A4472E /* me_button.png */; };
 		D93CE1A317026A16006AB52D /* addButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D93CE1A217026A16006AB52D /* addButton.png */; };
+		D93CE1A817027B12006AB52D /* PhoneNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = D93CE1A717027B12006AB52D /* PhoneNumberFormatter.m */; };
+		D93CE1AC170281F7006AB52D /* SettingsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D93CE1AB170281F7006AB52D /* SettingsManager.m */; };
+		D93CE1B5170298AF006AB52D /* InviteFriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93CE1AF170298AF006AB52D /* InviteFriendViewController.m */; };
+		D93CE1B6170298AF006AB52D /* InviteFriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93CE1B0170298AF006AB52D /* InviteFriendViewController.xib */; };
+		D93CE1B7170298AF006AB52D /* FriendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D93CE1B3170298AF006AB52D /* FriendCell.m */; };
+		D93CE1B8170298AF006AB52D /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93CE1B4170298AF006AB52D /* FriendCell.xib */; };
+		D93CE1FC1702AD89006AB52D /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D93CE1FB1702AD89006AB52D /* FacebookSDK.framework */; };
+		D93CE1FF1702ADA9006AB52D /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D93CE1FD1702ADA9006AB52D /* FacebookSDKResources.bundle */; };
+		D93CE2001702ADA9006AB52D /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D93CE1FE1702ADA9006AB52D /* FBUserSettingsViewResources.bundle */; };
 		D93F493F16FE4CC800FE151E /* followe_bar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93F493B16FE4CC800FE151E /* followe_bar_bg@2x.png */; };
 		D93F494016FE4CC800FE151E /* posted_user_ic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93F493C16FE4CC800FE151E /* posted_user_ic@2x.png */; };
 		D93F494116FE4CC800FE151E /* profile_list_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93F493D16FE4CC800FE151E /* profile_list_bar@2x.png */; };
@@ -315,9 +321,6 @@
 		D9072B6A16F95BA400E7F168 /* SearchDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchDetailsViewController.h; path = Classes/Controllers/SearchDetails/SearchDetailsViewController.h; sourceTree = "<group>"; };
 		D9072B6B16F95BA400E7F168 /* SearchDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchDetailsViewController.m; path = Classes/Controllers/SearchDetails/SearchDetailsViewController.m; sourceTree = "<group>"; };
 		D9072B6C16F95BA400E7F168 /* SearchDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchDetailsViewController.xib; path = Classes/Controllers/SearchDetails/SearchDetailsViewController.xib; sourceTree = "<group>"; };
-		D908EDFF16F0F2AB004B2405 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
-		D908EE0116F0F2C5004B2405 /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
-		D908EE0216F0F2C5004B2405 /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBUserSettingsViewResources.bundle; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
 		D908EE0516F0F2FD004B2405 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		D908EE0616F0F2FD004B2405 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D908EE0716F0F2FE004B2405 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -456,6 +459,19 @@
 		D93C0FE516F0349400A4472E /* me_button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_button_selected.png; sourceTree = "<group>"; };
 		D93C0FE616F0349400A4472E /* me_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = me_button.png; sourceTree = "<group>"; };
 		D93CE1A217026A16006AB52D /* addButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addButton.png; sourceTree = "<group>"; };
+		D93CE1A617027B12006AB52D /* PhoneNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneNumberFormatter.h; sourceTree = "<group>"; };
+		D93CE1A717027B12006AB52D /* PhoneNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneNumberFormatter.m; sourceTree = "<group>"; };
+		D93CE1AA170281F7006AB52D /* SettingsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsManager.h; path = Classes/Managers/Settings/SettingsManager.h; sourceTree = "<group>"; };
+		D93CE1AB170281F7006AB52D /* SettingsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsManager.m; path = Classes/Managers/Settings/SettingsManager.m; sourceTree = "<group>"; };
+		D93CE1AE170298AF006AB52D /* InviteFriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InviteFriendViewController.h; sourceTree = "<group>"; };
+		D93CE1AF170298AF006AB52D /* InviteFriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InviteFriendViewController.m; sourceTree = "<group>"; };
+		D93CE1B0170298AF006AB52D /* InviteFriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InviteFriendViewController.xib; sourceTree = "<group>"; };
+		D93CE1B2170298AF006AB52D /* FriendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendCell.h; sourceTree = "<group>"; };
+		D93CE1B3170298AF006AB52D /* FriendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendCell.m; sourceTree = "<group>"; };
+		D93CE1B4170298AF006AB52D /* FriendCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
+		D93CE1FB1702AD89006AB52D /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
+		D93CE1FD1702ADA9006AB52D /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
+		D93CE1FE1702ADA9006AB52D /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBUserSettingsViewResources.bundle; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
 		D93F493B16FE4CC800FE151E /* followe_bar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "followe_bar_bg@2x.png"; sourceTree = "<group>"; };
 		D93F493C16FE4CC800FE151E /* posted_user_ic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "posted_user_ic@2x.png"; sourceTree = "<group>"; };
 		D93F493D16FE4CC800FE151E /* profile_list_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_list_bar@2x.png"; sourceTree = "<group>"; };
@@ -725,7 +741,6 @@
 				D940776816F2E6DF0000E21B /* CoreLocation.framework in Frameworks */,
 				D908EE5E16F11888004B2405 /* libxml2.2.dylib in Frameworks */,
 				D908EE0C16F0FA4F004B2405 /* Accounts.framework in Frameworks */,
-				D908EE0016F0F2AB004B2405 /* FacebookSDK.framework in Frameworks */,
 				D908EE0916F0F2FE004B2405 /* Security.framework in Frameworks */,
 				D908EE0A16F0F2FE004B2405 /* Social.framework in Frameworks */,
 				D93C0FC816EFEC3600A4472E /* SystemConfiguration.framework in Frameworks */,
@@ -734,6 +749,7 @@
 				D927D99E16EE6A0B002CF45A /* Foundation.framework in Frameworks */,
 				D927D9A016EE6A0B002CF45A /* CoreGraphics.framework in Frameworks */,
 				D9C29EFE16F12C0A00A419DC /* libOAuth.a in Frameworks */,
+				D93CE1FC1702AD89006AB52D /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -899,6 +915,9 @@
 		D927D99A16EE6A0B002CF45A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D93CE1FD1702ADA9006AB52D /* FacebookSDKResources.bundle */,
+				D93CE1FE1702ADA9006AB52D /* FBUserSettingsViewResources.bundle */,
+				D93CE1FB1702AD89006AB52D /* FacebookSDK.framework */,
 				D972E04516FA7908007C552F /* CoreText.framework */,
 				D96709F016F80FF200CF27C4 /* MapKit.framework */,
 				D91CF92116F5741C00BC1891 /* MessageUI.framework */,
@@ -908,9 +927,6 @@
 				D908EE0516F0F2FD004B2405 /* AdSupport.framework */,
 				D908EE0616F0F2FD004B2405 /* Security.framework */,
 				D908EE0716F0F2FE004B2405 /* Social.framework */,
-				D908EE0116F0F2C5004B2405 /* FacebookSDKResources.bundle */,
-				D908EE0216F0F2C5004B2405 /* FBUserSettingsViewResources.bundle */,
-				D908EDFF16F0F2AB004B2405 /* FacebookSDK.framework */,
 				D93C0FC716EFEC3600A4472E /* SystemConfiguration.framework */,
 				D927DA0116EEA5E2002CF45A /* QuartzCore.framework */,
 				D927D99B16EE6A0B002CF45A /* UIKit.framework */,
@@ -961,6 +977,7 @@
 		D927D9AC16EE6A0C002CF45A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				D93CE1AD170298AC006AB52D /* InviteFriend */,
 				D927D9AD16EE6A0C002CF45A /* AppDelegate */,
 				D927D9D516EE6A0C002CF45A /* RootViewControllers */,
 				D927D9E416EE8B78002CF45A /* Controllers */,
@@ -983,6 +1000,7 @@
 		D927D9B116EE6A0C002CF45A /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				D93CE1A517027B12006AB52D /* PhoneNumberFormatter */,
 				D93C0F9416EFB17B00A4472E /* JSON */,
 				D93C0F8F16EFB0EE00A4472E /* Handlers */,
 				D927D9B216EE6A0C002CF45A /* Categories */,
@@ -1063,7 +1081,6 @@
 				D93F494316FE6C1E00FE151E /* MyWishlists */,
 				D992586916FBF0AC00490D86 /* Photo */,
 				D99F600416FAB6640009384E /* Community */,
-				D9072B6916F95B6800E7F168 /* SearchDetails */,
 				D96709E616F809FA00CF27C4 /* Map */,
 				D927D9F316EE9A99002CF45A /* SplashScreen */,
 				D93C0FC916EFF2A400A4472E /* Main */,
@@ -1072,6 +1089,7 @@
 				D91CF90E16F53ACF00BC1891 /* Wishlist */,
 				D91CF90616F5073C00BC1891 /* AddComment */,
 				D940777C16F2F8AF0000E21B /* Address */,
+				D9072B6916F95B6800E7F168 /* SearchDetails */,
 				D940777B16F2F87E0000E21B /* Search */,
 				D93C0FCF16EFF40F00A4472E /* Profile */,
 				D9D796DE16EECD4E00C494D7 /* SignUp */,
@@ -1125,6 +1143,7 @@
 		D927D9F616EE9CBF002CF45A /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				D93CE1A9170281AD006AB52D /* SettingsManager */,
 				D940776316F2E5650000E21B /* LocationManager */,
 				D908EEB016F11BF0004B2405 /* Twitter */,
 				D93C0FBF16EFE8BE00A4472E /* Reachability */,
@@ -1354,6 +1373,47 @@
 			);
 			name = TabBar;
 			path = Resources/Images/TabBar;
+			sourceTree = "<group>";
+		};
+		D93CE1A517027B12006AB52D /* PhoneNumberFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				D93CE1A617027B12006AB52D /* PhoneNumberFormatter.h */,
+				D93CE1A717027B12006AB52D /* PhoneNumberFormatter.m */,
+			);
+			name = PhoneNumberFormatter;
+			path = Classes/Utility/PhoneNumberFormatter;
+			sourceTree = "<group>";
+		};
+		D93CE1A9170281AD006AB52D /* SettingsManager */ = {
+			isa = PBXGroup;
+			children = (
+				D93CE1AA170281F7006AB52D /* SettingsManager.h */,
+				D93CE1AB170281F7006AB52D /* SettingsManager.m */,
+			);
+			name = SettingsManager;
+			sourceTree = "<group>";
+		};
+		D93CE1AD170298AC006AB52D /* InviteFriend */ = {
+			isa = PBXGroup;
+			children = (
+				D93CE1AE170298AF006AB52D /* InviteFriendViewController.h */,
+				D93CE1AF170298AF006AB52D /* InviteFriendViewController.m */,
+				D93CE1B0170298AF006AB52D /* InviteFriendViewController.xib */,
+				D93CE1B1170298AF006AB52D /* Views */,
+			);
+			name = InviteFriend;
+			path = Classes/Controllers/InviteFriend;
+			sourceTree = "<group>";
+		};
+		D93CE1B1170298AF006AB52D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D93CE1B2170298AF006AB52D /* FriendCell.h */,
+				D93CE1B3170298AF006AB52D /* FriendCell.m */,
+				D93CE1B4170298AF006AB52D /* FriendCell.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		D93F493A16FE4CC800FE151E /* Profile */ = {
@@ -2038,8 +2098,6 @@
 				D93C0FE816F0349400A4472E /* main_button.png in Resources */,
 				D93C0FE916F0349400A4472E /* me_button_selected.png in Resources */,
 				D93C0FEA16F0349400A4472E /* me_button.png in Resources */,
-				D908EE0316F0F2C5004B2405 /* FacebookSDKResources.bundle in Resources */,
-				D908EE0416F0F2C5004B2405 /* FBUserSettingsViewResources.bundle in Resources */,
 				D9C29EFC16F12C0A00A419DC /* jQueryInject.txt in Resources */,
 				D9C29EFD16F12C0A00A419DC /* jQueryInjectLandscape.txt in Resources */,
 				D9C29F0F16F12C0A00A419DC /* twitter_load.png in Resources */,
@@ -2167,6 +2225,10 @@
 				D95EAE521701309F0081BED0 /* SearchStoreViewController.xib in Resources */,
 				D95EAE541701309F0081BED0 /* SearchStoreCell.xib in Resources */,
 				D93CE1A317026A16006AB52D /* addButton.png in Resources */,
+				D93CE1B6170298AF006AB52D /* InviteFriendViewController.xib in Resources */,
+				D93CE1B8170298AF006AB52D /* FriendCell.xib in Resources */,
+				D93CE1FF1702ADA9006AB52D /* FacebookSDKResources.bundle in Resources */,
+				D93CE2001702ADA9006AB52D /* FBUserSettingsViewResources.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2288,6 +2350,10 @@
 				D93F496416FEB19000FE151E /* SettingsViewController.m in Sources */,
 				D95EAE511701309F0081BED0 /* SearchStoreViewController.m in Sources */,
 				D95EAE531701309F0081BED0 /* SearchStoreCell.m in Sources */,
+				D93CE1A817027B12006AB52D /* PhoneNumberFormatter.m in Sources */,
+				D93CE1AC170281F7006AB52D /* SettingsManager.m in Sources */,
+				D93CE1B5170298AF006AB52D /* InviteFriendViewController.m in Sources */,
+				D93CE1B7170298AF006AB52D /* FriendCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

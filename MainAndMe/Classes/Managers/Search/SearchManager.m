@@ -10,7 +10,7 @@
 #import "APIv1_0.h"
 #import "NSURLConnectionDelegateHandler.h"
 #import "JSON.h"
-
+#import "LocationManager.h"
 
 @interface SearchManager()
 
@@ -70,6 +70,23 @@
         exception(@"Exeption\n Load Stores for Category create");
     }
 
+}
+
+//! Load Products For Category
++ (void)loadProductsForCategory:(NSString*)categoryId
+                      success:(void(^) (NSArray* objects)) success
+                      failure:(void(^) (NSError* error, NSString* errorString)) failure
+                    exception:(void(^) (NSString* exceptionString))exception{
+    @try {
+        [[self shared] loadProductsForCategory:categoryId
+                                     success:success
+                                     failure:failure
+                                   exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(@"Exeption\n Load Products for Category create");
+    }
+    
 }
 
 //! Load Stores For All Category
@@ -151,8 +168,23 @@
     }
 }
 
+//! Load Products For All Category
++ (void)loadProductsForAllCategoryWithSuccess:(void(^) (NSArray* objects)) success
+                                      failure:(void(^) (NSError* error, NSString* errorString)) failure
+                                    exception:(void(^) (NSString* exceptionString))exception{
 
-#pragma mark - 
+    @try {
+        [[self shared] loadProductsForAllCategoryWithSuccess:success
+                                                     failure:failure
+                                                   exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(@"Exeption\n Load Products For All Categories create");
+    }
+}
+
+
+#pragma mark -
 - (void)loadCcategiriesSuccess:(void(^) (NSArray* categories)) success
                        failure:(void(^) (NSError* error, NSString* errorString)) failure
                      exception:(void(^) (NSString* exceptionString))exception{
@@ -230,6 +262,49 @@
     [connection start];
     
 }
+
+
+//! Load Stores For Category
+-(void)loadProductsForCategory:(NSString*)categoryId
+                       success:(void(^) (NSArray* objects)) success
+                       failure:(void(^) (NSError* error, NSString* errorString)) failure
+                     exception:(void(^) (NSString* exceptionString))exception{
+    
+    NSString* urlString = [NSString stringWithFormat:@"%@/categories/%@/products", [APIv1_0 serverUrl], categoryId];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:30];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        
+        if ([value isKindOfClass:[NSArray class]]) {
+            
+            success(value);
+            
+        }else{
+            NSString* messageString = @"Server API Error";
+            
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    } eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+}
+
 
 //! Load Wishlist
 - (void)loadWishlistById:(NSString*)wishlistId
@@ -355,6 +430,46 @@
     
 }
 
+//! Load Products For All Category
+-(void)loadProductsForAllCategoryWithSuccess:(void(^) (NSArray* objects)) success
+                                     failure:(void(^) (NSError* error, NSString* errorString)) failure
+                                   exception:(void(^) (NSString* exceptionString))exception{
+    
+    NSString* urlString = [NSString stringWithFormat:@"%@/products/nearby?lat=%f&lng=%f", [APIv1_0 serverUrl],
+                           [LocationManager shared].defaultLocation.coordinate.latitude,
+                           [LocationManager shared].defaultLocation.coordinate.longitude];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:30];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        
+        if ([value isKindOfClass:[NSArray class]]) {
+            
+            success(value);
+        }else{
+            NSString* messageString = @"Server API Error";
+            
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    } eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+}
 
 #pragma mark -
 - (void)loadStatesSuccess:(void(^) (NSDictionary* states)) success

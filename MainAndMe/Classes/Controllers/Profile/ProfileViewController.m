@@ -68,6 +68,10 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [_tableView reloadData];
+    if (_isNeedUpdate) {
+        [self loadProfileInfo];
+        _isNeedUpdate = NO;
+    }
 }
 
 - (void)viewDidUnload {

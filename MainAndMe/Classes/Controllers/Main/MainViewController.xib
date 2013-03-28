@@ -281,8 +281,15 @@
 							<bytes key="NSRGB">MC41Njg2Mjc0NTEgMC41Njg2Mjc0NTEgMC41Njg2Mjc0NTEAA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="268201187"/>
-						<reference key="IBUIFontDescription" ref="966009920"/>
-						<reference key="IBUIFont" ref="653969016"/>
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="207623955">
+							<int key="type">2</int>
+							<double key="pointSize">13</double>
+						</object>
+						<object class="NSFont" key="IBUIFont" id="293171227">
+							<string key="NSName">Helvetica-Bold</string>
+							<double key="NSSize">13</double>
+							<int key="NSfFlags">16</int>
+						</object>
 					</object>
 					<object class="IBUIButton" id="527254941">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -310,8 +317,8 @@
 							<bytes key="NSRGB">MC41Njg2Mjc0NTEgMC41Njg2Mjc0NTEgMC41Njg2Mjc0NTEAA</bytes>
 						</object>
 						<reference key="IBUINormalTitleShadowColor" ref="268201187"/>
-						<reference key="IBUIFontDescription" ref="966009920"/>
-						<reference key="IBUIFont" ref="653969016"/>
+						<reference key="IBUIFontDescription" ref="207623955"/>
+						<reference key="IBUIFont" ref="293171227"/>
 					</object>
 					<object class="IBUIButton" id="468158086">
 						<reference key="NSNextResponder" ref="191373211"/>
@@ -330,8 +337,8 @@
 						<reference key="IBUISelectedTitleColor" ref="947871746"/>
 						<reference key="IBUINormalTitleColor" ref="352365965"/>
 						<reference key="IBUINormalTitleShadowColor" ref="268201187"/>
-						<reference key="IBUIFontDescription" ref="966009920"/>
-						<reference key="IBUIFont" ref="653969016"/>
+						<reference key="IBUIFontDescription" ref="207623955"/>
+						<reference key="IBUIFont" ref="293171227"/>
 					</object>
 					<object class="IBUITableView" id="938581897">
 						<reference key="NSNextResponder" ref="191373211"/>
