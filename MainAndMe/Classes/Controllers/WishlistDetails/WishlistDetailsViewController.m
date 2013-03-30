@@ -1,5 +1,5 @@
 //
-//  SearchDetailsViewController.m
+//  WishlistDetailsViewController.m
 //  MainAndMe
 //
 //  Created by Sasha on 3/19/13.

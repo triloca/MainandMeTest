@@ -636,7 +636,7 @@
 
 
 - (void)showStoreSearch{
-    SearchStoreViewController* searchStoreViewController = [SearchStoreViewController new];
+    SearchStoreViewController* searchStoreViewController = [SearchStoreViewController loadFromXIB_Or_iPhone5_XIB];
     searchStoreViewController.didSelectStoreName = ^(NSString* name){
         _storeNameTextField.text = name;
     };

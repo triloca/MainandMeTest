@@ -52,7 +52,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">master_bg_@2x.png</string>
+							<string key="NSResourceName">master_bg.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="808308000">
@@ -74,6 +74,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{53, 10}, {215, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -817,6 +818,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{30, 549}, {255, 38}}</string>
 						<reference key="NSSuperview" ref="317694591"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -1370,7 +1372,7 @@
 			<string key="add_details_save_details_btn.png">{510, 76}</string>
 			<string key="back_but@2x.png">{71, 61}</string>
 			<string key="image_info_item_form_photo_bg.png">{274, 275}</string>
-			<string key="master_bg_@2x.png">{640, 960}</string>
+			<string key="master_bg.png">{320, 480}</string>
 			<string key="navigation_bar@2x.png">{640, 98}</string>
 			<string key="right_arrow_circle_btn.png">{41, 40}</string>
 		</dictionary>

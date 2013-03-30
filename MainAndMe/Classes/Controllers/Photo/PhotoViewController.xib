@@ -51,7 +51,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">master_bg_@2x.png</string>
+							<string key="NSResourceName">master_bg.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="934371771">
@@ -343,6 +343,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{40, 273}, {131, 21}}</string>
 								<reference key="NSSuperview" ref="689210068"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -830,6 +831,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{40, 265}, {131, 21}}</string>
 						<reference key="NSSuperview" ref="300507246"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -1947,7 +1949,7 @@
 			<string key="image_info_item_form_background.png">{612, 816}</string>
 			<string key="image_info_item_form_hr.png">{602, 2}</string>
 			<string key="image_info_item_form_photo_bg.png">{274, 275}</string>
-			<string key="master_bg_@2x.png">{640, 960}</string>
+			<string key="master_bg.png">{320, 480}</string>
 			<string key="navigation_bar@2x.png">{640, 98}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

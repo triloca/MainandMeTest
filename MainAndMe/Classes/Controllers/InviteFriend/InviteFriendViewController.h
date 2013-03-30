@@ -1,5 +1,5 @@
 //
-//  AddressViewController.h
+//  InviteFriendViewController.h
 //  MainAndMe
 //
 //  Created by Sasha on 3/15/13.

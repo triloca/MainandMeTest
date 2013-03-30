@@ -9,7 +9,7 @@
 #import "ProductDetailsCell.h"
 #import "UILabel+Common.h"
 
-@interface ProductDetailsCell()<RTLabelDelegate>
+@interface ProductDetailsCell()
 
 @property (weak, nonatomic) IBOutlet UIImageView *personImageView;
 @property (weak, nonatomic) IBOutlet UIButton *storeNameButton;

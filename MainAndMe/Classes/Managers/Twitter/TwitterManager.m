@@ -9,9 +9,9 @@
 #import "TwitterManager.h"
 #import "SA_OAuthTwitterEngine.h"
 #import "SA_OAuthTwitterController.h"
-#import "AFNetworking.h"
 #import "UserDefaultsManager.h"
 #import "NSURLConnectionDelegateHandler.h"
+#import "AFNetworking.h"
 
 #define kTwitterOAuthConsumerKey		@"CGLJ4SdxPBnJG4ygNsAs1Q"
 #define kTwitterOAuthConsumerSecret	    @"CBSHV5bsvSO2tr17tCr1xreEwTbV8WoO6nwBfyGSsUM"

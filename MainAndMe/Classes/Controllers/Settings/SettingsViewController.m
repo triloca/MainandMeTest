@@ -132,7 +132,7 @@
 }
 
 - (IBAction)inviteFriendsButtonClicked:(id)sender {
-    InviteFriendViewController* inviteFriendViewController = [InviteFriendViewController new];
+    InviteFriendViewController* inviteFriendViewController = [InviteFriendViewController loadFromXIB_Or_iPhone5_XIB];
     [self.navigationController pushViewController:inviteFriendViewController animated:YES];
 }
 

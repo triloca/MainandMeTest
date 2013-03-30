@@ -48,7 +48,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">master_bg_@2x.png</string>
+							<string key="NSResourceName">master_bg.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="662823910">
@@ -101,6 +101,7 @@
 						<int key="NSvFlags">276</int>
 						<string key="NSFrame">{{0, 100}, {320, 328}}</string>
 						<reference key="NSSuperview" ref="1046692655"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="95940923">
 							<int key="NSColorSpace">3</int>
@@ -482,7 +483,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="followe_bar_bg@2x.png">{305, 53}</string>
-			<string key="master_bg_@2x.png">{640, 960}</string>
+			<string key="master_bg.png">{320, 480}</string>
 			<string key="navigation_bar@2x.png">{640, 98}</string>
 			<string key="posted_user_ic@2x.png">{60, 60}</string>
 			<string key="profile_tob_bar@2x.png">{640, 120}</string>

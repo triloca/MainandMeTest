@@ -49,7 +49,7 @@
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">master_bg_@2x.png</string>
+							<string key="NSResourceName">master_bg.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="141721349">
@@ -386,7 +386,7 @@
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="back_but@2x.png">{71, 61}</string>
 			<string key="comm_box_large@2x.png">{550, 367}</string>
-			<string key="master_bg_@2x.png">{640, 960}</string>
+			<string key="master_bg.png">{320, 480}</string>
 			<string key="navigation_bar@2x.png">{640, 98}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>

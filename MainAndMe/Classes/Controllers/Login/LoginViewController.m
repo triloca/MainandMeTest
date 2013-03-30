@@ -231,7 +231,7 @@
         [self authenticaeThroughFacebook:[[UserDefaultsManager shared] userId]
                                 userName:[[UserDefaultsManager shared] userName]
                                    email:[[UserDefaultsManager shared] email]
-                             accessToken:[FBSession activeSession].accessToken];
+                             accessToken:[FBSession activeSession].accessTokenData.accessToken];
         
     }else if ([lastLoginType isEqualToString:kLoginTypeViaTwitter]) {
         [self authenticaeThroughTwitter:[[UserDefaultsManager shared] userId]
@@ -349,7 +349,7 @@
              [self authenticaeThroughFacebook:user_id
                                      userName:userName
                                         email:email
-                                  accessToken:[FBSession activeSession].accessToken];
+                                  accessToken:[FBSession activeSession].accessTokenData.accessToken];
              
          }else{
              [[AlertManager shared] showOkAlertWithTitle:@"Error" message:@"Facebook fail"];

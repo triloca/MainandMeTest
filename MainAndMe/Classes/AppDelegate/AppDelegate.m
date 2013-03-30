@@ -28,6 +28,12 @@
     [[LayoutManager shared] application:application
           didFinishLaunchingWithOptions:launchOptions];
     [ReachabilityManager shared];
+    
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+     (UIRemoteNotificationTypeAlert |
+      UIRemoteNotificationTypeBadge |
+      UIRemoteNotificationTypeSound)];
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -85,4 +91,28 @@
     return [FBSession.activeSession handleOpenURL:url];
 }
 
+#pragma mark Push Notifications
+// Delegation methods
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
+    NSString *tokenKey = [devToken description];
+    NSLog(@"APNS Token = %@", tokenKey);
+	tokenKey = [tokenKey stringByReplacingOccurrencesOfString:@"<" withString:@""];
+	tokenKey = [tokenKey stringByReplacingOccurrencesOfString:@">" withString:@""];
+    tokenKey = [tokenKey stringByReplacingOccurrencesOfString:@" " withString:@""];
+    //!Save token
+    NSLog(@"APNS Token = %@", tokenKey);
+}
+
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
+    NSLog(@"didFailToRegisterForRemoteNotificationsWithError: [%@]", err);
+    //!Reset token
+}
+
+- (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notif {
+    NSLog(@"notif.userInfo: %@", notif.userInfo);
+    
+}
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    NSLog(@"userInfo: %@", userInfo);
+}
 @end

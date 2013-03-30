@@ -43,13 +43,14 @@
 						<int key="NSvFlags">276</int>
 						<string key="NSFrameSize">{320, 480}</string>
 						<reference key="NSSuperview" ref="1050227192"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="746209301"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">master_bg_@2x.png</string>
+							<string key="NSResourceName">master_bg.png</string>
 						</object>
 					</object>
 					<object class="IBUIImageView" id="746209301">
@@ -57,6 +58,7 @@
 						<int key="NSvFlags">294</int>
 						<string key="NSFrameSize">{320, 44}</string>
 						<reference key="NSSuperview" ref="1050227192"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="245921976"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -71,6 +73,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{276, 6}, {35, 31}}</string>
 						<reference key="NSSuperview" ref="1050227192"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="448749143"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -108,6 +111,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{53, 10}, {215, 31}}</string>
 						<reference key="NSSuperview" ref="1050227192"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="988877399"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -139,6 +143,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{9, 5}, {35, 31}}</string>
 						<reference key="NSSuperview" ref="1050227192"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="72466224"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="IBUIOpaque">NO</bool>
@@ -163,6 +168,7 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{0, 42}, {320, 385}}</string>
 						<reference key="NSSuperview" ref="1050227192"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="64070406"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor" id="695608845">
@@ -183,6 +189,8 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrame">{{0, 42}, {320, 385}}</string>
 						<reference key="NSSuperview" ref="1050227192"/>
+						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<reference key="IBUIBackgroundColor" ref="695608845"/>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -197,6 +205,7 @@
 				</array>
 				<string key="NSFrameSize">{320, 431}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="14813248"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -413,14 +422,49 @@
 			<nil key="sourceID"/>
 			<int key="maxID">43</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">SearchDetailsViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="pageTableView">UITableView</string>
+						<string key="tableView">UITableView</string>
+						<string key="titleTextLabel">UILabel</string>
+						<string key="toggleButton">UIButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="pageTableView">
+							<string key="name">pageTableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tableView">
+							<string key="name">tableView</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="titleTextLabel">
+							<string key="name">titleTextLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="toggleButton">
+							<string key="name">toggleButton</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SearchDetailsViewController.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBCocoaTouchFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="back_but@2x.png">{71, 61}</string>
-			<string key="master_bg_@2x.png">{640, 960}</string>
+			<string key="master_bg.png">{320, 480}</string>
 			<string key="navigation_bar@2x.png">{640, 98}</string>
 			<string key="page_button@2x.png">{70, 61}</string>
 		</dictionary>

@@ -6,8 +6,6 @@
 //  Copyright (c) 2013 __MyCompanyName__. All rights reserved.
 //
 
-#import "RTLabel.h"
-
 
 @interface ProductDetailsCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *postedByLabel;

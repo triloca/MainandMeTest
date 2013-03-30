@@ -23,7 +23,6 @@
 #import "UserDefaultsManager.h"
 #import "FacebookSDK/FacebookSDK.h"
 #import "TwitterManager.h"
-#import "RTLabel.h"
 #import "StoreDetailsManager.h"
 #import "StoreDetailViewController.h"
 #import "QuartzCore/QuartzCore.h"
@@ -142,34 +141,7 @@ MFMessageComposeViewControllerDelegate>
 
 
 - (void)addToWishlistButtonClicked:(UIButton*)sender{
-    
-    [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
-        
-        if (buttonIndex == 0) {
-            
-            [[AlertManager shared] showTextFieldAlertWithCallBack:^(UIAlertView *alertView, UITextField *textField, NSInteger buttonIndex) {
-                
-                if (buttonIndex == 0) {
-                    if (textField.text.length > 0) {
-                        [self createNewWishlistWithName:textField.text];
-                    }
-                }
-            }
-                                                            title:@"Required"
-                                                          message:@"Please Enter Email"
-                                                      placeholder:@"<enter Wishlistname>"
-                                                           active:YES
-                                                cancelButtonTitle:@"Ok"
-                                                otherButtonTitles:@"Cancel", nil];
-        }else{
-            [self showWishlist];
-        }
-    }
-                                           title:@"Wishlist"
-                                         message:@"Would you like to create new wishlist or use existing?"
-                               cancelButtonTitle:@"Create New"
-                               otherButtonTitles:@"Add To Wishlist", nil];
-
+     [self showWishlist];
 }
 
 

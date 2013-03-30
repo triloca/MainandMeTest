@@ -23,7 +23,6 @@
 #import <MessageUI/MessageUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 #import "UserDefaultsManager.h"
-#import "RSTapRateView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FacebookSDK/FacebookSDK.h"
 #import "TwitterManager.h"
@@ -35,15 +34,15 @@ static NSString *kProductCellIdentifier = @"ProductCell";
 @interface StoreDetailViewController ()
 <UIActionSheetDelegate,
 MFMailComposeViewControllerDelegate,
-MFMessageComposeViewControllerDelegate,
-RSTapRateViewDelegate>
+MFMessageComposeViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray* tableArray;
+@property (strong, nonatomic) NSArray* commentsTableArray;
+@property (strong, nonatomic) NSArray* commentsArray;
 
 @property (strong, nonatomic) StoreDetailsCell* storeDetailsCell;
-@property (strong, nonatomic) RSTapRateView* rateView;
 
 @end
 
@@ -105,10 +104,15 @@ RSTapRateViewDelegate>
                                       action:@selector(shareButtonClicked:)
                             forControlEvents:UIControlEventTouchUpInside];
     
-    [_storeDetailsCell.rateButton addTarget:self
-                                     action:@selector(rateButtonClicked:)
+    [_storeDetailsCell.commentButton addTarget:self
+                                     action:@selector(commentButtonClicked:)
                            forControlEvents:UIControlEventTouchUpInside];
     
+    //! Fake Cell
+    _commentsTableArray = @[@{@"avatar_url":@"http://a0.twimg.com/profile_images/3429771169/3e5fedef81a3ab2a1cf57af04348d462_normal.png",
+                              @"body":@"Comments functionality will be available soon.",
+                              @"created_at":@"2013-03-28T14:02:09Z",
+                              @"username":@"Main And Me"}]; 
     
     [self loadProfileInfo];
   //  [self loadWithlist];
@@ -128,7 +132,7 @@ RSTapRateViewDelegate>
 }
 
 - (void)mapButtonClicked:(UIButton*)sender{
-    StoreMapViewController* storeMapViewController = [StoreMapViewController new];
+    StoreMapViewController* storeMapViewController = [StoreMapViewController loadFromXIB_Or_iPhone5_XIB];
     CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([[_storeInfo safeNumberObjectForKey:@"lat"] floatValue],
                                                                    [[_storeInfo safeNumberObjectForKey:@"lng"] floatValue]);
     storeMapViewController.coordinate = coordinate;
@@ -176,10 +180,9 @@ RSTapRateViewDelegate>
     [shareActionSheet showInView:[LayoutManager shared].appDelegate.window];
 }
 
-- (void)rateButtonClicked:(UIButton*)sender{
-    if (_rateView == nil) {
-        [self showRateView];
-    }
+
+- (void)commentButtonClicked:(UIButton*)sender{
+    [[AlertManager shared] showOkAlertWithTitle:@"This functionality will coming soon."];
 }
 
 #pragma mark - UIActionSheet Delegate
@@ -218,36 +221,60 @@ RSTapRateViewDelegate>
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 0) {
         return 368;
-    }else{
+    }else if (indexPath.section == 1) {
+        NSDictionary* object = [_commentsTableArray safeDictionaryObjectAtIndex:indexPath.row];
+        return [CommentCell cellHeight:[object safeStringObjectForKey:@"body"]];
+    }else if (indexPath.section == 2) {
         return 108;
     }
+    return 44;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 1;
+    }else if (section == 1) {
+        return [_commentsTableArray count];
+    }else if (section == 2) {
+        NSInteger count = [_tableArray count];
+        NSInteger temp = count % 3;
+        NSInteger rowsCount = count / 3;
+        if (temp > 0) {
+            rowsCount++;
+        }
+        return rowsCount;
     }
-    NSInteger count = [_tableArray count];
-    NSInteger temp = count % 3;
-    NSInteger rowsCount = count / 3;
-    if (temp > 0) {
-        rowsCount++;
-    }
-    return rowsCount;
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *kCommentCellIdentifier = @"CommentCell";
+    
     if (indexPath.section == 0) {
         return _storeDetailsCell;
     }else if (indexPath.section == 1){
+        CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:kCommentCellIdentifier];
+        
+        if (cell == nil){
+            cell = [CommentCell loadViewFromXIB];
+        }
+        
+        // Configure the cell...
+        NSDictionary* object = [_commentsTableArray safeDictionaryObjectAtIndex:indexPath.row];
+        
+        [cell setMessageText:[object safeStringObjectForKey:@"body"]];
+        [cell setCellData:object];
+        return cell;
+ 
+    }
+    else if (indexPath.section == 2){
         
         ProductCell* cell = [self productCellForIndexPath:indexPath];
         return cell;
-        
     }
     return [[UITableViewCell alloc] init];
 }
@@ -299,48 +326,7 @@ RSTapRateViewDelegate>
     [self dismissModalViewControllerAnimated:YES];
 }
 
-#pragma mark - Rate Delegate
-- (void)tapDidRateView:(RSTapRateView*)view rating:(NSInteger)rating{
-    NSString* rateString = [NSString stringWithFormat:@"You rate this Sore %d star rate", rating];
-    
-    [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
-        
-        if (buttonIndex == 0) {
-            [self rateStore:rating];
-        }
-        
-        [UIView animateWithDuration:0.3
-                         animations:^{
-                             _rateView.alpha = 0;
-                         }
-                         completion:^(BOOL finished) {
-                             [_rateView removeFromSuperview];
-                             self.rateView = nil;
-                         }];
-        
-    }
-                                           title:@"Rate"
-                                         message:rateString
-                               cancelButtonTitle:@"Ok"
-                               otherButtonTitles:@"Cancel", nil];
-}
 #pragma mark - Privat Methods
-
-- (void)showRateView{
-
-    self.rateView = [[RSTapRateView alloc] initWithFrame:CGRectMake(self.view.bounds.origin.x + 20, self.view.bounds.origin.y + 100, self.view.bounds.size.width - 40, 90.f)];
-    _rateView.backgroundColor = [UIColor colorWithWhite:0.9 alpha:1];
-    _rateView.delegate = self;
-    _rateView.alpha = 0;
-    _rateView.layer.cornerRadius = 10;
-    _rateView.layer.borderColor = [[UIColor grayColor] CGColor];
-    _rateView.layer.borderWidth = 2.0f;
-    [self.view addSubview:_rateView];
-    [UIView animateWithDuration:0.3
-                     animations:^{
-                         _rateView.alpha = 1;
-    }];
-}
 
 - (void)sendSms{
     MFMessageComposeViewController *controller = [[MFMessageComposeViewController alloc] init];

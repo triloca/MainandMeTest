@@ -129,7 +129,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
    
-    SearchDetailsViewController* searchDetailsViewController = [SearchDetailsViewController new];
+    SearchDetailsViewController* searchDetailsViewController = [SearchDetailsViewController loadFromXIB_Or_iPhone5_XIB];
     if (indexPath.section == 0) {
         searchDetailsViewController.isAllState = YES;
     }else{

@@ -11,10 +11,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *postedByLabel;
 @property (weak, nonatomic) IBOutlet UILabel *storeNameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
-@property (weak, nonatomic) IBOutlet UIButton *rateButton;
 @property (weak, nonatomic) IBOutlet UIButton *followButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
 @property (weak, nonatomic) IBOutlet UILabel *agoLabel;
+@property (weak, nonatomic) IBOutlet UIButton *commentButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *mapButton;
 @property (weak, nonatomic) IBOutlet UIImageView *followImageView;

@@ -276,12 +276,12 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 }
 
 - (IBAction)titleButtonClicked:(id)sender {
-    AddressViewController* addressViewController = [AddressViewController new];
+    AddressViewController* addressViewController = [AddressViewController loadFromXIB_Or_iPhone5_XIB];
     [self.navigationController pushViewController:addressViewController animated:YES];
 }
 
 - (IBAction)searchButtonClicked:(id)sender {
-    SearchViewController* searchViewController = [SearchViewController new];
+    SearchViewController* searchViewController = [SearchViewController loadFromXIB_Or_iPhone5_XIB];
     searchViewController.isStoreState = _storefrontButton.selected;
     [self.navigationController pushViewController:searchViewController animated:YES];
 }
@@ -650,4 +650,8 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     _triagleImageView.frame = rc2;
 }
 
+#pragma mark - Public Methods
+- (void)loadNearest{
+    [self recentButtonDown:_recentButton];
+}
 @end

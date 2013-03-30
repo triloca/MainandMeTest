@@ -111,6 +111,43 @@
 									<string key="NSResourceName">like_but_bar@2x.png</string>
 								</object>
 							</object>
+							<object class="IBUIButton" id="272402316">
+								<reference key="NSNextResponder" ref="167345563"/>
+								<int key="NSvFlags">292</int>
+								<string key="NSFrame">{{80, 336}, {85, 27}}</string>
+								<reference key="NSSuperview" ref="167345563"/>
+								<string key="NSReuseIdentifierKey">_NS:9</string>
+								<bool key="IBUIOpaque">NO</bool>
+								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+								<int key="IBUIContentHorizontalAlignment">0</int>
+								<int key="IBUIContentVerticalAlignment">0</int>
+								<string key="IBUINormalTitle">Button</string>
+								<object class="NSColor" key="IBUIHighlightedTitleColor" id="232409753">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MQA</bytes>
+								</object>
+								<object class="NSColor" key="IBUINormalTitleColor">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
+								</object>
+								<object class="NSColor" key="IBUINormalTitleShadowColor" id="800831133">
+									<int key="NSColorSpace">3</int>
+									<bytes key="NSWhite">MC41AA</bytes>
+								</object>
+								<object class="NSCustomResource" key="IBUINormalImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">comment_but@2x.png</string>
+								</object>
+								<object class="IBUIFontDescription" key="IBUIFontDescription" id="524869080">
+									<int key="type">2</int>
+									<double key="pointSize">15</double>
+								</object>
+								<object class="NSFont" key="IBUIFont" id="432290002">
+									<string key="NSName">Helvetica-Bold</string>
+									<double key="NSSize">15</double>
+									<int key="NSfFlags">16</int>
+								</object>
+							</object>
 							<object class="IBUILabel" id="933047863">
 								<reference key="NSNextResponder" ref="167345563"/>
 								<int key="NSvFlags">292</int>
@@ -132,10 +169,7 @@
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC4zMTc2NDcwNTg4IDAuMjE1Njg2Mjc0NSAwLjA2Mjc0NTA5ODA0AA</bytes>
 								</object>
-								<object class="NSColor" key="IBUIHighlightedColor" id="232409753">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MQA</bytes>
-								</object>
+								<reference key="IBUIHighlightedColor" ref="232409753"/>
 								<int key="IBUIBaselineAdjustment">0</int>
 								<float key="IBUIMinimumFontSize">9</float>
 								<object class="IBUIFontDescription" key="IBUIFontDescription">
@@ -153,7 +187,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{280, 336}, {35, 27}}</string>
 								<reference key="NSSuperview" ref="167345563"/>
-								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -165,23 +198,13 @@
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
-								<object class="NSColor" key="IBUINormalTitleShadowColor" id="800831133">
-									<int key="NSColorSpace">3</int>
-									<bytes key="NSWhite">MC41AA</bytes>
-								</object>
+								<reference key="IBUINormalTitleShadowColor" ref="800831133"/>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">act_but@2x.png</string>
 								</object>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="524869080">
-									<int key="type">2</int>
-									<double key="pointSize">15</double>
-								</object>
-								<object class="NSFont" key="IBUIFont" id="161631682">
-									<string key="NSName">Helvetica-Bold</string>
-									<double key="NSSize">15</double>
-									<int key="NSfFlags">16</int>
-								</object>
+								<reference key="IBUIFontDescription" ref="524869080"/>
+								<reference key="IBUIFont" ref="432290002"/>
 							</object>
 							<object class="IBUIButton" id="920708283">
 								<reference key="NSNextResponder" ref="167345563"/>
@@ -206,7 +229,7 @@
 									<string key="NSResourceName">like_but@2x.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="524869080"/>
-								<reference key="IBUIFont" ref="161631682"/>
+								<reference key="IBUIFont" ref="432290002"/>
 							</object>
 							<object class="IBUILabel" id="513373556">
 								<reference key="NSNextResponder" ref="167345563"/>
@@ -273,7 +296,7 @@
 							<object class="IBUIButton" id="230641791">
 								<reference key="NSNextResponder" ref="167345563"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{123, 335}, {74, 28}}</string>
+								<string key="NSFrame">{{185, 335}, {74, 28}}</string>
 								<reference key="NSSuperview" ref="167345563"/>
 								<reference key="NSNextKeyView" ref="483049106"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -292,7 +315,7 @@
 									<string key="NSResourceName">profile_header_follow_btn.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="524869080"/>
-								<reference key="IBUIFont" ref="161631682"/>
+								<reference key="IBUIFont" ref="432290002"/>
 							</object>
 							<object class="IBUIButton" id="394442309">
 								<reference key="NSNextResponder" ref="167345563"/>
@@ -316,7 +339,7 @@
 									<string key="NSResourceName">header_map_pin_btn.png</string>
 								</object>
 								<reference key="IBUIFontDescription" ref="524869080"/>
-								<reference key="IBUIFont" ref="161631682"/>
+								<reference key="IBUIFont" ref="432290002"/>
 							</object>
 							<object class="IBUIImageView" id="667189852">
 								<reference key="NSNextResponder" ref="167345563"/>
@@ -438,6 +461,14 @@
 					</object>
 					<int key="connectionID">44</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">commentButton</string>
+						<reference key="source" ref="232328593"/>
+						<reference key="destination" ref="272402316"/>
+					</object>
+					<int key="connectionID">46</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -475,6 +506,7 @@
 							<reference ref="230641791"/>
 							<reference ref="394442309"/>
 							<reference ref="667189852"/>
+							<reference ref="272402316"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -543,6 +575,11 @@
 						<reference key="object" ref="667189852"/>
 						<reference key="parent" ref="232328593"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">45</int>
+						<reference key="object" ref="272402316"/>
+						<reference key="parent" ref="232328593"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -564,12 +601,13 @@
 				<string key="38.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="39.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="43.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="45.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">44</int>
+			<int key="maxID">46</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
@@ -578,6 +616,7 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="act_but@2x.png">{69, 55}</string>
+			<string key="comment_but@2x.png">{169, 55}</string>
 			<string key="header_map_pin_btn.png">{69, 51}</string>
 			<string key="invite_friends_submit.png">{117, 108}</string>
 			<string key="item_view_gallery_fram_bg@2x.png">{640, 640}</string>

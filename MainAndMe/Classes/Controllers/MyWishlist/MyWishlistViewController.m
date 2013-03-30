@@ -78,6 +78,10 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)addButtonClicked:(id)sender {
+    [self showWishlistAlert];
+}
+
 #pragma mark - Table view data source
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -209,4 +213,56 @@
 
     return sorteArray;
 }
+
+- (void)showWishlistAlert{
+    
+    [[AlertManager shared] showTextFieldAlertWithCallBack:^(UIAlertView *alertView, UITextField *textField, NSInteger buttonIndex) {
+        
+        if (buttonIndex == 0) {
+            if (textField.text.length > 0) {
+                [self createNewWishlistWithName:textField.text];
+            }
+        }
+    }
+                                                    title:@"Required"
+                                                  message:@"Please Enter Email"
+                                              placeholder:@"<enter Wishlistname>"
+                                                   active:YES
+                                        cancelButtonTitle:@"Ok"
+                                        otherButtonTitles:@"Cancel", nil];
+    
+}
+
+- (void)createNewWishlistWithName:(NSString*)name{
+    
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
+    
+    [self showSpinnerWithName:@"MyWishlistViewController"];
+    [ProductDetailsManager createWishlist:name
+                                  success:^{
+                                      [self hideSpinnerWithName:@"MyWishlistViewController"];
+                                      
+                                      [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                          [self loadWithlist];
+                                      }
+                                                                             title:@"Success"
+                                                                           message:@"Wishlist created successfully"
+                                                                 cancelButtonTitle:@"Ok"
+                                                                 otherButtonTitles:nil];
+                                  }
+                                  failure:^(NSError *error, NSString *errorString) {
+                                      [self hideSpinnerWithName:@"MyWishlistViewController"];
+                                      [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                          message:errorString];
+                                  }
+                                exception:^(NSString *exceptionString) {
+                                    [self hideSpinnerWithName:@"MyWishlistViewController"];
+                                    [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                }];
+    
+}
+
 @end
