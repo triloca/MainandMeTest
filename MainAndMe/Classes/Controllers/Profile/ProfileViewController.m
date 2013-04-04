@@ -196,6 +196,8 @@
 }
 
 - (void)logout {
+    _isNeedUpdate = YES;
+    _nameLabel.text = @"";
     [[LoginSignUpManager shared] logout];
     [[LayoutManager shared] showLogin];
 }

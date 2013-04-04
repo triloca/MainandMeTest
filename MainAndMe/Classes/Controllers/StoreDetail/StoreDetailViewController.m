@@ -26,7 +26,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "FacebookSDK/FacebookSDK.h"
 #import "TwitterManager.h"
-
+#import "AddCommentViewController.h"
 
 static NSString *kProductCellIdentifier = @"ProductCell";
 
@@ -74,8 +74,8 @@ MFMessageComposeViewControllerDelegate>
     NSString* imageUrl = [[_storeInfo safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"full"];
     [_storeDetailsCell setProductImageURLString:imageUrl];
     
-    _storeDetailsCell.postedByLabel.text = [_storeInfo safeStringObjectForKey:@"name"];
-    _storeDetailsCell.storeNameLabel.text = [_storeInfo safeStringObjectForKey:@"street"];
+    _storeDetailsCell.postedByLabel.text = @"";
+    _storeDetailsCell.storeNameLabel.text = [_storeInfo safeStringObjectForKey:@"name"];
     
     NSDate* date = [DataManager dateFromString:[_storeInfo safeStringObjectForKey:@"created_at"]];
     _storeDetailsCell.agoLabel.text = [DataManager howLongAgo:date];
@@ -108,16 +108,27 @@ MFMessageComposeViewControllerDelegate>
                                      action:@selector(commentButtonClicked:)
                            forControlEvents:UIControlEventTouchUpInside];
     
-    //! Fake Cell
-    _commentsTableArray = @[@{@"avatar_url":@"http://a0.twimg.com/profile_images/3429771169/3e5fedef81a3ab2a1cf57af04348d462_normal.png",
-                              @"body":@"Comments functionality will be available soon.",
-                              @"created_at":@"2013-03-28T14:02:09Z",
-                              @"username":@"Main And Me"}]; 
+//    //! Fake Cell
+//    _commentsTableArray = @[@{@"avatar_url":@"http://a0.twimg.com/profile_images/3429771169/3e5fedef81a3ab2a1cf57af04348d462_normal.png",
+//                              @"body":@"Comments functionality will be available soon.",
+//                              @"created_at":@"2013-03-28T14:02:09Z",
+//                              @"username":@"Main And Me"}]; 
     
     [self loadProfileInfo];
   //  [self loadWithlist];
     [self loadProducts];
     
+}
+
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
+    [self loadComments];
 }
 
 - (void)viewDidUnload {
@@ -182,7 +193,12 @@ MFMessageComposeViewControllerDelegate>
 
 
 - (void)commentButtonClicked:(UIButton*)sender{
-    [[AlertManager shared] showOkAlertWithTitle:@"This functionality will coming soon."];
+   
+    AddCommentViewController* addCommentViewController = [AddCommentViewController loadFromXIB_Or_iPhone5_XIB];
+    addCommentViewController.productInfo = _storeInfo;
+    addCommentViewController.isStoreState = YES;
+    [self.navigationController pushViewController:addCommentViewController animated:YES];
+    
 }
 
 #pragma mark - UIActionSheet Delegate
@@ -490,6 +506,30 @@ MFMessageComposeViewControllerDelegate>
     
 }
 
+- (void)loadComments{
+    
+    [self showSpinnerWithName:@"StoreDetailViewController"];
+    [ProductDetailsManager loadStoreCommentsForUser:[[_storeInfo safeNumberObjectForKey:@"id"] stringValue]
+                                            success:^(NSString *userId, NSArray *commests) {
+                                                [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                                
+                                                _commentsTableArray = [self sortComments:commests];
+                                                [_tableView reloadData];
+                                                
+                                            }
+                                            failure:^(NSString *userId, NSError *error, NSString *errorString) {
+                                                [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                                [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                    message:errorString];
+                                            }
+                                          exception:^(NSString *userId, NSString *exceptionString) {
+                                              [self hideSpinnerWithName:@"StoreDetailViewController"];
+                                              [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                          }];
+    
+}
+
+
 - (void)likeStore{
     
     if (![ReachabilityManager isReachable]) {
@@ -668,6 +708,16 @@ MFMessageComposeViewControllerDelegate>
          
      }];
     
+}
+
+- (NSArray*)sortComments:(NSArray*)comments{
+    
+    NSArray* sorteArray = [comments sortedArrayUsingComparator: ^(id a, id b) {
+        NSDate *d1 = [DataManager dateFromString:[a safeStringObjectForKey:@"created_at"]];
+        NSDate *d2 = [DataManager dateFromString:[b safeStringObjectForKey:@"created_at"]];
+        return [d2 compare: d1];
+    }];
+    return sorteArray;
 }
 
 #pragma mark - Twitter

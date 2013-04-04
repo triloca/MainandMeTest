@@ -92,29 +92,67 @@
         return;
     }
     
-        [self showSpinnerWithName:@"ProductDetailViewController"];
-        [ProductDetailsManager postComments:[[_productInfo safeNumberObjectForKey:@"id"] stringValue]
-                                    comment:_messageTextView.text
-                                    success:^{
-                                        [self hideSpinnerWithName:@"ProductDetailViewController"];
-                                        [LayoutManager shared].mainViewController.isNeedRefresh = YES;
-                                        [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
-                                            [self.navigationController popViewControllerAnimated:YES];
-                                        }
-                                                                               title:@"Success"
-                                                                             message:@"Comment posted successfully"
-                                                                   cancelButtonTitle:@"Ok"
-                                                                   otherButtonTitles:nil];
-                                        
-                                    }
-                                    failure:^(NSError *error, NSString *errorString) {
-                                        [self hideSpinnerWithName:@"ProductDetailViewController"];
-                                        [[AlertManager shared] showOkAlertWithTitle:@"Error"
-                                                                            message:errorString];
-                                    }
-                                  exception:^(NSString *exceptionString) {
-                                      [self hideSpinnerWithName:@"ProductDetailViewController"];
-                                      [[AlertManager shared] showOkAlertWithTitle:exceptionString];
-                                  }];
+    if (_isStoreState) {
+        [self postStoreComment];
+    }else{
+        [self postProductComment];
+    }
 }
+
+- (void)postProductComment{
+    
+    [self showSpinnerWithName:@"AddCommentViewController"];
+    [ProductDetailsManager postProductComments:[[_productInfo safeNumberObjectForKey:@"id"] stringValue]
+                                       comment:_messageTextView.text
+                                       success:^{
+                                           [self hideSpinnerWithName:@"AddCommentViewController"];
+                                           [LayoutManager shared].mainViewController.isNeedRefresh = YES;
+                                           [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                               [self.navigationController popViewControllerAnimated:YES];
+                                           }
+                                                                                  title:@"Success"
+                                                                                message:@"Comment posted successfully"
+                                                                      cancelButtonTitle:@"Ok"
+                                                                      otherButtonTitles:nil];
+                                           
+                                       }
+                                       failure:^(NSError *error, NSString *errorString) {
+                                           [self hideSpinnerWithName:@"AddCommentViewController"];
+                                           [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                               message:errorString];
+                                       }
+                                     exception:^(NSString *exceptionString) {
+                                         [self hideSpinnerWithName:@"AddCommentViewController"];
+                                         [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                     }];
+}
+
+- (void)postStoreComment{
+    
+    [self showSpinnerWithName:@"AddCommentViewController"];
+    [ProductDetailsManager postStoreComments:[[_productInfo safeNumberObjectForKey:@"id"] stringValue]
+                                     comment:_messageTextView.text
+                                     success:^{
+                                         [self hideSpinnerWithName:@"AddCommentViewController"];
+                                         [LayoutManager shared].mainViewController.isNeedRefresh = YES;
+                                         [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                             [self.navigationController popViewControllerAnimated:YES];
+                                         }
+                                                                                title:@"Success"
+                                                                              message:@"Comment posted successfully"
+                                                                    cancelButtonTitle:@"Ok"
+                                                                    otherButtonTitles:nil];
+                                         
+                                     }
+                                     failure:^(NSError *error, NSString *errorString) {
+                                         [self hideSpinnerWithName:@"AddCommentViewController"];
+                                         [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                             message:errorString];
+                                     }
+                                   exception:^(NSString *exceptionString) {
+                                       [self hideSpinnerWithName:@"AddCommentViewController"];
+                                       [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                   }];
+}
+
 @end

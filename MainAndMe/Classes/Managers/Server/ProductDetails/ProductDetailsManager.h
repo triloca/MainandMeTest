@@ -26,16 +26,28 @@
                     failure:(void(^) (NSString* userId, NSError* error, NSString* errorString)) failure
                   exception:(void(^) (NSString* userId, NSString* exceptionString))exception;
 
++ (void)loadStoreCommentsForUser:(NSString*)userId
+                         success:(void(^) (NSString* userId, NSArray* commests)) success
+                         failure:(void(^) (NSString* userId, NSError* error, NSString* errorString)) failure
+                       exception:(void(^) (NSString* userId, NSString* exceptionString))exception;
+
+
 + (void)likeProducts:(NSString*)productId
              success:(void(^) ()) success
              failure:(void(^) (NSError* error, NSString* errorString)) failure
            exception:(void(^) (NSString* exceptionString))exception;
 
-+ (void)postComments:(NSString*)productId
-             comment:(NSString*)comment
-             success:(void(^) ()) success
-             failure:(void(^) (NSError* error, NSString* errorString)) failure
-           exception:(void(^) (NSString* exceptionString))exception;
++ (void)postProductComments:(NSString*)productId
+                    comment:(NSString*)comment
+                    success:(void(^) ()) success
+                    failure:(void(^) (NSError* error, NSString* errorString)) failure
+                  exception:(void(^) (NSString* exceptionString))exception;
+
++ (void)postStoreComments:(NSString*)productId
+                  comment:(NSString*)comment
+                  success:(void(^) ()) success
+                  failure:(void(^) (NSError* error, NSString* errorString)) failure
+                exception:(void(^) (NSString* exceptionString))exception;
 
 + (void)createWishlist:(NSString*)name
                success:(void(^) ()) success

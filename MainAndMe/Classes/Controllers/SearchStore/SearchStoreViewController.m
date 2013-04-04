@@ -19,7 +19,6 @@
 @interface SearchStoreViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
 @property (strong, nonatomic) NSArray* tableArray;
-@property (strong, nonatomic) NSArray* storesArray;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 
@@ -60,7 +59,8 @@
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
     
-    [self loadStores];
+   // [self loadStores];
+    [self applyFilterWith:@""];
 }
 
 - (void)viewDidUnload {

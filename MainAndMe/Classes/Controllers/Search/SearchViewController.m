@@ -48,13 +48,12 @@
     //_titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
     if (_isStoreState) {
         _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:20];
-        _titleTextLabel.text = @"Search Store By Category";
+        _titleTextLabel.text = @"Search Category";
     }else{
         _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:20];
-        _titleTextLabel.text = @"Search Product By Category";
+        _titleTextLabel.text = @"Search Category";
         
     }
-    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWillShow:)

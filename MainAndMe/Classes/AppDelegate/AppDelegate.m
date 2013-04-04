@@ -10,6 +10,7 @@
 #import "LayoutManager.h"
 #import "ReachabilityManager.h"
 #import "FacebookSDK/FacebookSDK.h"
+#import "AlertManager.h"
 
 @interface AppDelegate()
 
@@ -101,11 +102,14 @@
     tokenKey = [tokenKey stringByReplacingOccurrencesOfString:@" " withString:@""];
     //!Save token
     NSLog(@"APNS Token = %@", tokenKey);
+    NSString* alertText = [NSString stringWithFormat:@"%@\n%@", @"Notification Token =", tokenKey];
+    [[AlertManager shared] showOkAlertWithTitle:alertText];
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     NSLog(@"didFailToRegisterForRemoteNotificationsWithError: [%@]", err);
     //!Reset token
+    [[AlertManager shared] showOkAlertWithTitle:@"Failed To Register For Remote Notifications"];
 }
 
 - (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notif {
@@ -114,5 +118,7 @@
 }
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     NSLog(@"userInfo: %@", userInfo);
+    NSString* notifString = [NSString stringWithFormat:@"%@", userInfo];
+    [[AlertManager shared] showOkAlertWithTitle:@"Notification" message:notifString];
 }
 @end

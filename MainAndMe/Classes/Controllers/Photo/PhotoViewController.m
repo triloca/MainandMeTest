@@ -42,6 +42,7 @@
 
 
 @property (assign, nonatomic) BOOL isStoreState;
+@property (strong, nonatomic) NSArray* storesArray;
 
 @property (strong, nonatomic) PickerView* pickerView;
 @property (strong, nonatomic) NSArray* priceRangeArray;
@@ -122,11 +123,11 @@
     
     [self loadCategories];
     [self loadAddresses];
+    [self loadStores];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-   
     CGRect rc = _pickerView.frame;
     rc.origin.y = CGRectGetMaxY(self.view.frame);
     _pickerView.frame = rc;
@@ -637,8 +638,10 @@
 
 - (void)showStoreSearch{
     SearchStoreViewController* searchStoreViewController = [SearchStoreViewController loadFromXIB_Or_iPhone5_XIB];
+    searchStoreViewController.storesArray = _storesArray;
     searchStoreViewController.didSelectStoreName = ^(NSString* name){
         _storeNameTextField.text = name;
+        [self loadStores];
     };
     [[LayoutManager shared].rootNavigationController pushViewController:searchStoreViewController animated:YES];
     
@@ -696,5 +699,28 @@
     return sorteArray;
     
 }
+
+- (void)loadStores{
+    
+   [self showSpinnerWithName:@"PhotoViewController"];
+    [ProductsStoresManager searchWithSearchType:SearchTypeStores
+                                   searchFilter:SearchFilterNone
+                                        success:^(NSArray *objects) {
+                                            [self hideSpinnerWithName:@"PhotoViewController"];
+                                            
+                                            _storesArray = objects;
+                                        }
+                                        failure:^(NSError *error, NSString *errorString) {
+                                            [self hideSpinnerWithName:@"PhotoViewController"];
+                                            [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                message:errorString];
+                                            
+                                        }exception:^(NSString *exceptionString) {
+                                            [self hideSpinnerWithName:@"PhotoViewController"];
+                                            [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                        }];
+    
+}
+
 
 @end

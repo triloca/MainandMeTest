@@ -10,4 +10,5 @@
 
 @interface AddCommentViewController : UIViewController
 @property (strong, nonatomic) NSDictionary* productInfo;
+@property (assign, nonatomic) BOOL isStoreState;
 @end

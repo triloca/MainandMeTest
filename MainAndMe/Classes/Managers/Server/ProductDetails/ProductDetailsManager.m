@@ -90,6 +90,22 @@
     }
 }
 
++ (void)loadStoreCommentsForUser:(NSString*)userId
+                         success:(void(^) (NSString* userId, NSArray* commests)) success
+                         failure:(void(^) (NSString* userId, NSError* error, NSString* errorString)) failure
+                       exception:(void(^) (NSString* userId, NSString* exceptionString))exception{
+    @try {
+        [[self shared] loadStoreCommentsForUser:userId
+                                        success:success
+                                        failure:failure
+                                      exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(userId, @"Exeption\n Load Comments create");
+    }
+}
+
+
 + (void)likeProducts:(NSString*)productId
              success:(void(^) ()) success
              failure:(void(^) (NSError* error, NSString* errorString)) failure
@@ -107,23 +123,41 @@
 
 }
 
-+ (void)postComments:(NSString*)productId
-             comment:(NSString*)comment
-             success:(void(^) ()) success
-             failure:(void(^) (NSError* error, NSString* errorString)) failure
-           exception:(void(^) (NSString* exceptionString))exception{
-
++ (void)postProductComments:(NSString*)productId
+                    comment:(NSString*)comment
+                    success:(void(^) ()) success
+                    failure:(void(^) (NSError* error, NSString* errorString)) failure
+                  exception:(void(^) (NSString* exceptionString))exception{
+    
     @try {
-        [[self shared] postComments:productId
-                            comment:comment
-                            success:success
-                            failure:failure
-                          exception:exception];
+        [[self shared] postProductComments:productId
+                                   comment:comment
+                                   success:success
+                                   failure:failure
+                                 exception:exception];
     }
     @catch (NSException *exc) {
         exception(@"Exeption\n Post Comment create");
     }
+    
+}
 
++ (void)postStoreComments:(NSString*)productId
+                  comment:(NSString*)comment
+                  success:(void(^) ()) success
+                  failure:(void(^) (NSError* error, NSString* errorString)) failure
+                exception:(void(^) (NSString* exceptionString))exception{
+    
+    @try {
+        [[self shared] postStoreComments:productId
+                                 comment:comment
+                                 success:success
+                                 failure:failure
+                               exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(@"Exeption\n Post Comment create");
+    }
 }
 
 
@@ -273,6 +307,42 @@
     
 }
 
+- (void)loadStoreCommentsForUser:(NSString*)userId
+                         success:(void(^) (NSString* userId, NSArray* commests)) success
+                         failure:(void(^) (NSString* userId, NSError* error, NSString* errorString)) failure
+                       exception:(void(^) (NSString* userId, NSString* exceptionString))exception{
+    
+    NSString* urlString =
+    [NSString stringWithFormat:@"%@/stores/%@/comments", [APIv1_0 serverUrl], userId];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:20];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        if ([self isWishlistDataValid:value]) {
+            success(userId, value);
+        }else{
+            NSString* messageString = [value safeStringObjectForKey:@"error"];
+            failure(userId, nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(userId, error, error.localizedDescription);
+    }eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(userId, exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+    
+}
 
 - (void)likeProducts:(NSString*)productId
              success:(void(^) ()) success
@@ -317,14 +387,58 @@
     
 }
 
-- (void)postComments:(NSString*)productId
-             comment:(NSString*)comment
-             success:(void(^) ()) success
-             failure:(void(^) (NSError* error, NSString* errorString)) failure
-           exception:(void(^) (NSString* exceptionString))exception{
+- (void)postProductComments:(NSString*)productId
+                    comment:(NSString*)comment
+                    success:(void(^) ()) success
+                    failure:(void(^) (NSError* error, NSString* errorString)) failure
+                  exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString =
     [NSString stringWithFormat:@"%@/products/%@/comments?token=%@&comment[body]=%@", [APIv1_0 serverUrl], productId, [DataManager shared].api_token, comment];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:20];
+    [request setHTTPMethod:@"POST"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        if ([self isDataValid:value]) {
+            if ([value safeObjectForKey:@"errors"] == nil) {
+                success();
+            }else{
+                NSString* messageString = [[[value safeDictionaryObjectForKey:@"errors"] safeArrayObjectForKey:@"base"] safeStringObjectAtIndex:0];
+                failure(nil, messageString);
+            }
+            
+        }else{
+            NSString* messageString = [value safeStringObjectForKey:@"error"];
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    }eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+    
+}
+
+- (void)postStoreComments:(NSString*)productId
+                  comment:(NSString*)comment
+                  success:(void(^) ()) success
+                  failure:(void(^) (NSError* error, NSString* errorString)) failure
+                exception:(void(^) (NSString* exceptionString))exception{
+    
+    NSString* urlString =
+    [NSString stringWithFormat:@"%@/stores/%@/comments?token=%@&comment[body]=%@", [APIv1_0 serverUrl], productId, [DataManager shared].api_token, comment];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     

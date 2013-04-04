@@ -136,6 +136,7 @@ MFMessageComposeViewControllerDelegate>
 - (void)commentButtonClicked:(UIButton*)sender{
     AddCommentViewController* addCommentViewController = [AddCommentViewController loadFromXIB_Or_iPhone5_XIB];
     addCommentViewController.productInfo = _productInfo;
+    addCommentViewController.isStoreState = NO;
     [self.navigationController pushViewController:addCommentViewController animated:YES];
 }
 

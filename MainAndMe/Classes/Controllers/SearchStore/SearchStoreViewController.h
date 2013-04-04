@@ -10,4 +10,5 @@
 
 @interface SearchStoreViewController : UIViewController
 @property (copy, nonatomic) void (^didSelectStoreName)(NSString* name);
+@property (strong, nonatomic) NSArray* storesArray;
 @end
