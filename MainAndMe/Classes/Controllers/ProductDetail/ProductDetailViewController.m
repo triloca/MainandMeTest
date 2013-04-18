@@ -26,6 +26,7 @@
 #import "StoreDetailsManager.h"
 #import "StoreDetailViewController.h"
 #import "QuartzCore/QuartzCore.h"
+#import "DescriptionCell.h"
 
 @interface ProductDetailViewController ()
 <UIActionSheetDelegate,
@@ -186,29 +187,49 @@ MFMessageComposeViewControllerDelegate>
 #pragma mark - Table view data source
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section == 0) {
-        return 368;
-    }else{
-        
-        NSDictionary* object = [_tableArray safeDictionaryObjectAtIndex:indexPath.row];
-        return [CommentCell cellHeight:[object safeStringObjectForKey:@"body"]];
+    switch (indexPath.section) {
+        case 0:
+            return 368;
+            break;
+        case 1:{
+            return [DescriptionCell cellHeight:[_productInfo safeStringObjectForKey:@"description"]];
+            break;
+        }
+        case 2:{
+            NSDictionary* object = [_tableArray safeDictionaryObjectAtIndex:indexPath.row];
+            return [CommentCell cellHeight:[object safeStringObjectForKey:@"body"]];
+            break;
+        }
+            
+        default:
+            break;
     }
+    return 0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
     if (section == 0) {
         return 1;
+    }
+    if (section == 1) {
+        if ([[_productInfo safeStringObjectForKey:@"description"] length] > 0) {
+            return 1;
+        }else{
+            return 0;
+        }
     }
     return [_tableArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *kCommentCellIdentifier = @"CommentCell";
-    
+    static NSString *kDescriptionCellIdentifier = @"DescriptionCell";
+
     
     if (indexPath.section == 0) {
        
@@ -216,6 +237,19 @@ MFMessageComposeViewControllerDelegate>
 
     }else if (indexPath.section == 1){
     
+        DescriptionCell *cell = [tableView dequeueReusableCellWithIdentifier:kDescriptionCellIdentifier];
+        
+        if (cell == nil){
+            cell = [DescriptionCell loadViewFromXIB];
+        }
+        
+        // Configure the cell...
+        
+        [cell setMessageText:[_productInfo safeStringObjectForKey:@"description"]];
+        return cell;
+
+    }else if (indexPath.section == 2){
+        
         CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:kCommentCellIdentifier];
         
         if (cell == nil){
@@ -228,7 +262,7 @@ MFMessageComposeViewControllerDelegate>
         [cell setMessageText:[object safeStringObjectForKey:@"body"]];
         [cell setCellData:object];
         return cell;
-
+        
     }
     return [[UITableViewCell alloc] init];
 }

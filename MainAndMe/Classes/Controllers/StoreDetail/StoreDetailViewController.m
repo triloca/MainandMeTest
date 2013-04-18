@@ -27,6 +27,7 @@
 #import "FacebookSDK/FacebookSDK.h"
 #import "TwitterManager.h"
 #import "AddCommentViewController.h"
+#import "DescriptionCell.h"
 
 static NSString *kProductCellIdentifier = @"ProductCell";
 
@@ -238,24 +239,32 @@ MFMessageComposeViewControllerDelegate>
     if (indexPath.section == 0) {
         return 368;
     }else if (indexPath.section == 1) {
+        return [DescriptionCell cellHeight:[_storeInfo safeStringObjectForKey:@"description"]];
+    }else if (indexPath.section == 2) {
         NSDictionary* object = [_commentsTableArray safeDictionaryObjectAtIndex:indexPath.row];
         return [CommentCell cellHeight:[object safeStringObjectForKey:@"body"]];
-    }else if (indexPath.section == 2) {
+    }else if (indexPath.section == 3) {
         return 108;
     }
     return 44;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == 0) {
         return 1;
     }else if (section == 1) {
-        return [_commentsTableArray count];
+        if ([[_storeInfo safeStringObjectForKey:@"description"] length] > 0) {
+            return 1;
+        }else{
+            return 0;
+        }
     }else if (section == 2) {
+        return [_commentsTableArray count];
+    }else if (section == 3) {
         NSInteger count = [_tableArray count];
         NSInteger temp = count % 3;
         NSInteger rowsCount = count / 3;
@@ -269,10 +278,24 @@ MFMessageComposeViewControllerDelegate>
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *kCommentCellIdentifier = @"CommentCell";
+    static NSString *kDescriptionCellIdentifier = @"DescriptionCell";
     
     if (indexPath.section == 0) {
         return _storeDetailsCell;
     }else if (indexPath.section == 1){
+        
+        DescriptionCell *cell = [tableView dequeueReusableCellWithIdentifier:kDescriptionCellIdentifier];
+        
+        if (cell == nil){
+            cell = [DescriptionCell loadViewFromXIB];
+        }
+        
+        // Configure the cell...
+        
+        [cell setMessageText:[_storeInfo safeStringObjectForKey:@"description"]];
+        return cell;
+        
+    }else if (indexPath.section == 2){
         CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:kCommentCellIdentifier];
         
         if (cell == nil){
@@ -287,7 +310,7 @@ MFMessageComposeViewControllerDelegate>
         return cell;
  
     }
-    else if (indexPath.section == 2){
+    else if (indexPath.section == 3){
         
         ProductCell* cell = [self productCellForIndexPath:indexPath];
         return cell;
