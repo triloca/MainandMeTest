@@ -20,7 +20,7 @@
 @interface MyWishlistViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray* tableArray;
+@property (strong, nonatomic) NSMutableArray* tableArray;
 
 
 @end
@@ -117,6 +117,33 @@
     
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:   (UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSDictionary* obj = [_tableArray safeDictionaryObjectAtIndex:indexPath.row];
+        [_tableArray removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, nil]   withRowAnimation:UITableViewRowAnimationFade];
+        [self deleteWishlist:[[obj safeNumberObjectForKey:@"id"] stringValue]];
+    }
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView
+           editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    WishlistCell* cell = (WishlistCell*)[tableView cellForRowAtIndexPath:indexPath];
+    cell.agoLabel.hidden = YES;
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView
+didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    WishlistCell* cell = (WishlistCell*)[tableView cellForRowAtIndexPath:indexPath];
+    cell.agoLabel.hidden = NO;
+
+    [tableView reloadData];
+}
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -154,7 +181,7 @@
     [ProductDetailsManager loadWishlistInfoForUser:[DataManager shared].userId
                                            success:^(NSString *userId, NSArray *wishlists) {
                                                [self hideSpinnerWithName:@"WishlistViewController"];
-                                               _tableArray = [self sortWishlist:wishlists];
+                                               _tableArray = [NSMutableArray arrayWithArray:[self sortWishlist:wishlists]];
                                                [_tableView reloadData];
                                                
                                            }
@@ -170,6 +197,27 @@
     
 }
 
+- (void)deleteWishlist:(NSString*)wishlistId{
+
+    [self showSpinnerWithName:@"WishlistViewController"];
+    [ProductDetailsManager deleteWishlistInfoForUser:[DataManager shared].userId
+                                           productID:wishlistId
+                                             success:^(NSString *userId, NSArray *wishlist) {
+                                                 [self hideSpinnerWithName:@"WishlistViewController"];
+                                                 [[AlertManager shared] showOkAlertWithTitle:@"Success"
+                                                                                     message:@"Wishlist deleted"];
+                                             }
+                                             failure:^(NSString *userId, NSError *error, NSString *errorString) {
+                                                 [self hideSpinnerWithName:@"WishlistViewController"];
+                                                 [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                     message:errorString];
+                                                 [self loadWithlist];
+                                             }
+                                           exception:^(NSString *userId, NSString *exceptionString) {
+                                               [self hideSpinnerWithName:@"WishlistViewController"];
+                                               [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                           }];
+}
 
 - (void)addToWishlist:(NSDictionary*)wishlist{
    
