@@ -6,6 +6,8 @@
 //
 //
 
+#define CLCOORDINATES_EQUAL( coord1, coord2 ) ((coord1.latitude == coord2.latitude && coord1.longitude == coord2.longitude))
+
 #import "CommunityPoint.h"
 
 @implementation CommunityPoint
@@ -29,6 +31,23 @@
 
 - (NSString *)subtitle {
     return _address;
+}
+
+- (BOOL)isEqual:(id)object{
+    if (![object isKindOfClass:[self class]]) {
+        return NO;
+    }
+    CommunityPoint* point = (CommunityPoint*)object;
+    if (![_name isEqualToString:point.name]) {
+        return NO;
+    }
+    if (![_address isEqualToString:point.address]) {
+        return NO;
+    }
+    if (!CLCOORDINATES_EQUAL(_coordinate, point.coordinate)) {
+        return NO;
+    }
+    return YES;
 }
 
 @end
