@@ -20,6 +20,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 #import "AlertManager.h"
 #import "MBProgressHUD.h"
 #import "DataManager.h"
+#import "ProductDetailViewController.h"
 
 @interface MyLikesViewController ()
 @property (strong, nonatomic) NSArray* tableArray;
@@ -166,9 +167,9 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         //cell.transform = CGAffineTransformMake(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f);
         
         cell.didClickAtIndex = ^(NSInteger selectedIndex){
-//            NSDictionary* itemData = [_tableArray safeDictionaryObjectAtIndex:selectedIndex];
-//    
-//            [self showStoreDetailWithData:itemData];
+            NSDictionary* itemData = [_tableArray safeDictionaryObjectAtIndex:selectedIndex];
+    
+            [self showProductDetailsWithData:itemData];
         };
     }
     
@@ -274,6 +275,15 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     storeDetailViewController.storeInfo = data;
     [self.navigationController pushViewController:storeDetailViewController animated:YES];
 }
+
+- (void)showProductDetailsWithData:(NSDictionary*)data{
+    
+    ProductDetailViewController* productDetailViewController = [ProductDetailViewController loadFromXIB_Or_iPhone5_XIB];
+    productDetailViewController.productInfo = data;
+    [self.navigationController pushViewController:productDetailViewController animated:YES];
+    
+}
+
 
 - (void)reloadNeededTable{
     if (_isPageStile) {
