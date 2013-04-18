@@ -20,6 +20,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 #import "AlertManager.h"
 #import "MBProgressHUD.h"
 #import "DataManager.h"
+#import "ProductDetailViewController.h"
 
 @interface WishlistDetailsViewController ()
 @property (strong, nonatomic) NSArray* tableArray;
@@ -27,6 +28,8 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 @property (strong, nonatomic) NSMutableArray* pageTableProfileArray;
 @property (strong, nonatomic) NSArray* objectsArray;
 @property (weak, nonatomic) IBOutlet UIButton *toggleButton;
+@property (weak, nonatomic) IBOutlet UIButton *editButton;
+@property (assign, nonatomic) BOOL isVibrationActive;
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (unsafe_unretained, nonatomic) IBOutlet UITableView *pageTableView;
@@ -83,6 +86,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     [self setTableView:nil];
     [self setToggleButton:nil];
     [self setTitleTextLabel:nil];
+    [self setEditButton:nil];
     [super viewDidUnload];
 }
 
@@ -107,6 +111,19 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     [self reloadNeededTable];
 }
 
+- (IBAction)editButtonClicked:(UIButton*)sender {
+    if (sender.tag == 0) {
+        sender.tag = 1;
+        [sender setTitle:@"Done" forState:UIControlStateNormal];
+        _isVibrationActive = YES;
+        [_tableView reloadData];
+    }else{
+        sender.tag = 0;
+        [sender setTitle:@"Edit" forState:UIControlStateNormal];
+        _isVibrationActive = NO;
+        [_tableView reloadData];
+    }
+}
 #pragma mark - Table view data source
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -130,6 +147,12 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         if (temp > 0) {
             rowsCount++;
         }
+        
+        if (rowsCount == 0) {
+            _editButton.hidden = YES;
+        }else{
+            _editButton.hidden = NO;
+        }
         return rowsCount;
         
     }else{
@@ -141,6 +164,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     
     if (tableView == _tableView) {
         ProductCell* cell = [self productCellForIndexPath:indexPath];
+        
         return cell;
     }else{
         StorePageCell* cell = [self storePageCellForIndexPath:indexPath];
@@ -166,14 +190,32 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         //cell.transform = CGAffineTransformMake(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f);
         
         cell.didClickAtIndex = ^(NSInteger selectedIndex){
-//            NSDictionary* itemData = [_tableArray safeDictionaryObjectAtIndex:selectedIndex];
-//    
-//            [self showStoreDetailWithData:itemData];
+            NSDictionary* itemData = [_tableArray safeDictionaryObjectAtIndex:selectedIndex];
+            
+            if (_isVibrationActive) {
+                [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                    if (buttonIndex == 0) {
+                        [self deleteWishlistItem:[[_wishlistInfo safeNumberObjectForKey:@"id"] stringValue]
+                                          itemID:[[itemData safeNumberObjectForKey:@"id"] stringValue]];
+                    }
+                }
+                                                       title:@"Message"
+                                                     message:@"Delete this Item?"
+                                           cancelButtonTitle:@"Ok"
+                                           otherButtonTitles:@"Cancel", nil];
+            }else{
+                [self showProductDetailsWithData:itemData];
+            }
         };
     }
     
     // Configure the cell...
-    
+    if (!_isVibrationActive) {
+        [cell.firstView stopVibration];
+        [cell.secondView stopVibration];
+        [cell.thirdView stopVibration];
+    }
+
     NSInteger index = indexPath.row * 3;
     
     if ([_tableArray count] > index) {
@@ -215,10 +257,22 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     }
     cell.thirdView.coverButton.tag = index + 2;
     
+    if (_isVibrationActive) {
+        [cell.firstView startVibration];
+        [cell.secondView startVibration];
+        [cell.thirdView startVibration];
+    }
+    
     return cell;
 }
 
-
+- (void)showProductDetailsWithData:(NSDictionary*)data{
+    
+    ProductDetailViewController* productDetailViewController = [ProductDetailViewController loadFromXIB_Or_iPhone5_XIB];
+    productDetailViewController.productInfo = data;
+    [self.navigationController pushViewController:productDetailViewController animated:YES];
+    
+}
 - (StorePageCell*)storePageCellForIndexPath:(NSIndexPath*)indexPath{
     
     StorePageCell *cell = [_pageTableView dequeueReusableCellWithIdentifier:kStorePageCellIdentifier];
@@ -354,5 +408,30 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         [_pageTableProfileArray addObject:@""];
     }
 }
+
+
+- (void)deleteWishlistItem:(NSString*)wishlistId itemID:(NSString*)itemId{
+    
+    [self showSpinnerWithName:@"WishlistViewController"];
+    [ProductDetailsManager deleteProduct:itemId
+                              inWishlist:wishlistId
+                                 success:^(NSArray *wishlist) {
+                                     [self hideSpinnerWithName:@"WishlistViewController"];
+                                     [[AlertManager shared] showOkAlertWithTitle:@"Success"
+                                                                         message:@"Wishlist Item deleted"];
+                                     [self loadWishlistInfo];
+                                 }
+                                 failure:^(NSError *error, NSString *errorString) {
+                                     [self hideSpinnerWithName:@"WishlistViewController"];
+                                     [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                         message:errorString];
+                                     [self loadWishlistInfo];
+                                 }
+                               exception:^(NSString *exceptionString) {
+                                   [self hideSpinnerWithName:@"WishlistViewController"];
+                                   [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                               }];
+}
+
 
 @end
