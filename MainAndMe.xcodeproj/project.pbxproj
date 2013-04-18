@@ -27,6 +27,7 @@
 		D908EE0C16F0FA4F004B2405 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D908EE0B16F0FA4F004B2405 /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D908EE5E16F11888004B2405 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D908EE5D16F11888004B2405 /* libxml2.2.dylib */; };
 		D908EEB316F11C16004B2405 /* TwitterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D908EEB216F11C16004B2405 /* TwitterManager.m */; };
+		D909E3A8171D456D008DE661 /* locationButton.png in Resources */ = {isa = PBXBuildFile; fileRef = D909E3A7171D456D008DE661 /* locationButton.png */; };
 		D911AEDB1705102B00818B1A /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D911AECB1705102B00818B1A /* AFHTTPClient.m */; };
 		D911AEDC1705102B00818B1A /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D911AECD1705102B00818B1A /* AFHTTPRequestOperation.m */; };
 		D911AEDD1705102B00818B1A /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D911AECF1705102B00818B1A /* AFImageRequestOperation.m */; };
@@ -212,6 +213,10 @@
 		D940778516F2F93E0000E21B /* AddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D940778316F2F93E0000E21B /* AddressViewController.m */; };
 		D940778616F2F93E0000E21B /* AddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D940778416F2F93E0000E21B /* AddressViewController.xib */; };
 		D940778816F2F98D0000E21B /* MainViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D940778716F2F98B0000E21B /* MainViewController_iPhone5.xib */; };
+		D94810A517176BAA00444BFB /* DescriptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D94810A317176BAA00444BFB /* DescriptionCell.m */; };
+		D94810A617176BAA00444BFB /* DescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D94810A417176BAA00444BFB /* DescriptionCell.xib */; };
+		D94829AE1719CE84008AACFF /* CommunityCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D94829AC1719CE84008AACFF /* CommunityCell.m */; };
+		D94829AF1719CE84008AACFF /* CommunityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D94829AD1719CE84008AACFF /* CommunityCell.xib */; };
 		D95EAE421700F2A60081BED0 /* add_detail_form_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D95EAE3F1700F2A60081BED0 /* add_detail_form_background.png */; };
 		D95EAE431700F2A60081BED0 /* add_details_form_hr.png in Resources */ = {isa = PBXBuildFile; fileRef = D95EAE401700F2A60081BED0 /* add_details_form_hr.png */; };
 		D95EAE441700F2A60081BED0 /* add_details_form_photo_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D95EAE411700F2A60081BED0 /* add_details_form_photo_bg.png */; };
@@ -236,6 +241,7 @@
 		D972E04616FA7908007C552F /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D972E04516FA7908007C552F /* CoreText.framework */; };
 		D972E04B16FAA90C007C552F /* AddressCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D972E04916FAA90C007C552F /* AddressCell.m */; };
 		D972E04C16FAA90C007C552F /* AddressCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D972E04A16FAA90C007C552F /* AddressCell.xib */; };
+		D97925A31714B68C00CBFC27 /* search icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D97925A21714B68C00CBFC27 /* search icon.png */; };
 		D992586D16FBF0DD00490D86 /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D992586B16FBF0DD00490D86 /* PhotoViewController.m */; };
 		D992586E16FBF0DD00490D86 /* PhotoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D992586C16FBF0DD00490D86 /* PhotoViewController.xib */; };
 		D992587116FC099100490D86 /* image_info_item_form_background.png in Resources */ = {isa = PBXBuildFile; fileRef = D992587016FC099100490D86 /* image_info_item_form_background.png */; };
@@ -327,6 +333,7 @@
 		D908EE5D16F11888004B2405 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
 		D908EEB116F11C16004B2405 /* TwitterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterManager.h; path = Classes/Managers/Twitter/TwitterManager.h; sourceTree = "<group>"; };
 		D908EEB216F11C16004B2405 /* TwitterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwitterManager.m; path = Classes/Managers/Twitter/TwitterManager.m; sourceTree = "<group>"; };
+		D909E3A7171D456D008DE661 /* locationButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = locationButton.png; sourceTree = "<group>"; };
 		D911AECA1705102B00818B1A /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		D911AECB1705102B00818B1A /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		D911AECC1705102B00818B1A /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -593,6 +600,12 @@
 		D940778316F2F93E0000E21B /* AddressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddressViewController.m; path = Classes/Controllers/Address/AddressViewController.m; sourceTree = "<group>"; };
 		D940778416F2F93E0000E21B /* AddressViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddressViewController.xib; path = Classes/Controllers/Address/AddressViewController.xib; sourceTree = "<group>"; };
 		D940778716F2F98B0000E21B /* MainViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainViewController_iPhone5.xib; path = Classes/Controllers/Main/MainViewController_iPhone5.xib; sourceTree = "<group>"; };
+		D94810A217176BAA00444BFB /* DescriptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DescriptionCell.h; path = Classes/Controllers/ProductDetail/Views/DescriptionCell.h; sourceTree = "<group>"; };
+		D94810A317176BAA00444BFB /* DescriptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DescriptionCell.m; path = Classes/Controllers/ProductDetail/Views/DescriptionCell.m; sourceTree = "<group>"; };
+		D94810A417176BAA00444BFB /* DescriptionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DescriptionCell.xib; path = Classes/Controllers/ProductDetail/Views/DescriptionCell.xib; sourceTree = "<group>"; };
+		D94829AB1719CE84008AACFF /* CommunityCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommunityCell.h; sourceTree = "<group>"; };
+		D94829AC1719CE84008AACFF /* CommunityCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityCell.m; sourceTree = "<group>"; };
+		D94829AD1719CE84008AACFF /* CommunityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommunityCell.xib; sourceTree = "<group>"; };
 		D95EAE3F1700F2A60081BED0 /* add_detail_form_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_detail_form_background.png; path = Resources/Images/Settings/add_detail_form_background.png; sourceTree = "<group>"; };
 		D95EAE401700F2A60081BED0 /* add_details_form_hr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_details_form_hr.png; path = Resources/Images/Settings/add_details_form_hr.png; sourceTree = "<group>"; };
 		D95EAE411700F2A60081BED0 /* add_details_form_photo_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = add_details_form_photo_bg.png; path = Resources/Images/Settings/add_details_form_photo_bg.png; sourceTree = "<group>"; };
@@ -625,6 +638,7 @@
 		D972E04816FAA90C007C552F /* AddressCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressCell.h; sourceTree = "<group>"; };
 		D972E04916FAA90C007C552F /* AddressCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressCell.m; sourceTree = "<group>"; };
 		D972E04A16FAA90C007C552F /* AddressCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddressCell.xib; sourceTree = "<group>"; };
+		D97925A21714B68C00CBFC27 /* search icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search icon.png"; sourceTree = "<group>"; };
 		D992586A16FBF0DD00490D86 /* PhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoViewController.h; path = Classes/Controllers/Photo/PhotoViewController.h; sourceTree = "<group>"; };
 		D992586B16FBF0DD00490D86 /* PhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoViewController.m; path = Classes/Controllers/Photo/PhotoViewController.m; sourceTree = "<group>"; };
 		D992586C16FBF0DD00490D86 /* PhotoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoViewController.xib; path = Classes/Controllers/Photo/PhotoViewController.xib; sourceTree = "<group>"; };
@@ -775,6 +789,7 @@
 		D9072B5016F943E000E7F168 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				D97925A21714B68C00CBFC27 /* search icon.png */,
 				D93CE1A217026A16006AB52D /* addButton.png */,
 				D9072B6516F94E8F00E7F168 /* list_selecter_bar@2x.png */,
 				D9072B5F16F94A9600E7F168 /* search-result-bar.png */,
@@ -898,6 +913,9 @@
 		D9250EAC16F397FC00CEBAAD /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D94810A217176BAA00444BFB /* DescriptionCell.h */,
+				D94810A317176BAA00444BFB /* DescriptionCell.m */,
+				D94810A417176BAA00444BFB /* DescriptionCell.xib */,
 				D9250EAD16F398ED00CEBAAD /* ProductDetailsCell.h */,
 				D9250EAE16F398ED00CEBAAD /* ProductDetailsCell.m */,
 				D9250EAF16F398ED00CEBAAD /* ProductDetailsCell.xib */,
@@ -1665,6 +1683,16 @@
 			name = Address;
 			sourceTree = "<group>";
 		};
+		D94829AA1719CE84008AACFF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D94829AB1719CE84008AACFF /* CommunityCell.h */,
+				D94829AC1719CE84008AACFF /* CommunityCell.m */,
+				D94829AD1719CE84008AACFF /* CommunityCell.xib */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		D95EAE3E1700F2900081BED0 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1792,6 +1820,7 @@
 		D99F600416FAB6640009384E /* Community */ = {
 			isa = PBXGroup;
 			children = (
+				D94829AA1719CE84008AACFF /* Views */,
 				D99F600516FAB6640009384E /* Anotations */,
 				D99F600816FAB6640009384E /* CommunityViewController.h */,
 				D99F600916FAB6640009384E /* CommunityViewController.m */,
@@ -1955,6 +1984,7 @@
 		D9C29F3816F16AAE00A419DC /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				D909E3A7171D456D008DE661 /* locationButton.png */,
 				D94076EB16F27BD70000E21B /* navigation_bar@2x.png */,
 				D94076EC16F27BD70000E21B /* search_icon@2x.png */,
 				D9C29F3916F16AAE00A419DC /* back_but@2x.png */,
@@ -2225,6 +2255,10 @@
 				D9C0E40817069C99003DCE07 /* StoreMapViewController_iPhone5.xib in Resources */,
 				D9C0E40A17069D53003DCE07 /* SearchStoreViewController_iPhone5.xib in Resources */,
 				D9C0E40C17069E8B003DCE07 /* InviteFriendViewController_iPhone5.xib in Resources */,
+				D97925A31714B68C00CBFC27 /* search icon.png in Resources */,
+				D94810A617176BAA00444BFB /* DescriptionCell.xib in Resources */,
+				D94829AF1719CE84008AACFF /* CommunityCell.xib in Resources */,
+				D909E3A8171D456D008DE661 /* locationButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2346,6 +2380,8 @@
 				D911AEE01705102B00818B1A /* AFPropertyListRequestOperation.m in Sources */,
 				D911AEE11705102B00818B1A /* AFURLConnectionOperation.m in Sources */,
 				D911AEE5170510A200818B1A /* UIImageView+AFNetworking.m in Sources */,
+				D94810A517176BAA00444BFB /* DescriptionCell.m in Sources */,
+				D94829AE1719CE84008AACFF /* CommunityCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
