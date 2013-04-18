@@ -31,6 +31,7 @@
 
 //! Load Community For State
 + (void)loadCommunityForState:(NSString*)state
+                         page:(NSInteger)page
                       success:(void(^) (NSArray* communities)) success
                       failure:(void(^) (NSError* error, NSString* errorString)) failure
                     exception:(void(^) (NSString* exceptionString))exception;
@@ -57,4 +58,13 @@
                         success:(void(^) (NSArray* objects)) success
                         failure:(void(^) (NSError* error, NSString* errorString)) failure
                       exception:(void(^) (NSString* exceptionString))exception;
+
+//! Load Stores For Key
++ (void)loadStoresForKey:(NSString*)key
+                 success:(void(^) (NSArray* objects)) success
+                 failure:(void(^) (NSError* error, NSString* errorString)) failure
+               exception:(void(^) (NSString* exceptionString))exception;
+
+- (void)cancelSearch;
+
 @end
