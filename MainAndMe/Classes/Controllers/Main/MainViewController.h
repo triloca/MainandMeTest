@@ -11,4 +11,5 @@
 @interface MainViewController : UIViewController
 @property (assign, nonatomic) BOOL isNeedRefresh;
 - (void)loadNearest;
+- (void)refreshCurrentList:(id)refreshCurrentList;
 @end

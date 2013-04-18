@@ -290,10 +290,17 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _tableView) {
-        return 108;
+        
+        if (_controllerState == ControllerStateStores) {
+           return 140;
+        }else if (_controllerState == ControllerStateProducts) {
+          return 108;
+        }
+        
     }else{
         return 385;
     }
+    return 44;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -370,13 +377,16 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         NSDictionary* object = [_tableArray safeDictionaryObjectAtIndex:index];
         NSString* imageUrl = nil;
         
+        imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
         if (_controllerState == ControllerStateStores) {
-            imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
+            cell.firstView.textLabel.text = [object safeStringObjectForKey:@"name"];
         }else if(_controllerState == ControllerStateProducts){
-            imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
+            cell.firstView.textLabel.text = @"";
         }
+        
         [cell.firstView setImageURLString:imageUrl];
         cell.firstView.hidden = NO;
+        
     }else{
         cell.firstView.hidden = YES;
     }
@@ -386,10 +396,11 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         NSDictionary* object = [_tableArray safeDictionaryObjectAtIndex:index + 1];
         NSString* imageUrl = nil;
         
+        imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
         if (_controllerState == ControllerStateStores) {
-            imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
+            cell.secondView.textLabel.text = [object safeStringObjectForKey:@"name"];
         }else if(_controllerState == ControllerStateProducts){
-            imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
+            cell.secondView.textLabel.text = @"";
         }
         [cell.secondView setImageURLString:imageUrl];
         cell.secondView.hidden = NO;
@@ -402,10 +413,11 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         NSDictionary* object = [_tableArray safeDictionaryObjectAtIndex:index + 2];
         NSString* imageUrl = nil;
         
+        imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
         if (_controllerState == ControllerStateStores) {
-            imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
+            cell.thirdView.textLabel.text = [object safeStringObjectForKey:@"name"];
         }else if(_controllerState == ControllerStateProducts){
-            imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
+            cell.thirdView.textLabel.text = @"";
         }
         [cell.thirdView setImageURLString:imageUrl];
         cell.thirdView.hidden = NO;
@@ -541,6 +553,9 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 - (void)searchWithSearchType:(SearchType)type searchFilter:(SearchFilter)filter{
     
+    [ProductsStoresManager shared].lastSearchType = type;
+    [ProductsStoresManager shared].lastSearchFilter = filter;
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [ProductsStoresManager searchWithSearchType:type
                                    searchFilter:filter
@@ -579,13 +594,48 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 - (void)reloadNeededTable{
     if (_isPageStile) {
-        self.pageTableArray = _objectsArray;
+        
+        self.pageTableArray = [self sortObjects:_objectsArray];
         [_pageTableView reloadData];
     }else{
-        _tableArray = _objectsArray;
+        
+        _tableArray = [self sortObjects:_objectsArray];
         [_tableView reloadData];
     }
 
+}
+
+
+- (NSArray*)sortObjects:(NSArray*)array{
+    if ([ProductsStoresManager shared].lastSearchFilter == SearchFilterPopular) {
+        NSArray *sorteArray = [array sortedArrayUsingComparator:^(id a, id b) {
+            NSInteger *first = [[a safeNumberObjectForKey:@"like_count"] intValue];
+            NSInteger *second = [[b safeNumberObjectForKey:@"like_count"] intValue];
+            return first < second;
+        }];
+        return sorteArray;
+    }else if ([ProductsStoresManager shared].lastSearchFilter == SearchFilterNewly) {
+        [self filterByLocation:array];
+    }
+    return array;
+}
+
+- (NSArray*)filterByLocation:(NSArray*)array{
+    NSLog(@"%@", array);
+    NSArray *sorteArray = [array sortedArrayUsingComparator:^(id a, id b) {
+        CLLocation *first = [[CLLocation alloc] initWithLatitude:[[a safeNumberObjectForKey:@"lat"] floatValue]
+                                                       longitude:[[a safeNumberObjectForKey:@"lng"] floatValue]];
+        CLLocation *second = [[CLLocation alloc] initWithLatitude:[[b safeNumberObjectForKey:@"lat"] floatValue]
+                                                        longitude:[[b safeNumberObjectForKey:@"lng"] floatValue]];
+        
+        CLLocation* defaultLocetion = [LocationManager shared].defaultLocation;
+        CGFloat firstDistance = [defaultLocetion distanceFromLocation:first];
+        CGFloat secondDistance = [defaultLocetion distanceFromLocation:second];
+        return firstDistance < secondDistance;
+    }];
+    
+    return sorteArray;
+    
 }
 
 - (void)moveTriangleToPosition:(CGFloat)value{
@@ -621,10 +671,13 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                  lngnear:[LocationManager shared].defaultLocation.coordinate.longitude
                                  success:^(NSString* name, NSString* prefix) {
                                      
+                                     [LocationManager shared].stateName = name;
+                                     [LocationManager shared].statePrefix = prefix;
+                                     
                                      NSString* title = [NSString stringWithFormat:@"%@, %@",
                                                         name, prefix];
                                      [self setTitleText:title];
-                                     
+                                     [self refreshCurrentList:nil];
                                  }
                                  failure:^(NSError *error, NSString *errorString) {
                                      NSString* text = @"Address not found";
