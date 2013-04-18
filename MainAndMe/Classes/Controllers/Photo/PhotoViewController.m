@@ -123,7 +123,7 @@
     
     [self loadCategories];
     [self loadAddresses];
-    [self loadStores];
+    //[self loadStores];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -613,6 +613,7 @@
         
         [self hideKeyboard];
         [self hideCategoryPicker];
+        [[LayoutManager shared].mainViewController refreshCurrentList:nil];
         [[LayoutManager shared].rootTabBarController hidePhotoView];
     }
                                            title:@"Success"
@@ -627,6 +628,7 @@
         
         [self hideKeyboard];
         [self hideCategoryPicker];
+        [[LayoutManager shared].mainViewController refreshCurrentList:nil];
         [[LayoutManager shared].rootTabBarController hidePhotoView];
     }
                                            title:@"Success"
@@ -638,7 +640,7 @@
 
 - (void)showStoreSearch{
     SearchStoreViewController* searchStoreViewController = [SearchStoreViewController loadFromXIB_Or_iPhone5_XIB];
-    searchStoreViewController.storesArray = _storesArray;
+    //searchStoreViewController.storesArray = _storesArray;
     searchStoreViewController.didSelectStoreName = ^(NSString* name){
         _storeNameTextField.text = name;
         [self loadStores];
