@@ -75,6 +75,42 @@
     }
 }
 
++ (void)deleteWishlistInfoForUser:(NSString*)userId
+                        productID:(NSString*)productID
+                          success:(void(^) (NSString* userId, NSArray* wishlist)) success
+                          failure:(void(^) (NSString* userId, NSError* error, NSString* errorString)) failure
+                        exception:(void(^) (NSString* userId, NSString* exceptionString))exception{
+    @try {
+        [[self shared] deleteWishlistInfoForUser:userId
+                                       productID:productID
+                                         success:success
+                                         failure:failure
+                                       exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(userId, @"Exeption\n Delete Wishlist create");
+    }
+
+
+}
+
++ (void)deleteProduct:itemId
+           inWishlist:wishlistId
+              success:(void(^) (NSArray* wishlist)) success
+              failure:(void(^) (NSError* error, NSString* errorString)) failure
+            exception:(void(^) (NSString* exceptionString))exception{
+    @try {
+        [[self shared] deleteProduct:itemId
+                          inWishlist:wishlistId
+                             success:success
+                             failure:failure
+                           exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(@"Exeption\n Delete Wishlist Item create");
+    }
+}
+
 + (void)loadCommentsForUser:(NSString*)userId
                     success:(void(^) (NSString* userId, NSArray* commests)) success
                     failure:(void(^) (NSString* userId, NSError* error, NSString* errorString)) failure
@@ -269,6 +305,86 @@
     [connection start];
     
 }
+
+- (void)deleteWishlistInfoForUser:(NSString*)userId
+                        productID:(NSString*)productID
+                        success:(void(^) (NSString* userId, NSArray* wishlist)) success
+                        failure:(void(^) (NSString* userId, NSError* error, NSString* errorString)) failure
+                      exception:(void(^) (NSString* userId, NSString* exceptionString))exception{
+    
+    NSString* urlString =
+    [NSString stringWithFormat:@"%@/users/%@/product_lists/%@", [APIv1_0 serverUrl], userId, productID];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:20];
+    [request setHTTPMethod:@"DELETE"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        if (value == nil) {
+            success(userId, value);
+        }else{
+            NSString* messageString = [value safeStringObjectForKey:@"error"];
+            failure(userId, nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(userId, error, error.localizedDescription);
+    }eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(userId, exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+    
+}
+
+- (void)deleteProduct:itemId
+           inWishlist:wishlistId
+              success:(void(^) (NSArray* wishlist)) success
+              failure:(void(^) (NSError* error, NSString* errorString)) failure
+            exception:(void(^) (NSString* exceptionString))exception{
+    
+    NSString* urlString =
+    [NSString stringWithFormat:@"%@/product_lists/%@/list_items/%@", [APIv1_0 serverUrl], wishlistId, itemId];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:20];
+    [request setHTTPMethod:@"DELETE"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        if ([value isKindOfClass:[NSDictionary class]]) {
+            success(value);
+        }else{
+            NSString* messageString = [value safeStringObjectForKey:@"error"];
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    }eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+    
+}
+
+
+
+
 
 - (void)loadCommentsForUser:(NSString*)userId
                     success:(void(^) (NSString* userId, NSArray* commests)) success

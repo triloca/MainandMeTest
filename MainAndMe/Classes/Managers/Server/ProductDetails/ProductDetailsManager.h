@@ -21,6 +21,18 @@
                         failure:(void(^) (NSString* userId, NSError* error, NSString* errorString)) failure
                       exception:(void(^) (NSString* userId, NSString* exceptionString))exception;
 
++ (void)deleteWishlistInfoForUser:(NSString*)userId
+                        productID:(NSString*)productID
+                          success:(void(^) (NSString* userId, NSArray* wishlist)) success
+                          failure:(void(^) (NSString* userId, NSError* error, NSString* errorString)) failure
+                        exception:(void(^) (NSString* userId, NSString* exceptionString))exception;
+
++ (void)deleteProduct:itemId
+           inWishlist:wishlistId
+              success:(void(^) (NSArray* wishlist)) success
+              failure:(void(^) (NSError* error, NSString* errorString)) failure
+            exception:(void(^) (NSString* exceptionString))exception;
+
 + (void)loadCommentsForUser:(NSString*)userId
                     success:(void(^) (NSString* userId, NSArray* commests)) success
                     failure:(void(^) (NSString* userId, NSError* error, NSString* errorString)) failure
