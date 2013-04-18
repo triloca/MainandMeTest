@@ -129,11 +129,18 @@ static NSString *kPageCellIdentifier = @"PageCell";
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView == _tableView) {
-        return 108;
+        
+        if (_isStoreState) {
+            return 140;
+        }else{
+            return 108;
+        }
+        
     }else{
         return 385;
     }
-}
+    return 0;
+ }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -211,6 +218,11 @@ static NSString *kPageCellIdentifier = @"PageCell";
         imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
         
         [cell.firstView setImageURLString:imageUrl];
+        if (_isStoreState) {
+            cell.firstView.textLabel.text = [object safeStringObjectForKey:@"name"];
+        }else{
+            cell.firstView.textLabel.text = @"";
+        }
         cell.firstView.hidden = NO;
     }else{
         cell.firstView.hidden = YES;
@@ -222,8 +234,13 @@ static NSString *kPageCellIdentifier = @"PageCell";
         NSString* imageUrl = nil;
         
         imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
-        
         [cell.secondView setImageURLString:imageUrl];
+      
+        if (_isStoreState) {
+            cell.secondView.textLabel.text = [object safeStringObjectForKey:@"name"];
+        }else{
+            cell.secondView.textLabel.text = @"";
+        }
         cell.secondView.hidden = NO;
     }else{
         cell.secondView.hidden = YES;
@@ -237,6 +254,11 @@ static NSString *kPageCellIdentifier = @"PageCell";
         imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
         
         [cell.thirdView setImageURLString:imageUrl];
+        if (_isStoreState) {
+            cell.thirdView.textLabel.text = [object safeStringObjectForKey:@"name"];
+        }else{
+            cell.thirdView.textLabel.text = @"";
+        }
         cell.thirdView.hidden = NO;
     }else{
         cell.thirdView.hidden = YES;
