@@ -215,18 +215,29 @@
 
    NSString* urlString = [self urlFrom:type filter:filter];
 
-    _lastSearchFilter = filter;
-    _lastSearchType = type;
+//    _lastSearchFilter = filter;
+//    _lastSearchType = type;
     
-    if (type == SearchTypeProducts && filter == SearchFilterNone) {
-        
-        urlString = [NSString stringWithFormat:urlString,
-                     [LocationManager shared].defaultLocation.coordinate.latitude,
-                     [LocationManager shared].defaultLocation.coordinate.longitude];
-        urlString = [NSString stringWithFormat:@"%@%@", [APIv1_0 serverUrl], urlString];
-    }else{
-        urlString = [NSString stringWithFormat:@"%@%@", [APIv1_0 serverUrl], urlString];
-    }
+//    if (type == SearchTypeProducts && filter == SearchFilterNone) {
+//        
+//        urlString = [NSString stringWithFormat:urlString,
+//                     [LocationManager shared].defaultLocation.coordinate.latitude,
+//                     [LocationManager shared].defaultLocation.coordinate.longitude];
+//        urlString = [NSString stringWithFormat:@"%@%@", [APIv1_0 serverUrl], urlString];
+//    }else{
+//        urlString = [NSString stringWithFormat:@"%@%@", [APIv1_0 serverUrl], urlString];
+//    }
+    urlString = [NSString stringWithFormat:@"%@%@", [APIv1_0 serverUrl], urlString];
+    
+    urlString = [urlString stringByAppendingFormat:@"?lat=%f&lng=%f",
+                 [LocationManager shared].defaultLocation.coordinate.latitude,
+                 [LocationManager shared].defaultLocation.coordinate.longitude];
+    
+    urlString = [urlString stringByAppendingFormat:@"&city=%@&state=%@",
+                 [LocationManager shared].stateName,
+                 [LocationManager shared].statePrefix];
+    
+    urlString = [urlString stringByAppendingFormat:@"&radius=%@", @"20"];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
@@ -717,7 +728,7 @@
         case SearchTypeProducts:{
             switch (filter) {
                 case SearchFilterNone:
-                    return @"/products/nearby?lat=%f&lng=%f";
+                    return @"/products/nearby";
                     break;
                 case SearchFilterPopular:
                     return @"/products/popular";
