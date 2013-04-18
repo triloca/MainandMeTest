@@ -11,8 +11,8 @@
 
 
 @interface ProductView()
-@property (retain, nonatomic) IBOutlet UIImageView *backImageView;
 
+@property (assign, nonatomic) BOOL isVibrationActive;
 @end
 
 
@@ -75,5 +75,42 @@
 
 - (IBAction)coverButtonUpOutSide:(id)sender {
      _backImageView.alpha = 1;
+}
+- (void)startVibration{
+    if (_isVibrationActive) {
+        return;
+    }
+     _isVibrationActive = YES;
+    [self vibroAnimation];
+}
+
+- (void)stopVibration{
+    _isVibrationActive = NO;
+    _imageView.transform = CGAffineTransformIdentity;
+    _backImageView.transform = CGAffineTransformIdentity;
+}
+- (void)vibroAnimation{
+    if (!_isVibrationActive) {
+        _imageView.transform = CGAffineTransformIdentity;
+        _backImageView.transform = CGAffineTransformIdentity;
+        return;
+    }
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         _imageView.transform = CGAffineTransformMakeRotation(0.02);
+                         _backImageView.transform = CGAffineTransformMakeRotation(0.02);
+                     }
+                     completion:^(BOOL finished) {
+                         [UIView animateWithDuration:0.3
+                                          animations:^{
+                                              _imageView.transform = CGAffineTransformMakeRotation(-0.02);
+                                              _backImageView.transform = CGAffineTransformMakeRotation(-0.02);
+                                          }
+                                          completion:^(BOOL finished) {
+                                              [self vibroAnimation];
+                                          }];
+                         
+                     }];
+
 }
 @end

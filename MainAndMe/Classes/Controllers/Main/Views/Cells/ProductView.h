@@ -8,9 +8,12 @@
 
 
 @interface ProductView : UIView
-@property (retain, nonatomic) IBOutlet UIButton *textLabel;
+@property (retain, nonatomic) IBOutlet UILabel *textLabel;
 @property (retain, nonatomic) IBOutlet UIButton *coverButton;
 @property (retain, nonatomic) IBOutlet UIImageView *imageView;
+@property (retain, nonatomic) IBOutlet UIImageView *backImageView;
 
 - (void)setImageURLString:(NSString*)imageURLString;
+- (void)startVibration;
+- (void)stopVibration;
 @end
