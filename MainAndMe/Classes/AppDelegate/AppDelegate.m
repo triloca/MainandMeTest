@@ -102,7 +102,7 @@
     tokenKey = [tokenKey stringByReplacingOccurrencesOfString:@" " withString:@""];
     //!Save token
     NSLog(@"APNS Token = %@", tokenKey);
-    NSString* alertText = [NSString stringWithFormat:@"%@\n%@", @"Notification Token =", tokenKey];
+    NSString* alertText = [NSString stringWithFormat:@"%@\n%@\n%@", @"Notification Token =", tokenKey, @"For test only"];
     [[AlertManager shared] showOkAlertWithTitle:alertText];
 }
 
