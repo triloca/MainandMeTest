@@ -11,11 +11,19 @@
 #import "AlertManager.h"
 #import "CommunityPoint.h"
 #import "LocationManager.h"
+#import "CommunityCell.h"
+#include "UIView+Common.h"
 
 @interface CommunityViewController ()
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
-
+@property (assign, nonatomic) NSInteger page;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicatiorView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray* tableArray;
+@property (strong, nonatomic) NSArray* searchArray;
+@property (weak, nonatomic) IBOutlet UITextField *searchTextField;
+@property (assign, nonatomic) BOOL isAnimatesDrop;
 
 @end
 
@@ -49,6 +57,9 @@
 - (void)viewDidUnload {
     [self setMapView:nil];
     [self setTitleTextLabel:nil];
+    [self setActivityIndicatiorView:nil];
+    [self setTableView:nil];
+    [self setSearchTextField:nil];
     [super viewDidUnload];
 }
 
@@ -73,10 +84,9 @@
         if (annotationView == nil) {
             annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:kAnnotationId];
             annotationView.canShowCallout = YES;
-            annotationView.animatesDrop = NO;
             annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         }
-        
+        annotationView.animatesDrop = _isAnimatesDrop;
         CommunityPoint* communityPoint = (CommunityPoint*)annotation;
         annotationView.pinColor = communityPoint.pinColor;
         
@@ -108,19 +118,149 @@
     
 }
 
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [_tableArray count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *kCommunityCellIdentifier = @"CommunityCell";
+    
+    CommunityCell *cell = [tableView dequeueReusableCellWithIdentifier:kCommunityCellIdentifier];
+
+    if (cell == nil){
+        cell = [CommunityCell loadViewFromXIB];
+        //cell.transform = CGAffineTransformMake(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f);
+    }
+    
+    // Configure the cell...
+    
+    NSDictionary* obj = [_tableArray safeDictionaryObjectAtIndex:indexPath.row];
+    cell.nameLabel.text = [obj safeStringObjectForKey:@"slug"];
+    cell.addressLabel.text = [obj safeStringObjectForKey:@"city"];
+    return cell;
+}
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary* obj = [_tableArray safeDictionaryObjectAtIndex:indexPath.row];
+    
+    [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        if (buttonIndex == 0) {
+            CLLocation* location = [[CLLocation alloc]initWithLatitude:[[obj safeNumberObjectForKey:@"lat"] floatValue]
+                                                             longitude:[[obj safeNumberObjectForKey:@"lng"] floatValue]];
+            [LocationManager shared].defaultLocation = location;
+            [[LocationManager shared] notifyUpdate];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            
+        }else{
+            [_tableView reloadData];
+        }
+    }
+                                           title:@"Message"
+                                         message:@"Use this location as default?"
+                               cancelButtonTitle:@"Ok"
+                               otherButtonTitles:@"Cancel", nil];
+}
+
+#pragma mark - TextField Delegate
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    return YES;
+}
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
+    NSLog(@"textFieldDidBeginEditing");
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         CGRect rc = self.tableView.frame;
+                         rc.origin.y -= 165;
+                         self.tableView.frame = rc;
+                         rc = _mapView.frame;
+                         rc.origin.y -= 165;
+                         _mapView.frame = rc;
+                     }
+                     completion:^(BOOL finished) {
+                         
+                     }];
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
+    NSLog(@"textFieldShouldEndEditing");
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    [UIView animateWithDuration:0.3
+                     animations:^{
+                         CGRect rc = self.tableView.frame;
+                         rc.origin.y += 165;
+                         self.tableView.frame = rc;
+                         rc = _mapView.frame;
+                         rc.origin.y += 165;
+                         _mapView.frame = rc;
+                     }
+                     completion:^(BOOL finished) {
+                         
+                     }];
+
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    [self zoomToFitMapAnnotations];
+    return YES;
+}
+
+
+
 #pragma mark - Buttons Action
 - (IBAction)backButtonClicked:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)locationButtonClicked:(id)sender {
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(_mapView.userLocation.coordinate, 1500, 1500);
+    MKCoordinateRegion adjustRegion = [_mapView regionThatFits:region];
+    [_mapView setRegion:adjustRegion animated:YES];
+}
+
 #pragma mark - Privat Methods
+- (IBAction)searchValueChanged:(id)sender {
+    [self applyFilterWith:_searchTextField.text];
+    _isAnimatesDrop = NO;
+    [self showOnMap:nil];
+}
+
 - (void)loadData{
-    [self showSpinnerWithName:@"CommunityViewController"];
-    
+    _page++;
+    if (_page == 1) {
+        [self showSpinnerWithName:@"CommunityViewController"];
+    }else{
+        [_activityIndicatiorView startAnimating];
+    }
     [SearchManager loadCommunityForState:_statePrefix
+                                    page:_page
                                  success:^(NSArray* communities) {
                                      [self hideSpinnerWithName:@"CommunityViewController"];
+                                     [self showOnTable:communities];
+                                     _isAnimatesDrop = YES;
                                      [self showOnMap:communities];
+                                     if (_page == 1) {
+                                         [self zoomToFitMapAnnotations];
+                                     }
+                                     
+                                     if (communities.count > 0) {
+                                         [self loadData];
+                                     }else{
+                                         [_activityIndicatiorView stopAnimating];
+                                         [self zoomToFitMapAnnotations];
+                                     }
                                  }
                                  failure:^(NSError *error, NSString *errorString) {
                                      [self hideSpinnerWithName:@"CommunityViewController"];
@@ -133,11 +273,18 @@
                                }];
 }
 
+- (void)showOnTable:(NSArray*)communities{
+    NSMutableArray* tableCommunities = [NSMutableArray arrayWithArray:_searchArray];
+    [tableCommunities addObjectsFromArray:communities];
+    _searchArray = [NSArray arrayWithArray:tableCommunities];
+    [self applyFilterWith:_searchTextField.text];
+}
+
 - (void)showOnMap:(NSArray*)communities{
    
-    [self showSpinnerWithName:@"CommunityViewController"];
+    
     NSMutableArray* annotations = [NSMutableArray new];
-    for (id obj in communities) {
+    for (id obj in _tableArray) {
         if ([obj isKindOfClass:[NSDictionary class]]) {
             CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake([[obj safeNumberObjectForKey:@"lat"] floatValue],
                                                                            [[obj safeNumberObjectForKey:@"lng"] floatValue]);
@@ -148,12 +295,31 @@
             [annotations addObject:point];
         }
     }
+
     
-    [_mapView addAnnotations:annotations];
+    NSMutableArray* annotationToAdd = [NSMutableArray array];
+    NSMutableArray* annotationToRemove = [NSMutableArray array];
     
-    [self zoomToFitMapAnnotations];
+    NSArray* allAnnotations = _mapView.annotations;
     
-    [self hideSpinnerWithName:@"CommunityViewController"];
+    for (id obj in allAnnotations) {
+        if ([obj isKindOfClass:[CommunityPoint class]]) {
+            if (![annotations containsObject:obj]) {
+                [annotationToRemove addObject:obj];
+            }
+        }
+    }
+    
+    for (id obj in annotations) {
+        if ([obj isKindOfClass:[CommunityPoint class]]) {
+            if (![allAnnotations containsObject:obj]) {
+                [annotationToAdd addObject:obj];
+            }
+        }
+    }
+    
+    [_mapView removeAnnotations:annotationToRemove];
+    [_mapView addAnnotations:annotationToAdd];
 }
 
 - (void)zoomToFitMapAnnotations {
@@ -176,4 +342,23 @@
     [self.mapView setRegion:MKCoordinateRegionForMapRect([poly boundingMapRect]) animated:YES];
 }
 
+- (void)applyFilterWith:(NSString*)name{
+    
+    if ([name isEqualToString:@""]) {
+        _tableArray = _searchArray;
+        [_tableView reloadData];
+        return;
+    }
+    
+    NSMutableArray* filterdMutableArray = [NSMutableArray array];
+    
+    [_searchArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString* n = [[obj safeStringObjectForKey:@"slug"] lowercaseString];
+        if ([n hasPrefix:name]) {
+            [filterdMutableArray addObject:obj];
+        }
+    }];
+      _tableArray = [NSArray arrayWithArray:filterdMutableArray];
+    [_tableView reloadData];
+}
 @end
