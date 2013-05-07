@@ -466,7 +466,7 @@
            exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString =
-    [NSString stringWithFormat:@"%@/products/%@/likes?token=%@", [APIv1_0 serverUrl], productId, [DataManager shared].api_token];
+    [NSString stringWithFormat:@"%@/products/%@/likes?_token=%@", [APIv1_0 serverUrl], productId, [DataManager shared].api_token];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
@@ -510,7 +510,7 @@
                   exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString =
-    [NSString stringWithFormat:@"%@/products/%@/comments?token=%@&comment[body]=%@", [APIv1_0 serverUrl], productId, [DataManager shared].api_token, comment];
+    [NSString stringWithFormat:@"%@/products/%@/comments?_token=%@&comment[body]=%@", [APIv1_0 serverUrl], productId, [DataManager shared].api_token, comment];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
@@ -554,7 +554,7 @@
                 exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString =
-    [NSString stringWithFormat:@"%@/stores/%@/comments?token=%@&comment[body]=%@", [APIv1_0 serverUrl], productId, [DataManager shared].api_token, comment];
+    [NSString stringWithFormat:@"%@/stores/%@/comments?_token=%@&comment[body]=%@", [APIv1_0 serverUrl], productId, [DataManager shared].api_token, comment];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     

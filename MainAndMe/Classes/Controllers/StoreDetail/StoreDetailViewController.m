@@ -28,6 +28,7 @@
 #import "TwitterManager.h"
 #import "AddCommentViewController.h"
 #import "DescriptionCell.h"
+#import "NotificationManager.h"
 
 static NSString *kProductCellIdentifier = @"ProductCell";
 
@@ -118,6 +119,7 @@ MFMessageComposeViewControllerDelegate>
     [self loadProfileInfo];
   //  [self loadWithlist];
     [self loadProducts];
+    [self removeNotification];
     
 }
 
@@ -741,6 +743,22 @@ MFMessageComposeViewControllerDelegate>
         return [d2 compare: d1];
     }];
     return sorteArray;
+}
+
+- (void)removeNotification{
+    
+    if ([[NotificationManager shared] isContainId:[_storeInfo safeNumberObjectForKey:@"id"]]) {
+        [NotificationManager removeNotifications:[_storeInfo safeNumberObjectForKey:@"id"]
+                                         success:^(id obj) {
+                                             
+                                         }
+                                         failure:^(NSError *error, NSString *errorString) {
+                                             
+                                         }
+                                       exception:^(NSString *exceptionString) {
+                                           
+                                       }];
+    }
 }
 
 #pragma mark - Twitter

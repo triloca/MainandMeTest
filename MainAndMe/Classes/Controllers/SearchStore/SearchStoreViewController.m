@@ -56,9 +56,12 @@ UIPickerViewDataSource>
 @property (weak, nonatomic) IBOutlet UITextField *postalCodeTextField;
 @property (weak, nonatomic) IBOutlet UITextView *storeDescriptionTextView;
 @property (weak, nonatomic) IBOutlet UIImageView *storePhotoImageView;
+@property (weak, nonatomic) IBOutlet UITextField *categoryTextField;
 
 @property (strong, nonatomic) UIImage* photo;
 @property (strong, nonatomic) NSArray* keyStoresArray;
+@property (strong, nonatomic) NSArray* categoryArray;
+
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *searchSpinerView;
 
 @end
@@ -122,6 +125,7 @@ UIPickerViewDataSource>
     [self loadStores];
     [self applyFilterWith:@""];
     [self loadAddresses];
+    [self loadCategories];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -143,6 +147,7 @@ UIPickerViewDataSource>
     [self setAddButton:nil];
     [self setAddPhotoButton:nil];
     [self setSearchSpinerView:nil];
+    [self setCategoryTextField:nil];
     [super viewDidUnload];
 }
 
@@ -159,9 +164,7 @@ UIPickerViewDataSource>
 }
 
 - (IBAction)addButtonClicked:(id)sender {
-    
-    
-    
+
     [_searchTextField resignFirstResponder];
     _storefrontNameTextField.text = _searchTextField.text;
     
@@ -266,6 +269,22 @@ UIPickerViewDataSource>
         return NO;
     }
    
+    if (_categoryTextField == textField) {
+        _pickerView.pickerView.tag = 1;
+        [_pickerView.pickerView reloadAllComponents];
+        [_pickerView.pickerView selectRow:0 inComponent:0 animated:NO];
+        if ([_categoryArray count] > 0) {
+            [self pickerView:_pickerView.pickerView didSelectRow:0 inComponent:0];
+            [self showCategoryPicker];
+            [self hideKeyboard];
+            [self scrollToTextField:textField];
+        }else{
+            [[AlertManager shared] showOkAlertWithTitle:@"Category list is empty.\nPlease reload page."];
+        }
+        return NO;
+    }
+
+    
     [self hideCategoryPicker];
     [self scrollToTextField:textField];
     return YES;
@@ -294,7 +313,6 @@ UIPickerViewDataSource>
     [self jampToNextTextField:textField];
     return YES;
 }
-
 
 
 #pragma mark - TextView Delegate
@@ -335,6 +353,7 @@ UIPickerViewDataSource>
     [self showSpinnerWithName:@"Load stores"];
     [ProductsStoresManager searchWithSearchType:SearchTypeStores
                                    searchFilter:SearchFilterNone
+                                           page:1
                                         success:^(NSArray *objects) {
                                             [self hideSpinnerWithName:@"Load stores"];
                                             
@@ -651,6 +670,24 @@ UIPickerViewDataSource>
                            }];
 }
 
+- (void)loadCategories{
+    [self showSpinnerWithName:@"PhotoViewController"];
+    [SearchManager loadCcategiriesSuccess:^(NSArray *categories) {
+        [self hideSpinnerWithName:@"PhotoViewController"];
+        _categoryArray = categories;
+        [_pickerView.pickerView reloadAllComponents];
+    }
+                                  failure:^(NSError *error, NSString *errorString) {
+                                      [self hideSpinnerWithName:@"PhotoViewController"];
+                                      [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                          message:errorString];
+                                  }
+                                exception:^(NSString *exceptionString) {
+                                    [self hideSpinnerWithName:@"PhotoViewController"];
+                                    [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                }];
+}
+
 - (void)jampToNextTextField:(UITextField*)textField{
   
     if (textField == _storefrontNameTextField) {
@@ -699,6 +736,7 @@ UIPickerViewDataSource>
                                          state:statePrefix
                                         street:_streetTextField.text
                                           city:_cityTextField.text
+                                      category:_categoryTextField.text
                                        zipCode:_postalCodeTextField.text
                                    description:_storeDescriptionTextView.text
                                          image:_photo
@@ -754,17 +792,30 @@ UIPickerViewDataSource>
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     
-    _stateTextField.text = [[_statesArray safeDictionaryObjectAtIndex:row] safeStringObjectForKey:@"Name"];
-    _stateIndex = row;
-    
+    if (pickerView.tag == 1) {
+        _categoryTextField.text = [[_categoryArray safeDictionaryObjectAtIndex:row] safeStringObjectForKey:@"name"];
+    }else if (pickerView.tag == 2) {
+        _stateTextField.text = [[_statesArray safeDictionaryObjectAtIndex:row] safeStringObjectForKey:@"Name"];
+        _stateIndex = row;
+    }
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component; {
-    return [_statesArray count];
+    if (pickerView.tag == 1) {
+        return [_categoryArray count];
+    }else if (pickerView.tag == 2) {
+        return [_statesArray count];
+    }
+    return 0;
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component; {
-    return [[_statesArray safeDictionaryObjectAtIndex:row] safeObjectForKey:@"Name"];
+    if (pickerView.tag == 1) {
+        return [[_categoryArray safeDictionaryObjectAtIndex:row] safeObjectForKey:@"name"];
+    }else if (pickerView.tag == 2) {
+        return [[_statesArray safeDictionaryObjectAtIndex:row] safeObjectForKey:@"Name"];
+    }
+    return @"";
 }
 
 

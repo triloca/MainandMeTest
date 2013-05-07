@@ -27,6 +27,7 @@
 #import "StoreDetailViewController.h"
 #import "QuartzCore/QuartzCore.h"
 #import "DescriptionCell.h"
+#import "NotificationManager.h"
 
 @interface ProductDetailViewController ()
 <UIActionSheetDelegate,
@@ -102,6 +103,7 @@ MFMessageComposeViewControllerDelegate>
     }
     
     [self loadProfileInfo];
+    [self removeNotification];
        
 }
 
@@ -394,7 +396,7 @@ MFMessageComposeViewControllerDelegate>
                                                   success:^(NSNumber *userIdNumber, NSDictionary *profile) {
                                                       [self hideSpinnerWithName:@"ProductDetailViewController"];
                                                       _productDetailsCell.postedByLabel.text = [NSString
-                                                                                                stringWithFormat:@"Posted By %@ in", [profile safeStringObjectForKey:@"name"]];
+                                                                                                stringWithFormat:@"%@ in", [_productInfo safeStringObjectForKey:@"name"]];
                                                       [_productDetailsCell setPersonImageURLString:[profile safeStringObjectForKey:@"avatar_url"]];
                                                   }
                                                   failure:^(NSNumber *userIdNumber, NSError *error, NSString *errorString) {
@@ -628,6 +630,22 @@ MFMessageComposeViewControllerDelegate>
          
      }];
     
+}
+
+- (void)removeNotification{
+
+    if ([[NotificationManager shared] isContainId:[_productInfo safeNumberObjectForKey:@"id"]]) {
+        [NotificationManager removeNotifications:[_productInfo safeNumberObjectForKey:@"id"]
+                                         success:^(id obj) {
+                                             
+                                         }
+                                         failure:^(NSError *error, NSString *errorString) {
+                                             
+                                         }
+                                       exception:^(NSString *exceptionString) {
+                                           
+                                       }];
+    }
 }
 
 #pragma mark - Twitter

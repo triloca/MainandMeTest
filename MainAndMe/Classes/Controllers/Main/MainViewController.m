@@ -30,7 +30,8 @@
 #import "NSMutableArray+Safe.h"
 #import "StorePageCell.h"
 #import "LocationManager.h"
-
+#import "NotificationManager.h"
+#import "MNMBottomPullToRefreshManager.h"
 
 typedef enum {
     ControllerStateStores = 0,
@@ -42,7 +43,7 @@ static NSString *kProductCellIdentifier = @"ProductCell";
 static NSString *kPageCellIdentifier = @"PageCell";
 static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
-@interface MainViewController ()
+@interface MainViewController () <MNMBottomPullToRefreshManagerClient>
 @property (unsafe_unretained, nonatomic) IBOutlet UIButton *storefrontButton;
 @property (unsafe_unretained, nonatomic) IBOutlet UIButton *itemsButton;
 
@@ -52,6 +53,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIButton *toggleButton;
 @property (assign, nonatomic) BOOL isPageStile;
+@property (assign, nonatomic) NSInteger page;
 
 @property (assign, nonatomic) ControllerState controllerState;
 
@@ -71,7 +73,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 @property (weak, nonatomic) IBOutlet UIImageView *barTriangleImageView;
 
-
+@property (strong, nonatomic) MNMBottomPullToRefreshManager* pullToRefresh;
 @end
 
 @implementation MainViewController
@@ -98,6 +100,13 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.pullToRefresh = [[MNMBottomPullToRefreshManager alloc]
+                          initWithPullToRefreshViewHeight:60.0f
+                          tableView:_tableView
+                          withClient:self];
+    
+    _page = 1;
+    
     _pageTableProfileArray = [NSMutableArray new];
     _isNeedRefresh = NO;
     
@@ -121,7 +130,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     
     
     self.refreshControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
-    [self.refreshControl addTarget:self action:@selector(refreshCurrentList:) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(loadNextPage:) forControlEvents:UIControlEventValueChanged];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didUpdateLocation:)
@@ -129,15 +138,25 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                                object:nil];
 
     _barTriangleImageView.hidden = YES;
-
+    [self addDeviceToken];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (_isNeedRefresh) {
+        _page = 1;
         [self refreshCurrentList:nil];
     }
+    [self loadNotifications];
 }
+
+- (void)viewDidLayoutSubviews {
+    
+    [super viewDidLayoutSubviews];
+    
+    [_pullToRefresh relocatePullToRefreshView];
+}
+
 
 - (void)viewDidUnload {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -190,6 +209,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     _popularButton.selected = NO;
     _randomButton.selected = NO;
     
+    _page = 1;
     [self searchWithSearchType:SearchTypeStores searchFilter:SearchFilterNone];
     [self moveTriangleToPosition:53];
 }
@@ -205,6 +225,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     _popularButton.selected = NO;
     _randomButton.selected = NO;
     
+    _page = 1;
     [self searchWithSearchType:SearchTypeProducts searchFilter:SearchFilterNone];
     [self moveTriangleToPosition:214];
 }
@@ -215,6 +236,8 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     _randomButton.selected = NO;
     
     [self moveTriangleToPosition:28];
+    
+    _page = 1;
     
     if (_controllerState == ControllerStateStores) {
         
@@ -233,6 +256,8 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     
     [self moveTriangleToPosition:135];
     
+    _page = 1;
+    
     if (_controllerState == ControllerStateStores) {
         
         [self searchWithSearchType:SearchTypeStores searchFilter:SearchFilterPopular];
@@ -250,6 +275,8 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     
     [self moveTriangleToPosition:242];
     
+    _page = 1;
+    
     if (_controllerState == ControllerStateStores) {
         
         [self searchWithSearchType:SearchTypeStores searchFilter:SearchFilterRandom];
@@ -266,11 +293,23 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         _isPageStile = NO;
         _tableView.hidden = NO;
         _pageTableView.hidden = YES;
+
+        self.pullToRefresh = [[MNMBottomPullToRefreshManager alloc]
+                              initWithPullToRefreshViewHeight:60.0f
+                              tableView:_tableView
+                              withClient:self];
+
     }else{
         [_toggleButton setImage:[UIImage imageNamed:@"grid_button@2x.png"] forState:UIControlStateNormal];
         _isPageStile = YES;
         _tableView.hidden = YES;
         _pageTableView.hidden = NO;
+
+        self.pullToRefresh = [[MNMBottomPullToRefreshManager alloc]
+                              initWithPullToRefreshViewHeight:60.0f
+                              tableView:_pageTableView
+                              withClient:self];
+
     }
     [self reloadNeededTable];
 }
@@ -292,7 +331,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     if (tableView == _tableView) {
         
         if (_controllerState == ControllerStateStores) {
-           return 140;
+           return 144;
         }else if (_controllerState == ControllerStateProducts) {
           return 108;
         }
@@ -348,6 +387,24 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+#pragma mark - Scroll View Delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [_pullToRefresh tableViewScrolled];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    [_pullToRefresh tableViewReleased];
+}
+
+#pragma mark - Refresh Control Action
+
+- (void)bottomPullToRefreshTriggered:(MNMBottomPullToRefreshManager *)manager {
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self loadNextPage:nil];
+    });
+}
+
 
 #pragma mark - Privat Method
 
@@ -380,8 +437,16 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
         if (_controllerState == ControllerStateStores) {
             cell.firstView.textLabel.text = [object safeStringObjectForKey:@"name"];
+            cell.firstView.backgroundColor = [UIColor whiteColor];
         }else if(_controllerState == ControllerStateProducts){
             cell.firstView.textLabel.text = @"";
+            cell.firstView.backgroundColor = [UIColor clearColor];
+        }
+        
+        if ([[NotificationManager shared] isContainId:[object safeNumberObjectForKey:@"id"]]) {
+            cell.firstView.badgeImageView.hidden = NO;
+        }else{
+            cell.firstView.badgeImageView.hidden = YES;
         }
         
         [cell.firstView setImageURLString:imageUrl];
@@ -399,9 +464,18 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
         if (_controllerState == ControllerStateStores) {
             cell.secondView.textLabel.text = [object safeStringObjectForKey:@"name"];
+            cell.secondView.backgroundColor = [UIColor whiteColor];
         }else if(_controllerState == ControllerStateProducts){
             cell.secondView.textLabel.text = @"";
+            cell.secondView.backgroundColor = [UIColor clearColor];
         }
+        
+        if ([[NotificationManager shared] isContainId:[object safeNumberObjectForKey:@"id"]]) {
+            cell.secondView.badgeImageView.hidden = NO;
+        }else{
+            cell.secondView.badgeImageView.hidden = YES;
+        }
+        
         [cell.secondView setImageURLString:imageUrl];
         cell.secondView.hidden = NO;
     }else{
@@ -416,9 +490,18 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
         if (_controllerState == ControllerStateStores) {
             cell.thirdView.textLabel.text = [object safeStringObjectForKey:@"name"];
+            cell.thirdView.backgroundColor = [UIColor whiteColor];
         }else if(_controllerState == ControllerStateProducts){
             cell.thirdView.textLabel.text = @"";
+            cell.thirdView.backgroundColor = [UIColor clearColor];
         }
+        
+        if ([[NotificationManager shared] isContainId:[object safeNumberObjectForKey:@"id"]]) {
+            cell.thirdView.badgeImageView.hidden = NO;
+        }else{
+            cell.thirdView.badgeImageView.hidden = YES;
+        }
+        
         [cell.thirdView setImageURLString:imageUrl];
         cell.thirdView.hidden = NO;
     }else{
@@ -545,7 +628,13 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 
 - (void)refreshCurrentList:(id)refreshCurrentList {
+    [self searchWithSearchType:[ProductsStoresManager shared].lastSearchType
+                  searchFilter:[ProductsStoresManager shared].lastSearchFilter];
     
+}
+
+- (void)loadNextPage:(id)sender {
+    _page++;
     [self searchWithSearchType:[ProductsStoresManager shared].lastSearchType
                   searchFilter:[ProductsStoresManager shared].lastSearchFilter];
     [self.refreshControl endRefreshing];
@@ -553,12 +642,21 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 - (void)searchWithSearchType:(SearchType)type searchFilter:(SearchFilter)filter{
     
+    if ([_objectsArray count] == 0) {
+        _page = 1;
+    }
+    
+    if (_page == 1) {
+        _objectsArray = [NSArray array];
+    }
+    
     [ProductsStoresManager shared].lastSearchType = type;
     [ProductsStoresManager shared].lastSearchFilter = filter;
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [ProductsStoresManager searchWithSearchType:type
                                    searchFilter:filter
+                                           page:_page
                                         success:^(NSArray *objects) {
                                             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                             
@@ -567,7 +665,10 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                             }else{
                                                 _controllerState = ControllerStateProducts;
                                             }
-                                            _objectsArray = objects;
+                                            [_pullToRefresh tableViewReloadFinished];
+                                            NSMutableArray* temp = [NSMutableArray arrayWithArray:_objectsArray];
+                                            [temp addObjectsFromArray:objects];
+                                            _objectsArray = temp;
                                             
                                             [self reloadNeededTable];
                                             
@@ -582,6 +683,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                             }else{
                                                 _controllerState = ControllerStateProducts;
                                             }
+                                            [_pullToRefresh tableViewReloadFinished];
                                             _objectsArray = [NSArray new];
                                             
                                             [self reloadNeededTable];
@@ -589,6 +691,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                         }exception:^(NSString *exceptionString) {
                                             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
                                             [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                            [_pullToRefresh tableViewReloadFinished];
                                         }];
 }
 
@@ -635,7 +738,6 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     }];
     
     return sorteArray;
-    
 }
 
 - (void)moveTriangleToPosition:(CGFloat)value{
@@ -701,6 +803,34 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     CGRect rc2 = _triagleImageView.frame;
     rc2.origin.x = CGRectGetMaxX(rc);
     _triagleImageView.frame = rc2;
+}
+
+- (void)addDeviceToken{
+    [NotificationManager addDeviceToken:[NotificationManager shared].deviceToken
+                                success:^(NSArray *obj) {
+                                    
+                                }
+                                failure:^(NSError *error, NSString *errorString) {
+                                   // [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                    //                                    message:errorString];
+                                }
+                              exception:^(NSString *exceptionString) {
+                                  [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                              }];
+    
+
+}
+
+- (void)loadNotifications{
+    
+    [NotificationManager loadNotificationsWithSuccess:^(NSArray *notif) {
+        [_tableView reloadData];
+    }
+                                              failure:^(NSError *error, NSString *errorString) {
+                                              }
+                                            exception:^(NSString *exceptionString) {
+                                            }];
+    
 }
 
 #pragma mark - Public Methods

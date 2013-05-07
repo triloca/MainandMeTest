@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *storeNameTextField;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UITextField *storeCategoryTextField;
 
 @property (weak, nonatomic) IBOutlet UITextField *storefrontNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *countryTextField;
@@ -94,8 +95,9 @@
                                                object:nil];
     
     _priceRangeArray = [NSArray arrayWithObjects:
-                        @"$50-$100", @"$100-$200", @"$200-$300",
-                        @"$300-$400", @">500", nil];
+                        @"$0-$25", @"$25-$50",
+                        @"$50-$100", @"$100-$200", @"$200-$500",
+                        @"$500-$1000", @"$1000 and up", nil];
     
     _pickerView = [PickerView loadViewFromXIB];
     
@@ -154,6 +156,7 @@
     [self setPostalCodeTextField:nil];
     [self setStorePhotoImageView:nil];
     [self setStoreDescriptionTextView:nil];
+    [self setStoreCategoryTextField:nil];
     [super viewDidUnload];
 }
 
@@ -238,7 +241,7 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
     
-    if (_categoryTextField == textField) {
+    if (_categoryTextField == textField || _storeCategoryTextField == textField) {
         _pickerView.pickerView.tag = 1;
         [_pickerView.pickerView reloadAllComponents];
         [_pickerView.pickerView selectRow:0 inComponent:0 animated:NO];
@@ -345,27 +348,33 @@
        _priceTextField.text = [_priceRangeArray safeStringObjectAtIndex:row];
         switch (row) {
             case 0:
-                _priceValue = @"75";
+                _priceValue = @"25";
                 break;
             case 1:
-                _priceValue = @"150";
+                _priceValue = @"50";
                 break;
             case 2:
-                _priceValue = @"250";
+                _priceValue = @"100";
                 break;
             case 3:
-                _priceValue = @"350";
+                _priceValue = @"200";
                 break;
             case 4:
                 _priceValue = @"500";
                 break;
-
+            case 5:
+                _priceValue = @"1000";
+                break;
+            case 6:
+                _priceValue = @"10000";
+                break;
                 
             default:
                 break;
         }
     }else if (pickerView.tag == 1) {
         _categoryTextField.text = [[_categoryArray safeDictionaryObjectAtIndex:row] safeStringObjectForKey:@"name"];
+        _storeCategoryTextField.text = [[_categoryArray safeDictionaryObjectAtIndex:row] safeStringObjectForKey:@"name"];
     }else if (pickerView.tag == 2) {
         _stateTextField.text = [[_statesArray safeDictionaryObjectAtIndex:row] safeStringObjectForKey:@"Name"];
         _stateIndex = row;
@@ -558,6 +567,7 @@
                                          state:statePrefix
                                         street:_streetTextField.text
                                           city:_cityTextField.text
+                                      category:_storeCategoryTextField.text
                                        zipCode:_postalCodeTextField.text
                                    description:_storeDescriptionTextView.text
                                          image:_photo
@@ -707,6 +717,7 @@
    [self showSpinnerWithName:@"PhotoViewController"];
     [ProductsStoresManager searchWithSearchType:SearchTypeStores
                                    searchFilter:SearchFilterNone
+                                           page:1
                                         success:^(NSArray *objects) {
                                             [self hideSpinnerWithName:@"PhotoViewController"];
                                             

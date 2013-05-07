@@ -99,7 +99,7 @@
                          exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString =
-    [NSString stringWithFormat:@"%@/users/current?token=%@", [APIv1_0 serverUrl], [DataManager shared].api_token];
+    [NSString stringWithFormat:@"%@/users/current?_token=%@", [APIv1_0 serverUrl], [DataManager shared].api_token];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
@@ -145,7 +145,7 @@
                       exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString =
-    [NSString stringWithFormat:@"%@/users/%@?token=%@&id=%@&user[name]=%@&user[password]=%@&user[password_confirmation]=%@&user[date_of_birth]=%@&user[address]=%@&user[phone_number]=%@&user[setting_attributes][email_communities]=%@&user[setting_attributes][email_stores]=%@&user[setting_attributes][email_people]=%@&user[setting_attributes][wishlist]=%@", [APIv1_0 serverUrl],
+    [NSString stringWithFormat:@"%@/users/%@?_token=%@&id=%@&user[name]=%@&user[password]=%@&user[password_confirmation]=%@&user[date_of_birth]=%@&user[address]=%@&user[phone_number]=%@&user[setting_attributes][email_communities]=%@&user[setting_attributes][email_stores]=%@&user[setting_attributes][email_people]=%@&user[setting_attributes][wishlist]=%@", [APIv1_0 serverUrl],
      [DataManager shared].userId,
      [DataManager shared].api_token,
      [DataManager shared].userId,

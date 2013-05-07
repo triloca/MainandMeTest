@@ -17,6 +17,8 @@
 #import "ProductDetailViewController.h"
 #import "StoreDetailViewController.h"
 #import "ProductsStoresManager.h"
+#import <CoreLocation/CoreLocation.h>
+#import "LocationManager.h"
 
 static NSString *kProductCellIdentifier = @"ProductCell";
 
@@ -32,6 +34,9 @@ static NSString *kProductCellIdentifier = @"ProductCell";
 
 @property (assign, nonatomic) BOOL isKeyBoardVisible;
 @property (assign, nonatomic) BOOL isAllCategories;
+
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *searchSpinerView;
+
 @end
 
 @implementation SearchViewController
@@ -77,11 +82,11 @@ static NSString *kProductCellIdentifier = @"ProductCell";
     _isAllCategories = NO;
     [self loadCategories];
     
-    if (_isStoreState) {
-        [self searchWithSearchType:SearchTypeStores searchFilter:SearchFilterNone];
-    }else{
-        [self searchWithSearchType:SearchTypeProducts searchFilter:SearchFilterNone];
-    }
+//    if (_isStoreState) {
+//        [self searchWithSearchType:SearchTypeStores searchFilter:SearchFilterNone];
+//    }else{
+//        [self searchWithSearchType:SearchTypeProducts searchFilter:SearchFilterNone];
+//    }
 
 }
 
@@ -94,6 +99,7 @@ static NSString *kProductCellIdentifier = @"ProductCell";
     [self setTitleTextLabel:nil];
     [self setTableView:nil];
     [self setSearchTextField:nil];
+    [self setSearchSpinerView:nil];
     [super viewDidUnload];
 }
 
@@ -113,7 +119,7 @@ static NSString *kProductCellIdentifier = @"ProductCell";
             break;
         case 2:{
             if (_isStoreState) {
-                return 140;
+                return 144;
             }else{
                 return 108;
             }
@@ -248,11 +254,34 @@ static NSString *kProductCellIdentifier = @"ProductCell";
         _isAllCategories = YES;
     }
     [self applyFilterWith:sender.text];
-    [self applyItemsFilterWith:sender.text];
+    //[self applyItemsFilterWith:sender.text];
+    if (_isStoreState) {
+        [self searchStoreByKeyWord:_searchTextField.text];
+    }else{
+        [self searchProductByKeyWord:_searchTextField.text];
+    }
 }
 
 
 #pragma mark - Privat Methods
+
+- (NSArray*)filterByLocation:(NSArray*)array{
+    NSLog(@"%@", array);
+    NSArray *sorteArray = [array sortedArrayUsingComparator:^(id a, id b) {
+        CLLocation *first = [[CLLocation alloc] initWithLatitude:[[a safeNumberObjectForKey:@"lat"] floatValue]
+                                                       longitude:[[a safeNumberObjectForKey:@"lng"] floatValue]];
+        CLLocation *second = [[CLLocation alloc] initWithLatitude:[[b safeNumberObjectForKey:@"lat"] floatValue]
+                                                        longitude:[[b safeNumberObjectForKey:@"lng"] floatValue]];
+        
+        CLLocation* defaultLocetion = [LocationManager shared].defaultLocation;
+        CGFloat firstDistance = [defaultLocetion distanceFromLocation:first];
+        CGFloat secondDistance = [defaultLocetion distanceFromLocation:second];
+        return firstDistance < secondDistance;
+    }];
+    
+    return sorteArray;
+}
+
 
 - (void)loadCategories{
     [self showSpinnerWithName:@"SearchViewController"];
@@ -430,8 +459,10 @@ static NSString *kProductCellIdentifier = @"ProductCell";
         imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
         if (_isStoreState) {
             cell.firstView.textLabel.text = [object safeStringObjectForKey:@"name"];
+            cell.firstView.backgroundColor = [UIColor whiteColor];
         }else{
             cell.firstView.textLabel.text = @"";
+            cell.firstView.backgroundColor = [UIColor clearColor];
         }
         
         [cell.firstView setImageURLString:imageUrl];
@@ -449,8 +480,10 @@ static NSString *kProductCellIdentifier = @"ProductCell";
         imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
         if (_isStoreState) {
             cell.secondView.textLabel.text = [object safeStringObjectForKey:@"name"];
+            cell.secondView.backgroundColor = [UIColor whiteColor];
         }else{
             cell.secondView.textLabel.text = @"";
+            cell.secondView.backgroundColor = [UIColor clearColor];
         }
         [cell.secondView setImageURLString:imageUrl];
         cell.secondView.hidden = NO;
@@ -466,8 +499,10 @@ static NSString *kProductCellIdentifier = @"ProductCell";
         imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
         if (_isStoreState) {
             cell.thirdView.textLabel.text = [object safeStringObjectForKey:@"name"];
+            cell.thirdView.backgroundColor = [UIColor whiteColor];
         }else{
             cell.thirdView.textLabel.text = @"";
+            cell.thirdView.backgroundColor = [UIColor clearColor];
         }
         [cell.thirdView setImageURLString:imageUrl];
         cell.thirdView.hidden = NO;
@@ -499,6 +534,7 @@ static NSString *kProductCellIdentifier = @"ProductCell";
     [self showSpinnerWithName:@"SearchViewCntroller"];
     [ProductsStoresManager searchWithSearchType:type
                                    searchFilter:filter
+                                           page:1
                                         success:^(NSArray *objects) {
                                             [self hideSpinnerWithName:@"SearchViewCntroller"];
 
@@ -517,6 +553,67 @@ static NSString *kProductCellIdentifier = @"ProductCell";
                                             [self hideSpinnerWithName:@"SearchViewCntroller"];
                                             [[AlertManager shared] showOkAlertWithTitle:exceptionString];
                                         }];
+}
+
+- (void)searchProductByKeyWord:(NSString*)key{
+    [[SearchManager shared] cancelSearch];
+    
+    if (key.length == 0) {
+        _itemsArray = [NSArray array];
+        [_searchSpinerView stopAnimating];
+        [_tableView reloadData];
+        return;
+    }
+    
+    [_searchSpinerView startAnimating];
+    [_tableView reloadData];
+
+    [SearchManager loadProductsForKey:key
+                              success:^(NSArray *objects) {
+                                  [_searchSpinerView stopAnimating];
+                                  _itemsArray = [self filterByLocation:objects];
+                                  [_tableView reloadData];
+                              }
+                              failure:^(NSError *error, NSString *errorString) {
+                                  [_searchSpinerView stopAnimating];
+                                  [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                      message:errorString];
+                              }
+                            exception:^(NSString *exceptionString) {
+                                [_searchSpinerView stopAnimating];
+                                [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                            }];
+}
+
+
+- (void)searchStoreByKeyWord:(NSString*)key{
+    [[SearchManager shared] cancelSearch];
+    
+    if (key.length == 0) {
+        _itemsArray = [NSArray array];
+        [_searchSpinerView stopAnimating];
+        [_tableView reloadData];
+        return;
+    }
+    
+    [_searchSpinerView startAnimating];
+    [_tableView reloadData];
+    
+    [SearchManager loadStoresForKey:key
+                              success:^(NSArray *objects) {
+                                  [_searchSpinerView stopAnimating];
+                                  _itemsArray = [self filterByLocation:objects];
+                                  [_tableView reloadData];
+                              }
+                              failure:^(NSError *error, NSString *errorString) {
+                                  [_searchSpinerView stopAnimating];
+                                  [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                      message:errorString];
+                              }
+                            exception:^(NSString *exceptionString) {
+                                [_searchSpinerView stopAnimating];
+                                [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                            }];
 }
 
 

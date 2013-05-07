@@ -18,6 +18,7 @@
 #import "MyLikesViewController.h"
 #import "AboutViewController.h"
 #import "SettingsViewController.h"
+#import "MyNotificationsViewController.h"
 
 @interface ProfileViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
@@ -59,7 +60,8 @@
     
     _tableArray = [NSArray arrayWithObjects:
                    @"My Likes",
-                   @"My Wishlists", @"My Settings",
+                   @"My Wishlists", @"My Notifications",
+                   @"My Settings",
                    @"About Main And Me", @"Logout", nil];
     
     [self loadProfileInfo];
@@ -133,14 +135,18 @@
             break;
         }
         case 2:{
-            [self showSettings];
+            [self showMyNotifications];
             break;
         }
         case 3:{
-            [self showAbout];
+            [self showSettings];
             break;
         }
         case 4:{
+            [self showAbout];
+            break;
+        }
+        case 5:{
             [self logout];
             break;
         }
@@ -231,6 +237,12 @@
     SettingsViewController* settingsViewController = [SettingsViewController loadFromXIB_Or_iPhone5_XIB];
     settingsViewController.profileInfo = _profileInfo;
     [self.navigationController pushViewController:settingsViewController animated:YES];
+}
+
+- (void)showMyNotifications{
+    MyNotificationsViewController* myNotificationsViewController = [MyNotificationsViewController loadFromXIB_Or_iPhone5_XIB];
+    //myNotificationsViewController.profileInfo = _profileInfo;
+    [self.navigationController pushViewController:myNotificationsViewController animated:YES];
 }
 
 @end

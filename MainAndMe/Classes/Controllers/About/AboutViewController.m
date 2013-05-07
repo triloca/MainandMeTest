@@ -11,6 +11,7 @@
 
 @interface AboutViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
+@property (weak, nonatomic) IBOutlet UITextView *textView;
 @end
 
 @implementation AboutViewController
@@ -35,6 +36,8 @@
     // Do any additional setup after loading the view from its nib.
     _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
     _titleTextLabel.text = @"About";
+    
+    _textView.font = [UIFont fontWithName:@"GillSans" size:17];
 
 }
 
@@ -45,6 +48,7 @@
 
 - (void)viewDidUnload {
     [self setTitleTextLabel:nil];
+    [self setTextView:nil];
     [super viewDidUnload];
 }
 

@@ -12,6 +12,7 @@
 @property (retain, nonatomic) IBOutlet UIButton *coverButton;
 @property (retain, nonatomic) IBOutlet UIImageView *imageView;
 @property (retain, nonatomic) IBOutlet UIImageView *backImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *badgeImageView;
 
 - (void)setImageURLString:(NSString*)imageURLString;
 - (void)startVibration;

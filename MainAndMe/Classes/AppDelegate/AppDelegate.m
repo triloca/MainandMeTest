@@ -11,6 +11,9 @@
 #import "ReachabilityManager.h"
 #import "FacebookSDK/FacebookSDK.h"
 #import "AlertManager.h"
+#import "NotificationManager.h"
+#import "TestFlight.h"
+#import "UIDevice+IdentifierAddition.h"
 
 @interface AppDelegate()
 
@@ -22,6 +25,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+//#ifndef DEBUG
+     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueDeviceIdentifier]];
+   
+    [TestFlight takeOff:@"13260f43-93c0-465c-b350-5c1293135100"];
+    
+//#endif
+
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
@@ -97,13 +109,16 @@
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
     NSString *tokenKey = [devToken description];
     NSLog(@"APNS Token = %@", tokenKey);
+    
 	tokenKey = [tokenKey stringByReplacingOccurrencesOfString:@"<" withString:@""];
 	tokenKey = [tokenKey stringByReplacingOccurrencesOfString:@">" withString:@""];
+    
+    [NotificationManager shared].deviceToken = tokenKey;
     tokenKey = [tokenKey stringByReplacingOccurrencesOfString:@" " withString:@""];
     //!Save token
     NSLog(@"APNS Token = %@", tokenKey);
-    NSString* alertText = [NSString stringWithFormat:@"%@\n%@\n%@", @"Notification Token =", tokenKey, @"For test only"];
-    [[AlertManager shared] showOkAlertWithTitle:alertText];
+    //NSString* alertText = [NSString stringWithFormat:@"%@\n%@\n%@", @"Notification Token =", tokenKey, @"For test only"];
+    //[[AlertManager shared] showOkAlertWithTitle:alertText];
 }
 
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
@@ -114,11 +129,13 @@
 
 - (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notif {
     NSLog(@"notif.userInfo: %@", notif.userInfo);
-    
+   // [[AlertManager shared] showOkAlertWithTitle:[NSString stringWithFormat:@"%@", notif.userInfo]];
 }
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     NSLog(@"userInfo: %@", userInfo);
-    NSString* notifString = [NSString stringWithFormat:@"%@", userInfo];
-    [[AlertManager shared] showOkAlertWithTitle:@"Notification" message:notifString];
+   // NSString* notifString = [NSString stringWithFormat:@"%@", userInfo];
+    [[LayoutManager shared].mainViewController loadNotifications];
+    //[[AlertManager shared] showOkAlertWithTitle:@"Notification" message:notifString];
 }
 @end

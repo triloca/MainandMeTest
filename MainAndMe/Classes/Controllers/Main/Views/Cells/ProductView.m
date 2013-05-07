@@ -20,6 +20,7 @@
 
 - (void)awakeFromNib{
     // Init code
+    _textLabel.font = [UIFont fontWithName:@"GillSans" size:14];
 }
 
 

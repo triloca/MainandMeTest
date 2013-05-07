@@ -37,6 +37,7 @@ typedef enum {
 
 + (void)searchWithSearchType:(SearchType)type
                 searchFilter:(SearchFilter)filter
+                        page:(NSInteger)page
                      success:(void(^) (NSArray* objects)) success
                      failure:(void(^) (NSError* error, NSString* errorString)) failure
                    exception:(void(^) (NSString* exceptionString))exception;
@@ -59,6 +60,7 @@ typedef enum {
                       state:(NSString*)state
                      street:(NSString*)street
                        city:(NSString*)city
+                   category:(NSString*)category
                     zipCode:(NSString*)zipCode
                 description:(NSString*)description
                       image:(UIImage*)image

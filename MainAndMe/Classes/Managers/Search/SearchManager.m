@@ -90,6 +90,23 @@
     }
 }
 
+
+//! Load Stores For Key
++ (void)loadProductsForKey:(NSString*)key
+                   success:(void(^) (NSArray* objects)) success
+                   failure:(void(^) (NSError* error, NSString* errorString)) failure
+                 exception:(void(^) (NSString* exceptionString))exception{
+    @try {
+        [[self shared] loadProductsForKey:key
+                                  success:success
+                                  failure:failure
+                                exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(@"Exeption\n Load Products for Key");
+    }
+}
+
 //! Load Products For Category
 + (void)loadProductsForCategory:(NSString*)categoryId
                       success:(void(^) (NSArray* objects)) success
@@ -152,6 +169,25 @@
     @catch (NSException *exc) {
         exception(@"Exeption\n Load Community create");
     }
+}
+
+
+//! Load Community By ID
++ (void)loadCommunityById:(NSNumber*)communityId
+                  success:(void(^) (NSDictionary* communitie)) success
+                  failure:(void(^) (NSError* error, NSString* errorString)) failure
+                exception:(void(^) (NSString* exceptionString))exception{
+
+    @try {
+        [[self shared] loadCommunityById:communityId
+                                 success:success
+                                 failure:failure
+                               exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(@"Exeption\n Load Community By ID create");
+    }
+
 }
 
 //! Load Likes For Products
@@ -456,7 +492,7 @@
                 failure:(void(^) (NSError* error, NSString* errorString)) failure
               exception:(void(^) (NSString* exceptionString))exception{
     
-    NSString* urlString = [NSString stringWithFormat:@"%@/stores?term=%@&fields=id,name", [APIv1_0 serverUrl], key];
+    NSString* urlString = [NSString stringWithFormat:@"%@/stores?term=%@", [APIv1_0 serverUrl], key];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
@@ -492,6 +528,50 @@
     [connection start];
     
 }
+
+//! Load Stores For Key
+-(void)loadProductsForKey:(NSString*)key
+                  success:(void(^) (NSArray* objects)) success
+                  failure:(void(^) (NSError* error, NSString* errorString)) failure
+                exception:(void(^) (NSString* exceptionString))exception{
+    
+    NSString* urlString = [NSString stringWithFormat:@"%@/products?keywords=%@", [APIv1_0 serverUrl], key];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:30];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        
+        if ([value isKindOfClass:[NSArray class]]) {
+            
+            success(value);
+            
+        }else{
+            NSString* messageString = @"Server API Error";
+            
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    } eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    _currentSearchConnection = connection;
+    [connection start];
+    
+}
+
 
 - (void)cancelSearch{
     [_currentSearchConnection cancel];
@@ -583,7 +663,8 @@
                 exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString =
-    [NSString stringWithFormat:@"%@/search_state_communities?name=%@&page=%d&per_page=40", [APIv1_0 serverUrl], state, page];
+    //[NSString stringWithFormat:@"%@/search_state_communities?name=%@&page=%d&per_page=40", [APIv1_0 serverUrl], state, page];
+    [NSString stringWithFormat:@"%@/search_state_communities?name=%@&compact=true", [APIv1_0 serverUrl], state];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
@@ -597,6 +678,45 @@
         //NSLog(@"%@", returnString);
         id value = [returnString JSONValue];
         if ([value isKindOfClass:[NSArray class]]) {
+            success(value);
+        }else{
+            NSString* messageString = [value safeStringObjectForKey:@"error"];
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    }eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+    
+}
+
+
+- (void)loadCommunityById:(NSNumber*)communityId
+                      success:(void(^) (NSDictionary* communitie)) success
+                      failure:(void(^) (NSError* error, NSString* errorString)) failure
+                    exception:(void(^) (NSString* exceptionString))exception{
+    
+    NSString* urlString =
+    //[NSString stringWithFormat:@"%@/search_state_communities?name=%@&page=%d&per_page=40", [APIv1_0 serverUrl], state, page];
+    [NSString stringWithFormat:@"%@/communities/%d", [APIv1_0 serverUrl], [communityId intValue]];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:40];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        if ([value isKindOfClass:[NSDictionary class]]) {
             success(value);
         }else{
             NSString* messageString = [value safeStringObjectForKey:@"error"];

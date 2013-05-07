@@ -12,4 +12,5 @@
 @property (assign, nonatomic) BOOL isNeedRefresh;
 - (void)loadNearest;
 - (void)refreshCurrentList:(id)refreshCurrentList;
+- (void)loadNotifications;
 @end

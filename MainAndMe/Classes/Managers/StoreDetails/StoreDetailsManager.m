@@ -126,6 +126,24 @@
 
 }
 
+
++ (void)loadProductByProductId:(NSString*)productId
+                       success:(void(^) (NSDictionary* product)) success
+                       failure:(void(^) (NSError* error, NSString* errorString)) failure
+                     exception:(void(^) (NSString* exceptionString))exception{
+    
+    @try {
+        [[self shared] loadProductByProductId:productId
+                                      success:success
+                                      failure:failure
+                                    exception:exception];
+    }
+    @catch (NSException *exc) {
+        exception(@"Exeption\n Product Info create");
+    }
+    
+}
+
 #pragma mark -
 
 - (void)loadProductsForStore:(NSString*)storeId
@@ -134,7 +152,7 @@
                   exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString =
-    [NSString stringWithFormat:@"%@/stores/%@/products", [APIv1_0 serverUrl], storeId];
+    [NSString stringWithFormat:@"%@/stores/%@/products/latest", [APIv1_0 serverUrl], storeId];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
@@ -203,13 +221,51 @@
     
 }
 
+- (void)loadProductByProductId:(NSString*)productId
+                       success:(void(^) (NSDictionary* product)) success
+                       failure:(void(^) (NSError* error, NSString* errorString)) failure
+                     exception:(void(^) (NSString* exceptionString))exception{
+    
+    NSString* urlString =
+    [NSString stringWithFormat:@"%@/products/%@", [APIv1_0 serverUrl], productId];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:20];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        if ([self isDataValid:value]) {
+            success(value);
+        }else{
+            NSString* messageString = [value safeStringObjectForKey:@"error"];
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    }eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+    
+}
+
+
 - (void)likeStore:(NSString*)storeId
           success:(void(^) ()) success
           failure:(void(^) (NSError* error, NSString* errorString)) failure
         exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString =
-    [NSString stringWithFormat:@"%@/stores/%@/likes?token=%@", [APIv1_0 serverUrl], storeId, [DataManager shared].api_token];
+    [NSString stringWithFormat:@"%@/stores/%@/likes?_token=%@", [APIv1_0 serverUrl], storeId, [DataManager shared].api_token];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
@@ -252,7 +308,7 @@
           exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString =
-    [NSString stringWithFormat:@"%@/follow/store/%@?token=%@", [APIv1_0 serverUrl], storeId, [DataManager shared].api_token];
+    [NSString stringWithFormat:@"%@/follow/store/%@?_token=%@", [APIv1_0 serverUrl], storeId, [DataManager shared].api_token];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
@@ -297,7 +353,7 @@
         exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString =
-    [NSString stringWithFormat:@"%@/stores/%@/rate?token=%@&rate=%d", [APIv1_0 serverUrl], storeId, [DataManager shared].api_token, rate];
+    [NSString stringWithFormat:@"%@/stores/%@/rate?_token=%@&rate=%d", [APIv1_0 serverUrl], storeId, [DataManager shared].api_token, rate];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     

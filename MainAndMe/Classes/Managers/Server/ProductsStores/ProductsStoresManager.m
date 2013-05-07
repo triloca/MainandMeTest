@@ -70,12 +70,14 @@
 //! Search with type
 + (void)searchWithSearchType:(SearchType)type
                 searchFilter:(SearchFilter)filter
+                        page:(NSInteger)page
                      success:(void(^) (NSArray* objects)) success
                      failure:(void(^) (NSError* error, NSString* errorString)) failure
                    exception:(void(^) (NSString* exceptionString))exception{
     @try {
         [[self shared] searchWithSearchType:type
                                searchFilter:filter
+                                       page:page
                                     success:success
                                     failure:failure
                                   exception:exception];
@@ -119,6 +121,7 @@
                       state:(NSString*)state
                      street:(NSString*)street
                        city:(NSString*)city
+                   category:(NSString*)category
                     zipCode:(NSString*)zipCode
                 description:(NSString*)description
                       image:(UIImage*)image
@@ -132,6 +135,7 @@
                                      state:state
                                     street:street
                                       city:city
+                                  category:(NSString*)category
                                    zipCode:zipCode
                                description:description
                                      image:image
@@ -209,6 +213,7 @@
 //! Search with type
 -(void)searchWithSearchType:(SearchType)type
                searchFilter:(SearchFilter)filter
+                       page:(NSInteger)page
                     success:(void(^) (NSArray* objects)) success
                     failure:(void(^) (NSError* error, NSString* errorString)) failure
                   exception:(void(^) (NSString* exceptionString))exception{
@@ -238,6 +243,8 @@
                  [LocationManager shared].statePrefix];
     
     urlString = [urlString stringByAppendingFormat:@"&radius=%@", @"20"];
+    
+    urlString = [urlString stringByAppendingFormat:@"&page=%d&per_page=30", page];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
@@ -508,16 +515,17 @@
 
 //! Upload Store
 - (void)uploadStoreWithName:(NSString*)name
-                        country:(NSString*)country
-                     state:(NSString*)state
-                    street:(NSString*)street
-                     city:(NSString*)city
+                    country:(NSString*)country
+                      state:(NSString*)state
+                     street:(NSString*)street
+                       city:(NSString*)city
+                   category:(NSString*)category
                     zipCode:(NSString*)zipCode
-                  description:(NSString*)description
-                        image:(UIImage*)image
-                      success:(void(^) (NSDictionary* object)) success
-                      failure:(void(^) (NSError* error, NSString* errorString)) failure
-                    exception:(void(^) (NSString* exceptionString))exception{
+                description:(NSString*)description
+                      image:(UIImage*)image
+                    success:(void(^) (NSDictionary* object)) success
+                    failure:(void(^) (NSError* error, NSString* errorString)) failure
+                  exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString =
     [NSString stringWithFormat:@"%@/stores", [APIv1_0 serverUrl]];
@@ -552,6 +560,9 @@
     }
     if (city.length > 0) {
         [parameters setValue:city forKey:@"store[city]"];
+    }
+    if (category.length > 0) {
+        [parameters setValue:category forKey:@"store[category]"];
     }
     if (state.length > 0) {
         [parameters setValue:state forKey:@"store[state]"];
@@ -636,7 +647,7 @@
                  exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString =
-    [NSString stringWithFormat:@"%@/products?token=%@&product[name]=%@&product[price]=%@&product[store_name]=%@&product[category]=%@&product[description]=%@&image_name=image.jpg", [APIv1_0 serverUrl], [DataManager shared].api_token, name, price, storeName, category, description];
+    [NSString stringWithFormat:@"%@/products?_token=%@&product[name]=%@&product[price]=%@&product[store_name]=%@&product[category]=%@&product[description]=%@&image_name=image.jpg", [APIv1_0 serverUrl], [DataManager shared].api_token, name, price, storeName, category, description];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
