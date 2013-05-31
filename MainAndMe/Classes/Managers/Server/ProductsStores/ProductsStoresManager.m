@@ -246,6 +246,8 @@
     
     urlString = [urlString stringByAppendingFormat:@"&page=%d&per_page=30", page];
     
+    urlString = [urlString stringByAppendingFormat:@"&realtime=%@", @"true"];
+    
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]

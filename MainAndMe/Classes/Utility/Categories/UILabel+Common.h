@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface UILabel (Common)
--(void)resizeToStretch;
+- (void)resizeToStretch;
 @end

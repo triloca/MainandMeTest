@@ -367,6 +367,10 @@
         return;
     }
     
+    if (userName == nil || userName.length == 0 || [userName isEqualToString:@"(null)"]) {
+        userName = @"";
+    }
+    
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [LoginSignUpManager loginViaSocialWithUserId:user_id
                                      accessToken:accessToken
@@ -485,6 +489,10 @@
     if (![ReachabilityManager isReachable]) {
         [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
         return;
+    }
+    
+    if (userName == nil || userName.length == 0 || [userName isEqualToString:@"(null)"]) {
+        userName = @"";
     }
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];

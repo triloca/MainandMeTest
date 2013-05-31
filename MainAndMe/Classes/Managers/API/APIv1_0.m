@@ -11,8 +11,12 @@
 //NSString * const kServerURL = @"http://mainandme-staging-s.herokuapp.com/api/v1";
 //NSString * const kServerURL = @"http://mainandme-test.herokuapp.com/api/v1";
 
-NSString * const kServerBaseURL = @"http://mainandme-test.herokuapp.com";
+//NSString * const kServerBaseURL = @"http://mainandme-test.herokuapp.com";
+//NSString * const kServerAPIVersion = @"/api/v1";
+
+NSString * const kServerBaseURL = @"http://www.mainandme.com";
 NSString * const kServerAPIVersion = @"/api/v1";
+
 
 @implementation APIv1_0
 
