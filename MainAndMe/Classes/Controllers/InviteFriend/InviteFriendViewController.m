@@ -239,7 +239,7 @@
     [NSMutableDictionary dictionaryWithObjectsAndKeys:
      @"Main And Me for iOS", @"name",
      @"Main and Me is 100% dedicated to local, independent business.", @"description",
-     @"http://mainandme-test.herokuapp.com", @"link",
+     @"http://mainandme.com", @"link",
      @"http://mainandme-staging-s.herokuapp.com/assets/logo.png", @"picture",
      nil];
     

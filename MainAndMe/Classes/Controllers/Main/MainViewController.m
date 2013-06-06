@@ -54,6 +54,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 @property (unsafe_unretained, nonatomic) IBOutlet UIButton *toggleButton;
 @property (assign, nonatomic) BOOL isPageStile;
 @property (assign, nonatomic) NSInteger page;
+@property (assign, nonatomic) NSInteger refreshingPage;
 
 @property (assign, nonatomic) ControllerState controllerState;
 
@@ -74,6 +75,8 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 @property (weak, nonatomic) IBOutlet UIImageView *barTriangleImageView;
 
 @property (strong, nonatomic) MNMBottomPullToRefreshManager* pullToRefresh;
+
+
 @end
 
 @implementation MainViewController
@@ -130,7 +133,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     
     
     self.refreshControl = [[ODRefreshControl alloc] initInScrollView:self.tableView];
-    [self.refreshControl addTarget:self action:@selector(loadNextPage:) forControlEvents:UIControlEventValueChanged];
+    [self.refreshControl addTarget:self action:@selector(refreshCurrentList:) forControlEvents:UIControlEventValueChanged];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didUpdateLocation:)
@@ -138,7 +141,9 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                                object:nil];
 
     _barTriangleImageView.hidden = YES;
-    [self addDeviceToken];
+    
+    _isNeedSendToken = YES;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -148,6 +153,11 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         [self refreshCurrentList:nil];
     }
     [self loadNotifications];
+    
+    if (_isNeedSendToken) {
+        [self addDeviceToken];
+        _isNeedSendToken = NO;
+    }
 }
 
 - (void)viewDidLayoutSubviews {
@@ -288,6 +298,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 }
 
 - (IBAction)toggleButtonClicked:(id)sender {
+    
     if (_isPageStile) {
         [_toggleButton setImage:[UIImage imageNamed:@"page_button@2x.png"] forState:UIControlStateNormal];
         _isPageStile = NO;
@@ -312,6 +323,9 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
     }
     [self reloadNeededTable];
+    //[self refreshCurrentList:nil];
+    [self searchWithSearchType:[ProductsStoresManager shared].lastSearchType
+                  searchFilter:[ProductsStoresManager shared].lastSearchFilter];
 }
 
 - (IBAction)titleButtonClicked:(id)sender {
@@ -628,9 +642,11 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 
 - (void)refreshCurrentList:(id)refreshCurrentList {
-    [self searchWithSearchType:[ProductsStoresManager shared].lastSearchType
-                  searchFilter:[ProductsStoresManager shared].lastSearchFilter];
-    
+//    [self searchWithSearchType:[ProductsStoresManager shared].lastSearchType
+//                  searchFilter:[ProductsStoresManager shared].lastSearchFilter];
+    _refreshingPage = 1;
+    [self refreshToPage:_page];
+    [self.refreshControl endRefreshing];
 }
 
 - (void)loadNextPage:(id)sender {
@@ -694,6 +710,63 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                             [_pullToRefresh tableViewReloadFinished];
                                         }];
 }
+
+- (void)refreshToPage:(NSInteger)page{
+    
+    if (_refreshingPage == 1) {
+        _objectsArray = [NSArray array];
+    }
+    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [ProductsStoresManager searchWithSearchType:[ProductsStoresManager shared].lastSearchType
+                                   searchFilter:[ProductsStoresManager shared].lastSearchFilter
+                                           page:_refreshingPage
+                                        success:^(NSArray *objects) {
+                                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                            if (_refreshingPage <= page) {
+                                                _refreshingPage++;
+                                                NSMutableArray* temp = [NSMutableArray arrayWithArray:_objectsArray];
+                                                [temp addObjectsFromArray:objects];
+                                                _objectsArray = temp;
+                                                [self refreshToPage:page];
+                                            }else{
+                                                
+                                                if ([ProductsStoresManager shared].lastSearchType == SearchTypeStores) {
+                                                    _controllerState = ControllerStateStores;
+                                                }else{
+                                                    _controllerState = ControllerStateProducts;
+                                                }
+                                                
+                                                _refreshingPage = 1;
+                                                [_pullToRefresh tableViewReloadFinished];
+                                                [self reloadNeededTable];
+                                            }
+                                            
+                                        }
+                                        failure:^(NSError *error, NSString *errorString) {
+                                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                            [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                message:errorString];
+                                            _refreshingPage = 1;
+                                            if ([ProductsStoresManager shared].lastSearchType == SearchTypeStores) {
+                                                _controllerState = ControllerStateStores;
+                                            }else{
+                                                _controllerState = ControllerStateProducts;
+                                            }
+                                            [_pullToRefresh tableViewReloadFinished];
+                                            _objectsArray = [NSArray new];
+                                            
+                                            [self reloadNeededTable];
+                                            
+                                        }exception:^(NSString *exceptionString) {
+                                            [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                            [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                            [_pullToRefresh tableViewReloadFinished];
+                                        }];
+}
+
+
+
 
 - (void)reloadNeededTable{
     if (_isPageStile) {
@@ -791,28 +864,37 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 
 - (void)setTitleText:(NSString*)text{
+    
     _addressLabel.text = text;
     [_addressLabel resizeToStretch];
     CGRect rc = _addressLabel.frame;
-    if (rc.size.width > 200){
-        rc.size.width = 200;
+    if (rc.size.width > 220){
+        rc.size.width = 220;
     }
     rc.origin.x = (self.view.frame.size.width - rc.size.width) / 2;
+    rc.origin.x -= 7;
     _addressLabel.frame = rc;
     
     CGRect rc2 = _triagleImageView.frame;
     rc2.origin.x = CGRectGetMaxX(rc);
     _triagleImageView.frame = rc2;
+    
+    _addressLabel.text = text;
 }
 
 - (void)addDeviceToken{
+    
+    if ([NotificationManager shared].deviceToken.length == 0) {
+        return;
+    }
+    
     [NotificationManager addDeviceToken:[NotificationManager shared].deviceToken
                                 success:^(NSArray *obj) {
                                     
                                 }
                                 failure:^(NSError *error, NSString *errorString) {
-                                   // [[AlertManager shared] showOkAlertWithTitle:@"Error"
-                                    //                                    message:errorString];
+                                    [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                        message:errorString];
                                 }
                               exception:^(NSString *exceptionString) {
                                   [[AlertManager shared] showOkAlertWithTitle:exceptionString];

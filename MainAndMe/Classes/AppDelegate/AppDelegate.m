@@ -114,10 +114,10 @@
 	tokenKey = [tokenKey stringByReplacingOccurrencesOfString:@">" withString:@""];
     
     [NotificationManager shared].deviceToken = tokenKey;
-    tokenKey = [tokenKey stringByReplacingOccurrencesOfString:@" " withString:@""];
+    //tokenKey = [tokenKey stringByReplacingOccurrencesOfString:@" " withString:@""];
     //!Save token
-    NSLog(@"APNS Token = %@", tokenKey);
-    //NSString* alertText = [NSString stringWithFormat:@"%@\n%@\n%@", @"Notification Token =", tokenKey, @"For test only"];
+    //NSLog(@"APNS Token = %@", tokenKey);
+   // NSString* alertText = [NSString stringWithFormat:@"%@\n%@\n%@", @"Notification Token =", tokenKey, @"For test only"];
     //[[AlertManager shared] showOkAlertWithTitle:alertText];
 }
 

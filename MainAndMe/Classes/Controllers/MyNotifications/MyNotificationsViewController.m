@@ -123,6 +123,11 @@
     NSNumber* product_id = [object safeNumberObjectForKey:@"product_id"];
     NSNumber* store_id = [object safeNumberObjectForKey:@"store_id"];
     
+    if ([[object safeStringObjectForKey:@"notifiable_type"] isEqualToString:@"Follow"]) {
+        [self showRemoveAlertFro:object];
+        return;
+    }
+    
     if ([store_id intValue] > 0) {
         [self loadStoreById:[store_id stringValue]];
     }
@@ -208,5 +213,36 @@
                                             }];
 
 }
+
+
+- (void)showRemoveAlertFro:(NSDictionary*)obj{
+    [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        [self removeNotificationFor:obj];
+    }
+                                           title:@"Message"
+                                         message:@"You have one more folower"
+                               cancelButtonTitle:@"Ok"
+                               otherButtonTitles:nil];
+}
+
+- (void)removeNotificationFor:(NSDictionary*)object{
+
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [NotificationManager removeNotificationsById:[object safeNumberObjectForKey:@"id"]
+                                         success:^(id obj) {
+                                             [self loadNotifications];
+                                         }
+                                         failure:^(NSError *error, NSString *errorString) {
+                                             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                             [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                 message:errorString];
+                                         }
+                                       exception:^(NSString *exceptionString) {
+                                           [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                           [[AlertManager shared] showOkAlertWithTitle:exceptionString];
+                                       }];
+
+}
+
 
 @end

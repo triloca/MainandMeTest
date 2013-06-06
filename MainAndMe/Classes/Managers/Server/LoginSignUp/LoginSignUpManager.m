@@ -13,6 +13,7 @@
 #import "UserDefaultsManager.h"
 #import "DataManager.h"
 #import "TwitterManager.h"
+#import "LayoutManager.h"
 
 
 @interface LoginSignUpManager()
@@ -529,6 +530,8 @@
     [[TwitterManager sharedInstance] logout];
     [[DataManager shared] clearUserInfo];
     [[UserDefaultsManager shared] clearOldLoginSettings];
+    
+    [LayoutManager shared].mainViewController.isNeedSendToken = YES;
 }
 
 @end

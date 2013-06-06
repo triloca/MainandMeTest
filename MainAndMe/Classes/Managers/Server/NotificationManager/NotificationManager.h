@@ -26,6 +26,12 @@
                     failure:(void(^) (NSError* error, NSString* errorString)) failure
                   exception:(void(^) (NSString* exceptionString))exception;
 
++ (void)removeNotificationsById:(NSNumber*)notifId
+                        success:(void(^) (id obj)) success
+                        failure:(void(^) (NSError* error, NSString* errorString)) failure
+                      exception:(void(^) (NSString* exceptionString))exception;
+
 - (BOOL)isContainId:(NSNumber*)number;
 - (NSNumber*)notificationIdByObjectId:(NSNumber*)number;
+
 @end

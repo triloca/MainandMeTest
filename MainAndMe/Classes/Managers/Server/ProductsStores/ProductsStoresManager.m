@@ -242,7 +242,7 @@
                  [LocationManager shared].stateName,
                  [LocationManager shared].statePrefix];
     
-    urlString = [urlString stringByAppendingFormat:@"&radius=%@", @"20"];
+    //urlString = [urlString stringByAppendingFormat:@"&radius=%@", @"20"];
     
     urlString = [urlString stringByAppendingFormat:@"&page=%d&per_page=30", page];
     
