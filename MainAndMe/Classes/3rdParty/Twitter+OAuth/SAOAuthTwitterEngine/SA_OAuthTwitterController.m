@@ -43,7 +43,7 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 
 @implementation NSString (TwitterOAuth)
 - (BOOL) oauthtwitter_isNumeric {
-	const char *raw = (const char *) [self UTF8String];
+	const char				*raw = (const char *) [self UTF8String];
 	
 	for (int i = 0; i < strlen(raw); i++) {
 		if (raw[i] < '0' || raw[i] > '9') return NO;
@@ -107,7 +107,7 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 		if ([_webView respondsToSelector: @selector(setDetectsPhoneNumbers:)]) [(id) _webView setDetectsPhoneNumbers: NO];
 		if ([_webView respondsToSelector: @selector(setDataDetectorTypes:)]) [(id) _webView setDataDetectorTypes: 0];
 		
-		NSURLRequest *request = _engine.authorizeURLRequest;
+		NSURLRequest			*request = _engine.authorizeURLRequest;
 		[_webView loadRequest: request];
 
 		[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(pasteboardChanged:) name: UIPasteboardChangedNotification object: nil];
@@ -115,6 +115,7 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 	return self;
 }
 
+//=============================================================================================================================
 #pragma mark Actions
 - (void) denied {
 	if ([_delegate respondsToSelector: @selector(OAuthTwitterControllerFailed:)]) [_delegate OAuthTwitterControllerFailed: self];
@@ -134,6 +135,7 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 	[self performSelector: @selector(dismissModalViewControllerAnimated:) withObject: (id) kCFBooleanTrue afterDelay: 0.0];
 }
 
+//=============================================================================================================================
 #pragma mark View Controller Stuff
 - (void) loadView {
 	[super loadView];
@@ -149,7 +151,6 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 		_backgroundView.frame =  CGRectMake(0, 44, 320, 416);
 		_navBar = [[[UINavigationBar alloc] initWithFrame: CGRectMake(0, 0, 320, 44)] autorelease];
 	}
-    _navBar.tintColor = [UIColor colorWithRed:22.0f/255 green:30.0f/255 blue:120.0f/255 alpha:1];
 	_navBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 	_backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -170,7 +171,7 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 	label.text = NSLocalizedString(@"Please Wait…", nil);
 	label.backgroundColor = [UIColor clearColor];
 	label.textColor = [UIColor whiteColor];
-	label.textAlignment = UITextAlignmentCenter;
+	label.textAlignment = NSTextAlignmentCenter;
 	label.font = [UIFont boldSystemFontOfSize: 15];
 	[_blockerView addSubview: label];
 	
@@ -189,7 +190,7 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 - (void) didRotateFromInterfaceOrientation: (UIInterfaceOrientation) fromInterfaceOrientation {
@@ -198,6 +199,7 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 //	[self performInjection];			//removed due to twitter update
 }
 
+//=============================================================================================================================
 #pragma mark Notifications
 - (void) pasteboardChanged: (NSNotification *) note {
 	UIPasteboard					*pb = [UIPasteboard generalPasteboard];
@@ -211,88 +213,41 @@ static NSString* const kGGTwitterLoadingBackgroundImage = @"twitter_load.png";
 	[self gotPin: copied];
 }
 
-
+//=============================================================================================================================
 #pragma mark Webview Delegate stuff
-//- (void) webViewDidFinishLoad: (UIWebView *) webView {
-//	_loading = NO;
-//	//[self performInjection];
-//	if (_firstLoad) {
-//		[_webView performSelector: @selector(stringByEvaluatingJavaScriptFromString:) withObject: @"window.scrollBy(0,200)" afterDelay: 0];
-//		_firstLoad = NO;
-//	} else {
-//		NSString					*authPin = [self locateAuthPinInWebView: webView];
-//
-//		if (authPin.length) {
-//			[self gotPin: authPin];
-//			return;
-//		}
-//		
-//		NSString					*formCount = [webView stringByEvaluatingJavaScriptFromString: @"document.forms.length"];
-//		
-//		if ([formCount isEqualToString: @"0"]) {
-//			[self showPinCopyPrompt];
-//		}
-//	}
-//	
-//
-//	
-//	[UIView beginAnimations: nil context: nil];
-//	_blockerView.alpha = 0.0;
-//	[UIView commitAnimations];
-//	
-//	if ([_webView isLoading]) {
-//		_webView.alpha = 0.0;
-//	} else {
-//		_webView.alpha = 1.0;
-//	}
-//}
-
 - (void) webViewDidFinishLoad: (UIWebView *) webView {
-    _loading = NO;
-    //[self performInjection];
-    if (_firstLoad) {
-        [_webView performSelector: @selector(stringByEvaluatingJavaScriptFromString:) withObject: @"window.scrollBy(0,200)" afterDelay: 0];
-        _firstLoad = NO;
-    } else {
-        /*
-         NSString                    *authPin = [self locateAuthPinInWebView: webView];
-         NSLog(@"authPin: %@", authPin);
-         if (authPin.length) {
-         [self gotPin: authPin];
-         return;
-         }
-         
-         NSString                    *formCount = [webView stringByEvaluatingJavaScriptFromString: @"document.forms.length"];
-         
-         if ([formCount isEqualToString: @"0"]) {
-         [self showPinCopyPrompt];
-         }*/
-        
-        //*****************************************************
-        //  This is to bypass the pin requirement
-        //  in case the call back URL is set in Twitter settings
-        //*****************************************************
-        [_engine requestAccessToken];
-        if ([_delegate respondsToSelector: @selector(OAuthTwitterController:authenticatedWithUsername:)])
-        {
-            [_delegate OAuthTwitterController: self authenticatedWithUsername: _engine.username];
-            
-        }
-        [self performSelector: @selector(dismissModalViewControllerAnimated:) withObject: (id) kCFBooleanTrue afterDelay: 1.0];
-        
-        //[self dismissModalViewControllerAnimated:YES];
-    }
-    [UIView beginAnimations: nil context: nil];
-    _blockerView.alpha = 0.0;
-    [UIView commitAnimations];
-    
-    if ([_webView isLoading]) {
-        _webView.alpha = 0.0;
-    } else {
-        _webView.alpha = 1.0;
-    }
-}
+	_loading = NO;
+	//[self performInjection];
+	if (_firstLoad) {
+		[_webView performSelector: @selector(stringByEvaluatingJavaScriptFromString:) withObject: @"window.scrollBy(0,200)" afterDelay: 0];
+		_firstLoad = NO;
+	} else {
+		NSString					*authPin = [self locateAuthPinInWebView: webView];
 
+		if (authPin.length) {
+			[self gotPin: authPin];
+			return;
+		}
+		
+		NSString					*formCount = [webView stringByEvaluatingJavaScriptFromString: @"document.forms.length"];
+		
+		if ([formCount isEqualToString: @"0"]) {
+			[self showPinCopyPrompt];
+		}
+	}
+	
+
+	
+	[UIView beginAnimations: nil context: nil];
+	_blockerView.alpha = 0.0;
+	[UIView commitAnimations];
+	
+	if ([_webView isLoading]) {
+		_webView.alpha = 0.0;
+	} else {
+		_webView.alpha = 1.0;
+	}
+}
 
 - (void) showPinCopyPrompt {
 	if (self.pinCopyPromptBar.superview) return;		//already shown
@@ -317,7 +272,6 @@ Ugly. I apologize for its inelegance. Bleah.
 
 - (NSString *) locateAuthPinInWebView: (UIWebView *) webView {
 	// Look for either 'oauth-pin' or 'oauth_pin' in the raw HTML
-
 	NSString			*js = @"var d = document.getElementById('oauth-pin'); if (d == null) d = document.getElementById('oauth_pin'); if (d) d = d.innerHTML; d;";
 	NSString			*pin = [[webView stringByEvaluatingJavaScriptFromString: js] stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	

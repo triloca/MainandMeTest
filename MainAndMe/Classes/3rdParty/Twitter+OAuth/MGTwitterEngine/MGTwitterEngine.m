@@ -9,7 +9,7 @@
 #import "MGTwitterEngine.h"
 #import "MGTwitterHTTPURLConnection.h"
 
-#import "NSData+MGBase64.h"
+#import "NSData+Base64.h"
 
 #define USE_LIBXML 0
 

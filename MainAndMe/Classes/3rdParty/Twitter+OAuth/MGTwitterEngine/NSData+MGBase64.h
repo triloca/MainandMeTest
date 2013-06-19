@@ -1,5 +1,5 @@
 //
-//  NSData+MGBase64.m
+//  NSData+Base64.m
 //
 // Derived from http://colloquy.info/project/browser/trunk/NSDataAdditions.h?rev=1576
 // Created by khammond on Mon Oct 29 2001.

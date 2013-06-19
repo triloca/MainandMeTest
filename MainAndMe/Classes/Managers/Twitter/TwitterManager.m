@@ -16,6 +16,9 @@
 #define kTwitterOAuthConsumerKey		@"CGLJ4SdxPBnJG4ygNsAs1Q"
 #define kTwitterOAuthConsumerSecret	    @"CBSHV5bsvSO2tr17tCr1xreEwTbV8WoO6nwBfyGSsUM"
 
+//#define kTwitterOAuthConsumerKey		@"exmUYe6HjdOF5U7QY9RZzQ"
+//#define kTwitterOAuthConsumerSecret	    @"9VqgaghQ6s63jSxZqItFCWDqfdAMVD0wjb50z8hmO0"
+
 typedef void (^SuccessBlock)(TwitterManager* facebookManager);
 typedef void (^FailureBlock)(TwitterManager* facebookManager, NSError* error);
 
