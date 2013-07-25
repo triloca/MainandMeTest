@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSString* stateName;
 @property (strong, nonatomic) NSString* statePrefix;
 @property (strong, nonatomic) CLLocation* defaultLocation;
+@property (assign, nonatomic) BOOL locationFailed;
 
 
 + (LocationManager*)shared;

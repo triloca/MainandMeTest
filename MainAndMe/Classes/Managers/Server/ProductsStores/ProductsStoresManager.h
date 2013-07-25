@@ -17,7 +17,8 @@ typedef enum {
     SearchFilterNewly,
     SearchFilterRandom,
     SearchFilterFututrd,
-    SearchFilterNone
+    SearchFilterNone,
+    SearchFilterNewlyAll,
 } SearchFilter;
 
 

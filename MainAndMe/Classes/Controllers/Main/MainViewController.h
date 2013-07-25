@@ -11,6 +11,7 @@
 @interface MainViewController : UIViewController
 @property (assign, nonatomic) BOOL isNeedRefresh;
 @property (assign, nonatomic) BOOL isNeedSendToken;
+@property (assign, nonatomic) BOOL isJustExplore;
 - (void)loadNearest;
 - (void)refreshCurrentList:(id)refreshCurrentList;
 - (void)loadNotifications;

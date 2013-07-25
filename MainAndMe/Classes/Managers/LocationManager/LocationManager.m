@@ -46,6 +46,8 @@
         _stateName = @"";
         _statePrefix = @"";
         
+        _locationFailed = NO;
+        
     }
     return self;
 }
@@ -55,6 +57,7 @@
 #pragma mark -  CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     
+    _locationFailed = YES;
     [_locationManager stopUpdatingLocation];
     if (_isUpdating) {
         _isUpdating = NO;
@@ -64,6 +67,8 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    
+    _locationFailed = NO;
     
     self.currentLocation = newLocation;
     self.defaultLocation = newLocation;

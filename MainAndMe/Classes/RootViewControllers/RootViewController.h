@@ -11,4 +11,5 @@
 
 @property (strong, nonatomic) UITabBarController* rootTabBarController;
 - (void)hidePhotoView;
+- (void)loadPhotoButtonClicked:(id)sender;
 @end

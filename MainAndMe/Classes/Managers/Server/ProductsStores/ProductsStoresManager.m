@@ -220,31 +220,30 @@
 
    NSString* urlString = [self urlFrom:type filter:filter];
 
-//    _lastSearchFilter = filter;
-//    _lastSearchType = type;
-    
-//    if (type == SearchTypeProducts && filter == SearchFilterNone) {
-//        
-//        urlString = [NSString stringWithFormat:urlString,
-//                     [LocationManager shared].defaultLocation.coordinate.latitude,
-//                     [LocationManager shared].defaultLocation.coordinate.longitude];
-//        urlString = [NSString stringWithFormat:@"%@%@", [APIv1_0 serverUrl], urlString];
-//    }else{
-//        urlString = [NSString stringWithFormat:@"%@%@", [APIv1_0 serverUrl], urlString];
-//    }
     urlString = [NSString stringWithFormat:@"%@%@", [APIv1_0 serverUrl], urlString];
     
-    urlString = [urlString stringByAppendingFormat:@"?lat=%f&lng=%f",
-                 [LocationManager shared].defaultLocation.coordinate.latitude,
-                 [LocationManager shared].defaultLocation.coordinate.longitude];
-    
-    urlString = [urlString stringByAppendingFormat:@"&city=%@&state=%@",
-                 [LocationManager shared].stateName,
-                 [LocationManager shared].statePrefix];
-    
-    //urlString = [urlString stringByAppendingFormat:@"&radius=%@", @"20"];
-    
-    urlString = [urlString stringByAppendingFormat:@"&page=%d&per_page=30", page];
+    if (filter == SearchFilterNewlyAll) {
+        urlString = [urlString stringByAppendingFormat:@"?page=%d&per_page=30", page];
+    }else{
+        urlString = [urlString stringByAppendingFormat:@"?lat=%f&lng=%f",
+                     [LocationManager shared].defaultLocation.coordinate.latitude,
+                     [LocationManager shared].defaultLocation.coordinate.longitude];
+        
+        urlString = [urlString stringByAppendingFormat:@"&city=%@&state=%@",
+                     [LocationManager shared].stateName,
+                     [LocationManager shared].statePrefix];
+        
+        if ([LocationManager shared].currentLocation == nil
+            && [LocationManager shared].locationFailed
+            && type == SearchTypeStores) {
+            
+            urlString = [NSString stringWithFormat:@"%@%@", [APIv1_0 serverUrl],
+                         @"/stores/latest"];
+            urlString = [urlString stringByAppendingFormat:@"?page=%d&per_page=30", page];
+        }else{
+            urlString = [urlString stringByAppendingFormat:@"&page=%d&per_page=30", page];
+        }
+    }
     
     urlString = [urlString stringByAppendingFormat:@"&realtime=%@", @"true"];
     
@@ -731,6 +730,9 @@
                 case SearchFilterFututrd:
                     return @"/stores/featured";
                     break;
+                case SearchFilterNewlyAll:
+                    return @"/stores/latest";
+                    break;
                     
                 default:
                     break;
@@ -755,7 +757,9 @@
                 case SearchFilterFututrd:
                     return @"/products/featured";
                     break;
-                    
+                case SearchFilterNewlyAll:
+                    return @"/products/nearby";
+                    break;
                 default:
                     break;
             }

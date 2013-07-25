@@ -139,6 +139,11 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                              selector:@selector(didUpdateLocation:)
                                                  name:kUNDidUpdateLocetionNotification
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didFailedUpdateLocation:)
+                                                 name:kUNDidFailUpdateLocetionNotification
+                                               object:nil];
 
     _barTriangleImageView.hidden = YES;
     
@@ -148,6 +153,9 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    _isJustExplore = NO;
+    
     if (_isNeedRefresh) {
         _page = 1;
         [self refreshCurrentList:nil];
@@ -686,6 +694,10 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                             [temp addObjectsFromArray:objects];
                                             _objectsArray = temp;
                                             
+                                            if (_objectsArray.count == 0) {
+                                                [self showAlert];
+                                            }
+                                            
                                             [self reloadNeededTable];
                                             
                                         }
@@ -709,6 +721,48 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                             [[AlertManager shared] showOkAlertWithTitle:exceptionString];
                                             [_pullToRefresh tableViewReloadFinished];
                                         }];
+}
+
+- (void)showAlert{
+    
+    if (_isJustExplore) {
+        _page = 1;
+        
+        if (_controllerState == ControllerStateStores) {
+            [self searchWithSearchType:SearchTypeStores searchFilter:SearchFilterNewlyAll];
+        }else{
+            [self searchWithSearchType:SearchTypeProducts searchFilter:SearchFilterNewlyAll];
+        }
+        return;
+    }
+    
+    [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        if (buttonIndex == 0) {
+            
+            double delayInSeconds = 0.1;
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [[LayoutManager shared].rootTabBarController loadPhotoButtonClicked:nil];
+            });
+            
+        }else{
+            _isJustExplore = YES;
+            
+            _page = 1;
+            
+            if (_controllerState == ControllerStateStores) {
+                [self searchWithSearchType:SearchTypeStores searchFilter:SearchFilterNewlyAll];
+            }else{
+                [self searchWithSearchType:SearchTypeProducts searchFilter:SearchFilterNewlyAll];
+            }
+        
+        }
+    }
+                                           title:@"Your town isn't online yet..."
+                                         message:@"Be the first to add an item from an independent business"
+                               cancelButtonTitle:@"Add an item"
+                               otherButtonTitles:@"Just explore", nil];
+    
 }
 
 - (void)refreshToPage:(NSInteger)page{
@@ -838,6 +892,10 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 - (void)didUpdateLocation:(NSNotification*)notif{
     [self setTitleText:@"Loading..."];
     [self loadLocationName];
+}
+
+- (void)didFailedUpdateLocation:(NSNotification*)notif{
+    [self loadNearest];
 }
 
 - (void)loadLocationName{
