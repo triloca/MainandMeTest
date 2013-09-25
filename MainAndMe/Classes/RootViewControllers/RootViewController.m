@@ -67,12 +67,16 @@ UIActionSheetDelegate>
         [weakSelf loadPhotoButtonClicked:sender];
     };
     
+    [rootTabBarController.view addSubview:_tabBarView];
     
-    [rootTabBarController.tabBar addSubview:_tabBarView];
     CGRect rc = _tabBarView.frame;
 
-    rc.origin.y -= rc.size.height - rootTabBarController.tabBar.frame.size.height;
+    rc.origin.y -= rc.size.height - rootTabBarController.view.frame.size.height;
     _tabBarView.frame =rc;
+    rootTabBarController.tabBar.backgroundColor = [UIColor clearColor];
+    rootTabBarController.tabBar.alpha = 0;
+    
+    [rootTabBarController.view bringSubviewToFront:_tabBarView];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -165,6 +169,12 @@ UIActionSheetDelegate>
 
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+    // for iOS7
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    }
+    
     [self dismissModalViewControllerAnimated:YES];
     UIImage *capturedImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     if (capturedImage) {
@@ -177,6 +187,11 @@ UIActionSheetDelegate>
     [_photoViewController.view removeFromSuperview];
     self.photoViewController = nil;
     [self dismissModalViewControllerAnimated:YES];
+    // for iOS7
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    }
 }
 
 - (void)hidePhotoView{
