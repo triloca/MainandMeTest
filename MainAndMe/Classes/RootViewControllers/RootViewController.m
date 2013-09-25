@@ -131,12 +131,12 @@ UIActionSheetDelegate>
 }
 
 - (void)willPresentActionSheet:(UIActionSheet *)actionSheet {
-    UIColor* backColor = [UIColor colorWithRed:205/255.0f green:133/255.0f blue:63/255.0f alpha:0.7];
-    [[actionSheet layer] setBackgroundColor:backColor.CGColor];
+    //UIColor* backColor = [UIColor colorWithRed:205/255.0f green:133/255.0f blue:63/255.0f alpha:0.7];
+    //[[actionSheet layer] setBackgroundColor:backColor.CGColor];
     
-    UIButton *button = [[actionSheet subviews] safeObjectAtIndex:0];
-    UIImage* image = [button backgroundImageForState:UIControlStateNormal];
-    [button setBackgroundImage:image forState:UIControlStateHighlighted];
+    //UIButton *button = [[actionSheet subviews] safeObjectAtIndex:0];
+    //UIImage* image = [button backgroundImageForState:UIControlStateNormal];
+    //[button setBackgroundImage:image forState:UIControlStateHighlighted];
 }
 
 -(void) displayImagePickerWithSource:(UIImagePickerControllerSourceType)src{
