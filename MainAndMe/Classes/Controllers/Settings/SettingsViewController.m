@@ -313,6 +313,7 @@
     
     if (_birthdayPicker == nil) {
         self.birthdayPicker = [[UIDatePicker alloc] init];
+        self.birthdayPicker.backgroundColor = [UIColor colorWithRed:220/255.0f green:220/255.0f blue:213/255.0f alpha:1];
         CGRect rc = _birthdayPicker.frame;
         rc.origin.y = self.view.size.height;
         _birthdayPicker.frame = rc;

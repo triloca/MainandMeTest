@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D905D44217FCA8AE0095A07A /* MainViewController_iOS7.xib in Resources */ = {isa = PBXBuildFile; fileRef = D905D44117FCA8AE0095A07A /* MainViewController_iOS7.xib */; };
+		D905D44417FCB0590095A07A /* ProductDetailViewController_iOS7.xib in Resources */ = {isa = PBXBuildFile; fileRef = D905D44317FCB0590095A07A /* ProductDetailViewController_iOS7.xib */; };
+		D905D44617FCB0C70095A07A /* StoreDetailViewController_iOS7.xib in Resources */ = {isa = PBXBuildFile; fileRef = D905D44517FCB0C70095A07A /* StoreDetailViewController_iOS7.xib */; };
+		D905D44817FCB7530095A07A /* SearchViewController_iOS7.xib in Resources */ = {isa = PBXBuildFile; fileRef = D905D44717FCB7530095A07A /* SearchViewController_iOS7.xib */; };
 		D9072B4916F8E96F00E7F168 /* star_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = D9072B4516F8E96F00E7F168 /* star_empty.png */; };
 		D9072B4A16F8E96F00E7F168 /* star_empty@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9072B4616F8E96F00E7F168 /* star_empty@2x.png */; };
 		D9072B4B16F8E96F00E7F168 /* star_full.png in Resources */ = {isa = PBXBuildFile; fileRef = D9072B4716F8E96F00E7F168 /* star_full.png */; };
@@ -49,8 +53,6 @@
 		D91CF91616F53B7700BC1891 /* WishlistViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D91CF91216F53B7700BC1891 /* WishlistViewController_iPhone5.xib */; };
 		D91CF91A16F5451D00BC1891 /* WishlistCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D91CF91816F5451D00BC1891 /* WishlistCell.m */; };
 		D91CF91B16F5451D00BC1891 /* WishlistCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D91CF91916F5451D00BC1891 /* WishlistCell.xib */; };
-		D91CF91F16F54B0100BC1891 /* list_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D91CF91D16F54B0100BC1891 /* list_bar@2x.png */; };
-		D91CF92016F54B0100BC1891 /* list_errow_ic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D91CF91E16F54B0100BC1891 /* list_errow_ic@2x.png */; };
 		D91CF92216F5741D00BC1891 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D91CF92116F5741C00BC1891 /* MessageUI.framework */; };
 		D91CF92316F5A47200BC1891 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D908EE0516F0F2FD004B2405 /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D9250EB016F398ED00CEBAAD /* ProductDetailsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D9250EAE16F398ED00CEBAAD /* ProductDetailsCell.m */; };
@@ -135,8 +137,6 @@
 		D93CE1FF1702ADA9006AB52D /* FacebookSDKResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D93CE1FD1702ADA9006AB52D /* FacebookSDKResources.bundle */; };
 		D93CE2001702ADA9006AB52D /* FBUserSettingsViewResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D93CE1FE1702ADA9006AB52D /* FBUserSettingsViewResources.bundle */; };
 		D93F493F16FE4CC800FE151E /* followe_bar_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93F493B16FE4CC800FE151E /* followe_bar_bg@2x.png */; };
-		D93F494016FE4CC800FE151E /* posted_user_ic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93F493C16FE4CC800FE151E /* posted_user_ic@2x.png */; };
-		D93F494116FE4CC800FE151E /* profile_list_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93F493D16FE4CC800FE151E /* profile_list_bar@2x.png */; };
 		D93F494216FE4CC800FE151E /* profile_tob_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D93F493E16FE4CC800FE151E /* profile_tob_bar@2x.png */; };
 		D93F494816FE6C8D00FE151E /* MyWishlistViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D93F494416FE6C8D00FE151E /* MyWishlistViewController_iPhone5.xib */; };
 		D93F494916FE6C8D00FE151E /* MyWishlistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D93F494616FE6C8D00FE151E /* MyWishlistViewController.m */; };
@@ -161,7 +161,6 @@
 		D94076F616F27D020000E21B /* Perec-SuperNegraVersalita.otf in Resources */ = {isa = PBXBuildFile; fileRef = D94076F316F27D020000E21B /* Perec-SuperNegraVersalita.otf */; };
 		D94076FA16F284D50000E21B /* master_bg_568@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D94076F816F284D50000E21B /* master_bg_568@2x.png */; };
 		D94076FB16F284D50000E21B /* master_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D94076F916F284D50000E21B /* master_bg@2x.png */; };
-		D940770016F287090000E21B /* down_arrow_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D94076FD16F287090000E21B /* down_arrow_small@2x.png */; };
 		D940770116F287090000E21B /* storefront_top_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D94076FE16F287090000E21B /* storefront_top_bar@2x.png */; };
 		D940770216F287090000E21B /* storfront_active_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D94076FF16F287090000E21B /* storfront_active_bar@2x.png */; };
 		D940770616F287D70000E21B /* items_active_bar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D940770316F287D70000E21B /* items_active_bar@2x.png */; };
@@ -325,6 +324,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D905D44117FCA8AE0095A07A /* MainViewController_iOS7.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainViewController_iOS7.xib; path = Classes/Controllers/Main/MainViewController_iOS7.xib; sourceTree = "<group>"; };
+		D905D44317FCB0590095A07A /* ProductDetailViewController_iOS7.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ProductDetailViewController_iOS7.xib; path = Classes/Controllers/ProductDetail/ProductDetailViewController_iOS7.xib; sourceTree = "<group>"; };
+		D905D44517FCB0C70095A07A /* StoreDetailViewController_iOS7.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = StoreDetailViewController_iOS7.xib; path = Classes/Controllers/StoreDetail/StoreDetailViewController_iOS7.xib; sourceTree = "<group>"; };
+		D905D44717FCB7530095A07A /* SearchViewController_iOS7.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchViewController_iOS7.xib; path = Classes/Controllers/Search/SearchViewController_iOS7.xib; sourceTree = "<group>"; };
 		D9072B4516F8E96F00E7F168 /* star_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_empty.png; sourceTree = "<group>"; };
 		D9072B4616F8E96F00E7F168 /* star_empty@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "star_empty@2x.png"; sourceTree = "<group>"; };
 		D9072B4716F8E96F00E7F168 /* star_full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_full.png; sourceTree = "<group>"; };
@@ -388,8 +391,6 @@
 		D91CF91716F5451D00BC1891 /* WishlistCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WishlistCell.h; sourceTree = "<group>"; };
 		D91CF91816F5451D00BC1891 /* WishlistCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WishlistCell.m; sourceTree = "<group>"; };
 		D91CF91916F5451D00BC1891 /* WishlistCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WishlistCell.xib; sourceTree = "<group>"; };
-		D91CF91D16F54B0100BC1891 /* list_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list_bar@2x.png"; path = "Resources/Images/Wishlist/list_bar@2x.png"; sourceTree = "<group>"; };
-		D91CF91E16F54B0100BC1891 /* list_errow_ic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "list_errow_ic@2x.png"; path = "Resources/Images/Wishlist/list_errow_ic@2x.png"; sourceTree = "<group>"; };
 		D91CF92116F5741C00BC1891 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		D9250EAD16F398ED00CEBAAD /* ProductDetailsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProductDetailsCell.h; path = Classes/Controllers/ProductDetail/Views/ProductDetailsCell.h; sourceTree = "<group>"; };
 		D9250EAE16F398ED00CEBAAD /* ProductDetailsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProductDetailsCell.m; path = Classes/Controllers/ProductDetail/Views/ProductDetailsCell.m; sourceTree = "<group>"; };
@@ -525,8 +526,6 @@
 		D93CE1FD1702ADA9006AB52D /* FacebookSDKResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FacebookSDKResources.bundle; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FacebookSDKResources.bundle; sourceTree = "<group>"; };
 		D93CE1FE1702ADA9006AB52D /* FBUserSettingsViewResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = FBUserSettingsViewResources.bundle; path = ../../../../../Documents/FacebookSDK/FacebookSDK.framework/Versions/A/Resources/FBUserSettingsViewResources.bundle; sourceTree = "<group>"; };
 		D93F493B16FE4CC800FE151E /* followe_bar_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "followe_bar_bg@2x.png"; sourceTree = "<group>"; };
-		D93F493C16FE4CC800FE151E /* posted_user_ic@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "posted_user_ic@2x.png"; sourceTree = "<group>"; };
-		D93F493D16FE4CC800FE151E /* profile_list_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_list_bar@2x.png"; sourceTree = "<group>"; };
 		D93F493E16FE4CC800FE151E /* profile_tob_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile_tob_bar@2x.png"; sourceTree = "<group>"; };
 		D93F494416FE6C8D00FE151E /* MyWishlistViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyWishlistViewController_iPhone5.xib; path = Classes/Controllers/MyWishlist/MyWishlistViewController_iPhone5.xib; sourceTree = "<group>"; };
 		D93F494516FE6C8D00FE151E /* MyWishlistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyWishlistViewController.h; path = Classes/Controllers/MyWishlist/MyWishlistViewController.h; sourceTree = "<group>"; };
@@ -556,7 +555,6 @@
 		D94076F316F27D020000E21B /* Perec-SuperNegraVersalita.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Perec-SuperNegraVersalita.otf"; sourceTree = "<group>"; };
 		D94076F816F284D50000E21B /* master_bg_568@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "master_bg_568@2x.png"; sourceTree = "<group>"; };
 		D94076F916F284D50000E21B /* master_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "master_bg@2x.png"; sourceTree = "<group>"; };
-		D94076FD16F287090000E21B /* down_arrow_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down_arrow_small@2x.png"; sourceTree = "<group>"; };
 		D94076FE16F287090000E21B /* storefront_top_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "storefront_top_bar@2x.png"; sourceTree = "<group>"; };
 		D94076FF16F287090000E21B /* storfront_active_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "storfront_active_bar@2x.png"; sourceTree = "<group>"; };
 		D940770316F287D70000E21B /* items_active_bar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "items_active_bar@2x.png"; sourceTree = "<group>"; };
@@ -961,8 +959,6 @@
 		D91CF91C16F54ABC00BC1891 /* Wishlist */ = {
 			isa = PBXGroup;
 			children = (
-				D91CF91D16F54B0100BC1891 /* list_bar@2x.png */,
-				D91CF91E16F54B0100BC1891 /* list_errow_ic@2x.png */,
 			);
 			name = Wishlist;
 			sourceTree = "<group>";
@@ -1454,6 +1450,7 @@
 				D93C0FCA16EFF34700A4472E /* MainViewController.h */,
 				D93C0FCB16EFF34700A4472E /* MainViewController.m */,
 				D93C0FCC16EFF34700A4472E /* MainViewController.xib */,
+				D905D44117FCA8AE0095A07A /* MainViewController_iOS7.xib */,
 				D940778716F2F98B0000E21B /* MainViewController_iPhone5.xib */,
 			);
 			name = Main;
@@ -1542,8 +1539,6 @@
 			isa = PBXGroup;
 			children = (
 				D93F493B16FE4CC800FE151E /* followe_bar_bg@2x.png */,
-				D93F493C16FE4CC800FE151E /* posted_user_ic@2x.png */,
-				D93F493D16FE4CC800FE151E /* profile_list_bar@2x.png */,
 				D93F493E16FE4CC800FE151E /* profile_tob_bar@2x.png */,
 			);
 			name = Profile;
@@ -1647,7 +1642,6 @@
 				D940770316F287D70000E21B /* items_active_bar@2x.png */,
 				D940770416F287D70000E21B /* items_normal_bar@2x.png */,
 				D940770516F287D70000E21B /* storfront_normal_bar@2x.png */,
-				D94076FD16F287090000E21B /* down_arrow_small@2x.png */,
 				D94076FE16F287090000E21B /* storefront_top_bar@2x.png */,
 				D94076FF16F287090000E21B /* storfront_active_bar@2x.png */,
 			);
@@ -1728,6 +1722,7 @@
 				D940777016F2F3C80000E21B /* StoreDetailViewController.h */,
 				D940777116F2F3C80000E21B /* StoreDetailViewController.m */,
 				D940777216F2F3C80000E21B /* StoreDetailViewController.xib */,
+				D905D44517FCB0C70095A07A /* StoreDetailViewController_iOS7.xib */,
 				D940777916F2F4D20000E21B /* StoreDetailViewController_iPhone5.xib */,
 			);
 			name = StoreDetails;
@@ -1740,6 +1735,7 @@
 				D940776B16F2F3840000E21B /* ProductDetailViewController.h */,
 				D940776C16F2F3840000E21B /* ProductDetailViewController.m */,
 				D940776D16F2F3840000E21B /* ProductDetailViewController.xib */,
+				D905D44317FCB0590095A07A /* ProductDetailViewController_iOS7.xib */,
 				D940777516F2F4180000E21B /* ProductDetailViewController_iPhone5.xib */,
 			);
 			name = ProductDetails;
@@ -1748,6 +1744,7 @@
 		D940777B16F2F87E0000E21B /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				D905D44717FCB7530095A07A /* SearchViewController_iOS7.xib */,
 				D9072B5516F9453000E7F168 /* Views */,
 				D940777D16F2F9000000E21B /* SearchViewController.h */,
 				D940777E16F2F9000000E21B /* SearchViewController.m */,
@@ -2223,6 +2220,7 @@
 				D93C0FE116EFFCE800A4472E /* camera_button_selected.png in Resources */,
 				D93C0FE216EFFCE800A4472E /* tab_bar_background.png in Resources */,
 				D93C0FE716F0349400A4472E /* main_button_selected.png in Resources */,
+				D905D44817FCB7530095A07A /* SearchViewController_iOS7.xib in Resources */,
 				D93C0FE816F0349400A4472E /* main_button.png in Resources */,
 				D93C0FE916F0349400A4472E /* me_button_selected.png in Resources */,
 				D93C0FEA16F0349400A4472E /* me_button.png in Resources */,
@@ -2239,7 +2237,6 @@
 				D94076F616F27D020000E21B /* Perec-SuperNegraVersalita.otf in Resources */,
 				D94076FA16F284D50000E21B /* master_bg_568@2x.png in Resources */,
 				D94076FB16F284D50000E21B /* master_bg@2x.png in Resources */,
-				D940770016F287090000E21B /* down_arrow_small@2x.png in Resources */,
 				D940770116F287090000E21B /* storefront_top_bar@2x.png in Resources */,
 				D940770216F287090000E21B /* storfront_active_bar@2x.png in Resources */,
 				D940770616F287D70000E21B /* items_active_bar@2x.png in Resources */,
@@ -2284,6 +2281,7 @@
 				D940777A16F2F4D20000E21B /* StoreDetailViewController_iPhone5.xib in Resources */,
 				D940778116F2F9000000E21B /* SearchViewController.xib in Resources */,
 				D940778616F2F93E0000E21B /* AddressViewController.xib in Resources */,
+				D905D44217FCA8AE0095A07A /* MainViewController_iOS7.xib in Resources */,
 				D940778816F2F98D0000E21B /* MainViewController_iPhone5.xib in Resources */,
 				D9250EB116F398ED00CEBAAD /* ProductDetailsCell.xib in Resources */,
 				D9250EB616F3A0D300CEBAAD /* CommentCell.xib in Resources */,
@@ -2293,8 +2291,6 @@
 				D91CF91516F53B7700BC1891 /* WishlistViewController.xib in Resources */,
 				D91CF91616F53B7700BC1891 /* WishlistViewController_iPhone5.xib in Resources */,
 				D91CF91B16F5451D00BC1891 /* WishlistCell.xib in Resources */,
-				D91CF91F16F54B0100BC1891 /* list_bar@2x.png in Resources */,
-				D91CF92016F54B0100BC1891 /* list_errow_ic@2x.png in Resources */,
 				D96709D516F7D66B00CF27C4 /* StorePageCell.xib in Resources */,
 				D96709D716F7E01E00CF27C4 /* invite_friends_submit.png in Resources */,
 				D96709DE16F7E6BE00CF27C4 /* StoreDetailsCell.xib in Resources */,
@@ -2328,11 +2324,11 @@
 				D92F4EA316FD5ED700D86717 /* PhotoViewController_iPhone5.xib in Resources */,
 				D92F4EA516FD7F5A00D86717 /* ProfileViewController_iPhone5.xib in Resources */,
 				D93F493F16FE4CC800FE151E /* followe_bar_bg@2x.png in Resources */,
-				D93F494016FE4CC800FE151E /* posted_user_ic@2x.png in Resources */,
-				D93F494116FE4CC800FE151E /* profile_list_bar@2x.png in Resources */,
+				D905D44617FCB0C70095A07A /* StoreDetailViewController_iOS7.xib in Resources */,
 				D93F494216FE4CC800FE151E /* profile_tob_bar@2x.png in Resources */,
 				D93F494816FE6C8D00FE151E /* MyWishlistViewController_iPhone5.xib in Resources */,
 				D93F494A16FE6C8D00FE151E /* MyWishlistViewController.xib in Resources */,
+				D905D44417FCB0590095A07A /* ProductDetailViewController_iOS7.xib in Resources */,
 				D93F495016FE76E300FE151E /* MyLikesViewController.xib in Resources */,
 				D93F495616FEA55800FE151E /* WishlistDetailsViewController.xib in Resources */,
 				D93F495D16FEAFE100FE151E /* AboutViewController.xib in Resources */,
@@ -2607,8 +2603,8 @@
 		D927D9E016EE6A0C002CF45A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: James Akers (74N5G9B38Z)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: James Akers (74N5G9B38Z)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Hadrian Newman";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hadrian Newman";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../../Documents/FacebookSDK\"",
@@ -2629,8 +2625,8 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "70117D37-C8C9-4DDC-8485-A4DDC1283007";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "70117D37-C8C9-4DDC-8485-A4DDC1283007";
+				PROVISIONING_PROFILE = "1C4296C0-9CDD-42B4-9006-67FA819CC230";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1C4296C0-9CDD-42B4-9006-67FA819CC230";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
