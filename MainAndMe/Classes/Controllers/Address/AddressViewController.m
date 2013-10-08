@@ -108,6 +108,7 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     NSString* statePrefix = [[_tableArray safeDictionaryObjectAtIndex:indexPath.row] safeStringObjectForKey:@"Prefix"];
     NSString* stateName = [[_tableArray safeDictionaryObjectAtIndex:indexPath.row] safeStringObjectForKey:@"Name"];
     CommunityViewController* communityViewController = [CommunityViewController loadFromXIB_Or_iPhone5_XIB];

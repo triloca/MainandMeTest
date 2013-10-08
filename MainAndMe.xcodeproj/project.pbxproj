@@ -288,6 +288,8 @@
 		D99F600C16FAB6640009384E /* CommunityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D99F600916FAB6640009384E /* CommunityViewController.m */; };
 		D99F600D16FAB6640009384E /* CommunityViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D99F600A16FAB6640009384E /* CommunityViewController.xib */; };
 		D99F600F16FAD9160009384E /* CommunityViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D99F600E16FAD9160009384E /* CommunityViewController_iPhone5.xib */; };
+		D9B61C5A180462F600D53D69 /* Icon-80.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B61C58180462F600D53D69 /* Icon-80.png */; };
+		D9B61C5B180462F600D53D69 /* Icon-120.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B61C59180462F600D53D69 /* Icon-120.png */; };
 		D9C0E3F817069879003DCE07 /* master_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = D9C0E3F717069879003DCE07 /* master_bg.png */; };
 		D9C0E3FA17069A07003DCE07 /* AddressViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9C0E3F917069A07003DCE07 /* AddressViewController_iPhone5.xib */; };
 		D9C0E40417069B10003DCE07 /* SearchDetailsViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9C0E40317069B10003DCE07 /* SearchDetailsViewController_iPhone5.xib */; };
@@ -746,6 +748,8 @@
 		D99F600916FAB6640009384E /* CommunityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommunityViewController.m; sourceTree = "<group>"; };
 		D99F600A16FAB6640009384E /* CommunityViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommunityViewController.xib; sourceTree = "<group>"; };
 		D99F600E16FAD9160009384E /* CommunityViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommunityViewController_iPhone5.xib; sourceTree = "<group>"; };
+		D9B61C58180462F600D53D69 /* Icon-80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-80.png"; sourceTree = "<group>"; };
+		D9B61C59180462F600D53D69 /* Icon-120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-120.png"; sourceTree = "<group>"; };
 		D9C0E3F717069879003DCE07 /* master_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = master_bg.png; sourceTree = "<group>"; };
 		D9C0E3F917069A07003DCE07 /* AddressViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AddressViewController_iPhone5.xib; path = Classes/Controllers/Address/AddressViewController_iPhone5.xib; sourceTree = "<group>"; };
 		D9C0E40317069B10003DCE07 /* SearchDetailsViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SearchDetailsViewController_iPhone5.xib; path = Classes/Controllers/SearchDetails/SearchDetailsViewController_iPhone5.xib; sourceTree = "<group>"; };
@@ -1684,6 +1688,8 @@
 		D940771E16F2B5310000E21B /* AppIcons */ = {
 			isa = PBXGroup;
 			children = (
+				D9B61C58180462F600D53D69 /* Icon-80.png */,
+				D9B61C59180462F600D53D69 /* Icon-120.png */,
 				D940771F16F2B5320000E21B /* Icon@2x.png */,
 				D940772016F2B5320000E21B /* Icon-Small@2x.png */,
 				D940772116F2B5320000E21B /* Icon-72.png */,
@@ -2214,6 +2220,7 @@
 				D9D796E616EECF7A00C494D7 /* back_button.png in Resources */,
 				D9D796EB16EED4CE00C494D7 /* SignUpViewController_iPhone5.xib in Resources */,
 				D93C0FCE16EFF34700A4472E /* MainViewController.xib in Resources */,
+				D9B61C5B180462F600D53D69 /* Icon-120.png in Resources */,
 				D93C0FD416EFF43000A4472E /* ProfileViewController.xib in Resources */,
 				D93C0FDB16EFFBC200A4472E /* TabBarView.xib in Resources */,
 				D93C0FE016EFFCE800A4472E /* camera_button.png in Resources */,
@@ -2328,6 +2335,7 @@
 				D93F494216FE4CC800FE151E /* profile_tob_bar@2x.png in Resources */,
 				D93F494816FE6C8D00FE151E /* MyWishlistViewController_iPhone5.xib in Resources */,
 				D93F494A16FE6C8D00FE151E /* MyWishlistViewController.xib in Resources */,
+				D9B61C5A180462F600D53D69 /* Icon-80.png in Resources */,
 				D905D44417FCB0590095A07A /* ProductDetailViewController_iOS7.xib in Resources */,
 				D93F495016FE76E300FE151E /* MyLikesViewController.xib in Resources */,
 				D93F495616FEA55800FE151E /* WishlistDetailsViewController.xib in Resources */,
@@ -2603,8 +2611,8 @@
 		D927D9E016EE6A0C002CF45A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Hadrian Newman";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Hadrian Newman";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: James Akers (74N5G9B38Z)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: James Akers (74N5G9B38Z)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../../../../Documents/FacebookSDK\"",
@@ -2625,8 +2633,8 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1C4296C0-9CDD-42B4-9006-67FA819CC230";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "1C4296C0-9CDD-42B4-9006-67FA819CC230";
+				PROVISIONING_PROFILE = "70117D37-C8C9-4DDC-8485-A4DDC1283007";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "70117D37-C8C9-4DDC-8485-A4DDC1283007";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

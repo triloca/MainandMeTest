@@ -264,7 +264,7 @@
 
 - (void)applyFilterWith:(NSString*)name{
     
-    if ([name isEqualToString:@""]) {
+    if (!name || [name isEqualToString:@""]) {
         _tableArray = _searchArray;
         [_tableView reloadData];
         return;
