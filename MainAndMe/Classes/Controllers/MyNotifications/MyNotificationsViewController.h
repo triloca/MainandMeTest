@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface MyNotificationsViewController : UIViewController
+@interface MyNotificationsViewController : GAITrackedViewController
 @property (assign, nonatomic) BOOL isNeedRefresh;
 @property (strong, nonatomic) NSDictionary* categoryInfo;
 @property (assign, nonatomic) BOOL isAllState;

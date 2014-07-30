@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface PhotoViewController : UIViewController
+@interface PhotoViewController : GAITrackedViewController
 - (void)setPhoto:(UIImage*)photo;
 @end

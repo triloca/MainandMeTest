@@ -394,6 +394,46 @@
 }
 
 
+- (void)loginTrackreForCcmmunityId:(NSNumber*)communityId
+                             token:(NSString*)token
+                  success:(void(^) (NSDictionary* communitie)) success
+                  failure:(void(^) (NSError* error, NSString* errorString)) failure
+                exception:(void(^) (NSString* exceptionString))exception{
+    
+    NSString* urlString =
+    //[NSString stringWithFormat:@"%@/search_state_communities?name=%@&page=%d&per_page=40", [APIv1_0 serverUrl], state, page];
+    [NSString stringWithFormat:@"%@/login_trackers.json/%d", [APIv1_0 serverUrl], [communityId intValue]];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:40];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        //NSLog(@"%@", returnString);
+        id value = [returnString JSONValue];
+        if ([value isKindOfClass:[NSDictionary class]]) {
+            success(value);
+        }else{
+            NSString* messageString = [value safeStringObjectForKey:@"error"];
+            failure(nil, messageString);
+        }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    }eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+    
+}
+
+
 ////! Logout request
 //-(void)logoutWithSuccess:(void(^) (NSDictionary* user)) success
 //                 failure:(void(^) (NSError* error, NSString* errorString)) failure

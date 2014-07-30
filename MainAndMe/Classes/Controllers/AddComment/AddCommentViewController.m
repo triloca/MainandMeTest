@@ -34,6 +34,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.screenName = @"Add Comment screen";
+
     _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
     _titleTextLabel.text = @"Comment";
 }
@@ -67,7 +70,7 @@
 
 - (IBAction)postCommentButtonClicked:(id)sender {
     if (_messageTextView.text.length ==  0) {
-        [[AlertManager shared] showOkAlertWithTitle:@"Enter Cmment"];
+        [[AlertManager shared] showOkAlertWithTitle:@"Enter Comment"];
     }
     [self postComment];
 }

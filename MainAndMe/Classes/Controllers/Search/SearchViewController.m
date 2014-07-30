@@ -59,6 +59,10 @@ static NSString *kProductCellIdentifier = @"ProductCell";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.screenName = @"Search screen";
+
+    
     //_titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
     if (_isStoreState) {
         _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:20];
@@ -267,7 +271,7 @@ static NSString *kProductCellIdentifier = @"ProductCell";
 
 - (NSArray*)filterByLocation:(NSArray*)array{
     NSLog(@"%@", array);
-    NSArray *sorteArray = [array sortedArrayUsingComparator:^(id a, id b) {
+    NSArray *sorteArray = [array sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         CLLocation *first = [[CLLocation alloc] initWithLatitude:[[a safeNumberObjectForKey:@"lat"] floatValue]
                                                        longitude:[[a safeNumberObjectForKey:@"lng"] floatValue]];
         CLLocation *second = [[CLLocation alloc] initWithLatitude:[[b safeNumberObjectForKey:@"lat"] floatValue]

@@ -32,6 +32,7 @@
 #import "LocationManager.h"
 #import "NotificationManager.h"
 #import "MNMBottomPullToRefreshManager.h"
+#import "CommunityViewController.h"
 
 typedef enum {
     ControllerStateStores = 0,
@@ -103,6 +104,8 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.screenName = @"Main screen";
+    
     self.pullToRefresh = [[MNMBottomPullToRefreshManager alloc]
                           initWithPullToRefreshViewHeight:60.0f
                           tableView:_tableView
@@ -116,7 +119,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
      _controllerState = ControllerStateStores;
     _isPageStile = NO;
     
-    [self showOveralyView];
+    
     [_storefrontButton setBackgroundImage:[_storefrontButton backgroundImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted | UIControlStateSelected];
     [_itemsButton setBackgroundImage:[_itemsButton backgroundImageForState:UIControlStateHighlighted] forState:UIControlStateHighlighted | UIControlStateSelected];
     [_storefrontButton setTitleColor:[_storefrontButton titleColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted | UIControlStateSelected];
@@ -144,10 +147,27 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                              selector:@selector(didFailedUpdateLocation:)
                                                  name:kUNDidFailUpdateLocetionNotification
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didUpdateCommunity:)
+                                                 name:kUNDidUpdateCommunityNotification
+                                               object:nil];
 
     _barTriangleImageView.hidden = YES;
     
     _isNeedSendToken = YES;
+    
+    //! Check if user want change first community
+    NSDictionary* communityDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"kCommunityInfo"];
+    if (communityDict == nil) {
+        [self showCommunityAlertIfNecessary];
+    }else{
+        [self storefrontButtonDown:nil];
+    }
+    
+    NSString* title = [NSString stringWithFormat:@"%@, %@",
+                       [LocationManager shared].communityStateName, [LocationManager shared].communityStatePrefix];
+    
+    [self setTitleText:title];
     
 }
 
@@ -160,6 +180,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
         _page = 1;
         [self refreshCurrentList:nil];
     }
+    
     [self loadNotifications];
     
     if (_isNeedSendToken) {
@@ -207,7 +228,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                          completion:^(BOOL finished) {
                              [weak_overlyView removeFromSuperview];
                              [self storefrontButtonDown:nil];
-                             [[LocationManager shared] updateLocation];
+                             //[[LocationManager shared] updateLocation];
                          }];
     };
     
@@ -337,8 +358,23 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 }
 
 - (IBAction)titleButtonClicked:(id)sender {
+    
     AddressViewController* addressViewController = [AddressViewController loadFromXIB_Or_iPhone5_XIB];
-    [self.navigationController pushViewController:addressViewController animated:YES];
+    
+    NSDictionary* communityDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"kCommunityInfo"];
+    
+    NSString* statePrefix = [communityDict safeStringObjectForKey:@"prefix"];
+    NSString* stateName = [communityDict safeStringObjectForKey:@"name"];
+    CommunityViewController* communityViewController = [CommunityViewController loadFromXIB_Or_iPhone5_XIB];
+    communityViewController.statePrefix = statePrefix;
+    communityViewController.stateName = stateName;
+
+    
+    NSMutableArray* controllers = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+    [controllers safeAddObject:addressViewController];
+    self.navigationController.viewControllers = [NSArray arrayWithArray:controllers];
+    
+    [self.navigationController pushViewController:communityViewController animated:YES];
 }
 
 - (IBAction)searchButtonClicked:(id)sender {
@@ -694,9 +730,9 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                             [temp addObjectsFromArray:objects];
                                             _objectsArray = temp;
                                             
-                                            if (_objectsArray.count == 0) {
-                                                [self showAlert];
-                                            }
+//                                            if (_objectsArray.count == 0) {
+//                                                [self showAlert];
+//                                            }
                                             
                                             [self reloadNeededTable];
                                             
@@ -721,6 +757,23 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                             [[AlertManager shared] showOkAlertWithTitle:exceptionString];
                                             [_pullToRefresh tableViewReloadFinished];
                                         }];
+}
+
+- (void)showCommunityAlertIfNecessary{
+    
+    [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        if (buttonIndex == alertView.cancelButtonIndex) {
+            [self showOveralyView];
+        }else{
+            [self titleButtonClicked:nil];
+            _isNeedRefresh = YES;
+        }
+    }
+                                           title:@"Roslindale, MA not your location? Tap below to find your city"
+                                         message:nil
+                               cancelButtonTitle:@"Continue"
+                               otherButtonTitles:@"Find my city", nil];
+
 }
 
 - (void)showAlert{
@@ -777,6 +830,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                            page:_refreshingPage
                                         success:^(NSArray *objects) {
                                             [MBProgressHUD hideAllHUDsForView:self.view animated:YES];
+                                            
                                             if (_refreshingPage <= page) {
                                                 _refreshingPage++;
                                                 NSMutableArray* temp = [NSMutableArray arrayWithArray:_objectsArray];
@@ -794,6 +848,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                                 _refreshingPage = 1;
                                                 [_pullToRefresh tableViewReloadFinished];
                                                 [self reloadNeededTable];
+                                                _isNeedRefresh = NO;
                                             }
                                             
                                         }
@@ -838,9 +893,10 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 - (NSArray*)sortObjects:(NSArray*)array{
     if ([ProductsStoresManager shared].lastSearchFilter == SearchFilterPopular) {
-        NSArray *sorteArray = [array sortedArrayUsingComparator:^(id a, id b) {
-            NSInteger *first = [[a safeNumberObjectForKey:@"like_count"] intValue];
-            NSInteger *second = [[b safeNumberObjectForKey:@"like_count"] intValue];
+        
+        NSArray *sorteArray = [array sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
+            NSInteger first = [[a safeNumberObjectForKey:@"like_count"] integerValue];
+            NSInteger second = [[b safeNumberObjectForKey:@"like_count"] integerValue];
             return first < second;
         }];
         return sorteArray;
@@ -852,7 +908,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 - (NSArray*)filterByLocation:(NSArray*)array{
     NSLog(@"%@", array);
-    NSArray *sorteArray = [array sortedArrayUsingComparator:^(id a, id b) {
+    NSArray *sorteArray = [array sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         CLLocation *first = [[CLLocation alloc] initWithLatitude:[[a safeNumberObjectForKey:@"lat"] floatValue]
                                                        longitude:[[a safeNumberObjectForKey:@"lng"] floatValue]];
         CLLocation *second = [[CLLocation alloc] initWithLatitude:[[b safeNumberObjectForKey:@"lat"] floatValue]
@@ -890,7 +946,12 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 }
 
 - (void)didUpdateLocation:(NSNotification*)notif{
-    [self setTitleText:@"Loading..."];
+    //return;
+    //[self setTitleText:@"Loading..."];
+    
+}
+
+- (void)didUpdateCommunity:(NSNotification*)notif{
     [self loadLocationName];
 }
 
@@ -900,6 +961,19 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 - (void)loadLocationName{
     
+    
+    NSString* title = [NSString stringWithFormat:@"%@, %@",
+                       [LocationManager shared].communityStateName, [LocationManager shared].communityStatePrefix];
+    
+    [self setTitleText:title];
+    
+    [self storefrontButtonDown:nil];
+    return;
+    
+    _page = 1;
+   [self refreshCurrentList:nil];
+    
+    return;
     [ProductsStoresManager loadPlaceInfo:[LocationManager shared].defaultLocation.coordinate.latitude
                                  lngnear:[LocationManager shared].defaultLocation.coordinate.longitude
                                  success:^(NSString* name, NSString* prefix) {
@@ -972,6 +1046,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
                                             }];
     
 }
+
 
 #pragma mark - Public Methods
 - (void)loadNearest{

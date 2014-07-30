@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "GAITrackedViewController.h"
 
-@interface StoreMapViewController : UIViewController
+@interface StoreMapViewController : GAITrackedViewController
 @property (assign, nonatomic) CLLocationCoordinate2D coordinate;
 @property (strong, nonatomic) NSDictionary* storeInfo;
 @end

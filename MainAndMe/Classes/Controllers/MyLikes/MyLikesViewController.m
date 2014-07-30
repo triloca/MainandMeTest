@@ -57,6 +57,9 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.screenName = @"My Likes screen";
+
     // Do any additional setup after loading the view from its nib.
    
     _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];

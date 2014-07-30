@@ -6,8 +6,10 @@
 //  Copyright (c) 2012 Company. All rights reserved.
 //
 
+#import "GAITrackedViewController.h"
 
-@interface RootViewController : UIViewController
+
+@interface RootViewController : /*UIViewController*/GAITrackedViewController
 
 @property (strong, nonatomic) UITabBarController* rootTabBarController;
 - (void)hidePhotoView;

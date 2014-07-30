@@ -44,6 +44,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.screenName = @"Wishlist screen";
+
     _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
     _titleTextLabel.text = @"Add To Wishlist";
     
@@ -192,7 +195,7 @@
 
 - (NSArray*)sortWishlist:(NSArray*)wishlists{
     
-    NSArray *sorteArray = [wishlists sortedArrayUsingComparator:^(id a, id b) {
+    NSArray *sorteArray = [wishlists sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         NSString *first = [a safeStringObjectForKey:@"name"];
         NSString *second = [b safeStringObjectForKey:@"name"];
         return [first caseInsensitiveCompare:second];

@@ -33,6 +33,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.screenName = @"About screen";
+
     // Do any additional setup after loading the view from its nib.
     _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
     _titleTextLabel.text = @"About";

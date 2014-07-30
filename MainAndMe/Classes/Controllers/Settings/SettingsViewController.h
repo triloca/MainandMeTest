@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface SettingsViewController : UIViewController
+@interface SettingsViewController : GAITrackedViewController
 @property (strong, nonatomic) NSDictionary* profileInfo;
 @end

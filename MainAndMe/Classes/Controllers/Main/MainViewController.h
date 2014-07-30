@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MainViewController : UIViewController
+#import "GAITrackedViewController.h"
+
+@interface MainViewController : GAITrackedViewController
 @property (assign, nonatomic) BOOL isNeedRefresh;
 @property (assign, nonatomic) BOOL isNeedSendToken;
 @property (assign, nonatomic) BOOL isJustExplore;

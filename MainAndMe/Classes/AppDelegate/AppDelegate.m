@@ -14,6 +14,7 @@
 #import "NotificationManager.h"
 #import "TestFlight.h"
 #import "UIDevice+IdentifierAddition.h"
+#import "GAI.h"
 
 @interface AppDelegate()
 
@@ -27,12 +28,14 @@
 {
     
 //#ifndef DEBUG
-     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueDeviceIdentifier]];
-   
-    [TestFlight takeOff:@"13260f43-93c0-465c-b350-5c1293135100"];
+//     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueDeviceIdentifier]];
+//    [TestFlight takeOff:@"Insert your Application Token here"];
+    [TestFlight takeOff:@"14ae586e-6516-4ee4-956e-1c9f62e952e7"];
     
 //#endif
 
+    
+    
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
@@ -46,6 +49,20 @@
      (UIRemoteNotificationTypeAlert |
       UIRemoteNotificationTypeBadge |
       UIRemoteNotificationTypeSound)];
+    
+    
+    //Optional: automatically send uncaught exceptions to Google Analytics
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    
+    //Optional: set Google Analytics dispatch interval to e.g. 20 seconds
+    [GAI sharedInstance].dispatchInterval = 20;
+    
+    //Optional: set Logger to VERBOSE for debug information
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
+    
+    //Initialize tracker. Replace with tracking ID
+    [[GAI sharedInstance] trackerWithTrackingId:@"UA-53135300-1"];
+
     
     [self.window makeKeyAndVisible];
     return YES;

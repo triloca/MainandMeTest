@@ -12,11 +12,13 @@
 #import "LocationManager.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface StoreMapViewController ()
+@interface StoreMapViewController () <CLLocationManagerDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
 @property (strong, nonatomic) UIImageView* storeImageView;
 
+@property (strong, nonatomic) CLLocationManager* locationManager;
+@property (strong, nonatomic) CLLocation* location;
 @end
 
 @implementation StoreMapViewController
@@ -41,6 +43,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.screenName = @"Store Map screen";
+
     _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
     _titleTextLabel.text = @"Store On Map";
     
@@ -56,6 +60,12 @@
                                                    coordinate:_coordinate];
     [_mapView addAnnotation:placePoint];
     [self updateRegion:_coordinate];
+    
+    _locationManager = [CLLocationManager new];
+    _locationManager.delegate = self;
+    _locationManager.distanceFilter = kCLDistanceFilterNone;
+    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [_locationManager startUpdatingLocation];
     
 }
 
@@ -108,8 +118,8 @@
           
             NSString *urlToOpen =
             [NSString stringWithFormat:@"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f",
-             [LocationManager shared].defaultLocation.coordinate.latitude,
-             [LocationManager shared].defaultLocation.coordinate.longitude,
+             _location.coordinate.latitude,
+             _location.coordinate.longitude,
              communityPoint.coordinate.latitude, communityPoint.coordinate.longitude];
                        
 
@@ -120,6 +130,18 @@
                                          message:@"Open this store at map?"
                                cancelButtonTitle:@"Ok"
                                otherButtonTitles:@"Cancel", nil];
+}
+
+#pragma mark -  CLLocationManagerDelegate
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    
+    [_locationManager stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    
+    [_locationManager stopUpdatingLocation];
+    self.location = newLocation;
 }
 
 #pragma mark - Buttons Action

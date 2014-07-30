@@ -61,6 +61,9 @@ MFMessageComposeViewControllerDelegate>
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.screenName = @"Product Details screen";
+    
     // Do any additional setup after loading the view from its nib.
     _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
     _titleTextLabel.text = @"Product details";
@@ -461,7 +464,7 @@ MFMessageComposeViewControllerDelegate>
 
 - (NSArray*)sortComments:(NSArray*)comments{
     
-    NSArray* sorteArray = [comments sortedArrayUsingComparator: ^(id a, id b) {
+    NSArray* sorteArray = [comments sortedArrayUsingComparator: ^NSComparisonResult(id a, id b) {
         NSDate *d1 = [DataManager dateFromString:[a safeStringObjectForKey:@"created_at"]];
         NSDate *d2 = [DataManager dateFromString:[b safeStringObjectForKey:@"created_at"]];
         return [d2 compare: d1];

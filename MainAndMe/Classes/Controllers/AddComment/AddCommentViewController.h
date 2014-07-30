@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface AddCommentViewController : UIViewController
+@interface AddCommentViewController : GAITrackedViewController
 @property (strong, nonatomic) NSDictionary* productInfo;
 @property (assign, nonatomic) BOOL isStoreState;
 @end

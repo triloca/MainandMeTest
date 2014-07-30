@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface SearchStoreViewController : UIViewController
+@interface SearchStoreViewController : GAITrackedViewController
 @property (copy, nonatomic) void (^didSelectStoreName)(NSString* name);
 @property (strong, nonatomic) NSArray* storesArray;
 @end

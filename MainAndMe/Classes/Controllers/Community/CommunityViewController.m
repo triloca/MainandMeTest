@@ -14,6 +14,12 @@
 #import "CommunityCell.h"
 #include "UIView+Common.h"
 #import "MNMBottomPullToRefreshManager.h"
+#import "NSString+Common.h"
+
+#import "GAIDictionaryBuilder.h"
+#import "GAI.h"
+#import "GAITracker.h"
+#import "GAIFields.h"
 
 @interface CommunityViewController () <MNMBottomPullToRefreshManagerClient>
 
@@ -48,6 +54,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.screenName = @"Community screen";
     
     _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
     _titleTextLabel.text = @"Communities";
@@ -110,7 +118,8 @@
     
     [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
         if (buttonIndex == 0) {
-            [self loadCummunityByID:[obj safeNSNumberObjectForKey:@"id"]];
+            [_searchTextField resignFirstResponder];
+            [self loadCummunityInfo:obj];
         }else{
             [_tableView reloadData];
         }
@@ -229,7 +238,16 @@
 }
 
 
-- (void)loadCummunityByID:(NSNumber*)communityId{
+- (void)loadCummunityInfo:(NSDictionary*)community{
+    
+    NSNumber* communityId = [community safeNSNumberObjectForKey:@"id"];
+    NSString* communityName = [community safeStringObjectForKey:@"city"];
+    
+    id<GAITracker> tracker = [[GAI sharedInstance] defaultTracker];
+    [tracker set:[GAIFields customDimensionForIndex:1] value:communityName];
+    [tracker set:kGAIScreenName value:@"Community"];
+    [tracker send:[[[GAIDictionaryBuilder createAppView] set:@"premium" forKey:[GAIFields customDimensionForIndex:1]] build]];
+
     
     [self showSpinnerWithName:@"CommunityViewController"];
     
@@ -239,8 +257,19 @@
                                  
                                  CLLocation* location = [[CLLocation alloc]initWithLatitude:[[obj safeNumberObjectForKey:@"lat"] floatValue]
                                                                                   longitude:[[obj safeNumberObjectForKey:@"lng"] floatValue]];
-                                 [LocationManager shared].defaultLocation = location;
-                                 [[LocationManager shared] notifyUpdate];
+//                                 [LocationManager shared].defaultLocation = location;
+//
+                                 
+//                                 NSString* slug = [obj safeStringObjectForKey:@"slug"];
+//                                 NSString* name = [[slug componentsSeparatedByString:@"-"] firstObject];
+//                                 name = [name stringWithCapitalizedFirstCharacter];
+                                 
+                                 [[LocationManager shared] setupComminityLocation:location
+                                                                             name:communityName
+                                                                           prefix:_statePrefix];
+                                 
+                                 [[LocationManager shared] notifyCommunityUpdate];
+                                 
                                  [self.navigationController popToRootViewControllerAnimated:YES];
 
                              }

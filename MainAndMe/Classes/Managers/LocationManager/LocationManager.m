@@ -48,11 +48,56 @@
         
         _locationFailed = NO;
         
+        //!! Setup community info
+        
+        NSDictionary* communityDict = [[NSUserDefaults standardUserDefaults] objectForKey:@"kCommunityInfo"];
+        
+        if (communityDict == nil) {
+            
+            communityDict = @{@"name" : @"Roslindale",
+                              @"prefix": @"MA",
+                              @"lat" : [NSNumber numberWithFloat:42.2832142],
+                              @"lon" : [NSNumber numberWithFloat:-71.1270268]};
+            
+            [[NSUserDefaults standardUserDefaults] setObject:communityDict
+                                                      forKey:@"kCommunityInfo"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
+        _communityStateName = [communityDict safeStringObjectForKey:@"name"];
+        _communityStatePrefix= [communityDict safeStringObjectForKey:@"prefix"];
+        NSNumber* lat = [communityDict safeNSNumberObjectForKey:@"lat"];
+        NSNumber* lon = [communityDict safeNSNumberObjectForKey:@"lon"];
+        
+        _communityLocation = [[CLLocation alloc] initWithLatitude:[lat floatValue]
+                                                        longitude:[lon floatValue]];
+        
+        //!!
+        
     }
     return self;
 }
 
 #pragma mark - 
+
+- (void)setupComminityLocation:(CLLocation*)location
+                          name:(NSString*)name
+                        prefix:(NSString*)prefix{
+    
+    NSDictionary* communityDict = @{@"name" : name,
+                                    @"prefix": prefix,
+                                    @"lat" : [NSNumber numberWithFloat:location.coordinate.latitude],
+                                    @"lon" : [NSNumber numberWithFloat:location.coordinate.longitude]};
+    
+    [[NSUserDefaults standardUserDefaults] setObject:communityDict
+                                              forKey:@"kCommunityInfo"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    _communityLocation = location;
+    _communityStateName = name;
+    _communityStatePrefix = prefix;
+}
+
 
 #pragma mark -  CLLocationManagerDelegate
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
@@ -112,5 +157,11 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kUNDidUpdateLocetionNotification
                                                         object:_defaultLocation];
 }
+
+- (void)notifyCommunityUpdate{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kUNDidUpdateCommunityNotification
+                                                        object:nil];
+}
+
 
 @end

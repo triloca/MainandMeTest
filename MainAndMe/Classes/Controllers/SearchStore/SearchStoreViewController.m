@@ -85,6 +85,9 @@ UIPickerViewDataSource>
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.screenName = @"Search Store screen";
+
     // Do any additional setup after loading the view from its nib.
     _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
     _titleTextLabel.text = @"Select Store";
@@ -489,7 +492,7 @@ UIPickerViewDataSource>
 
 - (NSArray*)filterByLocation:(NSArray*)array{
     
-    NSArray *sorteArray = [array sortedArrayUsingComparator:^(id a, id b) {
+    NSArray *sorteArray = [array sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         CLLocation *first = [[CLLocation alloc] initWithLatitude:[[a safeNumberObjectForKey:@"lat"] floatValue]
                                                        longitude:[[a safeNumberObjectForKey:@"lng"] floatValue]];
         CLLocation *second = [[CLLocation alloc] initWithLatitude:[[b safeNumberObjectForKey:@"lat"] floatValue]
@@ -641,7 +644,7 @@ UIPickerViewDataSource>
 }
 
 - (NSArray*)sortAddresses:(NSArray*)array{
-    NSArray *sorteArray = [array sortedArrayUsingComparator:^(id a, id b) {
+    NSArray *sorteArray = [array sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         NSString *first = [a safeStringObjectForKey:@"Name"];
         NSString *second = [b safeStringObjectForKey:@"Name"];
         return [first caseInsensitiveCompare:second];

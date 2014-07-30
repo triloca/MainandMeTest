@@ -59,6 +59,8 @@ static NSString *kPageCellIdentifier = @"PageCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
    
+    self.screenName = @"Search Details screen";
+
     _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
     
     if (_isStoreState) {

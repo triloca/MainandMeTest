@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface WishlistViewController : UIViewController
+@interface WishlistViewController : GAITrackedViewController
 @property (strong, nonatomic) NSDictionary* productInfo;
 @end

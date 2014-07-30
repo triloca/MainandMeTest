@@ -226,32 +226,34 @@
         urlString = [urlString stringByAppendingFormat:@"?page=%d&per_page=30", page];
     }else{
         urlString = [urlString stringByAppendingFormat:@"?lat=%f&lng=%f",
-                     [LocationManager shared].defaultLocation.coordinate.latitude,
-                     [LocationManager shared].defaultLocation.coordinate.longitude];
+                     [LocationManager shared].communityLocation.coordinate.latitude,
+                     [LocationManager shared].communityLocation.coordinate.longitude];
         
         urlString = [urlString stringByAppendingFormat:@"&city=%@&state=%@",
-                     [LocationManager shared].stateName,
-                     [LocationManager shared].statePrefix];
+                     [LocationManager shared].communityStateName,
+                     [LocationManager shared].communityStatePrefix];
         
-        if ([LocationManager shared].currentLocation == nil
-            && [LocationManager shared].locationFailed
-            && type == SearchTypeStores) {
-            
-            urlString = [NSString stringWithFormat:@"%@%@", [APIv1_0 serverUrl],
-                         @"/stores/latest"];
-            urlString = [urlString stringByAppendingFormat:@"?page=%d&per_page=30", page];
-        }else{
+//        if ([LocationManager shared].currentLocation == nil
+//            && [LocationManager shared].locationFailed
+//            && type == SearchTypeStores) {
+//            
+//            urlString = [NSString stringWithFormat:@"%@%@", [APIv1_0 serverUrl],
+//                         @"/stores/latest"];
+//            urlString = [urlString stringByAppendingFormat:@"?page=%d&per_page=30", page];
+//        }else{
             urlString = [urlString stringByAppendingFormat:@"&page=%d&per_page=30", page];
-        }
+//        }
     }
     
     urlString = [urlString stringByAppendingFormat:@"&realtime=%@", @"true"];
+    
+    NSLog(@"urlString = %@", urlString);
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
                                                            cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
-                                                       timeoutInterval:30];
+                                                       timeoutInterval:60];
     [request setHTTPMethod:@"GET"];
     
     NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {

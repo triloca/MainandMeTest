@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "GAITrackedViewController.h"
 
-@interface CommunityViewController : UIViewController
+@interface CommunityViewController : GAITrackedViewController
 @property (assign, nonatomic) NSString* stateName;
 @property (strong, nonatomic) NSString* statePrefix;
 

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface SignUpViewController : UIViewController
+@interface SignUpViewController : GAITrackedViewController
 
 @end

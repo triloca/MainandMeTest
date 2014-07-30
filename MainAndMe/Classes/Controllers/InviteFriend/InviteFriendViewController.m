@@ -47,6 +47,10 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.screenName = @"Invite Friends screen";
+
+    
     _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
     _titleTextLabel.text = @"Invite Friends";
     
@@ -221,7 +225,7 @@
 }
 
 - (NSArray*)sortAddresses:(NSArray*)array{
-    NSArray *sorteArray = [array sortedArrayUsingComparator:^(id a, id b) {
+    NSArray *sorteArray = [array sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         NSString *first = [a safeStringObjectForKey:@"name"];
         NSString *second = [b safeStringObjectForKey:@"name"];
         return [first caseInsensitiveCompare:second];

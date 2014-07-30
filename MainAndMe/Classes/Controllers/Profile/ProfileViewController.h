@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface ProfileViewController : UIViewController
+@interface ProfileViewController : GAITrackedViewController
 @property (assign, nonatomic) BOOL isNeedUpdate;
 @end

@@ -82,6 +82,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.screenName = @"Photo screen";
+
     _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
     _titleTextLabel.text = @"Add/Edit Photo";
     
@@ -702,7 +705,7 @@
 }
 
 - (NSArray*)sortAddresses:(NSArray*)array{
-    NSArray *sorteArray = [array sortedArrayUsingComparator:^(id a, id b) {
+    NSArray *sorteArray = [array sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         NSString *first = [a safeStringObjectForKey:@"Name"];
         NSString *second = [b safeStringObjectForKey:@"Name"];
         return [first caseInsensitiveCompare:second];

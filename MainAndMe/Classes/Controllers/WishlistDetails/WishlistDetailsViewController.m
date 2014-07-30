@@ -61,6 +61,9 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
    
+    self.screenName = @"Wishlist Details screen";
+
+    
     _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
     _titleTextLabel.text = @"Wishlist Details";
    

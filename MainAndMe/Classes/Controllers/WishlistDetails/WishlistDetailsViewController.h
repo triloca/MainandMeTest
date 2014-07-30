@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GAITrackedViewController.h"
 
-@interface WishlistDetailsViewController : UIViewController
+@interface WishlistDetailsViewController : GAITrackedViewController
 @property (assign, nonatomic) BOOL isNeedRefresh;
 @property (strong, nonatomic) NSDictionary* wishlistInfo;
 @property (assign, nonatomic) BOOL isAllState;

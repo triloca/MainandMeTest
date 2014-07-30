@@ -13,4 +13,5 @@
 + (NSString*)md5:(NSString*)value;
 + (NSString*)md5HexDigest:(NSString*)input;
 - (BOOL) isValidEmail;
+- (NSString*)stringWithCapitalizedFirstCharacter;
 @end

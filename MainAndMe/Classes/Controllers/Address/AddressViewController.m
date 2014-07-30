@@ -49,6 +49,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.screenName = @"Address screen";
+
     _titleTextLabel.font = [UIFont fontWithName:@"Perec-SuperNegra" size:22];
     _titleTextLabel.text = @"Select Address";
     
@@ -264,7 +267,7 @@
 }
 
 - (NSArray*)sortAddresses:(NSArray*)array{
-    NSArray *sorteArray = [array sortedArrayUsingComparator:^(id a, id b) {
+    NSArray *sorteArray = [array sortedArrayUsingComparator:^NSComparisonResult(id a, id b) {
         NSString *first = [a safeStringObjectForKey:@"Name"];
         NSString *second = [b safeStringObjectForKey:@"Name"];
         return [first caseInsensitiveCompare:second];
