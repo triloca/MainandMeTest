@@ -285,6 +285,9 @@
     
     NSString* urlString = [NSString stringWithFormat:@"%@/categories/%@/stores", [APIv1_0 serverUrl], categoryId];
     
+    NSString* communityId = [LocationManager shared].communityId;
+    urlString = [urlString stringByAppendingFormat:@"?community_id=%@", communityId];
+
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
@@ -327,6 +330,9 @@
                      exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString = [NSString stringWithFormat:@"%@/categories/%@/products", [APIv1_0 serverUrl], categoryId];
+    
+    NSString* communityId = [LocationManager shared].communityId;
+    urlString = [urlString stringByAppendingFormat:@"?community_id=%@", communityId];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
@@ -452,6 +458,9 @@
     
     NSString* urlString = [NSString stringWithFormat:@"%@/stores", [APIv1_0 serverUrl]];
     
+    NSString* communityId = [LocationManager shared].communityId;
+    urlString = [urlString stringByAppendingFormat:@"?community_id=%@", communityId];
+    
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
@@ -492,7 +501,10 @@
                 failure:(void(^) (NSError* error, NSString* errorString)) failure
               exception:(void(^) (NSString* exceptionString))exception{
     
-    NSString* urlString = [NSString stringWithFormat:@"%@/stores?term=%@", [APIv1_0 serverUrl], key];
+    NSString* urlString = [NSString stringWithFormat:@"%@/stores?keywords=%@", [APIv1_0 serverUrl], key];
+    
+    NSString* communityId = [LocationManager shared].communityId;
+    urlString = [urlString stringByAppendingFormat:@"&community_id=%@", communityId];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
@@ -537,6 +549,8 @@
     
     NSString* urlString = [NSString stringWithFormat:@"%@/products?keywords=%@", [APIv1_0 serverUrl], key];
     
+    NSString* communityId = [LocationManager shared].communityId;
+    urlString = [urlString stringByAppendingFormat:@"&community_id=%@", communityId];
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
@@ -583,8 +597,11 @@
                                    exception:(void(^) (NSString* exceptionString))exception{
     
     NSString* urlString = [NSString stringWithFormat:@"%@/products/nearby?lat=%f&lng=%f", [APIv1_0 serverUrl],
-                           [LocationManager shared].defaultLocation.coordinate.latitude,
-                           [LocationManager shared].defaultLocation.coordinate.longitude];
+                           [LocationManager shared].currentLocation.coordinate.latitude,
+                           [LocationManager shared].currentLocation.coordinate.longitude];
+    
+    NSString* communityId = [LocationManager shared].communityId;
+    urlString = [urlString stringByAppendingFormat:@"&community_id=%@", communityId];
     
     urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
     

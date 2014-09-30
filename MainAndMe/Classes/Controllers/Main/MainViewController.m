@@ -249,7 +249,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     _randomButton.selected = NO;
     
     _page = 1;
-    [self searchWithSearchType:SearchTypeStores searchFilter:SearchFilterNone];
+    [self searchWithSearchType:SearchTypeStores searchFilter:SearchFilterRandom];
     [self moveTriangleToPosition:53];
 }
 
@@ -265,7 +265,7 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
     _randomButton.selected = NO;
     
     _page = 1;
-    [self searchWithSearchType:SearchTypeProducts searchFilter:SearchFilterNone];
+    [self searchWithSearchType:SearchTypeProducts searchFilter:SearchFilterRandom];
     [self moveTriangleToPosition:214];
 }
 

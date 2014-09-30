@@ -12,9 +12,11 @@
 #import "FacebookSDK/FacebookSDK.h"
 #import "AlertManager.h"
 #import "NotificationManager.h"
-#import "TestFlight.h"
+//#import "TestFlight.h"
 #import "UIDevice+IdentifierAddition.h"
 #import "GAI.h"
+#import "LocationManager.h"
+//#import "ProximityKitManager.h"
 
 @interface AppDelegate()
 
@@ -30,7 +32,7 @@
 //#ifndef DEBUG
 //     [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueDeviceIdentifier]];
 //    [TestFlight takeOff:@"Insert your Application Token here"];
-    [TestFlight takeOff:@"14ae586e-6516-4ee4-956e-1c9f62e952e7"];
+    //[TestFlight takeOff:@"14ae586e-6516-4ee4-956e-1c9f62e952e7"];
     
 //#endif
 
@@ -41,6 +43,8 @@
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
 
+    [[LocationManager shared] updateLocation];
+    
     [[LayoutManager shared] application:application
           didFinishLaunchingWithOptions:launchOptions];
     [ReachabilityManager shared];
@@ -62,6 +66,8 @@
     
     //Initialize tracker. Replace with tracking ID
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-53135300-1"];
+
+    //[[ProximityKitManager shared] application:application didFinishLaunchingWithOptions:launchOptions];
 
     
     [self.window makeKeyAndVisible];
@@ -147,6 +153,7 @@
 - (void)application:(UIApplication *)app didReceiveLocalNotification:(UILocalNotification *)notif {
     NSLog(@"notif.userInfo: %@", notif.userInfo);
    // [[AlertManager shared] showOkAlertWithTitle:[NSString stringWithFormat:@"%@", notif.userInfo]];
+    //[[ProximityKitManager shared] application:app didReceiveLocalNotification:notif];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
@@ -154,5 +161,12 @@
    // NSString* notifString = [NSString stringWithFormat:@"%@", userInfo];
     [[LayoutManager shared].mainViewController loadNotifications];
     //[[AlertManager shared] showOkAlertWithTitle:@"Notification" message:notifString];
+}
+
+// for iOS 8...
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void(^)())completionHandle
+{
+    [self application:application didReceiveLocalNotification:notification];
+    completionHandle();
 }
 @end

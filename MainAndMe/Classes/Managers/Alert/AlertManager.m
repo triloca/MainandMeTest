@@ -96,6 +96,7 @@ static char kAlertHandlerObjectKey;
 }
 
 
+//! Old method
 - (void)showTextFieldAlertWithCallBack:(void (^)(UIAlertView *alertView, UITextField* textField, NSInteger buttonIndex))callBack
                                  title:(NSString*)title
                                message:(NSString*)message
@@ -134,6 +135,8 @@ static char kAlertHandlerObjectKey;
                                               cancelButtonTitle:cancelButtonTitle
                                               otherButtonTitles:nil];
     
+    //alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
+    
     va_list args;
     va_start(args, otherButtonTitles);
     for (NSString *arg = otherButtonTitles; arg != nil; arg = va_arg(args, NSString*))
@@ -152,6 +155,84 @@ static char kAlertHandlerObjectKey;
     [alertView show];
     
 }
+
+
+- (UIAlertView*)showAlertWithCallBack:(void (^)(UIAlertView *alertView, UITextField* firstTextField, UITextField* secondTextField, NSInteger buttonIndex))callBack
+                                title:(NSString*)title
+                              message:(NSString*)message
+                     firstPlaceholder:(NSString*)firstPlaceholder
+                    secondPlaceholder:(NSString*)secondPlaceholder
+                       alertViewStyle:(UIAlertViewStyle)alertViewStyle
+                    cancelButtonTitle:(NSString*)cancelButtonTitle
+                    otherButtonTitles:(NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION{
+    
+    //! Create delegate handler
+    AlertDelegateHandler* alertDelegateHandler = [AlertDelegateHandler new];
+    
+    //! Create alert view
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:alertDelegateHandler
+                                              cancelButtonTitle:cancelButtonTitle
+                                              otherButtonTitles:nil];
+    //! Set addition buttons
+    va_list args;
+    va_start(args, otherButtonTitles);
+    for (NSString *arg = otherButtonTitles; arg != nil; arg = va_arg(args, NSString*))
+    {
+        [alertView addButtonWithTitle:arg];
+    }
+    va_end(args);
+    
+    //! Set alert style
+    alertView.alertViewStyle = alertViewStyle;
+    
+    //! Get textfields
+    UITextField* firstTextField = nil;
+    UITextField* secondTextField = nil;
+    
+    switch (alertViewStyle) {
+        case UIAlertViewStyleDefault:
+            break;
+        case UIAlertViewStylePlainTextInput:
+        case UIAlertViewStyleSecureTextInput:{
+            
+            firstTextField = [alertView textFieldAtIndex:0];
+        }
+            break;
+        case UIAlertViewStyleLoginAndPasswordInput:{
+            
+            firstTextField = [alertView textFieldAtIndex:0];
+            secondTextField = [alertView textFieldAtIndex:1];
+        }
+            break;
+    }
+
+    
+    //! Set placeholder
+    firstTextField.placeholder = firstPlaceholder;
+    secondTextField.placeholder = secondPlaceholder;
+    
+    firstTextField.keyboardType = UIKeyboardTypeEmailAddress;
+    
+    //! Set delegate handler
+    alertDelegateHandler.didClickedButtonBlock = ^(UIAlertView *alertView, NSInteger buttonIndex) {
+        //! Call back
+        if (callBack){
+            callBack(alertView, firstTextField, secondTextField, buttonIndex);
+        }
+    };
+    
+    //! Associat alert and delegate handler
+    objc_setAssociatedObject(alertView, &kAlertHandlerObjectKey, alertDelegateHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    //! Show alert
+    [alertView show];
+    
+    return alertView;
+}
+
+
 
 #pragma mark - TextField Delegate
 

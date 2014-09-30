@@ -60,6 +60,7 @@
                                                    coordinate:_coordinate];
     [_mapView addAnnotation:placePoint];
     [self updateRegion:_coordinate];
+    [_mapView selectAnnotation:placePoint animated:YES];
     
     _locationManager = [CLLocationManager new];
     _locationManager.delegate = self;
@@ -116,18 +117,30 @@
     [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
         if (buttonIndex == 0) {
           
-            NSString *urlToOpen =
-            [NSString stringWithFormat:@"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f",
-             _location.coordinate.latitude,
-             _location.coordinate.longitude,
-             communityPoint.coordinate.latitude, communityPoint.coordinate.longitude];
-                       
+            
+//            NSString* addr = [NSString stringWithFormat:@"http://maps.apple.com/maps?daddr=%1.6f,%1.6f&saddr=%1.6f,%1.6f",communityPoint.coordinate.latitude,communityPoint.coordinate.longitude,42.286731719970703, -71.1306];
+            
+//            NSString* addr = [NSString stringWithFormat:@"http://maps.apple.com/maps?daddr=%1.6f,%1.6f&saddr=%1.6f,%1.6f",communityPoint.coordinate.latitude,communityPoint.coordinate.longitude,mapView.userLocation.coordinate.latitude,mapView.userLocation.coordinate.longitude];
 
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlToOpen]];
+            NSString* addr = [NSString stringWithFormat:@"http://maps.apple.com/maps?daddr=%1.6f,%1.6f&saddr=%1.6f,%1.6f",communityPoint.coordinate.latitude,communityPoint.coordinate.longitude,[LocationManager shared].currentLocation.coordinate.latitude,[LocationManager shared].currentLocation.coordinate.longitude];
+            
+//           NSString* addr = [NSString stringWithFormat:@"http://maps.apple.com/maps?daddr=%1.6f,%1.6f&saddr=%1.6f,%1.6f", 44.502964, 34.19,[LocationManager shared].currentLocation.coordinate.latitude,[LocationManager shared].currentLocation.coordinate.longitude];
+            
+            NSURL* url = [[NSURL alloc] initWithString:[addr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            [[UIApplication sharedApplication] openURL:url];
+            
+//            NSString *urlToOpen =
+//            [NSString stringWithFormat:@"http://maps.google.com/maps?saddr=%f,%f&daddr=%f,%f",
+//             _location.coordinate.latitude,
+//             _location.coordinate.longitude,
+//             communityPoint.coordinate.latitude, communityPoint.coordinate.longitude];
+//                       
+//
+//            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlToOpen]];
         }
     }
-                                           title:@"Message"
-                                         message:@"Open this store at map?"
+                                           title:nil
+                                         message:@"Get directions to this store in Maps app?"
                                cancelButtonTitle:@"Ok"
                                otherButtonTitles:@"Cancel", nil];
 }

@@ -56,6 +56,7 @@
             
             communityDict = @{@"name" : @"Roslindale",
                               @"prefix": @"MA",
+                              @"community_id" : @"17005",
                               @"lat" : [NSNumber numberWithFloat:42.2832142],
                               @"lon" : [NSNumber numberWithFloat:-71.1270268]};
             
@@ -66,6 +67,7 @@
         
         _communityStateName = [communityDict safeStringObjectForKey:@"name"];
         _communityStatePrefix= [communityDict safeStringObjectForKey:@"prefix"];
+        _communityId = [communityDict safeStringObjectForKey:@"community_id"];
         NSNumber* lat = [communityDict safeNSNumberObjectForKey:@"lat"];
         NSNumber* lon = [communityDict safeNSNumberObjectForKey:@"lon"];
         
@@ -82,10 +84,12 @@
 
 - (void)setupComminityLocation:(CLLocation*)location
                           name:(NSString*)name
-                        prefix:(NSString*)prefix{
-    
+                        prefix:(NSString*)prefix
+                   communityId:(NSString*)communityId{
+
     NSDictionary* communityDict = @{@"name" : name,
                                     @"prefix": prefix,
+                                    @"community_id" : communityId,
                                     @"lat" : [NSNumber numberWithFloat:location.coordinate.latitude],
                                     @"lon" : [NSNumber numberWithFloat:location.coordinate.longitude]};
     
@@ -95,6 +99,7 @@
     
     _communityLocation = location;
     _communityStateName = name;
+    _communityId = communityId;
     _communityStatePrefix = prefix;
 }
 
@@ -121,8 +126,8 @@
     [_locationManager stopUpdatingLocation];
     if (_isUpdating) {
         _isUpdating = NO;
-        [[NSNotificationCenter defaultCenter] postNotificationName:kUNDidUpdateLocetionNotification
-                                                        object:newLocation];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:kUNDidUpdateLocetionNotification
+//                                                        object:newLocation];
     }
 }
 
@@ -143,11 +148,13 @@
 
 - (void)setDefaultLocation:(CLLocation *)defaultLocation
                   sateName:(NSString*)stateName
-                    prefix:(NSString*)prefix{
+                    prefix:(NSString*)prefix
+               communityId:(NSString*)communityId{
 
     _defaultLocation = defaultLocation;
     _stateName = stateName;
     _statePrefix = prefix;
+    _communityId = communityId;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kUNDidUpdateLocetionNotification
                                                         object:nil];

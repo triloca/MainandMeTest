@@ -266,7 +266,8 @@
                                  
                                  [[LocationManager shared] setupComminityLocation:location
                                                                              name:communityName
-                                                                           prefix:_statePrefix];
+                                                                           prefix:_statePrefix
+                                                                      communityId:[[obj safeNumberObjectForKey:@"id"] stringValue]];
                                  
                                  [[LocationManager shared] notifyCommunityUpdate];
                                  

@@ -12,6 +12,7 @@
 #import "LoginSignUpManager.h"
 #import "MBProgressHUD.h"
 #import "ReachabilityManager.h"
+#import "PrPolicyViewController.h"
 
 @interface SignUpViewController ()
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -246,6 +247,13 @@
                                       [[AlertManager shared] showOkAlertWithTitle:exceptionString];
                                   }];
     }
+}
+
+- (IBAction)privacyPolicyButtonClicked:(id)sender {
+    
+    PrPolicyViewController* signUpViewController = [PrPolicyViewController loadFromXIB_Or_iPhone5_XIB];
+    [self.navigationController pushViewController:signUpViewController animated:YES];
+    
 }
 
 @end

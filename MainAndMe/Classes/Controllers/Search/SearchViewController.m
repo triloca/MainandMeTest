@@ -24,8 +24,10 @@ static NSString *kProductCellIdentifier = @"ProductCell";
 
 @interface SearchViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *titleTextLabel;
+
 @property (strong, nonatomic) NSArray* tableArray;
 @property (strong, nonatomic) NSArray* categoriesArray;
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *searchTextField;
 

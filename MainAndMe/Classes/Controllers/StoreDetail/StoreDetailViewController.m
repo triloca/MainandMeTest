@@ -498,7 +498,7 @@ MFMessageComposeViewControllerDelegate>
                                                   success:^(NSNumber *userIdNumber, NSDictionary *profile) {
                                                       [self hideSpinnerWithName:@"StoreDetailViewController"];
                                                       _storeDetailsCell.postedByLabel.text = [NSString
-                                                                                                stringWithFormat:@"Posted By %@ in", [profile safeStringObjectForKey:@"name"]];
+                                                                                                stringWithFormat:@"Posted By %@", [profile safeStringObjectForKey:@"name"]];
                                                       [_storeDetailsCell setPersonImageURLString:[profile safeStringObjectForKey:@"avatar_url"]];
                                                   }
                                                   failure:^(NSNumber *userIdNumber, NSError *error, NSString *errorString) {
@@ -574,7 +574,12 @@ MFMessageComposeViewControllerDelegate>
                                 }
                                 failure:^(NSError *error, NSString *errorString) {
                                     [self hideSpinnerWithName:@"StoreDetailViewController"];
-                                    [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                    
+                                    if ([errorString isEqualToString:@"You can not like something twice."]) {
+                                        errorString = @"You have already liked this, but thanks for trying again.";
+                                    }
+                                    
+                                    [[AlertManager shared] showOkAlertWithTitle:@"Oops!"
                                                                         message:errorString];
                                 }
                               exception:^(NSString *exceptionString) {
@@ -600,7 +605,7 @@ MFMessageComposeViewControllerDelegate>
                              }
                              failure:^(NSError *error, NSString *errorString) {
                                  [self hideSpinnerWithName:@"StoreDetailViewController"];
-                                 [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                 [[AlertManager shared] showOkAlertWithTitle:@"Oops!"
                                                                      message:errorString];
                              }
                            exception:^(NSString *exceptionString) {
@@ -791,7 +796,7 @@ MFMessageComposeViewControllerDelegate>
                                   [self hideSpinnerWithName:@"StoreDetailViewController"];
                                   NSString* name = [_storeInfo safeStringObjectForKey:@"name"];
                                   name = [name stringByReplacingOccurrencesOfString:@"<null>" withString:@""];
-                                  NSString* text = [NSString stringWithFormat:@"Main And Me app\n%@\n%@", name, tinyUrl];
+                                  NSString* text = [NSString stringWithFormat:@"Via the Main and Me local shopping app:\n%@\n%@", name, tinyUrl];
                                   [self sendUpdateWithMessage:text];
                               }
                               failure:^(NSError *error, NSString *errorString) {

@@ -9,7 +9,7 @@
 #import "AlertDelegateHandler.h"
 
 @interface AlertDelegateHandler ()
-@property (copy, nonatomic) void (^didClickedButtonBlock)(UIAlertView* alertView, NSInteger buttonIndex);
+
 @end
 
 @implementation AlertDelegateHandler

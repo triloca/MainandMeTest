@@ -22,6 +22,7 @@
 //!! New location functionality
 @property (strong, nonatomic) NSString* communityStateName;
 @property (strong, nonatomic) NSString* communityStatePrefix;
+@property (strong, nonatomic) NSString* communityId;
 @property (strong, nonatomic) CLLocation* communityLocation;
 //!!
 
@@ -34,12 +35,14 @@
 - (CLLocation*)currentLocation;
 - (void)setDefaultLocation:(CLLocation *)defaultLocation
                   sateName:(NSString*)stateName
-                    prefix:(NSString*)prefix;
+                    prefix:(NSString*)prefix
+               communityId:(NSString*)communityId;
 
 - (void)notifyUpdate;
 - (void)notifyCommunityUpdate;
 
 - (void)setupComminityLocation:(CLLocation*)location
                           name:(NSString*)name
-                        prefix:(NSString*)prefix;
+                        prefix:(NSString*)prefix
+                   communityId:(NSString*)communityId;
 @end

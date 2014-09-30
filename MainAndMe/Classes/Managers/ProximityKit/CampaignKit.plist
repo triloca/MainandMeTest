@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!--
+	Download this file to 'CampaignKit.plist' in your project folder, then drag it into Xcode to configure the library.
+-->
+<dict>
+    <key>CKAPIToken</key>
+    <string>03a4705f63ee0e2f4ea40a045da545990a73873a0333f2927426642f55daa026</string>
+    <key>CKKitURL</key>
+    <string>http://campaignkit.radiusnetworks.com/sdk/v1/kits/37</string>
+    <key>PKAPIToken</key>
+    <string>e17e40f258587a6f1e45facdb44028c8154c4d3e6f5757c88efcb6e210b33609</string>
+    <key>PKKitURL</key>
+    <string>http://proximitykit.radiusnetworks.com/api/kits/3987</string>
+    <key>PKAnalyticsURL</key>
+    <string>https://analytics.radiusnetworks.com/sdk/v1/events</string>
+</dict>
+</plist>
+

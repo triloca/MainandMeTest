@@ -399,7 +399,7 @@ MFMessageComposeViewControllerDelegate>
                                                   success:^(NSNumber *userIdNumber, NSDictionary *profile) {
                                                       [self hideSpinnerWithName:@"ProductDetailViewController"];
                                                       _productDetailsCell.postedByLabel.text = [NSString
-                                                                                                stringWithFormat:@"%@ in", [_productInfo safeStringObjectForKey:@"name"]];
+                                                                                                stringWithFormat:@"%@", [_productInfo safeStringObjectForKey:@"name"]];
                                                       [_productDetailsCell setPersonImageURLString:[profile safeStringObjectForKey:@"avatar_url"]];
                                                   }
                                                   failure:^(NSNumber *userIdNumber, NSError *error, NSString *errorString) {

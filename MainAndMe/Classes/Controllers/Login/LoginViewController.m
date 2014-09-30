@@ -446,26 +446,48 @@
 
 
 - (void)showEmailAlert {
-    [[AlertManager shared] showTextFieldAlertWithCallBack:^(UIAlertView *alertView, UITextField *textField, NSInteger buttonIndex) {
-        [textField resignFirstResponder];
-        
-        if (buttonIndex == 1) {
-            if ([textField.text isValidEmail]) {
-                [self authenticaeThroughTwitter:textField.text];
+    
+    [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, UITextField *firstTextField, UITextField *secondTextField, NSInteger buttonIndex) {
+        if (alertView.cancelButtonIndex == buttonIndex) {
+
+        }else{
+            if ([firstTextField.text isValidEmail]) {
+                [self authenticaeThroughTwitter:firstTextField.text];
             }else{
                 [self showEmailInvalidAlert];
             }
-        
         }
-     
-        
     }
-                                                    title:@"Enter your account email"
-                                                  message:@"Email"
-                                              placeholder:@"Enter email"
-                                                   active:YES
-                                        cancelButtonTitle:@"Cancel"
-                                        otherButtonTitles:@"Ok", nil];
+                                           title:@"Enter your account email"
+                                         message:@"Email:"
+                                firstPlaceholder:@"Enter email"
+                               secondPlaceholder:nil
+                                  alertViewStyle:UIAlertViewStylePlainTextInput
+                               cancelButtonTitle:@"Cancel"
+                               otherButtonTitles:@"Ok", nil];
+    
+    
+//    [[AlertManager shared] showTextFieldAlertWithCallBack:^(UIAlertView *alertView, UITextField *textField, NSInteger buttonIndex) {
+//        [textField resignFirstResponder];
+//        
+//        if (buttonIndex == 1) {
+//            
+//            if ([textField.text isValidEmail]) {
+//                [self authenticaeThroughTwitter:textField.text];
+//            }else{
+//                [self showEmailInvalidAlert];
+//            }
+//        
+//        }
+//     
+//        
+//    }
+//                                                    title:@"Enter your account email"
+//                                                  message:@"Email"
+//                                              placeholder:@"Enter email"
+//                                                   active:YES
+//                                        cancelButtonTitle:@"Cancel"
+//                                        otherButtonTitles:@"Ok", nil];
 
 }
 
