@@ -12,11 +12,11 @@
 #import "FacebookSDK/FacebookSDK.h"
 #import "AlertManager.h"
 #import "NotificationManager.h"
-//#import "TestFlight.h"
+#import "TestFlight.h"
 #import "UIDevice+IdentifierAddition.h"
 #import "GAI.h"
 #import "LocationManager.h"
-//#import "ProximityKitManager.h"
+#import "ProximityKitManager.h"
 
 @interface AppDelegate()
 
@@ -67,7 +67,7 @@
     //Initialize tracker. Replace with tracking ID
     [[GAI sharedInstance] trackerWithTrackingId:@"UA-53135300-1"];
 
-    //[[ProximityKitManager shared] application:application didFinishLaunchingWithOptions:launchOptions];
+    [[ProximityKitManager shared] application:application didFinishLaunchingWithOptions:launchOptions];
 
     
     [self.window makeKeyAndVisible];

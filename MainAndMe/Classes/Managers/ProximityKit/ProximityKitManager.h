@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 __MyCompanyName__. All rights reserved.
 //
 
+#import <CampaignKit/CampaignKit.h>
+
 
 @interface ProximityKitManager : NSObject
 
@@ -13,5 +15,8 @@
 
 - (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification;
+
+
+- (void)showIBeaconController:(CKCampaign*)campaign;
 
 @end

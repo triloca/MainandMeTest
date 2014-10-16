@@ -7,11 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE0DA75519DC5CE400A61B1F /* CampaignKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE0DA75419DC5CE400A61B1F /* CampaignKit.framework */; };
+		AE0DA75819DC5D1100A61B1F /* ProximityKitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AEE5FB9719D6073600FE7D55 /* ProximityKitManager.m */; };
 		AE49631119DAC27600BC877B /* PrPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE49630E19DAC27600BC877B /* PrPolicyViewController.m */; };
 		AE49631219DAC27600BC877B /* PrPolicyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE49630F19DAC27600BC877B /* PrPolicyViewController.xib */; };
 		AE49631319DAC27600BC877B /* PrPolicyViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE49631019DAC27600BC877B /* PrPolicyViewController_iPhone5.xib */; };
 		AE49631519DAF6AA00BC877B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE49631419DAF6AA00BC877B /* FacebookSDK.framework */; };
 		AE618BC819DB2A78003D798D /* ProximityKit.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE618BC719DB2A78003D798D /* ProximityKit.plist */; };
+		AEB8A41D19EAEA7B00CFA643 /* IBeaconInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB8A41A19EAEA7B00CFA643 /* IBeaconInfoViewController.m */; };
+		AEB8A41E19EAEA7B00CFA643 /* IBeaconInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB8A41B19EAEA7B00CFA643 /* IBeaconInfoViewController.xib */; };
+		AEB8A41F19EAEA7B00CFA643 /* IBeaconInfoViewController_iPhone5.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB8A41C19EAEA7B00CFA643 /* IBeaconInfoViewController_iPhone5.xib */; };
+		AEB8A42219EAF56800CFA643 /* test.html in Resources */ = {isa = PBXBuildFile; fileRef = AEB8A42119EAF56800CFA643 /* test.html */; };
 		AEE5FB9D19D6F00D00FE7D55 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = AEE5FB9C19D6F00D00FE7D55 /* libsqlite3.dylib */; };
 		AEE5FB9F19D6F2E300FE7D55 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEE5FB9E19D6F2E300FE7D55 /* libGoogleAnalyticsServices.a */; };
 		AEE5FBA119D6F2FB00FE7D55 /* libOAuth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AEE5FBA019D6F2FB00FE7D55 /* libOAuth.a */; };
@@ -329,12 +335,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AE0DA75419DC5CE400A61B1F /* CampaignKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CampaignKit.framework; path = MainAndMe/3rdParty/CampaignKit/CampaignKit.framework; sourceTree = "<group>"; };
 		AE49630D19DAC27600BC877B /* PrPolicyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PrPolicyViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE49630E19DAC27600BC877B /* PrPolicyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PrPolicyViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AE49630F19DAC27600BC877B /* PrPolicyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrPolicyViewController.xib; sourceTree = "<group>"; };
 		AE49631019DAC27600BC877B /* PrPolicyViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrPolicyViewController_iPhone5.xib; sourceTree = "<group>"; };
 		AE49631419DAF6AA00BC877B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "MainAndMe/3rdParty/Facebook/facebook-ios-sdk-3.18/FacebookSDK.framework"; sourceTree = "<group>"; };
 		AE618BC719DB2A78003D798D /* ProximityKit.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = ProximityKit.plist; path = Classes/Managers/ProximityKit/ProximityKit.plist; sourceTree = "<group>"; };
+		AEB8A41919EAEA7B00CFA643 /* IBeaconInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = IBeaconInfoViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AEB8A41A19EAEA7B00CFA643 /* IBeaconInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = IBeaconInfoViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		AEB8A41B19EAEA7B00CFA643 /* IBeaconInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IBeaconInfoViewController.xib; sourceTree = "<group>"; };
+		AEB8A41C19EAEA7B00CFA643 /* IBeaconInfoViewController_iPhone5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IBeaconInfoViewController_iPhone5.xib; sourceTree = "<group>"; };
+		AEB8A42119EAF56800CFA643 /* test.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = test.html; sourceTree = "<group>"; };
 		AEE5FB9619D6073600FE7D55 /* ProximityKitManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProximityKitManager.h; path = Classes/Managers/ProximityKit/ProximityKitManager.h; sourceTree = "<group>"; };
 		AEE5FB9719D6073600FE7D55 /* ProximityKitManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProximityKitManager.m; path = Classes/Managers/ProximityKit/ProximityKitManager.m; sourceTree = "<group>"; };
 		AEE5FB9C19D6F00D00FE7D55 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -800,7 +812,7 @@
 		D9D796D616EEB34B00C494D7 /* signin_facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = signin_facebook.png; path = Resources/Images/Login/signin_facebook.png; sourceTree = "<group>"; };
 		D9D796D716EEB34B00C494D7 /* signin_twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = signin_twitter.png; path = Resources/Images/Login/signin_twitter.png; sourceTree = "<group>"; };
 		D9D796DF16EECD6B00C494D7 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpViewController.h; path = Classes/Controllers/SignUp/SignUpViewController.h; sourceTree = "<group>"; };
-		D9D796E016EECD6B00C494D7 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpViewController.m; path = Classes/Controllers/SignUp/SignUpViewController.m; sourceTree = "<group>"; };
+		D9D796E016EECD6B00C494D7 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = SignUpViewController.m; path = Classes/Controllers/SignUp/SignUpViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D9D796E116EECD6B00C494D7 /* SignUpViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SignUpViewController.xib; path = Classes/Controllers/SignUp/SignUpViewController.xib; sourceTree = "<group>"; };
 		D9D796E516EECF7A00C494D7 /* back_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back_button.png; sourceTree = "<group>"; };
 		D9D796E716EED24300C494D7 /* NSString+Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Common.h"; path = "Classes/Utility/Categories/NSString+Common.h"; sourceTree = "<group>"; };
@@ -813,6 +825,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE0DA75519DC5CE400A61B1F /* CampaignKit.framework in Frameworks */,
 				AE49631519DAF6AA00BC877B /* FacebookSDK.framework in Frameworks */,
 				AEE5FB9D19D6F00D00FE7D55 /* libsqlite3.dylib in Frameworks */,
 				D98460011984AF760040F8E4 /* CoreData.framework in Frameworks */,
@@ -849,6 +862,27 @@
 			);
 			name = "Privacy Policy";
 			path = "Classes/Controllers/Privacy Policy";
+			sourceTree = "<group>";
+		};
+		AEB8A41819EAEA7B00CFA643 /* IBeaconInfo */ = {
+			isa = PBXGroup;
+			children = (
+				AEB8A41919EAEA7B00CFA643 /* IBeaconInfoViewController.h */,
+				AEB8A41A19EAEA7B00CFA643 /* IBeaconInfoViewController.m */,
+				AEB8A41B19EAEA7B00CFA643 /* IBeaconInfoViewController.xib */,
+				AEB8A41C19EAEA7B00CFA643 /* IBeaconInfoViewController_iPhone5.xib */,
+			);
+			name = IBeaconInfo;
+			path = Classes/Controllers/IBeaconInfo;
+			sourceTree = "<group>";
+		};
+		AEB8A42019EAF56800CFA643 /* HTML */ = {
+			isa = PBXGroup;
+			children = (
+				AEB8A42119EAF56800CFA643 /* test.html */,
+			);
+			name = HTML;
+			path = Resources/HTML;
 			sourceTree = "<group>";
 		};
 		AEE5FB9519D6071200FE7D55 /* ProximityKit */ = {
@@ -1055,6 +1089,7 @@
 		D927D99A16EE6A0B002CF45A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AE0DA75419DC5CE400A61B1F /* CampaignKit.framework */,
 				AE49631419DAF6AA00BC877B /* FacebookSDK.framework */,
 				AEE5FB9C19D6F00D00FE7D55 /* libsqlite3.dylib */,
 				D98460001984AF760040F8E4 /* CoreData.framework */,
@@ -1100,6 +1135,7 @@
 		D927D9A416EE6A0B002CF45A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AEB8A42019EAF56800CFA643 /* HTML */,
 				D94076EF16F27D020000E21B /* Fonts */,
 				D927D9EB16EE9845002CF45A /* Images */,
 				D927D9A516EE6A0B002CF45A /* Strings */,
@@ -1215,6 +1251,7 @@
 		D927D9E416EE8B78002CF45A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				AEB8A41819EAEA7B00CFA643 /* IBeaconInfo */,
 				AE49630C19DAC27600BC877B /* Privacy Policy */,
 				D9C778DC1721DD840017084A /* MyNotifications */,
 				D93CE1AD170298AC006AB52D /* InviteFriend */,
@@ -2356,7 +2393,9 @@
 				D96709D716F7E01E00CF27C4 /* invite_friends_submit.png in Resources */,
 				AE618BC819DB2A78003D798D /* ProximityKit.plist in Resources */,
 				D96709DE16F7E6BE00CF27C4 /* StoreDetailsCell.xib in Resources */,
+				AEB8A41F19EAEA7B00CFA643 /* IBeaconInfoViewController_iPhone5.xib in Resources */,
 				D96709E116F7E83A00CF27C4 /* header_map_pin_btn.png in Resources */,
+				AEB8A41E19EAEA7B00CFA643 /* IBeaconInfoViewController.xib in Resources */,
 				D96709E216F7E83A00CF27C4 /* profile_header_follow_btn.png in Resources */,
 				D96709EB16F80A2800CF27C4 /* StoreMapViewController.xib in Resources */,
 				D9072B4916F8E96F00E7F168 /* star_empty.png in Resources */,
@@ -2407,6 +2446,7 @@
 				AEE5FBA519D7062100FE7D55 /* CampaignKit.plist in Resources */,
 				D95EAE461700F3290081BED0 /* add_details_save_details_btn.png in Resources */,
 				D95EAE481700F3750081BED0 /* right_arrow_circle_btn.png in Resources */,
+				AEB8A42219EAF56800CFA643 /* test.html in Resources */,
 				D95EAE521701309F0081BED0 /* SearchStoreViewController.xib in Resources */,
 				D95EAE541701309F0081BED0 /* SearchStoreCell.xib in Resources */,
 				D93CE1A317026A16006AB52D /* addButton.png in Resources */,
@@ -2476,10 +2516,12 @@
 				D93C0FA616EFB17B00A4472E /* SBJsonParser.m in Sources */,
 				D93C0FA716EFB17B00A4472E /* SBJsonWriter.m in Sources */,
 				D93C0FAC16EFBCA700A4472E /* AlertManager.m in Sources */,
+				AEB8A41D19EAEA7B00CFA643 /* IBeaconInfoViewController.m in Sources */,
 				D93C0FB016EFBF1100A4472E /* AlertDelegateHandler.m in Sources */,
 				D93C0FB516EFCE1600A4472E /* MBProgressHUD.m in Sources */,
 				D93C0FB916EFD7AB00A4472E /* UserDefaultsManager.m in Sources */,
 				D93C0FBE16EFDDCF00A4472E /* DataManager.m in Sources */,
+				AE0DA75819DC5D1100A61B1F /* ProximityKitManager.m in Sources */,
 				D93C0FC316EFE94500A4472E /* Reachability.m in Sources */,
 				D93C0FC616EFE97B00A4472E /* ReachabilityManager.m in Sources */,
 				D93C0FCD16EFF34700A4472E /* MainViewController.m in Sources */,
@@ -2645,8 +2687,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
-				PROVISIONING_PROFILE = "74684CBE-9E5D-4A75-A6B5-D6AB586813DA";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4e825c57-3a33-4c07-bdc8-f3b46ea84ce6";
+				PROVISIONING_PROFILE = "600e52e2-43c7-462a-9e63-f16e044a2503";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "600e52e2-43c7-462a-9e63-f16e044a2503";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
@@ -2735,8 +2777,8 @@
 					"-lsqlite3.0",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "74684CBE-9E5D-4A75-A6B5-D6AB586813DA";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4e825c57-3a33-4c07-bdc8-f3b46ea84ce6";
+				PROVISIONING_PROFILE = "600e52e2-43c7-462a-9e63-f16e044a2503";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "600e52e2-43c7-462a-9e63-f16e044a2503";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

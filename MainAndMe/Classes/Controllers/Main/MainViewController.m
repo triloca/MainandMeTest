@@ -33,6 +33,7 @@
 #import "NotificationManager.h"
 #import "MNMBottomPullToRefreshManager.h"
 #import "CommunityViewController.h"
+#import "ProximityKitManager.h"
 
 typedef enum {
     ControllerStateStores = 0,
@@ -671,6 +672,9 @@ static NSString *kStorePageCellIdentifier = @"StorePageCell";
 
 - (void)showStoreDetailWithData:(NSDictionary*)data {
     
+//    [[ProximityKitManager shared] showIBeaconController:nil];
+//    
+//    return;
     StoreDetailViewController* storeDetailViewController = [StoreDetailViewController loadFromXIB_Or_iPhone5_XIB];
     storeDetailViewController.storeInfo = data;
     [self.navigationController pushViewController:storeDetailViewController animated:YES];

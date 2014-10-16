@@ -8,8 +8,9 @@
 
 #import "ProximityKitManager.h"
 //#import "CKManager.h"
-#import <CampaignKit/CampaignKit.h>
 #import "AlertManager.h"
+#import "IBeaconInfoViewController.h"
+#import "LayoutManager.h"
 
 @interface ProximityKitManager() <CKManagerDelegate>
 
@@ -62,7 +63,7 @@
     } else {
         // else if app is open, show alert view
         [CKCampaignAlertView showWithCampaign:campaign andCompletion:^{
-            [self showCampaign:campaign];
+            [self showIBeaconController:campaign];
         }];
     }
 }
@@ -70,8 +71,20 @@
 - (void)showCampaign:(CKCampaign*)campaign
 {
     // TODO: write custom code or use code from the Campaign Kit reference app
-    [[AlertManager shared] showOkAlertWithTitle:[NSString stringWithFormat:@"%@", campaign]];
+    
+   // [[AlertManager shared] showOkAlertWithTitle:[NSString stringWithFormat:@"%@", campaign]];
+    
+    [[AlertManager shared] showOkAlertWithTitle:campaign.content.alertTitle
+                                        message:[NSString stringWithFormat:@"%@", campaign.content.body]];
 
+}
+
+
+- (void)showIBeaconController:(CKCampaign*)campaign{
+    
+    IBeaconInfoViewController* iBeaconInfoViewController = [IBeaconInfoViewController loadFromXIB_Or_iPhone5_XIB];
+    iBeaconInfoViewController.campaign = campaign;
+    [[LayoutManager shared].rootNavigationController pushViewController:iBeaconInfoViewController animated:YES];
 }
 
 #pragma mark _______________________ Public Methods ________________________
@@ -99,7 +112,7 @@
     CKCampaign* campaign = [_campaignKitManager campaignFromNotification:notification];
     if (campaign)
     {
-        [self showCampaign:campaign];
+        [self showIBeaconController:campaign];
     }
 }
 
