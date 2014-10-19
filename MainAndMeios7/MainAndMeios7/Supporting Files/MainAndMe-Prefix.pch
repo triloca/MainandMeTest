@@ -1,0 +1,27 @@
+//
+//  MainAndMe-Prefix.pch
+//  MainAndMeios7
+//
+//  Created by Alexander Bukov on 10/16/14.
+//  Copyright (c) 2014 Uniprog. All rights reserved.
+//
+
+#ifndef MainAndMeios7_MainAndMe_Prefix_pch
+#define MainAndMeios7_MainAndMe_Prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+
+#define AMSlideMenuWithoutStoryboards
+
+
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+#import "SystemVresion.h"
+#import "UIViewController+Common.h"
+
+#import "LayoutManager.h"
+
+#endif
