@@ -32,6 +32,8 @@
 		AE34D97919F209390045AB20 /* UIView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = AE34D95B19F209390045AB20 /* UIView+Common.m */; };
 		AE34D97A19F209390045AB20 /* UIViewController+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = AE34D95E19F209390045AB20 /* UIViewController+Common.m */; };
 		AE34D97B19F209390045AB20 /* UIViewController+Spiner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE34D96019F209390045AB20 /* UIViewController+Spiner.m */; };
+		AE72CB5C19F6B68600463EE5 /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72CB5B19F6B68600463EE5 /* FacebookManager.m */; };
+		AE72CB5F19F6B6A500463EE5 /* TwitterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE72CB5E19F6B6A500463EE5 /* TwitterManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +89,10 @@
 		AE34D95F19F209390045AB20 /* UIViewController+Spiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Spiner.h"; sourceTree = "<group>"; };
 		AE34D96019F209390045AB20 /* UIViewController+Spiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Spiner.m"; sourceTree = "<group>"; };
 		AE34D96219F209390045AB20 /* SystemVresion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemVresion.h; sourceTree = "<group>"; };
+		AE72CB5A19F6B68600463EE5 /* FacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookManager.h; path = Facebook/FacebookManager.h; sourceTree = "<group>"; };
+		AE72CB5B19F6B68600463EE5 /* FacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookManager.m; path = Facebook/FacebookManager.m; sourceTree = "<group>"; };
+		AE72CB5D19F6B6A500463EE5 /* TwitterManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwitterManager.h; path = Twitter/TwitterManager.h; sourceTree = "<group>"; };
+		AE72CB5E19F6B6A500463EE5 /* TwitterManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwitterManager.m; path = Twitter/TwitterManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +180,8 @@
 		AE34D8C619F020970045AB20 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				AE72CB5919F6B64600463EE5 /* Twitter */,
+				AE72CB5819F6B62E00463EE5 /* Facebook */,
 				AE34D90319F203700045AB20 /* Layout */,
 			);
 			path = Managers;
@@ -463,6 +471,24 @@
 			path = System;
 			sourceTree = "<group>";
 		};
+		AE72CB5819F6B62E00463EE5 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				AE72CB5A19F6B68600463EE5 /* FacebookManager.h */,
+				AE72CB5B19F6B68600463EE5 /* FacebookManager.m */,
+			);
+			name = Facebook;
+			sourceTree = "<group>";
+		};
+		AE72CB5919F6B64600463EE5 /* Twitter */ = {
+			isa = PBXGroup;
+			children = (
+				AE72CB5D19F6B6A500463EE5 /* TwitterManager.h */,
+				AE72CB5E19F6B6A500463EE5 /* TwitterManager.m */,
+			);
+			name = Twitter;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -542,6 +568,7 @@
 				AE34D96F19F209390045AB20 /* NSMutableDictionary+Safe.m in Sources */,
 				AE34D96619F209390045AB20 /* NSDate+String.m in Sources */,
 				AE34D96319F209390045AB20 /* MF_Base64Additions.m in Sources */,
+				AE72CB5F19F6B6A500463EE5 /* TwitterManager.m in Sources */,
 				AE34D97919F209390045AB20 /* UIView+Common.m in Sources */,
 				AE34D90619F203960045AB20 /* LayoutManager.m in Sources */,
 				AE34D97B19F209390045AB20 /* UIViewController+Spiner.m in Sources */,
@@ -553,6 +580,7 @@
 				AE34D97A19F209390045AB20 /* UIViewController+Common.m in Sources */,
 				AE34D8DC19F021310045AB20 /* AppDelegate.m in Sources */,
 				AE34D96A19F209390045AB20 /* NSString+Email.m in Sources */,
+				AE72CB5C19F6B68600463EE5 /* FacebookManager.m in Sources */,
 				AE34D96D19F209390045AB20 /* NSDictionary+Safe.m in Sources */,
 				AE34D97719F209390045AB20 /* UIImageView+UNNetworking.m in Sources */,
 			);
