@@ -8,6 +8,12 @@
 
 #import "RootNavigationController.h"
 #import "AppDelegate.h"
+#import "SlidingVC.h"
+#import "LeftMenuVC.h"
+
+#import "HomeNVC.h"
+#import "HomeVC.h"
+
 
 @interface LayoutManager : NSObject
 
@@ -22,6 +28,16 @@
 
 //! Root navigation controller
 @property (strong, nonatomic) RootNavigationController* rootNVC;
+
+//! Sliding VC
+@property (strong, nonatomic) SlidingVC* slidingVC;
+
+////////
+@property (strong, nonatomic) LeftMenuVC* LeftMenuVC;
+
+@property (strong, nonatomic) HomeNVC* homeNVC;
+@property (strong, nonatomic) HomeVC* homeVC;
+
 
 
 + (LayoutManager*)shared;

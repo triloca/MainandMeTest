@@ -67,6 +67,24 @@
     
     //! Set root navigation controller
     [self shared].rootNVC = (RootNavigationController*)[self shared].window.rootViewController;
+    
+    [self shared].slidingVC = [[SlidingVC alloc] initWithNibName:@"SlidingVC" bundle:nil];
+    
+    
+    //! First controller to show
+    [self shared].homeVC = [HomeVC loadFromXIB_Or_iPhone5_XIB];
+    [self shared].homeNVC = [[HomeNVC alloc] initWithRootViewController:[self shared].homeVC];
+    
+    [self shared].slidingVC.topViewController = [self shared].homeNVC;
+    
+    //! Left VC
+    [self shared].LeftMenuVC = [LeftMenuVC loadFromXIB_Or_iPhone5_XIB];
+    [self shared].slidingVC.underLeftViewController = [self shared].LeftMenuVC;
+    
+    // enable swiping on the top view
+    [[self shared].homeNVC.view addGestureRecognizer:[self shared].slidingVC.panGesture];
+    
+    [self shared].rootNVC.viewControllers = @[[self shared].slidingVC];
 
 }
 
