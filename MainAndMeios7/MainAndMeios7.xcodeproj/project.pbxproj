@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A4A2430D19F74EDA00E27C29 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A2430C19F74EDA00E27C29 /* LocationManager.m */; };
 		AE34D8D519F020970045AB20 /* RootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE34D8C919F020970045AB20 /* RootNavigationController.m */; };
 		AE34D8D919F020DE0045AB20 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE34D8D719F020DE0045AB20 /* main.m */; };
 		AE34D8DC19F021310045AB20 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE34D8DB19F021310045AB20 /* AppDelegate.m */; };
@@ -37,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A4A2430B19F74EDA00E27C29 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		A4A2430C19F74EDA00E27C29 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		AE34D82F19F01CD60045AB20 /* MainAndMeios7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MainAndMeios7.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE34D8C819F020970045AB20 /* RootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootNavigationController.h; sourceTree = "<group>"; };
 		AE34D8C919F020970045AB20 /* RootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootNavigationController.m; sourceTree = "<group>"; };
@@ -106,6 +109,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A4A2430A19F74EDA00E27C29 /* Location Manager */ = {
+			isa = PBXGroup;
+			children = (
+				A4A2430B19F74EDA00E27C29 /* LocationManager.h */,
+				A4A2430C19F74EDA00E27C29 /* LocationManager.m */,
+			);
+			path = "Location Manager";
+			sourceTree = "<group>";
+		};
 		AE34D82619F01CD60045AB20 = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +192,7 @@
 		AE34D8C619F020970045AB20 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				A4A2430A19F74EDA00E27C29 /* Location Manager */,
 				AE72CB5919F6B64600463EE5 /* Twitter */,
 				AE72CB5819F6B62E00463EE5 /* Facebook */,
 				AE34D90319F203700045AB20 /* Layout */,
@@ -580,6 +593,7 @@
 				AE34D97A19F209390045AB20 /* UIViewController+Common.m in Sources */,
 				AE34D8DC19F021310045AB20 /* AppDelegate.m in Sources */,
 				AE34D96A19F209390045AB20 /* NSString+Email.m in Sources */,
+				A4A2430D19F74EDA00E27C29 /* LocationManager.m in Sources */,
 				AE72CB5C19F6B68600463EE5 /* FacebookManager.m in Sources */,
 				AE34D96D19F209390045AB20 /* NSDictionary+Safe.m in Sources */,
 				AE34D97719F209390045AB20 /* UIImageView+UNNetworking.m in Sources */,

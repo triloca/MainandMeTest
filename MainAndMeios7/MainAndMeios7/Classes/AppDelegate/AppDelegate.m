@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "LocationManager.h"
+#import <AddressBook/AddressBook.h>
 
 @interface AppDelegate ()
 
@@ -19,6 +21,35 @@
     // Override point for customization after application launch.
     
     [LayoutManager application:application didFinishLaunchingWithOptions:launchOptions];
+    [[LocationManager sharedManager] setUpdatePeriod:10];//10 seconds
+    [[LocationManager sharedManager] setDistanceFilter:10];//10 meters
+    [[LocationManager sharedManager] start];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:LOCATION_CHANGED_NOTIFICATION_NAME object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
+        
+        CLLocation *loc = (CLLocation *) notification.userInfo;
+        NSLog(@"--- LOCATION UPDATED: %@ ----", loc);
+    }];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:REGION_CHANGED_NOTIFICATION_NAME object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
+        
+        CLLocation *loc = (CLLocation *) notification.userInfo;
+        NSLog(@"--- REGION CHANGED: %@ ----", loc);
+    }];
+    
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:GEOCODING_INFO_UPDATED_NOTIFICATION_NAME object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
+        
+        CLPlacemark *placemark = (CLPlacemark *) notification.userInfo;
+        NSLog(@"Placemark name: %@", placemark.name);
+//        NSDictionary *dict = placemark.addressDictionary;
+//        NSString *locationName = [NSString stringWithFormat:@"%@", [dict objectForKey:(NSString *) kABPersonAddressStreetKey]];
+    }];
+    
+    [[LocationManager sharedManager] updateWithCompletionBlock:^(CLLocation * loc) {
+        NSLog(@"Forced udpate location: %@", loc);
+    }];
     
     return YES;
 }
