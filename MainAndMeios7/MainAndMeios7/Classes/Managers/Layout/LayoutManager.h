@@ -14,6 +14,9 @@
 #import "HomeNVC.h"
 #import "HomeVC.h"
 
+#import "ShopCategoryNVC.h"
+#import "ShopCategoryVC.h"
+
 
 @interface LayoutManager : NSObject
 
@@ -38,9 +41,13 @@
 @property (strong, nonatomic) HomeNVC* homeNVC;
 @property (strong, nonatomic) HomeVC* homeVC;
 
+@property (strong, nonatomic) ShopCategoryNVC* shopCategoryNVC;
+@property (strong, nonatomic) ShopCategoryVC* shopCategoryVC;
+
 
 
 + (LayoutManager*)shared;
 + (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+
 
 @end

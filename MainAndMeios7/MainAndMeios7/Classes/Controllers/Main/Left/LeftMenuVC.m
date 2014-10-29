@@ -7,6 +7,7 @@
 //
 
 #import "LeftMenuVC.h"
+#import "LeftMenuCell.h"
 
 @interface LeftMenuVC ()
 
@@ -29,14 +30,32 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    _tableView.tableFooterView = [UIView new];
+    
+    [self loadData];
+    [self updateViews];
+    
 }
 #pragma mark _______________________ Privat Methods(view)___________________
 #pragma mark _______________________ Privat Methods ________________________
 
 - (void)loadData{
-    _tableArray = @[@"1", @"2", @"3", @"4"];
+    _tableArray = @[@"Specials & Events",
+                    @"Search",
+                    @"Find stores by name",
+                    @"My wishlists",
+                    @"People I follow",
+                    @"Notifications",
+                    @"Edit my profile",
+                    @"Invite friends",
+                    @"About Main and Me",
+                    @"Log out"];
 }
+
+- (void)updateViews{
+    [_tableView reloadData];
+}
+
 #pragma mark _______________________ Buttons Action ________________________
 #pragma mark _______________________ Delegates _____________________________
 
@@ -51,30 +70,61 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //    static NSString *CellIdentifier = @"ClassCell";
+    static NSString *kLeftMenuCellIdentifier = @"LeftMenuCell";
     
-    //    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    //
-    //    if (cell == nil)
-    //    {
-    //        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    //    }
-    
-    //    ClassCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    //
-    //    if (cell == nil){
-    //        cell = [ClassCell loadViewFromXIB];
-    //        //cell.transform = CGAffineTransformMake(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f);
-    //    }
+    LeftMenuCell *cell = [tableView dequeueReusableCellWithIdentifier:kLeftMenuCellIdentifier];
+
+    if (cell == nil){
+        cell = [LeftMenuCell loadViewFromXIB];
+        //cell.transform = CGAffineTransformMake(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f);
+    }
     
     // Configure the cell...
     
-    return nil;
+    cell.nameLabel.text = [_tableArray safeStringObjectAtIndex:indexPath.row];
+    
+    if ([cell.nameLabel.text isEqualToString:@"Notifications"]) {
+        cell.badgeView.hidden = NO;
+        
+        [cell setupBageString:@"12"];
+        
+    }else{
+        cell.badgeView.hidden = YES;
+    }
+    
+    if ([cell.nameLabel.text isEqualToString:@"Log out"]) {
+        cell.arrowImageView.hidden = YES;
+    }else{
+        cell.arrowImageView.hidden = NO;
+    }
+    
+    return cell;
 }
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    switch (indexPath.row) {
+        case 0:{
+            
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+            [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+            
+            break;
+        }
+        case 1:{
+            
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].shopCategoryNVC;
+            [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+            
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
     
 }
 

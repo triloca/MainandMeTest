@@ -89,7 +89,13 @@
 }
 
 
-
+- (ShopCategoryNVC*)shopCategoryNVC{
+    if (_shopCategoryNVC == nil) {
+        self.shopCategoryVC = [ShopCategoryVC loadFromXIB_Or_iPhone5_XIB];
+        self.shopCategoryNVC = [[ShopCategoryNVC alloc] initWithRootViewController:_shopCategoryVC];
+    }
+    return _shopCategoryNVC;
+}
 #pragma mark _______________________ Notifications _________________________
 
 

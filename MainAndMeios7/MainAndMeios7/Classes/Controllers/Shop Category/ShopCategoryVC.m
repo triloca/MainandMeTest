@@ -1,32 +1,42 @@
 //
-//  SlidingVC.m
+//  ShopCategoryVC.m
 //  MainAndMeios7
 //
-//  Created by Alexander Bukov on 10/19/14.
+//  Created by Alexander Bukov on 10/23/14.
 //  Copyright (c) 2014 Uniprog. All rights reserved.
 //
 
-#import "SlidingVC.h"
+#import "ShopCategoryVC.h"
 
-@interface SlidingVC ()
+@interface ShopCategoryVC ()
 
 @end
 
-@implementation SlidingVC
+@implementation ShopCategoryVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    // configure anchored layout
-    //self.anchorRightPeekAmount  = 100.0;
-    //self.anchorLeftRevealAmount = 100.0;
-    //self.anchorRightPeekAmount = 100;
-    self.anchorRightRevealAmount = 242;
+    // configure top view controller
+
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+
+    UIBarButtonItem *anchorLeftButton  = [[UIBarButtonItem alloc] initWithTitle:@"Menu" style:UIBarButtonItemStylePlain target:self action:@selector(anchorRight)];
+    self.navigationItem.title = @"Layout Demo";
+    self.navigationItem.leftBarButtonItem = anchorLeftButton;
+   
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)anchorRight {
+    [self.slidingViewController anchorTopViewToRightAnimated:YES];
 }
 
 /*

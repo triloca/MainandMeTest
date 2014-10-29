@@ -32,6 +32,9 @@
 		AE34D97919F209390045AB20 /* UIView+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = AE34D95B19F209390045AB20 /* UIView+Common.m */; };
 		AE34D97A19F209390045AB20 /* UIViewController+Common.m in Sources */ = {isa = PBXBuildFile; fileRef = AE34D95E19F209390045AB20 /* UIViewController+Common.m */; };
 		AE34D97B19F209390045AB20 /* UIViewController+Spiner.m in Sources */ = {isa = PBXBuildFile; fileRef = AE34D96019F209390045AB20 /* UIViewController+Spiner.m */; };
+		AE4FFF9619F8CA2500EB0129 /* ShopCategoryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4FFF9419F8CA2500EB0129 /* ShopCategoryVC.m */; };
+		AE4FFF9719F8CA2500EB0129 /* ShopCategoryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE4FFF9519F8CA2500EB0129 /* ShopCategoryVC.xib */; };
+		AE4FFF9B19F8CA9100EB0129 /* ShopCategoryNVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE4FFF9A19F8CA9100EB0129 /* ShopCategoryNVC.m */; };
 		AE637FAD19F41ABC00656D89 /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AE637FA119F41ABC00656D89 /* ECPercentDrivenInteractiveTransition.m */; };
 		AE637FAE19F41ABC00656D89 /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE637FA319F41ABC00656D89 /* ECSlidingAnimationController.m */; };
 		AE637FAF19F41ABC00656D89 /* ECSlidingInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AE637FA619F41ABC00656D89 /* ECSlidingInteractiveTransition.m */; };
@@ -48,6 +51,8 @@
 		AE76634219F42CE300CA9127 /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE76634019F42CE300CA9127 /* HomeVC.m */; };
 		AE76634319F42CE300CA9127 /* HomeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE76634119F42CE300CA9127 /* HomeVC.xib */; };
 		AE76634919F468B000CA9127 /* HomeNVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE76634819F468B000CA9127 /* HomeNVC.m */; };
+		AE9B2C6F1A006B2600F284F4 /* menu_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = AE9B2C6E1A006B2600F284F4 /* menu_arrow.png */; };
+		AE9B2C731A006FE000F284F4 /* JSCustomBadge.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9B2C721A006FE000F284F4 /* JSCustomBadge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,6 +108,11 @@
 		AE34D95F19F209390045AB20 /* UIViewController+Spiner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Spiner.h"; sourceTree = "<group>"; };
 		AE34D96019F209390045AB20 /* UIViewController+Spiner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Spiner.m"; sourceTree = "<group>"; };
 		AE34D96219F209390045AB20 /* SystemVresion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemVresion.h; sourceTree = "<group>"; };
+		AE4FFF9319F8CA2500EB0129 /* ShopCategoryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShopCategoryVC.h; path = "Shop Category/ShopCategoryVC.h"; sourceTree = "<group>"; };
+		AE4FFF9419F8CA2500EB0129 /* ShopCategoryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShopCategoryVC.m; path = "Shop Category/ShopCategoryVC.m"; sourceTree = "<group>"; };
+		AE4FFF9519F8CA2500EB0129 /* ShopCategoryVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ShopCategoryVC.xib; path = "Shop Category/ShopCategoryVC.xib"; sourceTree = "<group>"; };
+		AE4FFF9919F8CA9100EB0129 /* ShopCategoryNVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShopCategoryNVC.h; path = "Shop Category/NVC/ShopCategoryNVC.h"; sourceTree = "<group>"; };
+		AE4FFF9A19F8CA9100EB0129 /* ShopCategoryNVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShopCategoryNVC.m; path = "Shop Category/NVC/ShopCategoryNVC.m"; sourceTree = "<group>"; };
 		AE637FA019F41ABC00656D89 /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
 		AE637FA119F41ABC00656D89 /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPercentDrivenInteractiveTransition.m; sourceTree = "<group>"; };
 		AE637FA219F41ABC00656D89 /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingAnimationController.h; sourceTree = "<group>"; };
@@ -116,7 +126,7 @@
 		AE637FAA19F41ABC00656D89 /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
 		AE637FAB19F41ABC00656D89 /* UIViewController+ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ECSlidingViewController.h"; sourceTree = "<group>"; };
 		AE637FAC19F41ABC00656D89 /* UIViewController+ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ECSlidingViewController.m"; sourceTree = "<group>"; };
-		AE637FB319F41ADD00656D89 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		AE637FB319F41ADD00656D89 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../../Default-568h@2x.png"; sourceTree = "<group>"; };
 		AE72CB5319F6ADFB00463EE5 /* LeftMenuCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LeftMenuCell.h; path = Main/Left/Views/LeftMenuCell.h; sourceTree = "<group>"; };
 		AE72CB5419F6ADFB00463EE5 /* LeftMenuCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LeftMenuCell.m; path = Main/Left/Views/LeftMenuCell.m; sourceTree = "<group>"; };
 		AE72CB5519F6ADFB00463EE5 /* LeftMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LeftMenuCell.xib; path = Main/Left/Views/LeftMenuCell.xib; sourceTree = "<group>"; };
@@ -131,6 +141,9 @@
 		AE76634119F42CE300CA9127 /* HomeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HomeVC.xib; path = Home/HomeVC.xib; sourceTree = "<group>"; };
 		AE76634719F468B000CA9127 /* HomeNVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeNVC.h; path = Home/NVC/HomeNVC.h; sourceTree = "<group>"; };
 		AE76634819F468B000CA9127 /* HomeNVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeNVC.m; path = Home/NVC/HomeNVC.m; sourceTree = "<group>"; };
+		AE9B2C6E1A006B2600F284F4 /* menu_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu_arrow.png; sourceTree = "<group>"; };
+		AE9B2C711A006FE000F284F4 /* JSCustomBadge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSCustomBadge.h; sourceTree = "<group>"; };
+		AE9B2C721A006FE000F284F4 /* JSCustomBadge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSCustomBadge.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +160,6 @@
 		AE34D82619F01CD60045AB20 = {
 			isa = PBXGroup;
 			children = (
-				AE637FB319F41ADD00656D89 /* Default-568h@2x.png */,
 				AE34D83119F01CD60045AB20 /* MainAndMeios7 */,
 				AE34D83019F01CD60045AB20 /* Products */,
 			);
@@ -175,6 +187,7 @@
 		AE34D8C119F020970045AB20 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
+				AE9B2C701A006FE000F284F4 /* JSCustomBadge */,
 				AE637F9F19F41ABC00656D89 /* ECSlidingViewController */,
 			);
 			path = 3rdParty;
@@ -211,6 +224,7 @@
 		AE34D8C519F020970045AB20 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				AE4FFF9219F8C9EE00EB0129 /* ShopCategory */,
 				AE76633D19F42C9400CA9127 /* HOME */,
 				AE34D90E19F206440045AB20 /* MENU */,
 				AE34D8C719F020970045AB20 /* RootViewControllers */,
@@ -289,6 +303,8 @@
 		AE34D8D019F020970045AB20 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AE9B2C6D1A006B2600F284F4 /* Menu */,
+				AE637FB319F41ADD00656D89 /* Default-568h@2x.png */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -512,6 +528,26 @@
 			path = System;
 			sourceTree = "<group>";
 		};
+		AE4FFF9219F8C9EE00EB0129 /* ShopCategory */ = {
+			isa = PBXGroup;
+			children = (
+				AE4FFF9819F8CA5700EB0129 /* NVC */,
+				AE4FFF9319F8CA2500EB0129 /* ShopCategoryVC.h */,
+				AE4FFF9419F8CA2500EB0129 /* ShopCategoryVC.m */,
+				AE4FFF9519F8CA2500EB0129 /* ShopCategoryVC.xib */,
+			);
+			name = ShopCategory;
+			sourceTree = "<group>";
+		};
+		AE4FFF9819F8CA5700EB0129 /* NVC */ = {
+			isa = PBXGroup;
+			children = (
+				AE4FFF9919F8CA9100EB0129 /* ShopCategoryNVC.h */,
+				AE4FFF9A19F8CA9100EB0129 /* ShopCategoryNVC.m */,
+			);
+			name = NVC;
+			sourceTree = "<group>";
+		};
 		AE637F9F19F41ABC00656D89 /* ECSlidingViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -591,6 +627,23 @@
 			name = NVC;
 			sourceTree = "<group>";
 		};
+		AE9B2C6D1A006B2600F284F4 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				AE9B2C6E1A006B2600F284F4 /* menu_arrow.png */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		AE9B2C701A006FE000F284F4 /* JSCustomBadge */ = {
+			isa = PBXGroup;
+			children = (
+				AE9B2C711A006FE000F284F4 /* JSCustomBadge.h */,
+				AE9B2C721A006FE000F284F4 /* JSCustomBadge.m */,
+			);
+			path = JSCustomBadge;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -648,9 +701,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE9B2C6F1A006B2600F284F4 /* menu_arrow.png in Resources */,
 				AE76633619F4243500CA9127 /* LeftMenuVC.xib in Resources */,
 				AE72CB5719F6ADFB00463EE5 /* LeftMenuCell.xib in Resources */,
 				AE34D8E419F0228D0045AB20 /* Main.storyboard in Resources */,
+				AE4FFF9719F8CA2500EB0129 /* ShopCategoryVC.xib in Resources */,
 				AE637FB419F41ADD00656D89 /* Default-568h@2x.png in Resources */,
 				AE34D8E519F0228D0045AB20 /* Images.xcassets in Resources */,
 				AE34D8E319F0228D0045AB20 /* LaunchScreen.xib in Resources */,
@@ -674,6 +729,7 @@
 				AE34D8D919F020DE0045AB20 /* main.m in Sources */,
 				AE34D96819F209390045AB20 /* NSFileManager+Path.m in Sources */,
 				AE34D96F19F209390045AB20 /* NSMutableDictionary+Safe.m in Sources */,
+				AE4FFF9619F8CA2500EB0129 /* ShopCategoryVC.m in Sources */,
 				AE637FAE19F41ABC00656D89 /* ECSlidingAnimationController.m in Sources */,
 				AE34D96619F209390045AB20 /* NSDate+String.m in Sources */,
 				AE34D96319F209390045AB20 /* MF_Base64Additions.m in Sources */,
@@ -684,11 +740,13 @@
 				AE637FB019F41ABC00656D89 /* ECSlidingSegue.m in Sources */,
 				AE72CB5619F6ADFB00463EE5 /* LeftMenuCell.m in Sources */,
 				AE34D90619F203960045AB20 /* LayoutManager.m in Sources */,
+				AE4FFF9B19F8CA9100EB0129 /* ShopCategoryNVC.m in Sources */,
 				AE34D97B19F209390045AB20 /* UIViewController+Spiner.m in Sources */,
 				AE34D8D519F020970045AB20 /* RootNavigationController.m in Sources */,
 				AE34D96B19F209390045AB20 /* NSString+Path.m in Sources */,
 				AE76634919F468B000CA9127 /* HomeNVC.m in Sources */,
 				AE637FAD19F41ABC00656D89 /* ECPercentDrivenInteractiveTransition.m in Sources */,
+				AE9B2C731A006FE000F284F4 /* JSCustomBadge.m in Sources */,
 				AE34D97819F209390045AB20 /* UITextView+Size.m in Sources */,
 				AE34D96919F209390045AB20 /* NSString+Capitalized.m in Sources */,
 				AE34D96519F209390045AB20 /* MKMapView+Zoom.m in Sources */,

@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSCustomBadge.h"
+
 
 @interface LeftMenuCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIImageView *arrowImageView;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic, readonly) JSCustomBadge *badgeView;
+
+- (void)setupBageString:(NSString*)text;
 
 @end

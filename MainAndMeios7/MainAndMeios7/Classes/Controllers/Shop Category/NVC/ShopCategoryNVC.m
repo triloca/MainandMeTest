@@ -1,20 +1,19 @@
 //
-//  HomeNVC.m
+//  ShopCategoryNVC.m
 //  MainAndMeios7
 //
-//  Created by Alexander Bukov on 10/19/14.
+//  Created by Alexander Bukov on 10/23/14.
 //  Copyright (c) 2014 Uniprog. All rights reserved.
 //
 
-#import "HomeNVC.h"
+#import "ShopCategoryNVC.h"
 #import "UIViewController+ECSlidingViewController.h"
 
-
-@interface HomeNVC ()
+@interface ShopCategoryNVC ()
 
 @end
 
-@implementation HomeNVC
+@implementation ShopCategoryNVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,12 +25,15 @@
     
     //! Add recognizer for finger action
     [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+    [self.view addGestureRecognizer:self.slidingViewController.resetTapGesture];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-
+    
     [self.view removeGestureRecognizer:self.slidingViewController.panGesture];
+    [self.view removeGestureRecognizer:self.slidingViewController.resetTapGesture];
+
 }
 
 - (void)didReceiveMemoryWarning {

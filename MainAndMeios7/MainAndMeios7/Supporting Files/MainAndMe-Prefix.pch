@@ -22,6 +22,9 @@
 #import "SystemVresion.h"
 #import "UIViewController+Common.h"
 
+#import "AllCategories.h"
 #import "LayoutManager.h"
+#import "UIViewController+ECSlidingViewController.h"
+
 
 #endif
