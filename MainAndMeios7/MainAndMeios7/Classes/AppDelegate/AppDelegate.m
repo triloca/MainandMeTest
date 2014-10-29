@@ -10,6 +10,10 @@
 #import "LocationManager.h"
 #import <AddressBook/AddressBook.h>
 
+#import "RegistrationRequest.h"
+#import "MMServiceProvider.h"
+
+
 @interface AppDelegate ()
 
 @end
@@ -50,6 +54,20 @@
     [[LocationManager sharedManager] updateWithCompletionBlock:^(CLLocation * loc) {
         NSLog(@"Forced udpate location: %@", loc);
     }];
+    
+    
+//    RegistrationRequest *request = [[RegistrationRequest alloc] init];
+//    request.username = @"test12";
+//    request.password = @"passwd";
+//    request.email = @"ee1@ee.com";
+//    
+//    [[MMServiceProvider sharedProvider] sendRequest:request success:^(RegistrationRequest *request) {
+//        NSLog(@"Registration complete! %@", request.response);
+//    } failure:^(RegistrationRequest *request, NSError *error) {
+//        NSLog(@"Registration failed: %@", error);
+//        NSLog(@"Response: %@", request.response);
+//    }];
+    
     
     return YES;
 }
