@@ -11,6 +11,7 @@
 #import <AddressBook/AddressBook.h>
 
 #import "RegistrationRequest.h"
+#import "LoginRequest.h"
 #import "MMServiceProvider.h"
 
 
@@ -65,6 +66,16 @@
 //        NSLog(@"Registration complete! %@", request.response);
 //    } failure:^(RegistrationRequest *request, NSError *error) {
 //        NSLog(@"Registration failed: %@", error);
+//        NSLog(@"Response: %@", request.response);
+//    }];
+    
+//    LoginRequest *loginRequest = [[LoginRequest alloc] init];
+//    loginRequest.email = @"ee@ee.com";
+//    loginRequest.password = @"passwd";
+//    [[MMServiceProvider sharedProvider] sendRequest:loginRequest success:^(LoginRequest *request) {
+//        NSLog(@"login completed: %@", request.response);
+//    } failure:^(LoginRequest *request, NSError *error) {
+//        NSLog(@"login failed: %@", error);
 //        NSLog(@"Response: %@", request.response);
 //    }];
     

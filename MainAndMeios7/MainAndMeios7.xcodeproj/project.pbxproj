@@ -22,6 +22,7 @@
 		A433635D1A01726200D77C2C /* AFPropertyListRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A433633E1A01726200D77C2C /* AFPropertyListRequestOperation.m */; };
 		A433635E1A01726200D77C2C /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A43363401A01726200D77C2C /* AFURLConnectionOperation.m */; };
 		A433635F1A01726200D77C2C /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = A43363421A01726200D77C2C /* AFXMLRequestOperation.m */; };
+		A433636C1A01789200D77C2C /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A433636B1A01789200D77C2C /* LoginRequest.m */; };
 		A4A2430D19F74EDA00E27C29 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A4A2430C19F74EDA00E27C29 /* LocationManager.m */; };
 		AE34D8D519F020970045AB20 /* RootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE34D8C919F020970045AB20 /* RootNavigationController.m */; };
 		AE34D8D919F020DE0045AB20 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE34D8D719F020DE0045AB20 /* main.m */; };
@@ -84,6 +85,8 @@
 		A43363401A01726200D77C2C /* AFURLConnectionOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLConnectionOperation.m; sourceTree = "<group>"; };
 		A43363411A01726200D77C2C /* AFXMLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFXMLRequestOperation.h; sourceTree = "<group>"; };
 		A43363421A01726200D77C2C /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
+		A433636A1A01789200D77C2C /* LoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRequest.h; sourceTree = "<group>"; };
+		A433636B1A01789200D77C2C /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRequest.m; sourceTree = "<group>"; };
 		A4A2430B19F74EDA00E27C29 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		A4A2430C19F74EDA00E27C29 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		AE34D82F19F01CD60045AB20 /* MainAndMeios7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MainAndMeios7.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +189,8 @@
 			children = (
 				A433632C1A0162CE00D77C2C /* RegistrationRequest.h */,
 				A433632D1A0162CE00D77C2C /* RegistrationRequest.m */,
+				A433636A1A01789200D77C2C /* LoginRequest.h */,
+				A433636B1A01789200D77C2C /* LoginRequest.m */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -678,6 +683,7 @@
 				AE34D96C19F209390045AB20 /* NSArray+Safe.m in Sources */,
 				AE34D96E19F209390045AB20 /* NSMutableArray+Safe.m in Sources */,
 				AE34D96419F209390045AB20 /* UILabel+Size.m in Sources */,
+				A433636C1A01789200D77C2C /* LoginRequest.m in Sources */,
 				A433632E1A0162CE00D77C2C /* RegistrationRequest.m in Sources */,
 				AE34D8D919F020DE0045AB20 /* main.m in Sources */,
 				A433635D1A01726200D77C2C /* AFPropertyListRequestOperation.m in Sources */,
