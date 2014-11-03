@@ -1,49 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="VV1-m7-Tjo">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M5A-DX-RU5">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
-        <!--Root Navigation Controller-->
-        <scene sceneID="OKN-IR-TLJ">
+        <!--Navigation Controller-->
+        <scene sceneID="8Gs-8j-kG1">
             <objects>
-                <navigationController navigationBarHidden="YES" id="VV1-m7-Tjo" customClass="RootNavigationController" sceneMemberID="viewController">
-                    <nil key="simulatedStatusBarMetrics"/>
-                    <nil key="simulatedTopBarMetrics"/>
-                    <nil key="simulatedBottomBarMetrics"/>
-                    <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="I9K-et-Ig2">
+                <navigationController navigationBarHidden="YES" id="M5A-DX-RU5" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sdZ-nj-XU8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
-                    <connections>
-                        <segue destination="6P8-3D-UNH" kind="relationship" relationship="rootViewController" id="09X-Vx-OwS"/>
-                    </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QCU-A9-JrW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="clN-Sz-blV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-98" y="218"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Aev-Qi-zMG">
-            <objects>
-                <viewController id="6P8-3D-UNH" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eNV-08-GhJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="NWS-F0-nqY"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="IEY-HY-Kun">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="8ht-Q3-YU4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cvu-gJ-sH8" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="576" y="234"/>
+            <point key="canvasLocation" x="-118" y="230"/>
         </scene>
     </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
 </document>

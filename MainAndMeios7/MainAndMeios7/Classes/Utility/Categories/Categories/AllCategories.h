@@ -17,6 +17,6 @@
 #import "NSString+Path.h"
 #import "NSString+Email.h"
 #import "NSString+Capitalized.h"
-#import "UIImage+Common.h"
 #import "NSError+LocalizedError.h"
+#import "UIFont+All.h"
 

@@ -8,6 +8,17 @@
 
 #import "RootNavigationController.h"
 #import "AppDelegate.h"
+#import "SlidingVC.h"
+#import "LeftMenuVC.h"
+
+#import "HomeNVC.h"
+#import "HomeVC.h"
+
+#import "ShopCategoryNVC.h"
+#import "ShopCategoryVC.h"
+
+#import "LoginVC.h"
+
 
 @interface LayoutManager : NSObject
 
@@ -23,8 +34,25 @@
 //! Root navigation controller
 @property (strong, nonatomic) RootNavigationController* rootNVC;
 
+//! Container for modal controller
+@property (strong, nonatomic) UIViewController* modalViewController;
+
+//! Sliding VC
+@property (strong, nonatomic) SlidingVC* slidingVC;
+
+////////
+@property (strong, nonatomic) LeftMenuVC* LeftMenuVC;
+
+@property (strong, nonatomic) HomeNVC* homeNVC;
+@property (strong, nonatomic) HomeVC* homeVC;
+
+@property (strong, nonatomic) ShopCategoryNVC* shopCategoryNVC;
+@property (strong, nonatomic) ShopCategoryVC* shopCategoryVC;
+
+
 
 + (LayoutManager*)shared;
 + (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
+
 
 @end
