@@ -26,4 +26,12 @@
     return dict;
 }
 
+- (void) processResponse:(NSObject *)response {
+    NSDictionary *responseDict = (NSDictionary *) response;
+    
+    self.user = [responseDict safeDictionaryObjectForKey:@"user"];
+    self.apiToken = [_user safeStringObjectForKey:@"api_token"];
+
+}
+
 @end

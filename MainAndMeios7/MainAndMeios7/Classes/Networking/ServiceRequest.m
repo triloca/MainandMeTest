@@ -32,8 +32,14 @@
 }
 
 - (RequestError *) validateResponse:(NSDictionary*) responseDictionary httpResponse:(NSHTTPURLResponse *) httpResponse {
+    
     if (httpResponse.statusCode != 200 && httpResponse.statusCode != 201 && httpResponse.statusCode != 202) {
         self.response = responseDictionary;
+
+        if ([responseDictionary safeObjectForKey:@"errors"] != nil) {
+            return [RequestError requestErrorWithCode:httpResponse.statusCode description:responseDictionary[@"errors"]];
+        }
+        
         return [RequestError requestErrorWithCode:httpResponse.statusCode description:@"Some server error occured."];
     }
     

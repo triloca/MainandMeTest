@@ -13,7 +13,28 @@
 #import "RegistrationRequest.h"
 #import "LoginRequest.h"
 #import "MMServiceProvider.h"
-
+#import "SearchRequest.h"
+#import "LoadProfileRequest.h"
+#import "LoadCommentsRequest.h"
+#import "LoadStoreRequest.h"
+#import "LoadProductsByStoreRequest.h"
+#import "ForgotPasswordRequest.h"
+#import "LoginTrackerRequest.h"
+#import "AddDeviceTokenRequest.h"
+#import "GetNotificationsRequest.h"
+#import "RemoveNotificationRequest.h"
+#import "LoadWishistRequest.h"
+#import "LoadStoreCommentsForUser.h"
+#import "LikeProductRequest.h"
+#import "CreateWishlistRequest.h"
+#import "LoadCategoriesRequest.h"
+#import "LoadStoresForCategory.h"
+#import "LoadProductsForCategory.h"
+#import "LoadProductLikesForUserRequest.h"
+#import "LoadStoresRequest.h"
+#import "LoadProductsRequest.h"
+#import "LoadNearbyProductsRequest.h"
+#import "LoadStatesRequest.h"
 
 @interface AppDelegate ()
 
@@ -68,18 +89,227 @@
 //        NSLog(@"Registration failed: %@", error);
 //        NSLog(@"Response: %@", request.response);
 //    }];
+
+/*
+    LoginRequest *loginRequest = [[LoginRequest alloc] init];
+    loginRequest.email = @"ee@ee.com";
+    loginRequest.password = @"passwd";
+    [[MMServiceProvider sharedProvider] sendRequest:loginRequest success:^(LoginRequest *_loginRequest) {
+        NSString *apiToken = _loginRequest.apiToken;
+        NSLog(@"login completed: %@", apiToken);
+//        
+//        AddDeviceTokenRequest *addDeviceRequest = [[AddDeviceTokenRequest alloc] init];
+//        addDeviceRequest.apiToken = apiToken;
+//        addDeviceRequest.deviceToken = apiToken;
+//        
+//        [[MMServiceProvider sharedProvider] sendRequest:addDeviceRequest success:^(AddDeviceTokenRequest *request) {
+//            NSLog(@"device token added");
+//        }failure:^(AddDeviceTokenRequest *request, NSError *error) {
+//            NSLog(@"Error: %@", error);
+//        }];
+        
+//        GetNotificationsRequest *notificationsRequest = [[GetNotificationsRequest alloc] init];
+//        notificationsRequest.apiToken = apiToken;
+//        
+//        [[MMServiceProvider sharedProvider] sendRequest:notificationsRequest success:^(GetNotificationsRequest *request) {
+//            NSLog(@"notifications: %@", notificationsRequest.notifications);
+//        }failure:^(GetNotificationsRequest *request, NSError *error) {
+//            NSLog(@"Error: %@", error);
+//        }];
+        
+//        RemoveNotificationRequest *removeNotificationsRequest = [[RemoveNotificationRequest alloc] init];
+//        removeNotificationsRequest.apiToken = apiToken;
+//        removeNotificationsRequest.notificationId = @(555);
+//        [[MMServiceProvider sharedProvider] sendRequest:removeNotificationsRequest success:^(RemoveNotificationRequest *request) {
+//            NSLog(@"notifications cleared");
+//        }failure:^(RemoveNotificationRequest *request, NSError *error) {
+//            NSLog(@"Error: %@", error);
+//        }];
+        
+//        LoadWishistRequest *wishlistRequest = [[LoadWishistRequest alloc] init];
+//        wishlistRequest.userId = @(50);
+//        
+//        [[MMServiceProvider sharedProvider] sendRequest:wishlistRequest success:^(LoadWishistRequest *request) {
+//            NSLog(@"wishlist: %@", wishlistRequest.wishlist);
+//        }failure:^(LoadWishistRequest *request, NSError *error) {
+//            NSLog(@"Error: %@", error);
+//        }];
+//        LikeProductRequest *request = [[LikeProductRequest alloc] init];
+//        request.apiToken = apiToken;
+//        
+//        [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+//            NSLog(@"product was liked: %@", request.response);
+//        }failure:^(id _request, NSError *error) {
+//            NSLog(@"Error: %@", error);
+//        }];
+        
+        //WARNING: This request if failing with '{name: can't be black error}' i dont know why.
+        //Obviously, there is another key for 'name' field.
+        //So just feel free to go to request realization and take a loot at 'userRequestDictionary' method.
+//        CreateWishlistRequest *request = [[CreateWishlistRequest alloc] init];
+//        request.name = @"My wishlist1";
+//        request.userId = @(50);
+//        request.apiToken = apiToken;
+//        
+//        [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+//            NSLog(@"wishlist was created: %@", request.response);
+//        }failure:^(id _request, NSError *error) {
+//            NSLog(@"Error: %@, %@", error.userInfo[NSLocalizedDescriptionKey], request.response);
+//        }];
+
+    } failure:^(LoginRequest *request, NSError *error) {
+        NSLog(@"login failed: %@", error);
+        NSLog(@"Response: %@", request.response);
+    }];
+/* */
+//
+//    
+//    ForgotPasswordRequest *forgotPswdRequest = [[ForgotPasswordRequest alloc] init];
+//    forgotPswdRequest.email = @"ee@ee.com";
+//    
+//    [[MMServiceProvider sharedProvider] sendRequest:forgotPswdRequest success:^(ForgotPasswordRequest *request) {
+//        NSLog(@"Password recovery email sent");
+//    } failure:^(ForgotPasswordRequest *request, NSError* error) {
+//        NSLog(@"Password recovery failed with error: %@", error);
+//    }];
+//
     
-//    LoginRequest *loginRequest = [[LoginRequest alloc] init];
-//    loginRequest.email = @"ee@ee.com";
-//    loginRequest.password = @"passwd";
-//    [[MMServiceProvider sharedProvider] sendRequest:loginRequest success:^(LoginRequest *request) {
-//        NSLog(@"login completed: %@", request.response);
-//    } failure:^(LoginRequest *request, NSError *error) {
-//        NSLog(@"login failed: %@", error);
-//        NSLog(@"Response: %@", request.response);
+//    SearchRequest *searchRequest = [[SearchRequest alloc] initWithSearchType:SearchTypeStores searchFilter:SearchFilterNewlyAll];
+//    searchRequest.coordinate = CLLocationCoordinate2DMake(42.283215, -71.123029);
+//    searchRequest.city = @"Roslindale";
+//    searchRequest.state = @"MA";
+//    
+//    [[MMServiceProvider sharedProvider] sendRequest:searchRequest success:^(id _request) {
+//        NSLog(@"Succceess!");
+//    } failure:^(id _request, NSError *error) {
+//        NSLog(@"Fail: %@", error);
 //    }];
     
+//    LoadProfileRequest *loadProfileRequest = [[LoadProfileRequest alloc] init];
+//    loadProfileRequest.userId = @(50);
+//    
+//    [[MMServiceProvider sharedProvider] sendRequest:loadProfileRequest success:^(LoadProfileRequest *request) {
+//        NSLog(@"Profile: %@", request.profile);
+//    } failure:^(LoadProfileRequest *request, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//    }];
     
+//    LoadCommentsRequest *commentsRequest = [[LoadCommentsRequest alloc] init];
+//    commentsRequest.userId = @(50);
+//    
+//    [[MMServiceProvider sharedProvider] sendRequest:commentsRequest success:^(LoadCommentsRequest *request) {
+//        NSLog(@"comments: %@", commentsRequest.comments);
+//    } failure:^(LoadCommentsRequest *request, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//    }];
+    
+//    LoadStoreRequest *storeRequest = [[LoadStoreRequest alloc] init];
+//    storeRequest.storeId = @(50);
+//
+//    [[MMServiceProvider sharedProvider] sendRequest:storeRequest success:^(LoadStoreRequest *request) {
+//        NSLog(@"store: %@", request.storeDetails);
+//    } failure:^(LoadCommentsRequest *request, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//    }];
+
+//    LoadProductsByStoreRequest *productsRequest = [[LoadProductsByStoreRequest alloc] init];
+//    productsRequest.storeId = @(50);
+//
+//    [[MMServiceProvider sharedProvider] sendRequest:productsRequest success:^(LoadProductsByStoreRequest *request) {
+//        NSLog(@"products: %@", request.products);
+//    } failure:^(LoadProductsByStoreRequest *request, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//    }];
+
+//    LoginTrackerRequest *trackerRequest = [[LoginTrackerRequest alloc] init];
+//    trackerRequest.communityId = @"50";
+//    
+//    [[MMServiceProvider sharedProvider] sendRequest:trackerRequest success:^(LoginTrackerRequest *request) {
+//        NSLog(@"Tracking success");
+//    } failure:^(LoginTrackerRequest *request, NSError *error) {
+//        NSLog(@"Tracking failed: %@", error);
+//    }];
+//
+    
+//    LoadStoreCommentsForUser *storeCommentsRequest = [[LoadStoreCommentsForUser alloc] init];
+//    storeCommentsRequest.userId = @(50);
+//    [[MMServiceProvider sharedProvider] sendRequest:storeCommentsRequest success:^(LoadStoreCommentsForUser *request) {
+//        NSLog(@"comments for user: %@", storeCommentsRequest.comments);
+//    } failure:^(LoadStoreCommentsForUser *request, NSError *error) {
+//        NSLog(@"Tracking failed: %@", error);
+//    }];
+    
+//    LoadCategoriesRequest *request = [[LoadCategoriesRequest alloc] init];
+//    
+//    [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+//        NSLog(@"categories loaded %@", request.categories);
+//    } failure:^(id _request, NSError *error) {
+//        NSLog(@"error: %@", error);
+//    }];
+
+//    LoadStoresForCategory *request = [[LoadStoresForCategory alloc] init];
+//    request.categoryId = @"59";
+//    
+//    [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+//        NSLog(@"stores: %@", request.stores);
+//    } failure:^(id _request, NSError *error) {
+//        NSLog(@"error: %@", error);
+//    }];
+
+//    LoadProductsForCategory *request = [[LoadProductsForCategory alloc] init];
+//    request.categoryId = @"59";
+////    request.communityId = @"1";
+//    
+//    [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+//        NSLog(@"products: %@", request.products);
+//    } failure:^(id _request, NSError *error) {
+//        NSLog(@"error: %@", error);
+//    }];
+
+//    LoadProductLikesForUserRequest *request = [[LoadProductLikesForUserRequest alloc] init];
+//    request.userId = @(50);
+//    
+//    [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+//        NSLog(@"likes: %@", request.likes);
+//    } failure:^(id _request, NSError *error) {
+//        NSLog(@"error: %@", error);
+//    }];
+
+//    LoadStoresRequest *request = [[LoadStoresRequest alloc] init];
+//    request.keywords = @"find";
+//    
+//    [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+//        NSLog(@"stores: %@", request.stores);
+//    } failure:^(id _request, NSError *error) {
+//        NSLog(@"error: %@", error);
+//    }];
+
+//    LoadProductsRequest *request = [[LoadProductsRequest alloc] init];
+//    request.keywords = @"find";
+//
+//    [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+//        NSLog(@"products: %@", request.products);
+//    } failure:^(id _request, NSError *error) {
+//        NSLog(@"error: %@", error);
+//    }];
+    
+//    LoadNearbyProductsRequest *request = [[LoadNearbyProductsRequest alloc] init];
+//    request.coordinate = CLLocationCoordinate2DMake(42.283215, -71.123029);
+//
+//    [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+//        NSLog(@"products: %@", request.products);
+//    } failure:^(id _request, NSError *error) {
+//        NSLog(@"error: %@", error);
+//    }];
+
+//    LoadStatesRequest *request = [[LoadStatesRequest alloc] init];
+//    
+//    [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+//        NSLog(@"states: %@", request.states);
+//    } failure:^(id _request, NSError *error) {
+//        NSLog(@"error: %@", error);
+//    }];
+
     return YES;
 }
 

@@ -101,8 +101,12 @@
         }
         [self log:@"request error: %@", error];
         
+        NSError *requestError;
+        if ([serviceRequest.response isKindOfClass:[NSDictionary class]])
+            requestError = [serviceRequest validateResponse:(NSDictionary *) serviceRequest.response httpResponse:operation.response];
+        
         if (failure)
-            failure(serviceRequest, error);
+            failure(serviceRequest, requestError ? requestError : error);
     }];
     
     return operation;

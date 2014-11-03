@@ -471,7 +471,7 @@ static void AFNetworkReachabilityReleaseCallback(const void *info) {
         path = @"";
     }
 
-    NSURL *url = [NSURL URLWithString:path relativeToURL:self.baseURL];
+    NSURL *url = [self.baseURL URLByAppendingPathComponent:path];
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request setHTTPMethod:method];
     [request setAllHTTPHeaderFields:self.defaultHeaders];
