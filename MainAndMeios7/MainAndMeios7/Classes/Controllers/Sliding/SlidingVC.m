@@ -14,29 +14,88 @@
 
 @implementation SlidingVC
 
+#pragma mark _______________________ Class Methods _________________________
+
+
+
+#pragma mark ____________________________ Init _____________________________
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        // Custom initialization
+        
+    }
+    return self;
+}
+
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    
+}
+
+
+- (void)dealloc{
+    
+}
+
+#pragma mark _______________________ View Lifecycle ________________________
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    // configure anchored layout
-    //self.anchorRightPeekAmount  = 100.0;
-    //self.anchorLeftRevealAmount = 100.0;
-    //self.anchorRightPeekAmount = 100;
+    
     self.anchorRightRevealAmount = 242;
+    
+    [LoginVC loginVCPresentation:^(LoginVC *loginVC) {
+        UINavigationController* loginNVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        
+        [loginVC view];
+        
+        [[LayoutManager shared].rootNVC presentViewController:loginNVC
+                                                     animated:NO
+                                                   completion:^{}];
+        
+    }
+                         success:^(LoginVC *loginVC, NSString *token) {
+                             [loginVC.navigationController dismissViewControllerAnimated:YES
+                                                                              completion:^{}];
+                         }
+                         failure:^(LoginVC *loginVC, NSError *error) {
+                             
+                         }
+                 alreadyLoggedIn:^(LoginVC *loginVC, NSString *token) {
+                     
+                 }];
+    
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark _______________________ Privat Methods(view)___________________
+//! Update views by model
+- (void)updateViews{
+    
 }
 
-/*
-#pragma mark - Navigation
+#pragma mark _______________________ Privat Methods ________________________
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+
+
+#pragma mark _______________________ Buttons Action ________________________
+
+
+
+#pragma mark _______________________ Delegates _____________________________
+
+
+
+#pragma mark _______________________ Public Methods ________________________
+
+
+
+#pragma mark _______________________ Notifications _________________________
+
+
+
 
 @end

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="DINBek-Regular.ttf">
+            <string>DINBek-Regular</string>
+            <string>DINBek-Regular</string>
+            <string>DINBek-Regular</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SearchTypeView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bRH-pE-C09">
+                    <rect key="frame" x="115" y="6" width="90" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="14"/>
+                    <state key="normal" title="Items">
+                        <color key="titleColor" red="0.086274509799999996" green="0.090196078430000007" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected">
+                        <color key="titleColor" red="0.2156862745" green="0.73725490199999999" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" red="0.2156862745" green="0.73725490199999999" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="itemsButtonDown:" destination="iN0-l3-epB" eventType="touchDown" id="avF-Ca-YIk"/>
+                        <action selector="itemsButtonUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="7v0-X0-xy4"/>
+                        <action selector="itemsButtonUp:" destination="iN0-l3-epB" eventType="touchUpOutside" id="A6B-Il-BvO"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DVC-TN-D9X">
+                    <rect key="frame" x="222" y="8" width="90" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="14"/>
+                    <state key="normal" title="Storefronts">
+                        <color key="titleColor" red="0.086274509799999996" green="0.090196078430000007" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected">
+                        <color key="titleColor" red="0.2156862745" green="0.73725490199999999" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" red="0.2156862745" green="0.73725490199999999" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="storefrontButtonDown:" destination="iN0-l3-epB" eventType="touchDown" id="N4s-il-mLS"/>
+                        <action selector="storefrontsButtonUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="2Ua-He-fLY"/>
+                        <action selector="storefrontsButtonUp:" destination="iN0-l3-epB" eventType="touchUpOutside" id="Dm2-9o-3eF"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="df0-XI-YDB">
+                    <rect key="frame" x="8" y="8" width="90" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="14"/>
+                    <state key="normal" title="Specials">
+                        <color key="titleColor" red="0.086274509799999996" green="0.090196078430000007" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="selected">
+                        <color key="titleColor" red="0.2156862745" green="0.73725490199999999" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <state key="highlighted">
+                        <color key="titleColor" red="0.2156862745" green="0.73725490199999999" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="specialsButtonDown:" destination="iN0-l3-epB" eventType="touchDown" id="RIK-rB-J2T"/>
+                        <action selector="specialsButtonUp:" destination="iN0-l3-epB" eventType="touchUpOutside" id="GJ1-Fx-l8y"/>
+                        <action selector="specialsButtonUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="dWY-tp-TTa"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="enc-uu-XVF">
+                    <rect key="frame" x="221" y="41" width="92" height="3"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.2156862745" green="0.73725490199999999" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="borderImageView" destination="enc-uu-XVF" id="xbK-3j-LJ3"/>
+                <outlet property="itemsButton" destination="bRH-pE-C09" id="SWv-jk-ECU"/>
+                <outlet property="specialsButton" destination="df0-XI-YDB" id="H0Q-1i-rJa"/>
+                <outlet property="storefrontsButton" destination="DVC-TN-D9X" id="dF1-2p-cDN"/>
+            </connections>
+            <point key="canvasLocation" x="178" y="102"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

@@ -26,5 +26,6 @@
 #import "LayoutManager.h"
 #import "UIViewController+ECSlidingViewController.h"
 
+#import "CommonManager.h"
 
 #endif

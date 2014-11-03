@@ -17,6 +17,8 @@
 #import "ShopCategoryNVC.h"
 #import "ShopCategoryVC.h"
 
+#import "LoginVC.h"
+
 
 @interface LayoutManager : NSObject
 
@@ -31,6 +33,9 @@
 
 //! Root navigation controller
 @property (strong, nonatomic) RootNavigationController* rootNVC;
+
+//! Container for modal controller
+@property (strong, nonatomic) UIViewController* modalViewController;
 
 //! Sliding VC
 @property (strong, nonatomic) SlidingVC* slidingVC;

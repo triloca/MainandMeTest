@@ -19,6 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationBar.translucent = NO;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -26,12 +28,15 @@
     
     //! Add recognizer for finger action
     [self.view addGestureRecognizer:self.slidingViewController.panGesture];
+    [self.view addGestureRecognizer:self.slidingViewController.resetTapGesture];
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-
+    
     [self.view removeGestureRecognizer:self.slidingViewController.panGesture];
+    [self.view removeGestureRecognizer:self.slidingViewController.resetTapGesture];
+    
 }
 
 - (void)didReceiveMemoryWarning {

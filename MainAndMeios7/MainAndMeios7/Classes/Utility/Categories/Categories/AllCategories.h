@@ -18,4 +18,5 @@
 #import "NSString+Email.h"
 #import "NSString+Capitalized.h"
 #import "NSError+LocalizedError.h"
+#import "UIFont+All.h"
 
