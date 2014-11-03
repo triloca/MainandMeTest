@@ -47,9 +47,9 @@
     // Override point for customization after application launch.
     
     [LayoutManager application:application didFinishLaunchingWithOptions:launchOptions];
-    [[LocationManager sharedManager] setUpdatePeriod:10];//10 seconds
-    [[LocationManager sharedManager] setDistanceFilter:10];//10 meters
-    [[LocationManager sharedManager] start];
+//    [[LocationManager sharedManager] setUpdatePeriod:10];//10 seconds
+//    [[LocationManager sharedManager] setDistanceFilter:10];//10 meters
+//    [[LocationManager sharedManager] start];
     
     [[NSNotificationCenter defaultCenter] addObserverForName:LOCATION_CHANGED_NOTIFICATION_NAME object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
         
