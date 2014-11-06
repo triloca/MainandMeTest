@@ -12,6 +12,7 @@
 
 //request
 @property (strong, nonatomic) NSNumber *storeId;
+@property BOOL latest;
 
 //response
 @property (strong, nonatomic) NSArray *products;

@@ -43,7 +43,7 @@
     if (!([method isEqualToString:@"GET"] || [method isEqualToString:@"HEAD"] || [method isEqualToString:@"DELETE"])) {
         request = [super requestWithMethod:method path:path parameters:nil];
         
-        NSURL *url = [NSURL URLWithString:path relativeToURL:self.baseURL]; //manually set params to the url
+        NSURL *url = [self.baseURL URLByAppendingPathComponent:path]; //manually set params to the url
         url = [NSURL URLWithString:[[url absoluteString] stringByAppendingFormat:[path rangeOfString:@"?"].location == NSNotFound ? @"?%@" : @"&%@", AFQueryStringFromParametersWithEncoding(parameters, self.stringEncoding)]];
 
         [request setURL:url];
@@ -55,6 +55,27 @@
 
     }
     return request;
+}
+
+- (AFHTTPRequestOperation *) uploadFileWithRequest:(FileRequest *) fileRequest success:(RequestSuccessCallback) success failure:(RequestFailCallback) failure  {
+    
+    NSMutableURLRequest *request = [self multipartFormRequestWithMethod:@"POST" path:fileRequest.path parameters:fileRequest.requestDictionary constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        NSError *error = nil;
+        if (fileRequest.filePath) {
+            [formData appendPartWithFileURL:[NSURL fileURLWithPath:fileRequest.filePath] name:[fileRequest formFileField] error:&error];
+        } else if (fileRequest.fileData) {
+            [formData appendPartWithFileData:fileRequest.fileData name:[fileRequest formFileField] fileName:fileRequest.fileName mimeType:@"application/octet-stream"];
+        }
+        if (error) {
+            failure(fileRequest, error);
+        }
+    }];
+    
+    AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request serviceRequest:fileRequest success:success failure:failure];
+    
+    [self enqueueHTTPRequestOperation:operation];
+    
+    return operation;
 }
 
 -  (AFHTTPRequestOperation *) HTTPRequestOperationWithRequest:(NSMutableURLRequest *) request serviceRequest:(ServiceRequest *) serviceRequest success:(RequestSuccessCallback) success failure:(RequestFailCallback) failure {

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 #import "ServiceRequest.h"
+#import "FileRequest.h"
 
 typedef void (^RequestSuccessCallback)(id request);
 typedef void (^RequestFailCallback)(id request, NSError *requestError);

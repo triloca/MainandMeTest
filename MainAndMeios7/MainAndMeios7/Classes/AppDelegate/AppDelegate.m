@@ -35,6 +35,11 @@
 #import "LoadProductsRequest.h"
 #import "LoadNearbyProductsRequest.h"
 #import "LoadStatesRequest.h"
+#import "LoadCurrentUserRequest.h"
+#import "SaveCurrentUserRequest.h"
+#import "LikeStoreRequest.h"
+#import "FollowStoreRequest.h"
+#import "RateStoreRequest.h"
 
 @interface AppDelegate ()
 
@@ -90,10 +95,10 @@
 //        NSLog(@"Response: %@", request.response);
 //    }];
 
-/*
+/* 
     LoginRequest *loginRequest = [[LoginRequest alloc] init];
-    loginRequest.email = @"ee@ee.com";
-    loginRequest.password = @"passwd";
+    loginRequest.email = @"test@test.com";
+    loginRequest.password = @"testtest";
     [[MMServiceProvider sharedProvider] sendRequest:loginRequest success:^(LoginRequest *_loginRequest) {
         NSString *apiToken = _loginRequest.apiToken;
         NSLog(@"login completed: %@", apiToken);
@@ -134,11 +139,43 @@
 //        }failure:^(LoadWishistRequest *request, NSError *error) {
 //            NSLog(@"Error: %@", error);
 //        }];
+
 //        LikeProductRequest *request = [[LikeProductRequest alloc] init];
 //        request.apiToken = apiToken;
 //        
 //        [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
 //            NSLog(@"product was liked: %@", request.response);
+//        }failure:^(id _request, NSError *error) {
+//            NSLog(@"Error: %@", error);
+//        }];
+        
+//        LikeStoreRequest *request = [[LikeStoreRequest alloc] init];
+//        request.apiToken = apiToken;
+//        request.storeId = @"50";
+//        
+//        [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+//            NSLog(@"store was liked: %@", request.response);
+//        }failure:^(id _request, NSError *error) {
+//            NSLog(@"Error: %@", error);
+//        }];
+        
+//        FollowStoreRequest *request = [[FollowStoreRequest alloc] init];
+//        request.apiToken = apiToken;
+//        request.storeId = @"50";
+//
+//        [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+//            NSLog(@"store was liked: %@", request.response);
+//        }failure:^(id _request, NSError *error) {
+//            NSLog(@"Error: %@", error);
+//        }];
+
+//        RateStoreRequest *request = [[RateStoreRequest alloc] init];
+//        request.apiToken = apiToken;
+//        request.storeId = @"50";
+//        request.rate = 5;
+//
+//        [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+//            NSLog(@"store was rated: %@", request.response);
 //        }failure:^(id _request, NSError *error) {
 //            NSLog(@"Error: %@", error);
 //        }];
@@ -155,6 +192,38 @@
 //            NSLog(@"wishlist was created: %@", request.response);
 //        }failure:^(id _request, NSError *error) {
 //            NSLog(@"Error: %@, %@", error.userInfo[NSLocalizedDescriptionKey], request.response);
+//        }];
+
+//        LoadCurrentUserRequest *loadCurrentUserRequest = [[LoadCurrentUserRequest alloc] init];
+//        loadCurrentUserRequest.apiToken = apiToken;
+//        
+//        [[MMServiceProvider sharedProvider] sendRequest:loadCurrentUserRequest success:^(id _request) {
+//            NSLog(@"current user: %@", loadCurrentUserRequest.user);
+//            NSDictionary *user = loadCurrentUserRequest.user;
+//            
+//            
+//            SaveCurrentUserRequest *request = [[SaveCurrentUserRequest alloc] init];
+//            request.apiToken = apiToken;
+//            request.userId = user[@"id"];
+//            request.username = user[@"name"];
+//            request.password = loginRequest.password;
+//            request.birthday = user[@"date_of_birth"];
+//            request.address = user[@"address"];
+//            request.phoneNumber = user[@"phone_number"];
+//            request.emailCommunities = user[@"email_communities"];
+//            request.emailStores = user[@"email_stores"];
+//            request.emailPeople = user[@"email_people"];
+//            request.wishlist = user[@"1"];
+//            
+//            [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+//                NSLog(@"current user saved: %@", request.user);
+//                
+//                
+//            } failure:^(id _request, NSError *error) {
+//                NSLog(@"error: %@", error);
+//            }];
+//        } failure:^(id _request, NSError *error) {
+//            NSLog(@"error: %@", error);
 //        }];
 
     } failure:^(LoginRequest *request, NSError *error) {
@@ -309,7 +378,6 @@
 //    } failure:^(id _request, NSError *error) {
 //        NSLog(@"error: %@", error);
 //    }];
-
     return YES;
 }
 

@@ -21,4 +21,18 @@
 }
 
 
+- (RequestError *) validateResponse:(NSDictionary *)responseDictionary httpResponse:(NSHTTPURLResponse *)httpResponse {
+    if ([responseDictionary isKindOfClass:[NSDictionary class]]) {
+        NSString* message = [[[responseDictionary safeDictionaryObjectForKey:@"errors"] safeArrayObjectForKey:@"base"] safeObjectAtIndex:0];
+        if (message.length > 0) {
+            return [RequestError requestErrorWithCode:httpResponse.statusCode description:message];
+        }
+        
+        if ([responseDictionary objectForKey:@"errors"]) {
+            return [RequestError requestErrorWithCode:httpResponse.statusCode description:responseDictionary[@"errors"]];
+        }
+    }
+    return nil;
+}
+
 @end

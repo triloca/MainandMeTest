@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    SearchTypeSpecials = 0,
+    SearchTypeItems,
+    SearchTypeStorefronts
+} SearchType;
+
+
 @interface SearchTypeView : UIView
 @property (copy, nonatomic) void (^didSelectSpecials)(SearchTypeView* view, UIButton* button);
 @property (copy, nonatomic) void (^didSelectItems)(SearchTypeView* view, UIButton* button);

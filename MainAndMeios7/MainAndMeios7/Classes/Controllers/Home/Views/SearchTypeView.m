@@ -14,6 +14,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *storefrontsButton;
 @property (weak, nonatomic) IBOutlet UIImageView *borderImageView;
 
+@property (assign, nonatomic) SearchType searchType;
+
 @end
 
 @implementation SearchTypeView
@@ -25,6 +27,13 @@
     [_itemsButton setTitleColor:[_itemsButton titleColorForState:UIControlStateSelected] forState:UIControlStateSelected | UIControlStateHighlighted];
     
     [_storefrontsButton setTitleColor:[_storefrontsButton titleColorForState:UIControlStateSelected] forState:UIControlStateSelected | UIControlStateHighlighted];
+    
+    [self selectSpecials];
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    [self updateState];
 }
 
 - (IBAction)specialsButtonDown:(UIButton *)sender {
@@ -83,15 +92,35 @@
 }
 
 - (void)selectSpecials{
-    [self specialsButtonDown:_specialsButton];
+    _searchType = SearchTypeSpecials;
+    [self updateState];
 }
 
 - (void)selectItems{
-    [self itemsButtonDown:_itemsButton];
+    _searchType = SearchTypeItems;
+    [self updateState];
 }
 
 - (void)selectStorefronts{
-    [self storefrontButtonDown:_storefrontsButton];
+    _searchType = SearchTypeStorefronts;
+    [self updateState];
+}
+
+- (void)updateState{
+    switch (_searchType) {
+        case SearchTypeSpecials:
+            [self specialsButtonDown:_specialsButton];
+            break;
+        case SearchTypeItems:
+            [self itemsButtonDown:_itemsButton];
+            break;
+        case SearchTypeStorefronts:
+            [self storefrontButtonDown:_storefrontsButton];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end

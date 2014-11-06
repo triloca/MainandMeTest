@@ -19,7 +19,7 @@
 }
 
 - (NSString *) path {
-    return [NSString stringWithFormat:@"/stores/%@/products", self.storeId];
+    return (_latest ? [NSString stringWithFormat:@"/stores/%@/products/latest", self.storeId] : [NSString stringWithFormat:@"/stores/%@/products", self.storeId]);
 }
 
 - (void) processResponse:(NSObject *)response {

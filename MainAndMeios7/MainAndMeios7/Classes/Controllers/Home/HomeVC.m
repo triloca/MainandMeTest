@@ -10,10 +10,16 @@
 #import "UIFont+All.h"
 #import "SearchTypeView.h"
 #import "SearchTypeView.h"
+#import "TMQuiltView.h"
+#import "HomeCell.h"
 
-@interface HomeVC ()
+@interface HomeVC () <TMQuiltViewDataSource, TMQuiltViewDelegate>
 @property (strong, nonatomic) SearchTypeView *searchTypeView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+
+
+@property (strong, nonatomic) TMQuiltView *quiltView;
+@property (strong, nonatomic) NSArray* collectionArray;
 
 @end
 
@@ -33,23 +39,56 @@
     self.searchTypeView = [SearchTypeView loadViewFromXIB];
     [self.view addSubview:_searchTypeView];
     
-    
-    
     [self configSearchBar];
     
     self.navigationItem.title = @"Layout Demo";
     self.navigationItem.leftBarButtonItem = anchorLeftButton;
+    
+    [_searchTypeView selectItems];
+
+    [self setupCollection];
+    
+    _collectionArray = @[
+                         @{@"height" : [NSNumber numberWithFloat:200],
+                           @"image": [UIImage imageNamed:@"big_IMG_2423.jpg"]},
+                         @{@"height" : [NSNumber numberWithFloat:250],
+                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]},
+                         @{@"height" : [NSNumber numberWithFloat:230],
+                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
+                         @{@"height" : [NSNumber numberWithFloat:205],
+                           @"image": [UIImage imageNamed:@"big_IMG_5648.jpg"]},
+                         @{@"height" : [NSNumber numberWithFloat:220],
+                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
+                         @{@"height" : [NSNumber numberWithFloat:260],
+                           @"image": [UIImage imageNamed:@"big_IMG_5648.jpg"]},
+                         @{@"height" : [NSNumber numberWithFloat:200],
+                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]},
+                         @{@"height" : [NSNumber numberWithFloat:270],
+                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]},
+                         @{@"height" : [NSNumber numberWithFloat:310],
+                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
+                         @{@"height" : [NSNumber numberWithFloat:235],
+                           @"image": [UIImage imageNamed:@"big_IMG_2423.jpg"]},
+                         @{@"height" : [NSNumber numberWithFloat:240],
+                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
+                         @{@"height" : [NSNumber numberWithFloat:200],
+                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]}
+                         
+                         ];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [_searchTypeView selectItems];
-    
-    [self updateSearchTypeViewFrame];
-    
+    [_quiltView reloadData];
 }
 
+- (void)viewDidLayoutSubviews{
+    [super viewDidLayoutSubviews];
+    
+    [self updateSearchTypeViewFrame];
+    [self configureCollectionFrame];
+
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -87,5 +126,88 @@
     rc.origin.y = CGRectGetMaxY(_searchTypeView.frame);
     _searchBar.frame = rc;
 }
+
+
+- (void)setupCollection{
+    
+    self.quiltView = [[TMQuiltView alloc] initWithFrame:CGRectZero];
+    _quiltView.delegate = self;
+    _quiltView.dataSource = self;
+    _quiltView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:_quiltView];
+    _quiltView.backgroundColor = [UIColor clearColor];
+
+}
+
+- (void)configureCollectionFrame{
+    
+    CGRect rc = self.view.frame;
+    rc.origin.y = CGRectGetMaxY(_searchBar.frame);
+    rc.size.height -= rc.origin.y;
+    _quiltView.frame = rc;
+
+}
+
+
+#pragma mark - QuiltViewControllerDataSource
+
+//- (NSArray *)images {
+//    if (!_images) {
+//        NSMutableArray *imageNames = [NSMutableArray array];
+//        for(int i = 0; i < kNumberOfCells; i++) {
+//            [imageNames addObject:[NSString stringWithFormat:@"%d.jpeg", i % 10 + 1]];
+//        }
+//        _images = [imageNames retain];
+//    }
+//    return _images;
+//}
+
+//- (UIImage *)imageAtIndexPath:(NSIndexPath *)indexPath {
+//    return [UIImage imageNamed:[self.images objectAtIndex:indexPath.row]];
+//}
+
+
+- (NSInteger)quiltViewNumberOfCells:(TMQuiltView *)TMQuiltView {
+    return _collectionArray.count;
+}
+
+- (TMQuiltViewCell *)quiltView:(TMQuiltView *)quiltView cellAtIndexPath:(NSIndexPath *)indexPath {
+    HomeCell *cell = (HomeCell *)[quiltView dequeueReusableCellWithReuseIdentifier:@"PhotoCell"];
+    if (!cell) {
+        cell = [HomeCell loadViewFromXIB];
+        [cell setReuseIdentifier:@"PhotoCell"];
+    }
+    
+    
+    cell.userNameLabel.text = @"James Akers";
+    cell.descrLabel.text = @"Culture Clothing";
+    cell.itemNameLabel.text = @"Clothing";
+    
+    UIImage* image = [[_collectionArray safeDictionaryObjectAtIndex:indexPath.row] objectForKey:@"image"];
+    cell.mainImageView.image = image;
+    
+    return cell;
+}
+
+#pragma mark - TMQuiltViewDelegate
+
+- (NSInteger)quiltViewNumberOfColumns:(TMQuiltView *)quiltView {
+    
+    
+    if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft
+        || [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) {
+        return 3;
+    } else {
+        return 2;
+    }
+}
+
+- (CGFloat)quiltView:(TMQuiltView *)quiltView heightForCellAtIndexPath:(NSIndexPath *)indexPath {
+    
+   CGFloat height = [[[_collectionArray safeDictionaryObjectAtIndex:indexPath.row] safeNumberObjectForKey:@"height"] floatValue];
+    
+    return height;
+}
+
 
 @end
