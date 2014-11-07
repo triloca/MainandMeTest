@@ -7,7 +7,7 @@
 //
 
 #import "LoginVC.h"
-
+#import "RegistrationVC.h"
 @interface LoginVC()
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
@@ -88,7 +88,32 @@
         _successBlock(self, nil);
     }
 }
-
+-(IBAction)registrationButtonClicked:(id)sender
+{
+    [RegistrationVC registrationVCPresentation:^(RegistrationVC *registrationVC) {
+        UINavigationController* registrationNVC = [[UINavigationController alloc] initWithRootViewController:registrationVC];
+        
+        [registrationNVC view];
+        
+        [self.navigationController presentViewController:registrationNVC
+                                                animated:NO
+                                              completion:^{}];
+        
+    }
+                                       success:^(RegistrationVC *registrationVC, NSString *token) {
+                                           [registrationVC.navigationController dismissViewControllerAnimated:NO
+                                                                                                   completion:^{}];
+                                           if (_successBlock) {
+                                               _successBlock(self, nil);
+                                           }
+                                       }
+                                       failure:^(RegistrationVC *registrationVC, NSError *error) {
+                                           [registrationVC.navigationController dismissViewControllerAnimated:YES
+                                                                                                   completion:^{}];
+                                           
+                                       }
+     ];
+}
 - (IBAction)facebookButtonClicked:(id)sender {
     if (_successBlock) {
         _successBlock(self, nil);

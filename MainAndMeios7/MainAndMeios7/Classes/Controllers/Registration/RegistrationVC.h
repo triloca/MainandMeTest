@@ -11,16 +11,8 @@
 @interface RegistrationVC : UIViewController <UITextFieldDelegate>
 {
     
-    //! Please use property
-    
-    //!@property (strong, nonatomic) NSArray *arrPlaceholers;
-    
-    IBOutlet UITableView *tblView;
-    IBOutlet UIButton *btnRegister;
-    NSArray *arrPlaceholers;
-    NSArray *arrKey;
-    NSMutableDictionary *dictResult;
-    UITextField *txtField;
+      
+   
 }
 
 @property (copy, nonatomic) void (^successBlock)(RegistrationVC* registrationVC, NSString* token);
@@ -32,7 +24,5 @@
                     success:(void (^)(RegistrationVC* registrationVC, NSString* token))success
                            failure:(void (^)(RegistrationVC* registrationVC, NSError* error))failure;
 
--(IBAction)btnRegister_Click:(id)sender;
--(IBAction)btnCancel_Click:(id)sender;
 
 @end

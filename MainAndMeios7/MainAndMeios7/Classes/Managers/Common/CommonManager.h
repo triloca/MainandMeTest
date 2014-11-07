@@ -21,5 +21,5 @@
 
 #pragma mark Is logged
 - (BOOL)isLoggedIn;
-
+-(BOOL)isFourInchScreen;
 @end

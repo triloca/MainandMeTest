@@ -83,6 +83,19 @@
         return NO;
     }
 }
+-(BOOL)isFourInchScreen
+{
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenHeight = screenRect.size.height;
+    if(screenHeight<=480)
+    {
+        return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
 #pragma mark _______________________ Notifications _________________________
 
 
