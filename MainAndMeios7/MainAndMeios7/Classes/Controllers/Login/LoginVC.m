@@ -8,6 +8,9 @@
 
 #import "LoginVC.h"
 #import "RegistrationVC.h"
+#import "LoginRequest.h"
+#import "NSString+Email.h"
+
 @interface LoginVC()
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
@@ -24,22 +27,7 @@
 #pragma mark _______________________ Class Methods _________________________
 
 
-+ (void)loginVCPresentation:(void (^)(LoginVC* loginVC))presentation
-                    success:(void (^)(LoginVC* loginVC, NSString* token))success
-                    failure:(void (^)(LoginVC* loginVC, NSError* error))failure
-            alreadyLoggedIn:(void (^)(LoginVC* loginVC, NSString* token))alreadyLoggedIn{
-    
-    LoginVC* loginVC = [LoginVC loadFromXIB_Or_iPhone5_XIB];
-    loginVC.successBlock = success;
-    loginVC.failureBlock = failure;
-    loginVC.alreadyLoggedInBlock = alreadyLoggedIn;
-    
-    if ([[CommonManager shared] isLoggedIn]) {
-        alreadyLoggedIn(loginVC, [[CommonManager shared] apiToken]);
-    }else{
-        presentation(loginVC);
-    }
-}
+
 
 #pragma mark ____________________________ Init _____________________________
 
@@ -79,40 +67,72 @@
 
 #pragma mark _______________________ Privat Methods ________________________
 
+- (void)loginWithEmail:(NSString*)email
+                  pass:(NSString*)pass{
+    
+    LoginRequest *loginRequest = [[LoginRequest alloc] init];
+    loginRequest.email = email;
+    loginRequest.password = pass;
+    
+    [self showSpinnerWithName:@""];
+    [[MMServiceProvider sharedProvider] sendRequest:loginRequest success:^(LoginRequest *_loginRequest) {
+        [self hideSpinnerWithName:@""];
+        
+        
+        [[CommonManager shared] setupApiToken:_loginRequest.apiToken];
+        [[CommonManager shared] setupUserId:[_loginRequest.user safeStringObjectForKey:@"id"]];
+        
+        
+        NSString *apiToken = _loginRequest.apiToken;
+        NSLog(@"login completed: %@", apiToken);
+        
+        if (_successBlock) {
+            _successBlock(self, apiToken);
+        }
+        
+    } failure:^(LoginRequest *request, NSError *error) {
+        [self hideSpinnerWithName:@""];
+        NSLog(@"login failed: %@", error);
+        NSLog(@"Response: %@", request.response);
+    }];
+    
+}
+
+- (void)hideKeyBoard{
+    [_emailTextField resignFirstResponder];
+    [_passwordTextField resignFirstResponder];
+}
+
+- (BOOL)isTextFieldsValid{
+    
+    if (![_emailTextField.text isValidateEmail]) {
+        [[AlertManager shared] showAlertWithCallBack:nil
+                                               title:@"Invalid email"
+                                             message:nil
+                                   cancelButtonTitle:@"Ok"
+                                   otherButtonTitles:nil];
+        return NO;
+    }
+    if (_passwordTextField.text.length == 0) {
+        [[AlertManager shared] showAlertWithCallBack:nil
+                                               title:@"Please enter password"
+                                             message:nil
+                                   cancelButtonTitle:@"Ok"
+                                   otherButtonTitles:nil];
+        
+        return NO;
+    }
+    return YES;
+}
 
 
 #pragma mark _______________________ Buttons Action ________________________
 
 - (IBAction)loginButtonClicked:(id)sender {
-    if (_successBlock) {
-        _successBlock(self, nil);
+    if ([self isTextFieldsValid]) {
+        [self hideKeyBoard];
+        [self loginWithEmail:_emailTextField.text pass:_passwordTextField.text];
     }
-}
--(IBAction)registrationButtonClicked:(id)sender
-{
-    [RegistrationVC registrationVCPresentation:^(RegistrationVC *registrationVC) {
-        UINavigationController* registrationNVC = [[UINavigationController alloc] initWithRootViewController:registrationVC];
-        
-        [registrationNVC view];
-        
-        [self.navigationController presentViewController:registrationNVC
-                                                animated:NO
-                                              completion:^{}];
-        
-    }
-                                       success:^(RegistrationVC *registrationVC, NSString *token) {
-                                           [registrationVC.navigationController dismissViewControllerAnimated:NO
-                                                                                                   completion:^{}];
-                                           if (_successBlock) {
-                                               _successBlock(self, nil);
-                                           }
-                                       }
-                                       failure:^(RegistrationVC *registrationVC, NSError *error) {
-                                           [registrationVC.navigationController dismissViewControllerAnimated:YES
-                                                                                                   completion:^{}];
-                                           
-                                       }
-     ];
 }
 - (IBAction)facebookButtonClicked:(id)sender {
     if (_successBlock) {

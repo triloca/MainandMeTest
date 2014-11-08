@@ -10,6 +10,82 @@
 
 @implementation UIViewController (Common)
 
+
++ (id)loadFromXIBForScrrenSizes{
+
+    if (IS_IPHONE_4_OR_LESS) {
+        NSString* xibName = [NSString stringWithFormat:@"%@", NSStringFromClass(self)];
+        if ([self isXibFileWithName:xibName]) {
+            return [[self alloc] initWithNibName:xibName bundle:nil];
+        }
+        
+        return nil;
+    }
+    
+    if (IS_IPHONE_5) {
+        
+        NSString* xibName = [NSString stringWithFormat:@"%@_568h", NSStringFromClass(self)];
+        if ([self isXibFileWithName:xibName]) {
+            return [[self alloc] initWithNibName:xibName bundle:nil];
+        }
+        
+        xibName = [NSString stringWithFormat:@"%@", NSStringFromClass(self)];
+        if ([self isXibFileWithName:xibName]) {
+            return [[self alloc] initWithNibName:xibName bundle:nil];
+        }
+        
+        return nil;
+    }
+    
+    if (IS_IPHONE_6) {
+        
+        NSString* xibName = [NSString stringWithFormat:@"%@_667h", NSStringFromClass(self)];
+        if ([self isXibFileWithName:xibName]) {
+            return [[self alloc] initWithNibName:xibName bundle:nil];
+        }
+        
+        xibName = [NSString stringWithFormat:@"%@_568h", NSStringFromClass(self)];
+        if ([self isXibFileWithName:xibName]) {
+            return [[self alloc] initWithNibName:xibName bundle:nil];
+        }
+        
+        xibName = [NSString stringWithFormat:@"%@", NSStringFromClass(self)];
+        if ([self isXibFileWithName:xibName]) {
+            return [[self alloc] initWithNibName:xibName bundle:nil];
+        }
+        
+        return nil;
+    }
+    
+    if (IS_IPHONE_6P) {
+        
+        NSString* xibName = [NSString stringWithFormat:@"%@_736h", NSStringFromClass(self)];
+        if ([self isXibFileWithName:xibName]) {
+            return [[self alloc] initWithNibName:xibName bundle:nil];
+        }
+        
+        xibName = [NSString stringWithFormat:@"%@_667h", NSStringFromClass(self)];
+        if ([self isXibFileWithName:xibName]) {
+            return [[self alloc] initWithNibName:xibName bundle:nil];
+        }
+        
+        xibName = [NSString stringWithFormat:@"%@_568h", NSStringFromClass(self)];
+        if ([self isXibFileWithName:xibName]) {
+            return [[self alloc] initWithNibName:xibName bundle:nil];
+        }
+        
+        xibName = [NSString stringWithFormat:@"%@", NSStringFromClass(self)];
+        if ([self isXibFileWithName:xibName]) {
+            return [[self alloc] initWithNibName:xibName bundle:nil];
+        }
+        
+        return nil;
+    }
+
+    
+    return nil;
+}
+
 + (id)loadFromXIB_Or_iPhone5_XIB{
     
     BOOL isScreen568 = (fabs((double)[[ UIScreen mainScreen] bounds].size.height - (double)568 ) < DBL_EPSILON );

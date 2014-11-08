@@ -15,14 +15,14 @@
    
 }
 
-@property (copy, nonatomic) void (^successBlock)(RegistrationVC* registrationVC, NSString* token);
-@property (copy, nonatomic) void (^failureBlock)(RegistrationVC* registrationVC, NSError* error);
-@property (copy, nonatomic) void (^alreadyLoggedInBlock)(RegistrationVC* registrationVC, NSString* token);
+@property (copy, nonatomic) void (^successBlock)(UIViewController* registrationVC, NSString* token);
+@property (copy, nonatomic) void (^failureBlock)(UIViewController* registrationVC, NSError* error);
+@property (copy, nonatomic) void (^alreadyLoggedInBlock)(UIViewController* registrationVC, NSString* token);
 
 
-+ (void)registrationVCPresentation:(void (^)(RegistrationVC* registrationVC))presentation
-                    success:(void (^)(RegistrationVC* registrationVC, NSString* token))success
-                           failure:(void (^)(RegistrationVC* registrationVC, NSError* error))failure;
++ (void)registrationVCPresentation:(void (^)(UIViewController* registrationVC))presentation
+                    success:(void (^)(UIViewController* registrationVC, NSString* token))success
+                           failure:(void (^)(UIViewController* registrationVC, NSError* error))failure;
 
 
 @end

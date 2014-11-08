@@ -28,4 +28,8 @@
 
 #import "CommonManager.h"
 
+#import "AllCategories.h"
+#import "AlertManager.h"
+#import "MMServiceProvider.h"
+
 #endif

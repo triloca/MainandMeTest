@@ -12,6 +12,7 @@
 #import "SearchTypeView.h"
 #import "TMQuiltView.h"
 #import "HomeCell.h"
+#import "LoadProductsRequest.h"
 
 @interface HomeVC () <TMQuiltViewDataSource, TMQuiltViewDelegate>
 @property (strong, nonatomic) SearchTypeView *searchTypeView;
@@ -19,11 +20,15 @@
 
 
 @property (strong, nonatomic) TMQuiltView *quiltView;
-@property (strong, nonatomic) NSArray* collectionArray;
+@property (strong, nonatomic) NSMutableArray* collectionArray;
 
 @end
 
 @implementation HomeVC
+
+#pragma mark _______________________ Class Methods _________________________
+#pragma mark ____________________________ Init _____________________________
+#pragma mark _______________________ View Lifecycle ________________________
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,38 +53,43 @@
 
     [self setupCollection];
     
-    _collectionArray = @[
-                         @{@"height" : [NSNumber numberWithFloat:200],
-                           @"image": [UIImage imageNamed:@"big_IMG_2423.jpg"]},
-                         @{@"height" : [NSNumber numberWithFloat:250],
-                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]},
-                         @{@"height" : [NSNumber numberWithFloat:230],
-                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
-                         @{@"height" : [NSNumber numberWithFloat:205],
-                           @"image": [UIImage imageNamed:@"big_IMG_5648.jpg"]},
-                         @{@"height" : [NSNumber numberWithFloat:220],
-                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
-                         @{@"height" : [NSNumber numberWithFloat:260],
-                           @"image": [UIImage imageNamed:@"big_IMG_5648.jpg"]},
-                         @{@"height" : [NSNumber numberWithFloat:200],
-                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]},
-                         @{@"height" : [NSNumber numberWithFloat:270],
-                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]},
-                         @{@"height" : [NSNumber numberWithFloat:310],
-                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
-                         @{@"height" : [NSNumber numberWithFloat:235],
-                           @"image": [UIImage imageNamed:@"big_IMG_2423.jpg"]},
-                         @{@"height" : [NSNumber numberWithFloat:240],
-                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
-                         @{@"height" : [NSNumber numberWithFloat:200],
-                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]}
-                         
-                         ];
+//    _collectionArray = @[
+//                         @{@"height" : [NSNumber numberWithFloat:200],
+//                           @"image": [UIImage imageNamed:@"big_IMG_2423.jpg"]},
+//                         @{@"height" : [NSNumber numberWithFloat:250],
+//                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]},
+//                         @{@"height" : [NSNumber numberWithFloat:230],
+//                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
+//                         @{@"height" : [NSNumber numberWithFloat:205],
+//                           @"image": [UIImage imageNamed:@"big_IMG_5648.jpg"]},
+//                         @{@"height" : [NSNumber numberWithFloat:220],
+//                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
+//                         @{@"height" : [NSNumber numberWithFloat:260],
+//                           @"image": [UIImage imageNamed:@"big_IMG_5648.jpg"]},
+//                         @{@"height" : [NSNumber numberWithFloat:200],
+//                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]},
+//                         @{@"height" : [NSNumber numberWithFloat:270],
+//                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]},
+//                         @{@"height" : [NSNumber numberWithFloat:310],
+//                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
+//                         @{@"height" : [NSNumber numberWithFloat:235],
+//                           @"image": [UIImage imageNamed:@"big_IMG_2423.jpg"]},
+//                         @{@"height" : [NSNumber numberWithFloat:240],
+//                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
+//                         @{@"height" : [NSNumber numberWithFloat:200],
+//                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]}
+//                         
+//                         ];
+    
+    
+    self.collectionArray = [NSMutableArray new];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [_quiltView reloadData];
+    
+    [self search];
 }
 
 - (void)viewDidLayoutSubviews{
@@ -94,6 +104,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark _______________________ Privat Methods(view)___________________
+
 
 - (void)anchorRight {
     [self.slidingViewController anchorTopViewToRightAnimated:YES];
@@ -148,6 +161,38 @@
 
 }
 
+#pragma mark _______________________ Privat Methods ________________________
+
+
+- (void)search{
+    if (_searchTypeView.searchType == SearchTypeItems) {
+        [self loadProducts];
+    }
+}
+
+- (void)loadProducts{
+
+    LoadProductsRequest *request = [[LoadProductsRequest alloc] init];
+    request.keywords = @"find";
+
+    [self showSpinnerWithName:@""];
+    [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+        [self hideSpinnerWithName:@""];
+        NSLog(@"products: %@", request.products);
+        
+        [_collectionArray addObjectsFromArray:request.products];
+        
+        [_quiltView reloadData];
+        
+    } failure:^(id _request, NSError *error) {
+        [self hideSpinnerWithName:@""];
+        NSLog(@"error: %@", error);
+    }];
+
+}
+
+#pragma mark _______________________ Buttons Action ________________________
+#pragma mark _______________________ Delegates _____________________________
 
 #pragma mark - QuiltViewControllerDataSource
 
@@ -183,8 +228,12 @@
     cell.descrLabel.text = @"Culture Clothing";
     cell.itemNameLabel.text = @"Clothing";
     
-    UIImage* image = [[_collectionArray safeDictionaryObjectAtIndex:indexPath.row] objectForKey:@"image"];
-    cell.mainImageView.image = image;
+    NSDictionary* storeDict = [_collectionArray safeDictionaryObjectAtIndex:indexPath.row];
+    
+//    UIImage* image = [[_collectionArray safeDictionaryObjectAtIndex:indexPath.row] objectForKey:@"image"];
+//    cell.mainImageView.image = image;
+    
+    cell.storeDict = storeDict;
     
     return cell;
 }
@@ -204,10 +253,13 @@
 
 - (CGFloat)quiltView:(TMQuiltView *)quiltView heightForCellAtIndexPath:(NSIndexPath *)indexPath {
     
-   CGFloat height = [[[_collectionArray safeDictionaryObjectAtIndex:indexPath.row] safeNumberObjectForKey:@"height"] floatValue];
+    NSDictionary* storeDict = [_collectionArray safeDictionaryObjectAtIndex:indexPath.row];
+    
+   CGFloat height = [HomeCell cellHeghtForStore:storeDict];
     
     return height;
 }
 
-
+#pragma mark _______________________ Public Methods ________________________
+#pragma mark _______________________ Notifications _________________________
 @end

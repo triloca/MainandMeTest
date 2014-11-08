@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -18,44 +19,48 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegistrationVC">
             <connections>
                 <outlet property="btnSignIn" destination="B0V-w4-Ooy" id="TJH-3t-nfu"/>
+                <outlet property="emailImageView" destination="c8Y-ZB-h7m" id="R1F-XN-508"/>
                 <outlet property="imgBackground" destination="sxG-uv-Ttk" id="Bsf-jK-Jt9"/>
+                <outlet property="keyImageView" destination="id2-fo-Css" id="lAq-rf-PxQ"/>
                 <outlet property="scroll" destination="0W7-Et-Bgu" id="mQX-SF-hkC"/>
-                <outlet property="signupButton" destination="hu3-1Q-CNL" id="SHj-lh-JEo"/>
+                <outlet property="signupBackImageView" destination="hRp-l3-smV" id="9mD-XR-sM4"/>
+                <outlet property="signupButton" destination="hu3-1Q-CNL" id="UHP-Tn-7Zl"/>
                 <outlet property="txtConfirmPassword" destination="ule-ZF-epG" id="znd-mN-gRs"/>
                 <outlet property="txtEmailAddress" destination="jfE-rX-PFm" id="5jm-9K-48M"/>
                 <outlet property="txtFullName" destination="Dbv-nr-z1t" id="NyU-bh-1CU"/>
                 <outlet property="txtPassword" destination="0Ag-Tn-LHD" id="hYc-Bk-rns"/>
+                <outlet property="userLogoImageView" destination="x5P-xX-ZiH" id="m2P-o5-Ekp"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewMain" destination="HtU-fV-vBD" id="eND-Vd-sbq"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="0W7-Et-Bgu">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signup_back.png" id="sxG-uv-Ttk">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signup_back568.png" id="sxG-uv-Ttk">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </imageView>
                         <view contentMode="scaleToFill" id="HtU-fV-vBD">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="signup_fields_back.png" id="hRp-l3-smV">
-                                    <rect key="frame" x="36" y="200" width="249" height="170"/>
+                                    <rect key="frame" x="36" y="364" width="343" height="170"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <rect key="contentStretch" x="0.5" y="0.0" width="0.0" height="1"/>
                                 </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="B0V-w4-Ooy">
-                                    <rect key="frame" x="97" y="438" width="123" height="31"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    <rect key="frame" x="143" y="600" width="123" height="31"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="12"/>
                                     <state key="normal" title="Already a user? Login">
@@ -66,54 +71,54 @@
                                     </connections>
                                 </button>
                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="singup_logo.png" id="Xe4-UY-LmW">
-                                    <rect key="frame" x="45" y="68" width="230" height="44"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <rect key="frame" x="92" y="157" width="230" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="singup_user_logo.png" id="x5P-xX-ZiH">
-                                    <rect key="frame" x="45" y="206" width="30" height="30"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <rect key="frame" x="97" y="370" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGNUP FOR MAIN AND ME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7we-H5-0xW">
-                                    <rect key="frame" x="47" y="173" width="226" height="21"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SIGNUP FOR MAIN AND ME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7we-H5-0xW">
+                                    <rect key="frame" x="94" y="337" width="226" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="18"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="singup_key_logo.png" id="id2-fo-Css">
-                                    <rect key="frame" x="44" y="292" width="30" height="30"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <rect key="frame" x="97.5" y="456" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name" minimumFontSize="17" id="Dbv-nr-z1t">
-                                    <rect key="frame" x="88" y="206" width="178" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="146" y="370" width="178" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="15"/>
-                                    <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
                                     <connections>
-                                        <outlet property="delegate" destination="-1" id="xTi-xX-dHg"/>
+                                        <outlet property="delegate" destination="-1" id="jn4-Ov-Tzb"/>
                                     </connections>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" minimumFontSize="17" id="ule-ZF-epG">
-                                    <rect key="frame" x="88" y="332" width="178" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="146" y="496" width="178" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="15"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" secureTextEntry="YES"/>
                                     <connections>
-                                        <outlet property="delegate" destination="-1" id="i0U-gQ-78G"/>
+                                        <outlet property="delegate" destination="-1" id="RcS-yg-f4g"/>
                                     </connections>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" id="0Ag-Tn-LHD">
-                                    <rect key="frame" x="88" y="292" width="178" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="146" y="456" width="178" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="15"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES"/>
                                     <connections>
-                                        <outlet property="delegate" destination="-1" id="WOV-WS-GWm"/>
+                                        <outlet property="delegate" destination="-1" id="dgw-a1-XAn"/>
                                     </connections>
                                 </textField>
                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail address" minimumFontSize="17" id="jfE-rX-PFm">
-                                    <rect key="frame" x="88" y="246" width="178" height="30"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="146" y="410" width="178" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="15"/>
                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                     <connections>
@@ -121,8 +126,8 @@
                                     </connections>
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hu3-1Q-CNL">
-                                    <rect key="frame" x="36" y="383" width="248" height="40"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <rect key="frame" x="83" y="547" width="248" height="40"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="15"/>
                                     <state key="normal" title="Signup" backgroundImage="singup_button_empty.png">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -132,8 +137,8 @@
                                     </connections>
                                 </button>
                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="singup_email_logo.png" id="c8Y-ZB-h7m">
-                                    <rect key="frame" x="45" y="246" width="30" height="30"/>
-                                    <autoresizingMask key="autoresizingMask"/>
+                                    <rect key="frame" x="97.5" y="410" width="30" height="30"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -147,12 +152,12 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <nil key="simulatedStatusBarMetrics"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="140" y="150"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+            <point key="canvasLocation" x="94" y="162"/>
         </view>
     </objects>
     <resources>
-        <image name="signup_back.png" width="320" height="480"/>
+        <image name="signup_back568.png" width="640" height="1136"/>
         <image name="signup_fields_back.png" width="249" height="170"/>
         <image name="singup_button_empty.png" width="248" height="40"/>
         <image name="singup_email_logo.png" width="30" height="30"/>

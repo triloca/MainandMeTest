@@ -16,4 +16,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *descrLabel;
 @property (weak, nonatomic) IBOutlet UILabel *itemNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+
+@property (strong, nonatomic) NSDictionary* storeDict;
+
+
++ (CGFloat)cellHeghtForStore:(NSDictionary*)storeDict;
+
 @end

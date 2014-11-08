@@ -35,6 +35,11 @@
 		A44DD9851A07F68D006E695E /* FileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A44DD9841A07F68D006E695E /* FileRequest.m */; };
 		A44DD9881A07F6F5006E695E /* UploadProductRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A44DD9871A07F6F5006E695E /* UploadProductRequest.m */; };
 		A44DD98B1A07FDE4006E695E /* UploadStoreRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = A44DD98A1A07FDE4006E695E /* UploadStoreRequest.m */; };
+		AE7849F71A0D9AAE005D86B3 /* RegistrationVC_568h.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7849F51A0D9AAE005D86B3 /* RegistrationVC_568h.xib */; };
+		AE7849F81A0D9AAE005D86B3 /* RegistrationVC_736h.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7849F61A0D9AAE005D86B3 /* RegistrationVC_736h.xib */; };
+		AE7849FA1A0DBE8A005D86B3 /* RegistrationVC_667h.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7849F91A0DBE8A005D86B3 /* RegistrationVC_667h.xib */; };
+		AE784A191A0DCB03005D86B3 /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE784A151A0DCB03005D86B3 /* AlertManager.m */; };
+		AE784A1A1A0DCB03005D86B3 /* AlertDelegateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AE784A181A0DCB03005D86B3 /* AlertDelegateHandler.m */; };
 		AEA175331A0722B900448D1A /* ECPercentDrivenInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA1741D1A0722B800448D1A /* ECPercentDrivenInteractiveTransition.m */; };
 		AEA175341A0722B900448D1A /* ECSlidingAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA1741F1A0722B800448D1A /* ECSlidingAnimationController.m */; };
 		AEA175351A0722B900448D1A /* ECSlidingInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA174221A0722B800448D1A /* ECSlidingInteractiveTransition.m */; };
@@ -209,6 +214,13 @@
 		A44DD9891A07FDE4006E695E /* UploadStoreRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadStoreRequest.h; sourceTree = "<group>"; };
 		A44DD98A1A07FDE4006E695E /* UploadStoreRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadStoreRequest.m; sourceTree = "<group>"; };
 		AE34D82F19F01CD60045AB20 /* MainAndMeios7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MainAndMeios7.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE7849F51A0D9AAE005D86B3 /* RegistrationVC_568h.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationVC_568h.xib; sourceTree = "<group>"; };
+		AE7849F61A0D9AAE005D86B3 /* RegistrationVC_736h.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationVC_736h.xib; sourceTree = "<group>"; };
+		AE7849F91A0DBE8A005D86B3 /* RegistrationVC_667h.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationVC_667h.xib; sourceTree = "<group>"; };
+		AE784A141A0DCB03005D86B3 /* AlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertManager.h; sourceTree = "<group>"; };
+		AE784A151A0DCB03005D86B3 /* AlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertManager.m; sourceTree = "<group>"; };
+		AE784A171A0DCB03005D86B3 /* AlertDelegateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertDelegateHandler.h; sourceTree = "<group>"; };
+		AE784A181A0DCB03005D86B3 /* AlertDelegateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertDelegateHandler.m; sourceTree = "<group>"; };
 		AEA1741C1A0722B800448D1A /* ECPercentDrivenInteractiveTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECPercentDrivenInteractiveTransition.h; sourceTree = "<group>"; };
 		AEA1741D1A0722B800448D1A /* ECPercentDrivenInteractiveTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECPercentDrivenInteractiveTransition.m; sourceTree = "<group>"; };
 		AEA1741E1A0722B800448D1A /* ECSlidingAnimationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingAnimationController.h; sourceTree = "<group>"; };
@@ -504,13 +516,32 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		AE784A131A0DCB03005D86B3 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				AE784A141A0DCB03005D86B3 /* AlertManager.h */,
+				AE784A151A0DCB03005D86B3 /* AlertManager.m */,
+				AE784A161A0DCB03005D86B3 /* Handlers */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		AE784A161A0DCB03005D86B3 /* Handlers */ = {
+			isa = PBXGroup;
+			children = (
+				AE784A171A0DCB03005D86B3 /* AlertDelegateHandler.h */,
+				AE784A181A0DCB03005D86B3 /* AlertDelegateHandler.m */,
+			);
+			path = Handlers;
+			sourceTree = "<group>";
+		};
 		AEA174191A0722B800448D1A /* MainAndMeios7 */ = {
 			isa = PBXGroup;
 			children = (
 				AEA1741A1A0722B800448D1A /* 3rdParty */,
 				AEA1742E1A0722B800448D1A /* Classes */,
-				AEA175191A0722B900448D1A /* Resources */,
 				AEA1752F1A0722B900448D1A /* Supporting Files */,
+				AEA175191A0722B900448D1A /* Resources */,
 			);
 			path = MainAndMeios7;
 			sourceTree = "<group>";
@@ -843,6 +874,7 @@
 		AEA174AE1A0722B800448D1A /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				AE784A131A0DCB03005D86B3 /* Alert */,
 				AEA174AF1A0722B800448D1A /* Common */,
 				AEA174B21A0722B800448D1A /* Facebook */,
 				AEA174B51A0722B800448D1A /* Layout */,
@@ -1272,6 +1304,9 @@
 		AECC46E21A0B2D76003339E6 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
+				AE7849F91A0DBE8A005D86B3 /* RegistrationVC_667h.xib */,
+				AE7849F51A0D9AAE005D86B3 /* RegistrationVC_568h.xib */,
+				AE7849F61A0D9AAE005D86B3 /* RegistrationVC_736h.xib */,
 				AECC46E31A0B2D76003339E6 /* RegistrationVC.h */,
 				AECC46E41A0B2D76003339E6 /* RegistrationVC.m */,
 				AECC46E51A0B2D76003339E6 /* RegistrationVC.xib */,
@@ -1361,6 +1396,7 @@
 				314A4F001A0BE7900003B4A9 /* signup_back.png in Resources */,
 				AEA175D81A07670E00448D1A /* big_IMG_2952.jpg in Resources */,
 				AEA175C21A073B7900448D1A /* HomeCell.xib in Resources */,
+				AE7849FA1A0DBE8A005D86B3 /* RegistrationVC_667h.xib in Resources */,
 				AEA1759B1A0722B900448D1A /* DINBek-Regular.ttf in Resources */,
 				AEA175A61A0722B900448D1A /* Info.plist in Resources */,
 				AEA1754A1A0722B900448D1A /* LoginVC.xib in Resources */,
@@ -1369,12 +1405,14 @@
 				AEA1759C1A0722B900448D1A /* scope_bar_background.png in Resources */,
 				AEA1759F1A0722B900448D1A /* search_bar_background@2x.png in Resources */,
 				AEA175D01A0759F200448D1A /* home_cell_back@2x.png in Resources */,
+				AE7849F81A0D9AAE005D86B3 /* RegistrationVC_736h.xib in Resources */,
 				AEA175CF1A0759F200448D1A /* home_cell_back.png in Resources */,
 				AEA175481A0722B900448D1A /* SearchTypeView.xib in Resources */,
 				AEA1759A1A0722B900448D1A /* DINbek-Bold.ttf in Resources */,
 				AECC46ED1A0B2D76003339E6 /* RegistrationCell.xib in Resources */,
 				AEA175451A0722B900448D1A /* HomeVC.xib in Resources */,
 				AEA175D91A07670E00448D1A /* big_IMG_4133.jpg in Resources */,
+				AE7849F71A0D9AAE005D86B3 /* RegistrationVC_568h.xib in Resources */,
 				314A4F041A0BE7900003B4A9 /* signup_fields_back@2x.png in Resources */,
 				314A4F061A0BE7900003B4A9 /* signup_separator@2x.png in Resources */,
 				314A4F111A0BE7900003B4A9 /* singup_user_logo.png in Resources */,
@@ -1468,6 +1506,7 @@
 				AEA175361A0722B900448D1A /* ECSlidingSegue.m in Sources */,
 				A44DD98B1A07FDE4006E695E /* UploadStoreRequest.m in Sources */,
 				AEA175901A0722B900448D1A /* UIImage+Common.m in Sources */,
+				AE784A1A1A0DCB03005D86B3 /* AlertDelegateHandler.m in Sources */,
 				AEA1756E1A0722B900448D1A /* LoginTrackerRequest.m in Sources */,
 				AEA1756B1A0722B900448D1A /* LoadStoresRequest.m in Sources */,
 				AEA1753F1A0722B900448D1A /* AFNetworkActivityIndicatorManager.m in Sources */,
@@ -1487,6 +1526,7 @@
 				AEA175811A0722B900448D1A /* MKMapView+Zoom.m in Sources */,
 				AEA1757B1A0722B900448D1A /* RequestError.m in Sources */,
 				AEA1758B1A0722B900448D1A /* NSMutableArray+Safe.m in Sources */,
+				AE784A191A0DCB03005D86B3 /* AlertManager.m in Sources */,
 				AEA1756C1A0722B900448D1A /* LoadWishistRequest.m in Sources */,
 				AEA1756D1A0722B900448D1A /* LoginRequest.m in Sources */,
 				AEA175931A0722B900448D1A /* UIImage+Scaling.m in Sources */,

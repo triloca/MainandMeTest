@@ -29,4 +29,13 @@
     return dict;
 }
 
+
+- (void) processResponse:(NSDictionary *)response {
+    if ([response isKindOfClass:[NSDictionary class]]) {
+        
+        self.responseEmail = [[response safeDictionaryObjectForKey:@"user"] safeStringObjectForKey:@"email"];
+        self.api_token = [[response safeDictionaryObjectForKey:@"user"] safeStringObjectForKey:@"api_token"];
+    }
+}
+
 @end

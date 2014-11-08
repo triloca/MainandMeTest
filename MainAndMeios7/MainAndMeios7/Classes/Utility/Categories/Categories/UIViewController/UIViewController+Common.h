@@ -10,4 +10,9 @@
 
 @interface UIViewController (Common)
 + (id)loadFromXIB_Or_iPhone5_XIB;
+
+//! For iPhone 6P
++ (id)loadFromXIBForScrrenSizes;
+
+
 @end

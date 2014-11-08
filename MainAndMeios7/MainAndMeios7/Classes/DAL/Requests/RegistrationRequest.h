@@ -15,4 +15,7 @@
 @property (strong, nonatomic) NSString *password;
 
 
+@property (strong, nonatomic) NSString *responseEmail;
+@property (strong, nonatomic) NSString* api_token;
+
 @end

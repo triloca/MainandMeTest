@@ -7,6 +7,7 @@
 //
 
 #import "SlidingVC.h"
+#import "RegistrationVC.h"
 
 @interface SlidingVC ()
 
@@ -48,26 +49,43 @@
     
     self.anchorRightRevealAmount = 242;
     
-    [LoginVC loginVCPresentation:^(LoginVC *loginVC) {
-        UINavigationController* loginNVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-        
-        [loginVC view];
-        
-        [[LayoutManager shared].rootNVC presentViewController:loginNVC
+    [RegistrationVC registrationVCPresentation:^(UIViewController *registrationVC) {
+        UINavigationController* registrationNVC = [[UINavigationController alloc] initWithRootViewController:registrationVC];
+       
+        [[LayoutManager shared].rootNVC presentViewController:registrationNVC
                                                      animated:NO
                                                    completion:^{}];
         
-    }
-                         success:^(LoginVC *loginVC, NSString *token) {
-                             [loginVC.navigationController dismissViewControllerAnimated:YES
-                                                                              completion:^{}];
-                         }
-                         failure:^(LoginVC *loginVC, NSError *error) {
-                             
-                         }
-                 alreadyLoggedIn:^(LoginVC *loginVC, NSString *token) {
-                     
-                 }];
+
+    } success:^(UIViewController *registrationVC, NSString *token) {
+        [registrationVC.navigationController dismissViewControllerAnimated:YES completion:^{}];
+        
+    } failure:^(UIViewController *registrationVC, NSError *error) {
+        
+    }];
+    
+    
+//    [LoginVC loginVCPresentation:^(LoginVC *loginVC) {
+//        
+//        UINavigationController* loginNVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+//        
+//        [loginVC view];
+//        
+//        [[LayoutManager shared].rootNVC presentViewController:loginNVC
+//                                                     animated:NO
+//                                                   completion:^{}];
+//        
+//    }
+//                         success:^(LoginVC *loginVC, NSString *token) {
+//                             [loginVC.navigationController dismissViewControllerAnimated:YES
+//                                                                              completion:^{}];
+//                         }
+//                         failure:^(LoginVC *loginVC, NSError *error) {
+//                             
+//                         }
+//                 alreadyLoggedIn:^(LoginVC *loginVC, NSString *token) {
+//                     
+//                 }];
     
 }
 

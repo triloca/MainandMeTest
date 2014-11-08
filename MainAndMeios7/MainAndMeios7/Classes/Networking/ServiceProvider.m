@@ -114,7 +114,11 @@
             });
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        serviceRequest.response = [NSJSONSerialization JSONObjectWithData:operation.responseData options:NSJSONReadingAllowFragments error:nil];
+        
+        if (operation.responseData) {
+            serviceRequest.response = [NSJSONSerialization JSONObjectWithData:operation.responseData options:NSJSONReadingAllowFragments error:nil];
+        }
+        
         [self log:@"Response code: %d", operation.response.statusCode];
         [self log:@"Response headers: %@", operation.response.allHeaderFields];
         if ([operation.response.MIMEType hasPrefix:@"application"] || [operation.response.MIMEType hasPrefix:@"text"]) {
