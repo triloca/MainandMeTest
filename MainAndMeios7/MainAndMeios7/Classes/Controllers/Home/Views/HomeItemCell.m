@@ -1,19 +1,19 @@
 //
-//  HomeCell.m
+//  HomeItemCell.m
 //  MainAndMeios7
 //
 //  Created by Alexander Bukov on 11/3/14.
 //  Copyright (c) 2014 Uniprog. All rights reserved.
 //
 
-#import "HomeCell.h"
+#import "HomeItemCell.h"
 
-@interface HomeCell ()
+@interface HomeItemCell ()
 
 
 @end
 
-@implementation HomeCell
+@implementation HomeItemCell
 
 + (CGFloat)cellHeghtForStore:(NSDictionary*)storeDict{
     
@@ -57,7 +57,7 @@
     [self.userImageView  setImageWithURLRequest:request
                                   placeholderImage:[UIImage imageNamed:@"dash_icon_placeholder_110.png"]
                                       failureImage:nil
-                                  progressViewSize:CGSizeMake(_userImageView.bounds.size.width - 5, 9)
+                                  progressViewSize:CGSizeMake(_userImageView.bounds.size.width - 5, 4)
                                  progressViewStile:UIProgressViewStyleDefault
                                  progressTintColor:[UIColor colorWithRed:109/255.0f green:145/255.0f blue:109/255.0f alpha:1]
                                     trackTintColor:nil
@@ -119,8 +119,15 @@
     
     [self setupImageURL:mainImageURL];
     
-    
+    _descrLabel.text = [storeDict safeStringObjectForKey:@"name"];
+    _itemNameLabel.text = [storeDict safeStringObjectForKey:@"category"];
 
+    NSString* price = [storeDict safeStringObjectForKey:@"price"];
+    if (price.length == 0) {
+        price = @"---";
+    }
+    _userNameLabel.text = price;
+    
 }
 
 @end

@@ -17,6 +17,12 @@
 #import "ShopCategoryNVC.h"
 #import "ShopCategoryVC.h"
 
+#import "PrivacyPolicyVC.h"
+#import "PrivacyPolicyNVC.h"
+
+#import "PlacesFollowVC.h"
+#import "PlacesFollowNVC.h"
+
 #import "LoginVC.h"
 
 
@@ -48,6 +54,12 @@
 
 @property (strong, nonatomic) ShopCategoryNVC* shopCategoryNVC;
 @property (strong, nonatomic) ShopCategoryVC* shopCategoryVC;
+
+@property (strong, nonatomic) PrivacyPolicyVC *privacyPolicyVC;
+@property (strong, nonatomic) PrivacyPolicyNVC *privacyPolicyNVC;
+
+@property (strong, nonatomic) PlacesFollowVC *placesFollowVC;
+@property (strong, nonatomic) PlacesFollowNVC *placesFollowNVC;
 
 
 

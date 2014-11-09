@@ -24,6 +24,14 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Please</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>DINbek-Bold.ttf</string>
+		<string>DINbek-Regular.ttf</string>
+		<string>Whitney-Bold.otf</string>
+		<string>DINLight.ttf</string>
+		<string>MyriadPro-Regular.otf</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

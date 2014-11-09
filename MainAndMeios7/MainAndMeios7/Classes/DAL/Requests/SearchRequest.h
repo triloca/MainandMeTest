@@ -29,15 +29,16 @@ typedef enum {
 @interface SearchRequest : ServiceRequest
 
 //request
-@property SearchType searchType;
-@property SearchFilter searchFilter;
+@property (assign, nonatomic) SearchType searchType;
+@property (assign, nonatomic) SearchFilter searchFilter;
 @property CLLocationCoordinate2D coordinate;
 @property NSString *city;
 @property NSString *state;
 @property NSUInteger page;
+@property (strong, nonatomic) NSString* searchKey;
 
 //response
-@property NSArray *objects;
+@property (strong, nonatomic) NSArray *objects;
 
 - (id) initWithSearchType: (SearchType) type searchFilter: (SearchFilter) filter;
 

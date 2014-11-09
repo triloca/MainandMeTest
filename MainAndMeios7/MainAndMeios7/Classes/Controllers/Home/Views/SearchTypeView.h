@@ -12,7 +12,7 @@ typedef enum {
     SearchTypeSpecials = 0,
     SearchTypeItems,
     SearchTypeStorefronts
-} SearchType;
+} ViewSearchType;
 
 
 @interface SearchTypeView : UIView
@@ -20,7 +20,7 @@ typedef enum {
 @property (copy, nonatomic) void (^didSelectItems)(SearchTypeView* view, UIButton* button);
 @property (copy, nonatomic) void (^didSelectStorefronts)(SearchTypeView* view, UIButton* button);
 
-@property (assign, nonatomic, readonly) SearchType searchType;
+@property (assign, nonatomic, readonly) ViewSearchType searchType;
 
 - (void)selectSpecials;
 - (void)selectItems;

@@ -14,7 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *storefrontsButton;
 @property (weak, nonatomic) IBOutlet UIImageView *borderImageView;
 
-@property (assign, nonatomic) SearchType searchType;
+@property (assign, nonatomic) ViewSearchType searchType;
 
 @end
 
@@ -41,31 +41,45 @@
     sender.selected = YES;
     sender.titleLabel.font = [UIFont fontWithName:@"DINbek Bold" size:14];
     
-    [self moveBorderToButton:sender];
+    _searchType = SearchTypeSpecials;
+
+    [self updateState];
 }
+
 - (IBAction)itemsButtonDown:(UIButton *)sender {
     [self unselectAll];
     sender.selected = YES;
     sender.titleLabel.font = [UIFont fontWithName:@"DINbek Bold" size:14];
 
-    [self moveBorderToButton:sender];
+    _searchType = SearchTypeItems;
+    
+    [self updateState];
 }
+
 - (IBAction)storefrontButtonDown:(UIButton *)sender {
     [self unselectAll];
     sender.selected = YES;
     sender.titleLabel.font = [UIFont fontWithName:@"DINbek Bold" size:14];
 
-    [self moveBorderToButton:sender];
+    _searchType = SearchTypeStorefronts;
+    
+    [self updateState];
 }
 
 - (IBAction)specialsButtonUp:(UIButton *)sender {
-    
+    if (_didSelectSpecials) {
+        _didSelectSpecials(self, sender);
+    }
 }
 - (IBAction)itemsButtonUp:(UIButton *)sender {
-    
+    if (_didSelectItems) {
+        _didSelectItems(self, sender);
+    }
 }
 - (IBAction)storefrontsButtonUp:(UIButton *)sender {
-    
+    if (_didSelectStorefronts) {
+        _didSelectStorefronts(self, sender);
+    }
 }
 
 - (void)moveBorderToButton:(UIButton*)sender{
@@ -92,30 +106,27 @@
 }
 
 - (void)selectSpecials{
-    _searchType = SearchTypeSpecials;
-    [self updateState];
+    [self specialsButtonDown:_specialsButton];
 }
 
 - (void)selectItems{
-    _searchType = SearchTypeItems;
-    [self updateState];
+     [self specialsButtonDown:_itemsButton];
 }
 
 - (void)selectStorefronts{
-    _searchType = SearchTypeStorefronts;
-    [self updateState];
+    [self storefrontButtonDown:_storefrontsButton];
 }
 
 - (void)updateState{
     switch (_searchType) {
         case SearchTypeSpecials:
-            [self specialsButtonDown:_specialsButton];
+            [self moveBorderToButton:_specialsButton];
             break;
         case SearchTypeItems:
-            [self itemsButtonDown:_itemsButton];
+            [self moveBorderToButton:_itemsButton];
             break;
         case SearchTypeStorefronts:
-            [self storefrontButtonDown:_storefrontsButton];
+            [self moveBorderToButton:_storefrontsButton];
             break;
             
         default:

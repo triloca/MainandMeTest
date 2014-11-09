@@ -11,8 +11,19 @@
 #import "SearchTypeView.h"
 #import "SearchTypeView.h"
 #import "TMQuiltView.h"
-#import "HomeCell.h"
+#import "HomeStoreCell.h"
+#import "HomeItemCell.h"
 #import "LoadProductsRequest.h"
+#import "SVPullToRefresh.h"
+#import "SearchRequest.h"
+
+
+typedef enum {
+    ScreenStateStore = 0,
+    ScreenStateItem,
+    
+} ScreenState;
+
 
 @interface HomeVC () <TMQuiltViewDataSource, TMQuiltViewDelegate>
 @property (strong, nonatomic) SearchTypeView *searchTypeView;
@@ -22,6 +33,13 @@
 @property (strong, nonatomic) TMQuiltView *quiltView;
 @property (strong, nonatomic) NSMutableArray* collectionArray;
 
+@property (assign, nonatomic) NSInteger page;
+
+@property (strong, nonatomic) AFHTTPRequestOperation* searchOperation;
+
+@property (strong, nonatomic) NSTimer* searchTimer;
+
+@property (assign, nonatomic) ScreenState screenState;
 @end
 
 @implementation HomeVC
@@ -34,6 +52,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    __weak HomeVC* wSelf = self;
+    
     UIButton* menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [menuButton setImage:[UIImage imageNamed:@"menu_button.png"] forState:UIControlStateNormal];
     menuButton.frame = CGRectMake(0, 0, 40, 40);
@@ -44,52 +64,54 @@
     self.searchTypeView = [SearchTypeView loadViewFromXIB];
     [self.view addSubview:_searchTypeView];
     
+    _searchTypeView.didSelectItems = ^(SearchTypeView* view, UIButton* button){
+        [wSelf.searchBar resignFirstResponder];
+        [wSelf startSearch];
+        wSelf.quiltView.hidden = NO;
+    };
+    
+    _searchTypeView.didSelectStorefronts = ^(SearchTypeView* view, UIButton* button){
+        [wSelf.searchBar resignFirstResponder];
+        [wSelf startSearch];
+        wSelf.quiltView.hidden = NO;
+    };
+    
+    _searchTypeView.didSelectSpecials = ^(SearchTypeView* view, UIButton* button){
+        [wSelf.searchBar resignFirstResponder];
+        wSelf.collectionArray = [NSMutableArray new];
+        [wSelf.quiltView reloadData];
+        wSelf.quiltView.hidden = YES;
+
+    };
+    
     [self configSearchBar];
     
     self.navigationItem.title = @"Layout Demo";
     self.navigationItem.leftBarButtonItem = anchorLeftButton;
     
-    [_searchTypeView selectItems];
+    [_searchTypeView selectStorefronts];
 
     [self setupCollection];
     
-//    _collectionArray = @[
-//                         @{@"height" : [NSNumber numberWithFloat:200],
-//                           @"image": [UIImage imageNamed:@"big_IMG_2423.jpg"]},
-//                         @{@"height" : [NSNumber numberWithFloat:250],
-//                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]},
-//                         @{@"height" : [NSNumber numberWithFloat:230],
-//                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
-//                         @{@"height" : [NSNumber numberWithFloat:205],
-//                           @"image": [UIImage imageNamed:@"big_IMG_5648.jpg"]},
-//                         @{@"height" : [NSNumber numberWithFloat:220],
-//                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
-//                         @{@"height" : [NSNumber numberWithFloat:260],
-//                           @"image": [UIImage imageNamed:@"big_IMG_5648.jpg"]},
-//                         @{@"height" : [NSNumber numberWithFloat:200],
-//                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]},
-//                         @{@"height" : [NSNumber numberWithFloat:270],
-//                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]},
-//                         @{@"height" : [NSNumber numberWithFloat:310],
-//                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
-//                         @{@"height" : [NSNumber numberWithFloat:235],
-//                           @"image": [UIImage imageNamed:@"big_IMG_2423.jpg"]},
-//                         @{@"height" : [NSNumber numberWithFloat:240],
-//                           @"image": [UIImage imageNamed:@"big_IMG_4133.jpg"]},
-//                         @{@"height" : [NSNumber numberWithFloat:200],
-//                           @"image": [UIImage imageNamed:@"big_IMG_2952.jpg"]}
-//                         
-//                         ];
-    
     
     self.collectionArray = [NSMutableArray new];
+    
+    //_quiltView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0);
+    
+    
+    [_quiltView addInfiniteScrollingWithActionHandler:^{
+        [wSelf searchRequest];
+    }];
+    
+    _page = 1;
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [_quiltView reloadData];
     
-    [self search];
+    [self startSearch];
 }
 
 - (void)viewDidLayoutSubviews{
@@ -164,35 +186,180 @@
 #pragma mark _______________________ Privat Methods ________________________
 
 
-- (void)search{
-    if (_searchTypeView.searchType == SearchTypeItems) {
-        [self loadProducts];
-    }
+- (void)startSearchTimer{
+    
+    self.searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.7f
+                                                      target:self
+                                                    selector:@selector(readTimerTick:)
+                                                    userInfo:nil
+                                                     repeats:NO];
 }
 
-- (void)loadProducts{
+- (void)resetSearchTimer{
+    [self.searchTimer invalidate];
+    self.searchTimer = nil;
+}
 
-    LoadProductsRequest *request = [[LoadProductsRequest alloc] init];
-    request.keywords = @"find";
+- (void)readTimerTick:(NSTimer*)timer{
+    
+    [self startSearch];
+}
 
-    [self showSpinnerWithName:@""];
-    [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+
+- (void)startSearch{
+    
+    _page = 1;
+    [self searchRequest];
+   
+}
+
+
+
+- (void)searchRequest{
+
+    SearchType searchType = SearchTypeStores;
+    if (_searchTypeView.searchType == SearchTypeItems) {
+        searchType = SearchTypeProducts;
+    }
+    
+    
+    SearchRequest *searchRequest = [[SearchRequest alloc] initWithSearchType:searchType searchFilter:SearchFilterPopular];
+    searchRequest.coordinate = CLLocationCoordinate2DMake(42.283215, -71.123029);
+    searchRequest.city = @"Roslindale";
+    searchRequest.state = @"MA";
+    searchRequest.page = _page;
+    searchRequest.searchKey = _searchBar.text;
+    
+    if (_page == 1) {
+      //  [self showSpinnerWithName:@""];
+    }
+
+    self.searchOperation =   [[MMServiceProvider sharedProvider] sendRequest:searchRequest success:^(SearchRequest* request) {
+        NSLog(@"Succceess!");
         [self hideSpinnerWithName:@""];
-        NSLog(@"products: %@", request.products);
         
-        [_collectionArray addObjectsFromArray:request.products];
+        //! Set cell type
+        if (searchRequest.searchType == SearchTypeProducts) {
+            _screenState = ScreenStateItem;
+        }else if (searchRequest.searchType == SearchTypeStores){
+            _screenState = ScreenStateStore;
+        }
+        
+        [_quiltView.infiniteScrollingView stopAnimating];
+        
+        if (_page == 1) {
+            self.collectionArray = [NSMutableArray new];
+            [self.quiltView reloadData];
+        }
+        
+        if (request.objects.count > 0) {
+            [_collectionArray addObjectsFromArray:request.objects];
+            _page ++;
+        }
         
         [_quiltView reloadData];
         
-    } failure:^(id _request, NSError *error) {
-        [self hideSpinnerWithName:@""];
-        NSLog(@"error: %@", error);
-    }];
+        self.searchOperation = nil;
 
+    } failure:^(id _request, NSError *error) {
+        NSLog(@"Fail: %@", error);
+         [self hideSpinnerWithName:@""];
+        
+        [_quiltView.infiniteScrollingView stopAnimating];
+        _page = 1;
+        self.collectionArray = [NSMutableArray new];
+        [_quiltView reloadData];
+        NSLog(@"error: %@", error);
+        self.searchOperation = nil;
+    }];
 }
 
+
+- (void)setSearchOperation:(AFHTTPRequestOperation *)searchOperation{
+    //[_searchOperation cancel];
+    _searchOperation = searchOperation;
+}
+
+//- (void)loadProducts{
+//
+//    
+//    
+//    LoadProductsRequest *request = [[LoadProductsRequest alloc] init];
+//    request.keywords = @"find";
+//    request.
+//
+//    [self showSpinnerWithName:@""];
+//    [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+//        [self hideSpinnerWithName:@""];
+//        NSLog(@"products: %@", request.products);
+//        
+//        [_quiltView.infiniteScrollingView stopAnimating];
+//        
+//        if (_page == 1) {
+//            self.collectionArray = [NSMutableArray new];
+//        }
+//        
+//        if (request.products.count > 0) {
+//            [_collectionArray addObjectsFromArray:request.products];
+//            _page ++;
+//        }
+//        
+//        [_quiltView reloadData];
+//        
+//    } failure:^(id _request, NSError *error) {
+//        [self hideSpinnerWithName:@""];
+//        [_quiltView.infiniteScrollingView stopAnimating];
+//        _page = 1;
+//        self.collectionArray = [NSMutableArray new];
+//        
+//        NSLog(@"error: %@", error);
+//    }];
+//
+//}
+//
 #pragma mark _______________________ Buttons Action ________________________
 #pragma mark _______________________ Delegates _____________________________
+
+#pragma mark - Search Bar Delegate
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
+    return YES;
+}
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
+{
+    if (searchText.length > 2) {
+        
+    }
+    [self resetSearchTimer];
+    [self startSearchTimer];
+    
+    // The user clicked the [X] button or otherwise cleared the text.
+    if([searchText length] == 0) {
+        [searchBar performSelector: @selector(resignFirstResponder)
+                        withObject: nil
+                        afterDelay: 0.1];
+    }
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [searchBar resignFirstResponder];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar{
+    
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
+    
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    [self.searchBar resignFirstResponder];
+    return YES;
+}
 
 #pragma mark - QuiltViewControllerDataSource
 
@@ -217,25 +384,41 @@
 }
 
 - (TMQuiltViewCell *)quiltView:(TMQuiltView *)quiltView cellAtIndexPath:(NSIndexPath *)indexPath {
-    HomeCell *cell = (HomeCell *)[quiltView dequeueReusableCellWithReuseIdentifier:@"PhotoCell"];
-    if (!cell) {
-        cell = [HomeCell loadViewFromXIB];
-        [cell setReuseIdentifier:@"PhotoCell"];
+    
+    
+    
+    //! Set cell type
+    if (_screenState == ScreenStateItem) {
+       
+        HomeItemCell *cell = (HomeItemCell *)[quiltView dequeueReusableCellWithReuseIdentifier:@"HomeItemCell"];
+        if (!cell) {
+            cell = [HomeItemCell loadViewFromXIB];
+            [cell setReuseIdentifier:@"HomeItemCell"];
+        }
+        
+        
+        NSDictionary* storeDict = [_collectionArray safeDictionaryObjectAtIndex:indexPath.row];
+        
+        cell.storeDict = storeDict;
+        
+        return cell;
+
+    }else if (_screenState == ScreenStateStore){
+        HomeStoreCell *cell = (HomeStoreCell *)[quiltView dequeueReusableCellWithReuseIdentifier:@"HomeStoreCell"];
+        if (!cell) {
+            cell = [HomeStoreCell loadViewFromXIB];
+            [cell setReuseIdentifier:@"HomeStoreCell"];
+        }
+        
+        
+        NSDictionary* storeDict = [_collectionArray safeDictionaryObjectAtIndex:indexPath.row];
+        
+        cell.storeDict = storeDict;
+        
+        return cell;
+
     }
-    
-    
-    cell.userNameLabel.text = @"James Akers";
-    cell.descrLabel.text = @"Culture Clothing";
-    cell.itemNameLabel.text = @"Clothing";
-    
-    NSDictionary* storeDict = [_collectionArray safeDictionaryObjectAtIndex:indexPath.row];
-    
-//    UIImage* image = [[_collectionArray safeDictionaryObjectAtIndex:indexPath.row] objectForKey:@"image"];
-//    cell.mainImageView.image = image;
-    
-    cell.storeDict = storeDict;
-    
-    return cell;
+    return nil;
 }
 
 #pragma mark - TMQuiltViewDelegate
@@ -255,7 +438,7 @@
     
     NSDictionary* storeDict = [_collectionArray safeDictionaryObjectAtIndex:indexPath.row];
     
-   CGFloat height = [HomeCell cellHeghtForStore:storeDict];
+   CGFloat height = [HomeStoreCell cellHeghtForStore:storeDict];
     
     return height;
 }

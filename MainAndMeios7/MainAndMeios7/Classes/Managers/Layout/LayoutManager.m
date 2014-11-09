@@ -77,7 +77,7 @@
     
     [self shared].slidingVC.topViewController = [self shared].homeNVC;
     
-    //! Left VC
+     //! Left VC
     [self shared].LeftMenuVC = [LeftMenuVC loadFromXIB_Or_iPhone5_XIB];
     [self shared].slidingVC.underLeftViewController = [self shared].LeftMenuVC;
     
@@ -95,6 +95,22 @@
         self.shopCategoryNVC = [[ShopCategoryNVC alloc] initWithRootViewController:_shopCategoryVC];
     }
     return _shopCategoryNVC;
+}
+
+- (PrivacyPolicyNVC*)privacyPolicyNVC{
+    if (_privacyPolicyNVC == nil) {
+        self.privacyPolicyVC = [PrivacyPolicyVC loadFromXIB_Or_iPhone5_XIB];
+        self.privacyPolicyNVC = [[PrivacyPolicyNVC alloc] initWithRootViewController:_privacyPolicyVC];
+    }
+    return _privacyPolicyNVC;
+}
+
+- (PlacesFollowNVC*)placesFollowNVC{
+    if (_placesFollowNVC == nil) {
+        self.placesFollowVC = [PlacesFollowVC loadFromXIB_Or_iPhone5_XIB];
+        self.placesFollowNVC = [[PlacesFollowNVC alloc] initWithRootViewController:_placesFollowVC];
+    }
+    return _placesFollowNVC;
 }
 #pragma mark _______________________ Notifications _________________________
 

@@ -1,5 +1,5 @@
 //
-//  HomeCell.h
+//  HomeStoreCell.h
 //  MainAndMeios7
 //
 //  Created by Alexander Bukov on 11/3/14.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TMQuiltViewCell.h"
 
-@interface HomeCell : TMQuiltViewCell
+@interface HomeStoreCell : TMQuiltViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *mainImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *userImageView;
 

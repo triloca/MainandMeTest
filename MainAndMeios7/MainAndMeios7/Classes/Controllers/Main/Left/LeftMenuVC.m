@@ -45,10 +45,12 @@
                     @"Find stores by name",
                     @"My wishlists",
                     @"People I follow",
+                    @"Places I follow",
                     @"Notifications",
                     @"Edit my profile",
                     @"Invite friends",
                     @"About Main and Me",
+                    @"Privacy Policy",
                     @"Log out"];
 }
 
@@ -116,6 +118,18 @@
         case 1:{
             
             [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].shopCategoryNVC;
+            [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+            
+            break;
+        }
+        case 5:{
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].placesFollowNVC;
+            [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+            
+            break;
+        }
+        case 10:{
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].privacyPolicyNVC;
             [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
             
             break;
