@@ -7,14 +7,14 @@
 //
 
 #import "LoginVC.h"
-#import "RegistrationVC.h"
 #import "LoginRequest.h"
-#import "NSString+Email.h"
+
 
 @interface LoginVC()
 
 @property (weak, nonatomic) IBOutlet UITextField *emailTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (strong, nonatomic) IBOutlet UIView *viewEmailPassword;
 @property (weak, nonatomic) IBOutlet UIButton *loginButton;
 @property (weak, nonatomic) IBOutlet UIButton *facebookButton;
 @property (weak, nonatomic) IBOutlet UIButton *twitterButton;
@@ -27,7 +27,22 @@
 #pragma mark _______________________ Class Methods _________________________
 
 
-
++ (void)loginVCPresentation:(void (^)(LoginVC* loginVC))presentation
+                    success:(void (^)(LoginVC* loginVC, NSString* token))success
+                    failure:(void (^)(LoginVC* loginVC, NSError* error))failure
+            alreadyLoggedIn:(void (^)(LoginVC* loginVC, NSString* token))alreadyLoggedIn{
+    
+    LoginVC* loginVC = [LoginVC loadFromXIB_Or_iPhone5_XIB];
+    loginVC.successBlock = success;
+    loginVC.failureBlock = failure;
+    loginVC.alreadyLoggedInBlock = alreadyLoggedIn;
+    
+    if ([[CommonManager shared] isLoggedIn]) {
+        alreadyLoggedIn(loginVC, [[CommonManager shared] apiToken]);
+    }else{
+        presentation(loginVC);
+    }
+}
 
 #pragma mark ____________________________ Init _____________________________
 
@@ -56,16 +71,50 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    self.viewEmailPassword.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"signin_fields_back.png"]];
+    self.navigationController.navigationBarHidden=YES;
+    
+    CGRect frame=[UIScreen mainScreen].bounds;
+    imgMainBackground.frame=frame;
+    [imgMainBackground setImage:[UIImage imageNamed:@"signin_background.png"]];
+    
+    [self SetViewFrames];
 }
 
-#pragma mark _______________________ Privat Methods(view)___________________
-//! Update views by model
-- (void)updateViews{
-
+-(void)SetViewFrames{
+    
+    if (IS_IPHONE_4_OR_LESS) {
+        CGRect frame=imgLogo.frame;
+        frame.origin.y=frame.origin.y-40;
+        imgLogo.frame=frame;
+        
+        frame=imgSeperator.frame;
+        frame.origin.y-=40;
+        imgSeperator.frame=frame;
+        
+        frame=viewSignUp.frame;
+        frame.origin.y-=40;
+        viewSignUp.frame=frame;
+        
+        frame=self.viewEmailPassword.frame;
+        frame.origin.y-=40;
+        self.viewEmailPassword.frame=frame;
+        
+        frame=self.loginButton.frame;
+        frame.origin.y-=40;
+        self.loginButton.frame=frame;
+        
+        frame=self.facebookButton.frame;
+        frame.origin.y-=40;
+        self.facebookButton.frame=frame;
+        
+        frame=self.twitterButton.frame;
+        frame.origin.y-=40;
+        self.twitterButton.frame=frame;
+    }
 }
 
-#pragma mark _______________________ Privat Methods ________________________
 
 - (void)loginWithEmail:(NSString*)email
                   pass:(NSString*)pass{
@@ -94,9 +143,25 @@
         [self hideSpinnerWithName:@""];
         NSLog(@"login failed: %@", error);
         NSLog(@"Response: %@", request.response);
+        
+        if (_successBlock) {
+            _successBlock(self, nil);
+        }
+
+        
     }];
     
 }
+
+
+#pragma mark _______________________ Privat Methods(view)___________________
+//! Update views by model
+- (void)updateViews{
+
+}
+
+#pragma mark _______________________ Privat Methods ________________________
+
 
 - (void)hideKeyBoard{
     [_emailTextField resignFirstResponder];
@@ -134,6 +199,8 @@
         [self loginWithEmail:_emailTextField.text pass:_passwordTextField.text];
     }
 }
+
+
 - (IBAction)facebookButtonClicked:(id)sender {
     if (_successBlock) {
         _successBlock(self, nil);
@@ -148,6 +215,17 @@
 
 #pragma mark _______________________ Delegates _____________________________
 
+-(BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField == self.emailTextField) {
+        [self.emailTextField resignFirstResponder];
+        [self.passwordTextField becomeFirstResponder];
+    }else  {
+        [self.passwordTextField resignFirstResponder];
+    }
+    
+    return YES;
+}
 
 
 #pragma mark _______________________ Public Methods ________________________

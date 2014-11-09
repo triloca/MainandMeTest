@@ -183,7 +183,8 @@ static char kUNSpinerNameDictionaryObjectKey;
     [self.un_spinerView startAnimating];
     
     UIView* backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 75, 75)];
-    backgroundView.backgroundColor = [UIColor colorWithRed:0/255.0f green:110/255.0f blue:0/255.0f alpha:0.5f];
+    backgroundView.backgroundColor = [UIColor colorWithRed:10/255.0f green:110/255.0f blue:10/255.0f alpha:0.5f];
+    
     backgroundView.layer.cornerRadius = 10;
     backgroundView.center = CGPointMake(CGRectGetMidX(self.un_spinerView.bounds), CGRectGetMidY(self.un_spinerView.bounds));
     
@@ -211,7 +212,7 @@ static char kUNSpinerNameDictionaryObjectKey;
     
     self.un_spinerBackgroundView = [[UIView alloc] init];
     self.un_spinerBackgroundView.frame = self.view.bounds;
-    self.un_spinerBackgroundView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.3];
+    self.un_spinerBackgroundView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.2];
     self.un_spinerBackgroundView.userInteractionEnabled = YES;
     
     [self.view addSubview:self.un_spinerBackgroundView];

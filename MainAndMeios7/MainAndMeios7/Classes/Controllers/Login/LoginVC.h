@@ -7,11 +7,23 @@
 //
 
 
-@interface LoginVC : UIViewController
-@property (copy, nonatomic) void (^successBlock)(UIViewController* registrationVC, NSString* token);
-@property (copy, nonatomic) void (^failureBlock)(UIViewController* registrationVC, NSError* error);
-@property (copy, nonatomic) void (^alreadyLoggedInBlock)(UIViewController* registrationVC, NSString* token);
+@interface LoginVC : UIViewController<UITextFieldDelegate>{
+    
+    IBOutlet UIImageView *imgLogo;
+    IBOutlet UILabel *imgSeperator;
+    IBOutlet UIView *viewSignUp;
+    IBOutlet UIImageView *imgMainBackground;
+    
+    
+}
+@property (copy, nonatomic) void (^successBlock)(LoginVC* loginVC, NSString* token);
+@property (copy, nonatomic) void (^failureBlock)(LoginVC* loginVC, NSError* error);
+@property (copy, nonatomic) void (^alreadyLoggedInBlock)(LoginVC* loginVC, NSString* token);
 
 
++ (void)loginVCPresentation:(void (^)(LoginVC* loginVC))presentation
+                    success:(void (^)(LoginVC* loginVC, NSString* token))success
+                    failure:(void (^)(LoginVC* loginVC, NSError* error))failure
+            alreadyLoggedIn:(void (^)(LoginVC* loginVC, NSString* token))alreadyLoggedIn;
 
 @end

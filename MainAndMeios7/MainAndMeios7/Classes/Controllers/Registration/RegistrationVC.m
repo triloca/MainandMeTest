@@ -216,6 +216,10 @@
         NSString *apiToken = _loginRequest.apiToken;
         NSLog(@"login completed: %@", apiToken);
         
+        if (_successBlock) {
+            _successBlock(self, apiToken);
+        }
+        
     } failure:^(LoginRequest *request, NSError *error) {
         [self hideSpinnerWithName:@""];
         NSLog(@"login failed: %@", error);
@@ -278,6 +282,7 @@
     _txtConfirmPassword.text=[_txtConfirmPassword.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     
     if ([self validateTextFields]){
+        [self hideKeyboard];
         [self registrationAction];
     }
     //Register

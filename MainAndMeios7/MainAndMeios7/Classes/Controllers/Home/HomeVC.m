@@ -231,7 +231,7 @@ typedef enum {
     searchRequest.searchKey = _searchBar.text;
     
     if (_page == 1) {
-      //  [self showSpinnerWithName:@""];
+        [self showSpinnerWithName:@""];
     }
 
     self.searchOperation =   [[MMServiceProvider sharedProvider] sendRequest:searchRequest success:^(SearchRequest* request) {
