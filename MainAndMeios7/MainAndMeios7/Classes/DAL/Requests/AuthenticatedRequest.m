@@ -10,6 +10,13 @@
 
 @implementation AuthenticatedRequest
 
+- (id) init {
+    if (self = [super init]) {
+        self.apiToken = [CommonManager shared].apiToken;
+    }
+    return self;
+}
+
 - (NSMutableDictionary *) userRequestDictionary {
     return [NSMutableDictionary new];
 }

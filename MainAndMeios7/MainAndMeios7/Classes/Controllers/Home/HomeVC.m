@@ -16,7 +16,8 @@
 #import "LoadProductsRequest.h"
 #import "SVPullToRefresh.h"
 #import "SearchRequest.h"
-
+#import "CustomTitleView.h"
+#import "ProductDetailsVC.h"
 
 typedef enum {
     ScreenStateStore = 0,
@@ -26,8 +27,10 @@ typedef enum {
 
 
 @interface HomeVC () <TMQuiltViewDataSource, TMQuiltViewDelegate>
+
 @property (strong, nonatomic) SearchTypeView *searchTypeView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
+@property (assign, nonatomic) BOOL searchShouldBeginEditing;
 
 
 @property (strong, nonatomic) TMQuiltView *quiltView;
@@ -36,8 +39,6 @@ typedef enum {
 @property (assign, nonatomic) NSInteger page;
 
 @property (strong, nonatomic) AFHTTPRequestOperation* searchOperation;
-
-@property (strong, nonatomic) NSTimer* searchTimer;
 
 @property (assign, nonatomic) ScreenState screenState;
 @end
@@ -86,7 +87,12 @@ typedef enum {
     
     [self configSearchBar];
     
-    self.navigationItem.title = @"Layout Demo";
+    self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"ROSLINDALE, MA" dropDownIndicator:YES clickCallback:^(CustomTitleView *titleView) {
+        NSLog(@"It works!");
+        titleView.title = @"CLICKED";
+        titleView.shouldShowDropdownIndicator = YES;
+    }];
+
     self.navigationItem.leftBarButtonItem = anchorLeftButton;
     
     [_searchTypeView selectStorefronts];
@@ -103,15 +109,24 @@ typedef enum {
         [wSelf searchRequest];
     }];
     
-    _page = 1;
+    [self startSearch];
+    
+    _searchShouldBeginEditing = YES;
+}
 
+- (BOOL)prefersStatusBarHidden {
+    return NO;
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
+    return UIStatusBarAnimationNone;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [_quiltView reloadData];
     
-    [self startSearch];
+    [_quiltView reloadData];
+
 }
 
 - (void)viewDidLayoutSubviews{
@@ -186,33 +201,12 @@ typedef enum {
 #pragma mark _______________________ Privat Methods ________________________
 
 
-- (void)startSearchTimer{
-    
-    self.searchTimer = [NSTimer scheduledTimerWithTimeInterval:0.7f
-                                                      target:self
-                                                    selector:@selector(readTimerTick:)
-                                                    userInfo:nil
-                                                     repeats:NO];
-}
-
-- (void)resetSearchTimer{
-    [self.searchTimer invalidate];
-    self.searchTimer = nil;
-}
-
-- (void)readTimerTick:(NSTimer*)timer{
-    
-    [self startSearch];
-}
-
-
 - (void)startSearch{
     
     _page = 1;
     [self searchRequest];
    
 }
-
 
 
 - (void)searchRequest{
@@ -223,7 +217,7 @@ typedef enum {
     }
     
     
-    SearchRequest *searchRequest = [[SearchRequest alloc] initWithSearchType:searchType searchFilter:SearchFilterPopular];
+    SearchRequest *searchRequest = [[SearchRequest alloc] initWithSearchType:searchType searchFilter:SearchFilterRandom];
     searchRequest.coordinate = CLLocationCoordinate2DMake(42.283215, -71.123029);
     searchRequest.city = @"Roslindale";
     searchRequest.state = @"MA";
@@ -322,27 +316,39 @@ typedef enum {
 
 #pragma mark - Search Bar Delegate
 
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
-    return YES;
+
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)bar {
+    // reset the shouldBeginEditing BOOL ivar to YES, but first take its value and use it to return it from the method call
+    BOOL boolToReturn = _searchShouldBeginEditing;
+    _searchShouldBeginEditing = YES;
+    return boolToReturn;
+}
+-(void) searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    //This'll Show The cancelButton with Animation
+    //[searchBar setShowsCancelButton:YES animated:YES];
+    //remaining Code'll go here
 }
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText
-{
-    if (searchText.length > 2) {
-        
-    }
-    [self resetSearchTimer];
-    [self startSearchTimer];
+- (void) searchBar:(UISearchBar *)theSearchBar textDidChange:(NSString *)searchText {
+    // TODO - dynamically update the search results here, if we choose to do that.
     
-    // The user clicked the [X] button or otherwise cleared the text.
-    if([searchText length] == 0) {
-        [searchBar performSelector: @selector(resignFirstResponder)
-                        withObject: nil
-                        afterDelay: 0.1];
+    if (![theSearchBar isFirstResponder]) {
+        // The user clicked the [X] button while the keyboard was hidden
+        _searchShouldBeginEditing = NO;
+        [self startSearch];
+    }
+    else if ([searchText length] == 0) {
+        // The user clicked the [X] button or otherwise cleared the text.
+        [theSearchBar performSelector: @selector(resignFirstResponder)
+                           withObject: nil
+                           afterDelay: 0.1];
     }
 }
+
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    [self startSearch];
     [searchBar resignFirstResponder];
 }
 
@@ -351,7 +357,8 @@ typedef enum {
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
-    
+   // [searchBar setShowsCancelButton:NO animated:YES];
+    [searchBar resignFirstResponder];
 }
 
 - (BOOL)textFieldShouldClear:(UITextField *)textField
@@ -361,6 +368,9 @@ typedef enum {
     return YES;
 }
 
+- (IBAction)searchCancelButtonPressed:(id)sender {
+
+}
 #pragma mark - QuiltViewControllerDataSource
 
 //- (NSArray *)images {
@@ -422,6 +432,12 @@ typedef enum {
 }
 
 #pragma mark - TMQuiltViewDelegate
+
+- (void)quiltView:(TMQuiltView *)quiltView didSelectCellAtIndexPath:(NSIndexPath *)indexPath {
+    NSDictionary *dict = [_collectionArray safeDictionaryObjectAtIndex:indexPath.row];
+    ProductDetailsVC *vc = [[ProductDetailsVC alloc] initWithProduct:dict];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (NSInteger)quiltViewNumberOfColumns:(TMQuiltView *)quiltView {
     

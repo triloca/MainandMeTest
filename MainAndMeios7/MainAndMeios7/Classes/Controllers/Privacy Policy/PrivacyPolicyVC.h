@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PrivacyPolicyVC : UIViewController
-//@property (strong, nonatomic) IBOutlet UITextView *textView;
 
 @end

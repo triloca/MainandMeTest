@@ -51,6 +51,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+    
     [LayoutManager application:application didFinishLaunchingWithOptions:launchOptions];
 //    [[LocationManager sharedManager] setUpdatePeriod:10];//10 seconds
 //    [[LocationManager sharedManager] setDistanceFilter:10];//10 meters

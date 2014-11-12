@@ -25,7 +25,7 @@
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     //! Add recognizer for finger action
     [self.view addGestureRecognizer:self.slidingViewController.panGesture];
     [self.view addGestureRecognizer:self.slidingViewController.resetTapGesture];

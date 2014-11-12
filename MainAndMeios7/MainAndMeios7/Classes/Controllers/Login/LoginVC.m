@@ -69,6 +69,10 @@
 
 #pragma mark _______________________ View Lifecycle ________________________
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

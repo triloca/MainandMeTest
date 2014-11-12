@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="DINBek-Regular.ttf">
+            <string>DINBek-Regular</string>
+        </mutableArray>
+        <mutableArray key="DINbek-Bold.ttf">
+            <string>DINbekBold</string>
+            <string>DINbekBold</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductDetailsVC">
+            <connections>
+                <outlet property="descriptionLabel" destination="L67-Jq-t0J" id="KXx-cz-TCi"/>
+                <outlet property="gradientView" destination="Xyc-bv-eMg" id="XHB-DZ-KQC"/>
+                <outlet property="imageView" destination="GyI-sn-Pk2" id="Kl4-9g-vs8"/>
+                <outlet property="phoneButton" destination="sso-eZ-jIW" id="UuD-yf-l7H"/>
+                <outlet property="priceLabel" destination="r2W-Z3-Hvf" id="Qa2-5q-P35"/>
+                <outlet property="titleLabel" destination="CGu-3N-eXg" id="byY-ND-9Vs"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GyI-sn-Pk2">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$24.38" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2W-Z3-Hvf">
+                    <rect key="frame" x="8" y="520" width="147" height="39.5"/>
+                    <fontDescription key="fontDescription" name="DINbekBold" family="DINbek Bold" pointSize="32"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lu7-Ek-AyX">
+                    <rect key="frame" x="240" y="526" width="80" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="dyp-6X-Knf"/>
+                        <constraint firstAttribute="height" constant="42" id="eVX-Qf-DLr"/>
+                    </constraints>
+                    <state key="normal" image="item_det_wishlist_btn.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="wishlistAction:" destination="-1" eventType="touchUpInside" id="2Rk-Mj-1V1"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pnw-pe-2wc">
+                    <rect key="frame" x="207" y="526" width="33" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="i2Z-Od-crl"/>
+                        <constraint firstAttribute="width" constant="33" id="laF-1b-i1I"/>
+                    </constraints>
+                    <state key="normal" image="item_det_share_btn.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="shareAction:" destination="-1" eventType="touchUpInside" id="drc-eE-Vwu"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L67-Jq-t0J">
+                    <rect key="frame" x="8" y="499.5" width="147" height="12.5"/>
+                    <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="10"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CGu-3N-eXg">
+                    <rect key="frame" x="8" y="469.5" width="147" height="22"/>
+                    <fontDescription key="fontDescription" name="DINbekBold" family="DINbek Bold" pointSize="18"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sso-eZ-jIW">
+                    <rect key="frame" x="163" y="526" width="45" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="66b-dT-OfH"/>
+                        <constraint firstAttribute="width" constant="45" id="Wgm-U6-jV2"/>
+                    </constraints>
+                    <state key="normal" image="item_det_call_btn.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="callAction:" destination="-1" eventType="touchUpInside" id="s4H-wO-J17"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xyc-bv-eMg">
+                    <rect key="frame" x="0.0" y="421.5" width="320" height="146.5"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="lu7-Ek-AyX" secondAttribute="trailing" id="10U-pb-fTa"/>
+                <constraint firstItem="L67-Jq-t0J" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="1Xp-lJ-VwW"/>
+                <constraint firstAttribute="bottom" secondItem="sso-eZ-jIW" secondAttribute="bottom" id="3DX-Vs-pQu"/>
+                <constraint firstItem="L67-Jq-t0J" firstAttribute="top" secondItem="CGu-3N-eXg" secondAttribute="bottom" constant="8" id="5DO-qa-wJl"/>
+                <constraint firstItem="L67-Jq-t0J" firstAttribute="width" secondItem="CGu-3N-eXg" secondAttribute="width" id="5Th-25-kGK"/>
+                <constraint firstAttribute="bottom" secondItem="r2W-Z3-Hvf" secondAttribute="bottom" constant="8" id="6QC-TN-eo3"/>
+                <constraint firstAttribute="bottom" secondItem="lu7-Ek-AyX" secondAttribute="bottom" id="6i4-qH-pSp"/>
+                <constraint firstItem="CGu-3N-eXg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="7GQ-Wq-h9t"/>
+                <constraint firstItem="GyI-sn-Pk2" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7JH-DI-68v"/>
+                <constraint firstItem="lu7-Ek-AyX" firstAttribute="leading" secondItem="sso-eZ-jIW" secondAttribute="trailing" constant="32" id="9W2-9R-FdO"/>
+                <constraint firstItem="r2W-Z3-Hvf" firstAttribute="top" secondItem="L67-Jq-t0J" secondAttribute="bottom" constant="8" id="ARp-cf-MCT"/>
+                <constraint firstAttribute="bottom" secondItem="Pnw-pe-2wc" secondAttribute="bottom" id="KkB-k4-i0g"/>
+                <constraint firstItem="Xyc-bv-eMg" firstAttribute="top" secondItem="CGu-3N-eXg" secondAttribute="bottom" constant="-70" id="Mfy-Rh-o75"/>
+                <constraint firstItem="sso-eZ-jIW" firstAttribute="leading" secondItem="r2W-Z3-Hvf" secondAttribute="trailing" constant="8" id="Nz2-Ea-4j3"/>
+                <constraint firstItem="lu7-Ek-AyX" firstAttribute="leading" secondItem="Pnw-pe-2wc" secondAttribute="trailing" id="QR6-TJ-wQw"/>
+                <constraint firstItem="sso-eZ-jIW" firstAttribute="leading" secondItem="L67-Jq-t0J" secondAttribute="trailing" constant="8" id="RcX-O6-EwK"/>
+                <constraint firstAttribute="bottom" secondItem="Xyc-bv-eMg" secondAttribute="bottom" id="X3Q-Q3-Mxb"/>
+                <constraint firstAttribute="trailing" secondItem="GyI-sn-Pk2" secondAttribute="trailing" id="cgc-Ie-Eue"/>
+                <constraint firstItem="r2W-Z3-Hvf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="f0L-mC-1M8"/>
+                <constraint firstItem="GyI-sn-Pk2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="pCu-lw-cKu"/>
+                <constraint firstAttribute="trailing" secondItem="Xyc-bv-eMg" secondAttribute="trailing" id="tqR-E5-WnR"/>
+                <constraint firstItem="Xyc-bv-eMg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="xxc-yn-h92"/>
+                <constraint firstAttribute="bottom" secondItem="GyI-sn-Pk2" secondAttribute="bottom" id="zs3-8R-KA8"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="217" y="309"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="item_det_call_btn.png" width="45" height="42"/>
+        <image name="item_det_share_btn.png" width="33" height="42"/>
+        <image name="item_det_wishlist_btn.png" width="80" height="42"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

@@ -16,6 +16,7 @@
 #import "NSFileManager+Path.h"
 #import "NSString+Path.h"
 #import "NSString+Email.h"
+#import "NSString+Validation.h"
 #import "NSString+Capitalized.h"
 #import "NSError+LocalizedError.h"
 #import "UIFont+All.h"

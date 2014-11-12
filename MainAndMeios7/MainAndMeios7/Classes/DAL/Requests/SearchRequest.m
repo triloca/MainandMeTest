@@ -92,7 +92,7 @@
     NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict safeSetObject:@(_page) forKey:@"page"];
     [dict safeSetObject:@(kPerPagePropertyValue) forKey:@"per_page"];
-    [dict safeSetObject:_searchKey forKey:@"key"];
+    [dict safeSetObject:_searchKey forKey:@"keywords"];
     
     if (_searchFilter != SearchFilterNewlyAll) {
         [dict safeSetObject:@(_coordinate.latitude) forKey:@"lat"];

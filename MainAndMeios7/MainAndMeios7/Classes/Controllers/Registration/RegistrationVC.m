@@ -60,31 +60,28 @@
     
     
 }
+
 #pragma mark _______________________ View Lifecycle ________________________
 
--(void)viewWillAppear:(BOOL)animated{
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+- (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     self.navigationController.navigationBarHidden = TRUE;
-   
-
-    
 }
-- (void)viewWillDisappear:(BOOL)animated
-{
-     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [self hideKeyboard];
     [self clearAllTextFields];
 }
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 #pragma mark _______________________ Class Methods _________________________
 

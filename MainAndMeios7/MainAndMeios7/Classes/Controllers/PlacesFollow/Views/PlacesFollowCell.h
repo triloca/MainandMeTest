@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JSCustomBadge.h"
 
 @interface PlacesFollowCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
