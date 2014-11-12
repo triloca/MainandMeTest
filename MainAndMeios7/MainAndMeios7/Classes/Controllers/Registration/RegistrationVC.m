@@ -40,12 +40,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSDictionary *attrDict = @{NSFontAttributeName : _btnSignIn.titleLabel.font ,NSForegroundColorAttributeName : [UIColor
-                                                                                                                lightGrayColor]};
    
-    NSMutableAttributedString *title =[[NSMutableAttributedString alloc] initWithString:@"Already a user? Login" attributes: attrDict];
-    [title addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0,[title length])];
-    [_btnSignIn setAttributedTitle:title forState:UIControlStateNormal];
     
 //    if([[CommonManager shared] isFourInchScreen])
 //    {
@@ -63,7 +58,8 @@
 
 #pragma mark _______________________ View Lifecycle ________________________
 
-- (BOOL)prefersStatusBarHidden {
+- (BOOL)prefersStatusBarHidden
+{
     return YES;
 }
 
@@ -74,6 +70,12 @@
     [center addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardDidShowNotification object:nil];
     [center addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     self.navigationController.navigationBarHidden = TRUE;
+    NSDictionary *attrDict = @{NSFontAttributeName : _btnSignIn.titleLabel.font ,NSForegroundColorAttributeName : [UIColor
+                                                                                                                   lightGrayColor]};
+    
+    NSMutableAttributedString *title =[[NSMutableAttributedString alloc] initWithString:@"Already a user? Login" attributes: attrDict];
+    [title addAttribute:NSUnderlineStyleAttributeName value:[NSNumber numberWithInteger:NSUnderlineStyleSingle] range:NSMakeRange(0,[title length])];
+    [_btnSignIn setAttributedTitle:title forState:UIControlStateNormal];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

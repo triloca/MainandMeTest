@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		31157CBF1A1354D000C84C87 /* ForgetPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 31157CBD1A1354D000C84C87 /* ForgetPasswordVC.m */; };
+		31157CC01A1354D000C84C87 /* ForgetPasswordVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31157CBE1A1354D000C84C87 /* ForgetPasswordVC.xib */; };
+		31157CC61A13559800C84C87 /* forgot_pass_email_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 31157CC21A13559800C84C87 /* forgot_pass_email_back.png */; };
+		31157CC71A13559800C84C87 /* forgot_pass_email_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31157CC31A13559800C84C87 /* forgot_pass_email_back@2x.png */; };
+		31157CC81A13559800C84C87 /* forgot_pass_green_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 31157CC41A13559800C84C87 /* forgot_pass_green_button.png */; };
+		31157CC91A13559800C84C87 /* forgot_pass_green_button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 31157CC51A13559800C84C87 /* forgot_pass_green_button@2x.png */; };
+		31157CCD1A135B2700C84C87 /* ForgetPasswordVC_568h.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31157CCA1A135B2700C84C87 /* ForgetPasswordVC_568h.xib */; };
+		31157CCE1A135B2700C84C87 /* ForgetPasswordVC_667h.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31157CCB1A135B2700C84C87 /* ForgetPasswordVC_667h.xib */; };
+		31157CCF1A135B2700C84C87 /* ForgetPasswordVC_736h.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31157CCC1A135B2700C84C87 /* ForgetPasswordVC_736h.xib */; };
 		314A4F001A0BE7900003B4A9 /* signup_back.png in Resources */ = {isa = PBXBuildFile; fileRef = 314A4EED1A0BE7900003B4A9 /* signup_back.png */; };
 		314A4F011A0BE7900003B4A9 /* signup_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 314A4EEE1A0BE7900003B4A9 /* signup_back@2x.png */; };
 		314A4F021A0BE7900003B4A9 /* signup_back568.png in Resources */ = {isa = PBXBuildFile; fileRef = 314A4EEF1A0BE7900003B4A9 /* signup_back568.png */; };
@@ -49,6 +58,7 @@
 		A4EFB8E81A12853C00F80F85 /* item_det_call_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EFB8E51A12853C00F80F85 /* item_det_call_btn@2x.png */; };
 		A4EFB8E91A12853C00F80F85 /* item_det_share_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EFB8E61A12853C00F80F85 /* item_det_share_btn@2x.png */; };
 		A4EFB8EA1A12853C00F80F85 /* item_det_wishlist_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EFB8E71A12853C00F80F85 /* item_det_wishlist_btn@2x.png */; };
+		AE3D969E1A13A16B00BA4743 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE3D969D1A13A16B00BA4743 /* FacebookSDK.framework */; };
 		AE7849F71A0D9AAE005D86B3 /* RegistrationVC_568h.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7849F51A0D9AAE005D86B3 /* RegistrationVC_568h.xib */; };
 		AE7849F81A0D9AAE005D86B3 /* RegistrationVC_736h.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7849F61A0D9AAE005D86B3 /* RegistrationVC_736h.xib */; };
 		AE7849FA1A0DBE8A005D86B3 /* RegistrationVC_667h.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7849F91A0DBE8A005D86B3 /* RegistrationVC_667h.xib */; };
@@ -224,10 +234,19 @@
 		AECC46ED1A0B2D76003339E6 /* RegistrationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AECC46E91A0B2D76003339E6 /* RegistrationCell.xib */; };
 		AED33FA61A0F376B00D706F7 /* LoginVC_667h.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED33FA51A0F376B00D706F7 /* LoginVC_667h.xib */; };
 		AED33FA81A0F39ED00D706F7 /* LoginVC_736h.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED33FA71A0F39ED00D706F7 /* LoginVC_736h.xib */; };
-		AEF03ABF1A128AFC00C5422B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEF03ABE1A128AFC00C5422B /* FacebookSDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		31157CBC1A1354D000C84C87 /* ForgetPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgetPasswordVC.h; path = "Forget Password/ForgetPasswordVC.h"; sourceTree = "<group>"; };
+		31157CBD1A1354D000C84C87 /* ForgetPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgetPasswordVC.m; path = "Forget Password/ForgetPasswordVC.m"; sourceTree = "<group>"; };
+		31157CBE1A1354D000C84C87 /* ForgetPasswordVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ForgetPasswordVC.xib; path = "Forget Password/ForgetPasswordVC.xib"; sourceTree = "<group>"; };
+		31157CC21A13559800C84C87 /* forgot_pass_email_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forgot_pass_email_back.png; path = "Forget Password/forgot_pass_email_back.png"; sourceTree = "<group>"; };
+		31157CC31A13559800C84C87 /* forgot_pass_email_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "forgot_pass_email_back@2x.png"; path = "Forget Password/forgot_pass_email_back@2x.png"; sourceTree = "<group>"; };
+		31157CC41A13559800C84C87 /* forgot_pass_green_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forgot_pass_green_button.png; path = "Forget Password/forgot_pass_green_button.png"; sourceTree = "<group>"; };
+		31157CC51A13559800C84C87 /* forgot_pass_green_button@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "forgot_pass_green_button@2x.png"; path = "Forget Password/forgot_pass_green_button@2x.png"; sourceTree = "<group>"; };
+		31157CCA1A135B2700C84C87 /* ForgetPasswordVC_568h.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ForgetPasswordVC_568h.xib; path = "Forget Password/ForgetPasswordVC_568h.xib"; sourceTree = "<group>"; };
+		31157CCB1A135B2700C84C87 /* ForgetPasswordVC_667h.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ForgetPasswordVC_667h.xib; path = "Forget Password/ForgetPasswordVC_667h.xib"; sourceTree = "<group>"; };
+		31157CCC1A135B2700C84C87 /* ForgetPasswordVC_736h.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ForgetPasswordVC_736h.xib; path = "Forget Password/ForgetPasswordVC_736h.xib"; sourceTree = "<group>"; };
 		314A4EED1A0BE7900003B4A9 /* signup_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = signup_back.png; path = Registration/signup_back.png; sourceTree = "<group>"; };
 		314A4EEE1A0BE7900003B4A9 /* signup_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "signup_back@2x.png"; path = "Registration/signup_back@2x.png"; sourceTree = "<group>"; };
 		314A4EEF1A0BE7900003B4A9 /* signup_back568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = signup_back568.png; path = Registration/signup_back568.png; sourceTree = "<group>"; };
@@ -283,6 +302,7 @@
 		A4EFB8E61A12853C00F80F85 /* item_det_share_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_det_share_btn@2x.png"; sourceTree = "<group>"; };
 		A4EFB8E71A12853C00F80F85 /* item_det_wishlist_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_det_wishlist_btn@2x.png"; sourceTree = "<group>"; };
 		AE34D82F19F01CD60045AB20 /* MainAndMeios7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MainAndMeios7.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE3D969D1A13A16B00BA4743 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		AE7849F51A0D9AAE005D86B3 /* RegistrationVC_568h.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationVC_568h.xib; sourceTree = "<group>"; };
 		AE7849F61A0D9AAE005D86B3 /* RegistrationVC_736h.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationVC_736h.xib; sourceTree = "<group>"; };
 		AE7849F91A0DBE8A005D86B3 /* RegistrationVC_667h.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationVC_667h.xib; sourceTree = "<group>"; };
@@ -576,7 +596,6 @@
 		AECC46E91A0B2D76003339E6 /* RegistrationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationCell.xib; sourceTree = "<group>"; };
 		AED33FA51A0F376B00D706F7 /* LoginVC_667h.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC_667h.xib; sourceTree = "<group>"; };
 		AED33FA71A0F39ED00D706F7 /* LoginVC_736h.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginVC_736h.xib; sourceTree = "<group>"; };
-		AEF03ABE1A128AFC00C5422B /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = "../3rd/facebook-ios-sdk-3.20/FacebookSDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -584,13 +603,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AEF03ABF1A128AFC00C5422B /* FacebookSDK.framework in Frameworks */,
+				AE3D969E1A13A16B00BA4743 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		31157CBB1A13548200C84C87 /* Forget Password */ = {
+			isa = PBXGroup;
+			children = (
+				31157CCA1A135B2700C84C87 /* ForgetPasswordVC_568h.xib */,
+				31157CCB1A135B2700C84C87 /* ForgetPasswordVC_667h.xib */,
+				31157CCC1A135B2700C84C87 /* ForgetPasswordVC_736h.xib */,
+				31157CBC1A1354D000C84C87 /* ForgetPasswordVC.h */,
+				31157CBD1A1354D000C84C87 /* ForgetPasswordVC.m */,
+				31157CBE1A1354D000C84C87 /* ForgetPasswordVC.xib */,
+			);
+			name = "Forget Password";
+			sourceTree = "<group>";
+		};
+		31157CC11A13557400C84C87 /* Forget Password */ = {
+			isa = PBXGroup;
+			children = (
+				31157CC21A13559800C84C87 /* forgot_pass_email_back.png */,
+				31157CC31A13559800C84C87 /* forgot_pass_email_back@2x.png */,
+				31157CC41A13559800C84C87 /* forgot_pass_green_button.png */,
+				31157CC51A13559800C84C87 /* forgot_pass_green_button@2x.png */,
+			);
+			name = "Forget Password";
+			sourceTree = "<group>";
+		};
 		314A4ED01A0BE2E10003B4A9 /* Registration */ = {
 			isa = PBXGroup;
 			children = (
@@ -915,6 +958,7 @@
 				A4EFB8DE1A1283EC00F80F85 /* Product Details */,
 				AE784A2C1A0EC9F9005D86B3 /* PlacesFollow */,
 				AE784A1B1A0E72BC005D86B3 /* Privacy Policy */,
+				31157CBB1A13548200C84C87 /* Forget Password */,
 				AECC46E21A0B2D76003339E6 /* Registration */,
 				AEA174461A0722B800448D1A /* Home */,
 				AEA174511A0722B800448D1A /* LeftMenu */,
@@ -1490,6 +1534,7 @@
 		AEA1751E1A0722B900448D1A /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				31157CC11A13557400C84C87 /* Forget Password */,
 				A4EFB8E41A12853C00F80F85 /* Item details */,
 				A457C3771A0FEB6000AF733D /* Navigation bar */,
 				AE784A4F1A0F22DF005D86B3 /* SignIn */,
@@ -1605,7 +1650,7 @@
 		AEF03AC11A128B3A00C5422B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AEF03ABE1A128AFC00C5422B /* FacebookSDK.framework */,
+				AE3D969D1A13A16B00BA4743 /* FacebookSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1675,6 +1720,7 @@
 				A4EFB8EA1A12853C00F80F85 /* item_det_wishlist_btn@2x.png in Resources */,
 				AE784A3B1A0EC9F9005D86B3 /* PlacesFollowCell.xib in Resources */,
 				AE784A621A0F22DF005D86B3 /* signin_background.png in Resources */,
+				31157CCF1A135B2700C84C87 /* ForgetPasswordVC_736h.xib in Resources */,
 				314A4F051A0BE7900003B4A9 /* signup_separator.png in Resources */,
 				AEA175DD1A076A7300448D1A /* person.jpg in Resources */,
 				AEA175A11A0722B900448D1A /* menu_button.png in Resources */,
@@ -1700,10 +1746,13 @@
 				AE784A691A0F22DF005D86B3 /* signin_fb_button_back@2x.png in Resources */,
 				A41B97C71A12ADF50013E30A /* nav_map_button@2x.png in Resources */,
 				AEA1759F1A0722B900448D1A /* search_bar_background@2x.png in Resources */,
+				31157CC81A13559800C84C87 /* forgot_pass_green_button.png in Resources */,
 				AE784A6C1A0F22DF005D86B3 /* signin_logo.png in Resources */,
 				AEA175D01A0759F200448D1A /* home_cell_back@2x.png in Resources */,
 				AE784A6A1A0F22DF005D86B3 /* signin_fields_back.png in Resources */,
+				31157CC71A13559800C84C87 /* forgot_pass_email_back@2x.png in Resources */,
 				A41B97C31A12A8B80013E30A /* nav_back_button@2x.png in Resources */,
+				31157CC01A1354D000C84C87 /* ForgetPasswordVC.xib in Resources */,
 				AE784A661A0F22DF005D86B3 /* signin_email_passwd.png in Resources */,
 				AE7849F81A0D9AAE005D86B3 /* RegistrationVC_736h.xib in Resources */,
 				AE784A671A0F22DF005D86B3 /* signin_email_passwd@2x.png in Resources */,
@@ -1717,6 +1766,7 @@
 				A457C37D1A0FEB6000AF733D /* nav_title_down_arrow@3x.png in Resources */,
 				AEA175451A0722B900448D1A /* HomeVC.xib in Resources */,
 				AEA175D91A07670E00448D1A /* big_IMG_4133.jpg in Resources */,
+				31157CC91A13559800C84C87 /* forgot_pass_green_button@2x.png in Resources */,
 				AE7849F71A0D9AAE005D86B3 /* RegistrationVC_568h.xib in Resources */,
 				314A4F041A0BE7900003B4A9 /* signup_fields_back@2x.png in Resources */,
 				314A4F061A0BE7900003B4A9 /* signup_separator@2x.png in Resources */,
@@ -1737,6 +1787,7 @@
 				AE784A261A0E72BC005D86B3 /* PrivacyPolicyVC.xib in Resources */,
 				314A4F101A0BE7900003B4A9 /* singup_logo@2x.png in Resources */,
 				AE784A2A1A0E7331005D86B3 /* privacy_policy.png in Resources */,
+				31157CCE1A135B2700C84C87 /* ForgetPasswordVC_667h.xib in Resources */,
 				AEA175DA1A07670E00448D1A /* big_IMG_5648.jpg in Resources */,
 				AE784A4B1A0F1A86005D86B3 /* DINLight.ttf in Resources */,
 				314A4F0F1A0BE7900003B4A9 /* singup_logo.png in Resources */,
@@ -1744,7 +1795,9 @@
 				314A4F011A0BE7900003B4A9 /* signup_back@2x.png in Resources */,
 				A41B97C61A12ADF50013E30A /* nav_map_button.png in Resources */,
 				314A4F121A0BE7900003B4A9 /* singup_user_logo@2x.png in Resources */,
+				31157CCD1A135B2700C84C87 /* ForgetPasswordVC_568h.xib in Resources */,
 				314A4F091A0BE7900003B4A9 /* singup_button.png in Resources */,
+				31157CC61A13559800C84C87 /* forgot_pass_email_back.png in Resources */,
 				AE784A721A0F22DF005D86B3 /* singin_lock_logo.png in Resources */,
 				AEA1759D1A0722B900448D1A /* scope_bar_background@2x.png in Resources */,
 				AE784A4C1A0F1A86005D86B3 /* Whitney-Bold.otf in Resources */,
@@ -1819,6 +1872,7 @@
 				AEA1758C1A0722B900448D1A /* NSMutableDictionary+Safe.m in Sources */,
 				AE784A3A1A0EC9F9005D86B3 /* PlacesFollowCell.m in Sources */,
 				AEA175851A0722B900448D1A /* NSString+Capitalized.m in Sources */,
+				31157CBF1A1354D000C84C87 /* ForgetPasswordVC.m in Sources */,
 				AEA175551A0722B900448D1A /* AddDeviceTokenRequest.m in Sources */,
 				AEA1755C1A0722B900448D1A /* LikeProductRequest.m in Sources */,
 				AEA175821A0722B900448D1A /* NSDate+String.m in Sources */,
@@ -2006,6 +2060,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/alexanderbukov/Documents/PROGECTS/ODESK/MainandMe/iOS7/mamios/MainandMe/3rd/facebook-ios-sdk-3.20",
+					/Users/applenberry/Documents/FacebookSDK,
+					/Users/alexanderbukov/Documents/FacebookSDK,
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MainAndMeios7/Supporting Files/MainAndMe-Prefix.pch";
 				INFOPLIST_FILE = "MainAndMeios7/Supporting Files/Info.plist";
@@ -2025,6 +2081,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/alexanderbukov/Documents/PROGECTS/ODESK/MainandMe/iOS7/mamios/MainandMe/3rd/facebook-ios-sdk-3.20",
+					/Users/applenberry/Documents/FacebookSDK,
+					/Users/alexanderbukov/Documents/FacebookSDK,
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MainAndMeios7/Supporting Files/MainAndMe-Prefix.pch";
 				INFOPLIST_FILE = "MainAndMeios7/Supporting Files/Info.plist";

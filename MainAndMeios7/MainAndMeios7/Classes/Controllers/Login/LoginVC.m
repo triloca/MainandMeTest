@@ -8,7 +8,7 @@
 
 #import "LoginVC.h"
 #import "LoginRequest.h"
-
+#import "ForgetPasswordVC.h"
 
 @interface LoginVC()
 
@@ -84,6 +84,7 @@
     [imgMainBackground setImage:[UIImage imageNamed:@"signin_background.png"]];
     
     [self SetViewFrames];
+    
 }
 
 -(void)SetViewFrames{
@@ -198,13 +199,21 @@
 #pragma mark _______________________ Buttons Action ________________________
 
 - (IBAction)loginButtonClicked:(id)sender {
+    [self forgotPasswordButtonClicked:nil];
+    return;
     if ([self isTextFieldsValid]) {
         [self hideKeyBoard];
         [self loginWithEmail:_emailTextField.text pass:_passwordTextField.text];
     }
 }
 
-
+- (IBAction)forgotPasswordButtonClicked:(id)sender
+{
+    // push for forgot password from here
+    
+    ForgetPasswordVC * forgotVC = [ForgetPasswordVC loadFromXIBForScrrenSizes];
+    [self.navigationController pushViewController:forgotVC animated:YES];
+}
 - (IBAction)facebookButtonClicked:(id)sender {
     if (_successBlock) {
         _successBlock(self, nil);
