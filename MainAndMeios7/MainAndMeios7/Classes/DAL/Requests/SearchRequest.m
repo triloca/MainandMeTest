@@ -108,7 +108,7 @@
 
 - (void) processResponse:(NSArray *)response {
     
-    NSLog(@"Response: %@", response);
+   // NSLog(@"Response: %@", response);
     
     if ([response isKindOfClass:[NSArray class]]) {
         self.objects = response;

@@ -7,6 +7,9 @@
 //
 
 #import "ForgetPasswordVC.h"
+#import "ForgotPasswordRequest.h"
+
+
 @interface ForgetPasswordVC ()
 @property (weak, nonatomic)IBOutlet UIScrollView *scroll;
 @property (weak, nonatomic)IBOutlet UITextField *txtEmailAddress;
@@ -87,6 +90,37 @@
 -(void)forgotPasswordAction
 {
     NSLog(@"forgotPasswordAction");
+    
+    ForgotPasswordRequest *forgotPswdRequest = [[ForgotPasswordRequest alloc] init];
+    forgotPswdRequest.email = _txtEmailAddress.text;
+
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
+
+    
+    [self showSpinnerWithName:@""];
+    [[MMServiceProvider sharedProvider] sendRequest:forgotPswdRequest success:^(ForgotPasswordRequest *request) {
+        NSLog(@"Password recovery email sent");
+        [self hideSpinnerWithName:@""];
+
+        [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+                                               title:@"Password was reset successfully"
+                                             message:@"Please check your Email"
+                                   cancelButtonTitle:@"Ok"
+                                   otherButtonTitles:nil];
+        
+        
+    } failure:^(ForgotPasswordRequest *request, NSError* error) {
+        NSLog(@"Password recovery failed with error: %@", error);
+        [self hideSpinnerWithName:@""];
+        [[AlertManager shared] showOkAlertWithTitle:@"Error" message:error.localizedDescription];
+    }];
+
+
 }
 #pragma mark _______________________ Button Click Methods ________________________
 

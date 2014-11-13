@@ -7,6 +7,8 @@
 //
 
 #import "CommonManager.h"
+#import "FacebookManager.h"
+#import "TwitterManager.h"
 
 #define k_USER_ID           @"k_USER_ID"
 #define k_API_TOKEN         @"k_API_TOKEN"
@@ -83,19 +85,19 @@
         return NO;
     }
 }
--(BOOL)isFourInchScreen
-{
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGFloat screenHeight = screenRect.size.height;
-    if(screenHeight<=480)
-    {
-        return YES;
-    }
-    else
-    {
-        return NO;
-    }
+
+
+
+#pragma mark Logout
+- (void)logout{
+    [self setupApiToken:nil];
+    [self setupUserId:nil];
+    
+    [[FacebookManager shared] logOut];
+    [[TwitterManager shared] logout];
+    
 }
+
 #pragma mark _______________________ Notifications _________________________
 
 

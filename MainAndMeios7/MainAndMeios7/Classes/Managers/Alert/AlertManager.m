@@ -213,6 +213,8 @@ static char kAlertHandlerObjectKey;
     firstTextField.placeholder = firstPlaceholder;
     secondTextField.placeholder = secondPlaceholder;
     
+    firstTextField.keyboardType = UIKeyboardTypeEmailAddress;
+    
     //! Set delegate handler
     alertDelegateHandler.didClickedButtonBlock = ^(UIAlertView *alertView, NSInteger buttonIndex) {
         //! Call back

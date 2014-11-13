@@ -49,21 +49,7 @@
     
     self.anchorRightRevealAmount = 242;
     
-    [RegistrationVC registrationVCPresentation:^(UIViewController *registrationVC) {
-        UINavigationController* registrationNVC = [[UINavigationController alloc] initWithRootViewController:registrationVC];
-       
-        [[LayoutManager shared].rootNVC presentViewController:registrationNVC
-                                                     animated:NO
-                                                   completion:^{}];
-        
-
-    } success:^(UIViewController *registrationVC, NSString *token) {
-        [registrationVC.navigationController dismissViewControllerAnimated:YES completion:^{}];
-        
-    } failure:^(UIViewController *registrationVC, NSError *error) {
-        
-    }];
-    
+    [self checkIsLoggedIn];
     
 //    [LoginVC loginVCPresentation:^(LoginVC *loginVC) {
 //        
@@ -97,7 +83,38 @@
 
 #pragma mark _______________________ Privat Methods ________________________
 
+- (void)checkIsLoggedIn{
+    
+    if ([CommonManager shared].isLoggedIn) {
+        
+    }else{
+        NSLog(@"Need registration");
+        [self showRegistratioVC];
+    }
+    
+ 
+}
 
+- (void)showRegistratioVC{
+    
+    [RegistrationVC registrationVCPresentation:^(UIViewController *registrationVC) {
+        UINavigationController* registrationNVC = [[UINavigationController alloc] initWithRootViewController:registrationVC];
+        
+        [registrationVC view];
+        
+        [[LayoutManager shared].rootNVC presentViewController:registrationNVC
+                                                     animated:NO
+                                                   completion:^{}];
+        
+        
+    } success:^(UIViewController *registrationVC, NSString *token) {
+        [registrationVC.navigationController dismissViewControllerAnimated:YES completion:^{}];
+        
+    } failure:^(UIViewController *registrationVC, NSError *error) {
+        
+    }];
+
+}
 
 #pragma mark _______________________ Buttons Action ________________________
 

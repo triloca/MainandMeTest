@@ -47,6 +47,10 @@ typedef enum {
 
 #pragma mark _______________________ Class Methods _________________________
 #pragma mark ____________________________ Init _____________________________
+
+- (void)dealloc{
+
+}
 #pragma mark _______________________ View Lifecycle ________________________
 
 - (void)viewDidLoad {
@@ -87,10 +91,13 @@ typedef enum {
     
     [self configSearchBar];
     
-    self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"ROSLINDALE, MA" dropDownIndicator:YES clickCallback:^(CustomTitleView *titleView) {
-        NSLog(@"It works!");
-        titleView.title = @"CLICKED";
-        titleView.shouldShowDropdownIndicator = YES;
+    self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"ROSLINDALE, MA"
+                                                         dropDownIndicator:YES
+                                                             clickCallback:^(CustomTitleView *titleView) {
+                                                                 [[AlertManager shared] showOkAlertWithTitle:@"This functionality is not implemented yet"];
+//        NSLog(@"It works!");
+//        titleView.title = @"CLICKED";
+//        titleView.shouldShowDropdownIndicator = YES;
     }];
 
     self.navigationItem.leftBarButtonItem = anchorLeftButton;
@@ -125,6 +132,9 @@ typedef enum {
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
     [_quiltView reloadData];
 
 }
@@ -203,6 +213,11 @@ typedef enum {
 
 - (void)startSearch{
     
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
+    
     _page = 1;
     [self searchRequest];
    
@@ -211,6 +226,12 @@ typedef enum {
 
 - (void)searchRequest{
 
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
+    
+    
     SearchType searchType = SearchTypeStores;
     if (_searchTypeView.searchType == SearchTypeItems) {
         searchType = SearchTypeProducts;
@@ -343,6 +364,7 @@ typedef enum {
         [theSearchBar performSelector: @selector(resignFirstResponder)
                            withObject: nil
                            afterDelay: 0.1];
+        [self startSearch];
     }
 }
 
@@ -434,9 +456,16 @@ typedef enum {
 #pragma mark - TMQuiltViewDelegate
 
 - (void)quiltView:(TMQuiltView *)quiltView didSelectCellAtIndexPath:(NSIndexPath *)indexPath {
+   
     NSDictionary *dict = [_collectionArray safeDictionaryObjectAtIndex:indexPath.row];
-    ProductDetailsVC *vc = [[ProductDetailsVC alloc] initWithProduct:dict];
-    [self.navigationController pushViewController:vc animated:YES];
+    
+    if (_screenState == ScreenStateItem) {
+        ProductDetailsVC *vc = [[ProductDetailsVC alloc] initWithProduct:dict];
+        [self.navigationController pushViewController:vc animated:YES];
+
+    }else{
+        [[AlertManager shared] showOkAlertWithTitle:@"This functionality is not implemented yet"];
+    }
 }
 
 - (NSInteger)quiltViewNumberOfColumns:(TMQuiltView *)quiltView {
@@ -444,7 +473,7 @@ typedef enum {
     
     if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft
         || [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) {
-        return 3;
+        return 2;
     } else {
         return 2;
     }
@@ -461,4 +490,44 @@ typedef enum {
 
 #pragma mark _______________________ Public Methods ________________________
 #pragma mark _______________________ Notifications _________________________
+
+
+- (void)viewWillDisappear:(BOOL)animated {
+    /*
+     your code here
+     */
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+    [super viewWillDisappear:animated];
+}
+
+- (void)keyboardWillShow:(NSNotification *)notification {
+    //get the end position keyboard frame
+    NSDictionary *keyInfo = [notification userInfo];
+    CGRect keyboardFrame = [[keyInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+    //convert it to the same view coords as the tableView it might be occluding
+    keyboardFrame = [self.quiltView convertRect:keyboardFrame fromView:nil];
+    //calculate if the rects intersect
+    CGRect intersect = CGRectIntersection(keyboardFrame, self.quiltView.bounds);
+    if (!CGRectIsNull(intersect)) {
+        //yes they do - adjust the insets on tableview to handle it
+        //first get the duration of the keyboard appearance animation
+        NSTimeInterval duration = [[keyInfo objectForKey:@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
+        //change the table insets to match - animated to the same duration of the keyboard appearance
+        [UIView animateWithDuration:duration animations:^{
+            self.quiltView.contentInset = UIEdgeInsetsMake(0, 0, intersect.size.height, 0);
+            self.quiltView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, intersect.size.height, 0);
+        }];
+    }
+}
+
+- (void) keyboardWillHide:  (NSNotification *) notification{
+    NSDictionary *keyInfo = [notification userInfo];
+    NSTimeInterval duration = [[keyInfo objectForKey:@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
+    //clear the table insets - animated to the same duration of the keyboard disappearance
+    [UIView animateWithDuration:duration animations:^{
+        self.quiltView.contentInset = UIEdgeInsetsZero;
+        self.quiltView.scrollIndicatorInsets = UIEdgeInsetsZero;
+    }];
+}
 @end

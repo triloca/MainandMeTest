@@ -31,4 +31,7 @@
 #import "AlertManager.h"
 #import "MMServiceProvider.h"
 
+#import "ServiceProvider.h"
+#import "ReachabilityManager.h"
+
 #endif

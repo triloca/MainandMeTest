@@ -8,8 +8,10 @@
 
 #import "TwitterManager.h"
 
+#define kTwitterOAuthConsumerKey		@"CGLJ4SdxPBnJG4ygNsAs1Q"
+#define kTwitterOAuthConsumerSecret	    @"CBSHV5bsvSO2tr17tCr1xreEwTbV8WoO6nwBfyGSsUM"
 
-@interface TwitterManager()
+@interface TwitterManager() <FHSTwitterEngineAccessTokenDelegate>
 
 @end
 
@@ -37,21 +39,70 @@
     self = [super init];
     if (self) {
    		// your initialization here
+        [self setupKeys];
     }
     return self;
 }
 
 #pragma mark _______________________ Privat Methods ________________________
 
-
+- (void)setupKeys{
+   
+    [[FHSTwitterEngine sharedEngine]permanentlySetConsumerKey:kTwitterOAuthConsumerKey
+                                                    andSecret:kTwitterOAuthConsumerSecret];
+    [[FHSTwitterEngine sharedEngine] setDelegate:self];
+    [[FHSTwitterEngine sharedEngine] loadAccessToken];
+    
+}
 
 #pragma mark _______________________ Delegates _____________________________
 
+- (NSString *)loadAccessToken{
+    return nil;
+}
+- (void)storeAccessToken:(NSString *)accessToken{
 
+}
+
+
+- (void)twitterEngineControllerDidCancel{
+
+}
 
 #pragma mark _______________________ Public Methods ________________________
 
 
+- (void)loginVCPresentation:(void (^)(UIViewController* twitterLoginVC))presentation
+                    success:(void (^)(UIViewController* twitterLoginVC, FHSToken* token))success
+                    failure:(void (^)(UIViewController* twitterLoginVC, NSError* error))failure
+                    cancel:(void (^)(UIViewController* twitterLoginVC))cancel
+            alreadyLoggedIn:(void (^)(UIViewController* twitterLoginVC, FHSToken* token))alreadyLoggedIn{
+    
+    UIViewController *loginController = [[FHSTwitterEngine sharedEngine]loginControllerWithCompletionHandler:^(BOOL isSuccess) {
+        
+        NSLog(isSuccess ? @"Twitter login success" : @"Twitter login failed");
+        
+        if (isSuccess) {
+            success(loginController, [FHSTwitterEngine sharedEngine].accessToken);
+        }else{
+            failure(loginController, nil);
+        }
+        
+    }];
+
+    
+    if (loginController) {
+        presentation(loginController);
+    }else{
+        alreadyLoggedIn(loginController, [FHSTwitterEngine sharedEngine].accessToken);
+    }
+    
+}
+
+
+- (void)logout{
+    [[FHSTwitterEngine sharedEngine] logout];
+}
 
 #pragma mark _______________________ Notifications _________________________
 

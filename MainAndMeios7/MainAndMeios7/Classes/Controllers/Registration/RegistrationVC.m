@@ -180,7 +180,7 @@
         
         
         [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
-            [self loginWithEmail:request.email pass:request.password];
+            [self btnAlreadyRegistered:nil];
         }
                                                title:@"Success"
                                              message:@"You successfully signed up to use Main And Me"
@@ -277,6 +277,11 @@
 
 -(IBAction)btnSignUpClick:(id)sender
 {
+    
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
    
     _txtFullName.text=[_txtFullName.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     _txtEmailAddress.text=[_txtEmailAddress.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];

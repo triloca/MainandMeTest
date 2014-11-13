@@ -9,6 +9,10 @@
 #import "LoginVC.h"
 #import "LoginRequest.h"
 #import "ForgetPasswordVC.h"
+#import "FacebookManager.h"
+#import "LoginViaSocialRequest.h"
+#import "TwitterManager.h"
+#import "NSString+Email.h"
 
 @interface LoginVC()
 
@@ -195,10 +199,195 @@
     return YES;
 }
 
+- (void)loginWithFB{
+    
+    [[FacebookManager shared] loginWithReadPermissions:@[@"publish_stream",@"email"]
+                                          allowLoginUI:YES
+                                               success:^(FBSession *session, FBSessionState status) {
+                                                   
+                                                   NSLog(@"accessToken = %@", session.accessTokenData.accessToken);
+                                                   
+                                                   [self loadMeFB];
+                                               }
+                                               failure:^(FBSession *session, FBSessionState status, NSError *error) {
+                                                   [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                       message:error.localizedDescription];
+                                               }
+                                         olreadyLogged:^(FBSession *session, FBSessionState status) {
+                                             NSLog(@"accessToken = %@", session.accessTokenData.accessToken);
+                                             [self loadMeFB];
+                                         }];
+}
+
+
+- (void)loadMeFB{
+    
+    [self showSpinnerWithName:@""];
+    [[FacebookManager shared] loadMeWithSuccess:^(id<FBGraphUser> user) {
+        [self hideSpinnerWithName:@""];
+        [self authWithFBUser:user];
+    }
+                                        failure:^(FBRequestConnection *connection, id result, NSError *error) {
+                                            [self hideSpinnerWithName:@""];
+                                            [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                message:error.localizedDescription];
+                                        }];
+}
+
+- (void)authWithFBUser:(id<FBGraphUser>)user{
+    
+    NSString* userName = user.name;
+    NSString* user_id = user.objectID;
+    NSString* email = [user objectForKey:@"email"];
+    
+    LoginViaSocialRequest* authRequest = [[LoginViaSocialRequest alloc] init];
+    
+    authRequest.userId = user_id;
+    authRequest.username = userName;
+    authRequest.email = email;
+    authRequest.credentialToken = [FBSession activeSession].accessTokenData.accessToken;
+    authRequest.type = @"facebook";
+   
+    [self showSpinnerWithName:@""];
+    [[MMServiceProvider sharedProvider] sendRequest:authRequest
+                                            success:^(LoginViaSocialRequest *request) {
+                                                [self hideSpinnerWithName:@""];
+                                                NSLog(@"Registration complete! %@", request.response);
+                                               
+                                                [[CommonManager shared] setupUserId:[[request.user safeNumberObjectForKey:@"id"] stringValue]];
+                                                [[CommonManager shared] setupApiToken:request.apiToken];
+                                                
+                                                NSLog(@"logged in");
+                                                
+                                                if (_successBlock) {
+                                                    _successBlock(self, request.apiToken);
+                                                }
+                                                
+                                            } failure:^(LoginViaSocialRequest *request, NSError *error) {
+                                                [self hideSpinnerWithName:@""];
+                                                NSLog(@"Registration failed: %@", error);
+                                                NSLog(@"Response: %@", request.response);
+                                                
+                                                [self hideSpinnerWithName:@""];
+                                                [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                    message:error.localizedDescription];
+
+                                            }];
+    
+}
+
+
+- (void)loginWithTwitter{
+    
+    
+    [[TwitterManager shared] loginVCPresentation:^(UIViewController *twitterLoginVC) {
+        [self presentViewController:twitterLoginVC animated:YES completion:^{}];
+    }
+                                         success:^(UIViewController *twitterLoginVC, FHSToken *token) {
+                                             [self showEmailAlert];
+                                         }
+                                         failure:^(UIViewController *twitterLoginVC, NSError *error) {
+                                             
+                                             [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                 message:@"Login failed"];
+                                         }
+                                          cancel:^(UIViewController *twitterLoginVC) {
+                                              
+                                          }
+                                 alreadyLoggedIn:^(UIViewController *twitterLoginVC, FHSToken *token) {
+                                                                                  [self showEmailAlert];
+                                 }];
+    
+
+}
+
+- (void)authTwitterWithEmail:(NSString*)email{
+    
+      
+    NSString* userName = [FHSTwitterEngine sharedEngine].authenticatedUsername;
+    NSString* user_id = [FHSTwitterEngine sharedEngine].authenticatedID;
+    NSString* tocken = [FHSTwitterEngine sharedEngine].accessToken.key;
+    
+    LoginViaSocialRequest* authRequest = [[LoginViaSocialRequest alloc] init];
+    
+    authRequest.userId = user_id;
+    authRequest.username = userName;
+    authRequest.email = email;
+    authRequest.credentialToken = tocken;
+    authRequest.type = @"twitter";
+    
+    [self showSpinnerWithName:@""];
+    [[MMServiceProvider sharedProvider] sendRequest:authRequest
+                                            success:^(LoginViaSocialRequest *request) {
+                                                [self hideSpinnerWithName:@""];
+                                                NSLog(@"Registration complete! %@", request.response);
+                                                
+                                                [[CommonManager shared] setupUserId:[[request.user safeNumberObjectForKey:@"id"] stringValue]];
+                                                [[CommonManager shared] setupApiToken:request.apiToken];
+                                                
+                                                NSLog(@"logged in");
+                                                
+                                                if (_successBlock) {
+                                                    _successBlock(self, request.apiToken);
+                                                }
+                                                
+                                            } failure:^(LoginViaSocialRequest *request, NSError *error) {
+                                                [self hideSpinnerWithName:@""];
+                                                NSLog(@"Registration failed: %@", error);
+                                                NSLog(@"Response: %@", request.response);
+                                                
+                                                [self hideSpinnerWithName:@""];
+                                                [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                    message:error.localizedDescription];
+                                                
+                                            }];
+    
+}
+
+- (void)showEmailAlert {
+    
+   [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, UITextField *firstTextField, UITextField *secondTextField, NSInteger buttonIndex) {
+        if (alertView.cancelButtonIndex == buttonIndex) {
+            
+        }else{
+            if ([firstTextField.text isValidateEmail]) {
+                [self authTwitterWithEmail:firstTextField.text];
+            }else{
+                [self showEmailInvalidAlert];
+            }
+        }
+    }
+                                           title:@"Enter your account email"
+                                         message:@"Email:"
+                                firstPlaceholder:@"Enter email"
+                               secondPlaceholder:nil
+                                  alertViewStyle:UIAlertViewStylePlainTextInput
+                               cancelButtonTitle:@"Cancel"
+                               otherButtonTitles:@"Ok", nil];
+    
+}
+
+- (void)showEmailInvalidAlert{
+    
+    [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+        [self showEmailAlert];
+    }
+                                           title:@"Error"
+                                         message:@"Invalid email, try again"
+                               cancelButtonTitle:@"Ok"
+                               otherButtonTitles:nil];
+}
 
 #pragma mark _______________________ Buttons Action ________________________
 
 - (IBAction)loginButtonClicked:(id)sender {
+    
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
+    
+    
     if ([self isTextFieldsValid]) {
         [self hideKeyBoard];
         [self loginWithEmail:_emailTextField.text pass:_passwordTextField.text];
@@ -213,15 +402,34 @@
     [self.navigationController pushViewController:forgotVC animated:YES];
 }
 - (IBAction)facebookButtonClicked:(id)sender {
-    if (_successBlock) {
-        _successBlock(self, nil);
+    
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
     }
+    
+    [self loginWithFB];
+//    if (_successBlock) {
+//        _successBlock(self, nil);
+//    }
 }
 
 - (IBAction)twitterButtonClicked:(id)sender {
-    if (_successBlock) {
-        _successBlock(self, nil);
+    
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
     }
+    
+    [self loginWithTwitter];
+}
+
+- (IBAction)forgotPassButtonClicked:(id)sender {
+    [self forgotPasswordButtonClicked:nil];
+}
+
+- (IBAction)signUpButtonClicked:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark _______________________ Delegates _____________________________

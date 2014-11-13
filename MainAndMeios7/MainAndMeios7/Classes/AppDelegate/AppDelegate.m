@@ -10,6 +10,8 @@
 #import "LocationManager.h"
 #import <AddressBook/AddressBook.h>
 
+#import "FacebookManager.h"
+
 #import "RegistrationRequest.h"
 #import "LoginRequest.h"
 #import "MMServiceProvider.h"
@@ -52,7 +54,9 @@
     // Override point for customization after application launch.
     
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
-    
+   
+    [ReachabilityManager shared];
+
     [LayoutManager application:application didFinishLaunchingWithOptions:launchOptions];
 //    [[LocationManager sharedManager] setUpdatePeriod:10];//10 seconds
 //    [[LocationManager sharedManager] setDistanceFilter:10];//10 meters
@@ -403,6 +407,15 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application: (UIApplication *)application  openURL: (NSURL *)url  sourceApplication: (NSString *)sourceApplication
+         annotation: (id)annotation
+{
+    
+    BOOL isFBManagerHandle = [[FacebookManager shared] handleOpenURL:url sourceApplication:sourceApplication];
+    
+    return isFBManagerHandle;
 }
 
 @end

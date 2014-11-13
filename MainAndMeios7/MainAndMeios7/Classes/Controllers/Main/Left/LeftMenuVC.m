@@ -135,6 +135,13 @@
             break;
         }
             
+        case 11:{
+            
+            [[CommonManager shared] logout];
+            [LayoutManager createSlidingVC];
+            break;
+        }
+            
         default:
             break;
     }

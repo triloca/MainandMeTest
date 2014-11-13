@@ -68,6 +68,16 @@
     //! Set root navigation controller
     [self shared].rootNVC = (RootNavigationController*)[self shared].window.rootViewController;
     
+    [self createSlidingVC];
+    
+    //! Background for logout screen changing
+    [self shared].window.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"signin_background.png"]];
+    
+}
+
+//! Call after logout to create new controllers
++ (void)createSlidingVC{
+    
     [self shared].slidingVC = [[SlidingVC alloc] initWithNibName:@"SlidingVC" bundle:nil];
     
     
@@ -77,7 +87,7 @@
     
     [self shared].slidingVC.topViewController = [self shared].homeNVC;
     
-     //! Left VC
+    //! Left VC
     [self shared].LeftMenuVC = [LeftMenuVC loadFromXIB_Or_iPhone5_XIB];
     [self shared].slidingVC.underLeftViewController = [self shared].LeftMenuVC;
     
@@ -87,7 +97,6 @@
     [self shared].rootNVC.viewControllers = @[[self shared].slidingVC];
 
 }
-
 
 - (ShopCategoryNVC*)shopCategoryNVC{
     if (_shopCategoryNVC == nil) {

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -21,6 +20,7 @@
                 <outlet property="imageView" destination="GyI-sn-Pk2" id="Kl4-9g-vs8"/>
                 <outlet property="phoneButton" destination="sso-eZ-jIW" id="UuD-yf-l7H"/>
                 <outlet property="priceLabel" destination="r2W-Z3-Hvf" id="Qa2-5q-P35"/>
+                <outlet property="spinnerView" destination="TOz-le-VeT" id="V4r-hA-xMP"/>
                 <outlet property="titleLabel" destination="CGu-3N-eXg" id="byY-ND-9Vs"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -66,13 +66,13 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L67-Jq-t0J">
-                    <rect key="frame" x="8" y="499.5" width="147" height="12.5"/>
+                    <rect key="frame" x="8" y="499" width="147" height="12.5"/>
                     <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="10"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CGu-3N-eXg">
-                    <rect key="frame" x="8" y="469.5" width="147" height="22"/>
+                    <rect key="frame" x="8" y="469" width="147" height="22"/>
                     <fontDescription key="fontDescription" name="DINbekBold" family="DINbek Bold" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -91,13 +91,18 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xyc-bv-eMg">
-                    <rect key="frame" x="0.0" y="421.5" width="320" height="146.5"/>
+                    <rect key="frame" x="0.0" y="421" width="320" height="146.5"/>
                 </view>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="TOz-le-VeT">
+                    <rect key="frame" x="142" y="265" width="37" height="37"/>
+                    <color key="color" red="0.2156862745" green="0.73725490199999999" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="lu7-Ek-AyX" secondAttribute="trailing" id="10U-pb-fTa"/>
                 <constraint firstItem="L67-Jq-t0J" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="1Xp-lJ-VwW"/>
+                <constraint firstItem="GyI-sn-Pk2" firstAttribute="centerY" secondItem="TOz-le-VeT" secondAttribute="centerY" constant="0.5" id="32q-uC-ch7"/>
                 <constraint firstAttribute="bottom" secondItem="sso-eZ-jIW" secondAttribute="bottom" id="3DX-Vs-pQu"/>
                 <constraint firstItem="L67-Jq-t0J" firstAttribute="top" secondItem="CGu-3N-eXg" secondAttribute="bottom" constant="8" id="5DO-qa-wJl"/>
                 <constraint firstItem="L67-Jq-t0J" firstAttribute="width" secondItem="CGu-3N-eXg" secondAttribute="width" id="5Th-25-kGK"/>
@@ -109,6 +114,7 @@
                 <constraint firstItem="r2W-Z3-Hvf" firstAttribute="top" secondItem="L67-Jq-t0J" secondAttribute="bottom" constant="8" id="ARp-cf-MCT"/>
                 <constraint firstAttribute="bottom" secondItem="Pnw-pe-2wc" secondAttribute="bottom" id="KkB-k4-i0g"/>
                 <constraint firstItem="Xyc-bv-eMg" firstAttribute="top" secondItem="CGu-3N-eXg" secondAttribute="bottom" constant="-70" id="Mfy-Rh-o75"/>
+                <constraint firstItem="GyI-sn-Pk2" firstAttribute="centerX" secondItem="TOz-le-VeT" secondAttribute="centerX" constant="-0.5" id="MlK-r7-fyH"/>
                 <constraint firstItem="sso-eZ-jIW" firstAttribute="leading" secondItem="r2W-Z3-Hvf" secondAttribute="trailing" constant="8" id="Nz2-Ea-4j3"/>
                 <constraint firstItem="lu7-Ek-AyX" firstAttribute="leading" secondItem="Pnw-pe-2wc" secondAttribute="trailing" id="QR6-TJ-wQw"/>
                 <constraint firstItem="sso-eZ-jIW" firstAttribute="leading" secondItem="L67-Jq-t0J" secondAttribute="trailing" constant="8" id="RcX-O6-EwK"/>

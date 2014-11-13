@@ -66,5 +66,7 @@
 + (LayoutManager*)shared;
 + (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 
++ (void)createSlidingVC;
+
 
 @end
