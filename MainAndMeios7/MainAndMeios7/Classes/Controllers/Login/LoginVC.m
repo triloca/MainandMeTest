@@ -199,8 +199,6 @@
 #pragma mark _______________________ Buttons Action ________________________
 
 - (IBAction)loginButtonClicked:(id)sender {
-    [self forgotPasswordButtonClicked:nil];
-    return;
     if ([self isTextFieldsValid]) {
         [self hideKeyBoard];
         [self loginWithEmail:_emailTextField.text pass:_passwordTextField.text];

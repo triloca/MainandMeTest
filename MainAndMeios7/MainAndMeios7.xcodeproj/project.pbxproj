@@ -58,7 +58,6 @@
 		A4EFB8E81A12853C00F80F85 /* item_det_call_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EFB8E51A12853C00F80F85 /* item_det_call_btn@2x.png */; };
 		A4EFB8E91A12853C00F80F85 /* item_det_share_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EFB8E61A12853C00F80F85 /* item_det_share_btn@2x.png */; };
 		A4EFB8EA1A12853C00F80F85 /* item_det_wishlist_btn@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A4EFB8E71A12853C00F80F85 /* item_det_wishlist_btn@2x.png */; };
-		AE3D969E1A13A16B00BA4743 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE3D969D1A13A16B00BA4743 /* FacebookSDK.framework */; };
 		AE7849F71A0D9AAE005D86B3 /* RegistrationVC_568h.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7849F51A0D9AAE005D86B3 /* RegistrationVC_568h.xib */; };
 		AE7849F81A0D9AAE005D86B3 /* RegistrationVC_736h.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7849F61A0D9AAE005D86B3 /* RegistrationVC_736h.xib */; };
 		AE7849FA1A0DBE8A005D86B3 /* RegistrationVC_667h.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE7849F91A0DBE8A005D86B3 /* RegistrationVC_667h.xib */; };
@@ -302,7 +301,6 @@
 		A4EFB8E61A12853C00F80F85 /* item_det_share_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_det_share_btn@2x.png"; sourceTree = "<group>"; };
 		A4EFB8E71A12853C00F80F85 /* item_det_wishlist_btn@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "item_det_wishlist_btn@2x.png"; sourceTree = "<group>"; };
 		AE34D82F19F01CD60045AB20 /* MainAndMeios7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MainAndMeios7.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AE3D969D1A13A16B00BA4743 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../../../../../../FacebookSDK/FacebookSDK.framework; sourceTree = "<group>"; };
 		AE7849F51A0D9AAE005D86B3 /* RegistrationVC_568h.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationVC_568h.xib; sourceTree = "<group>"; };
 		AE7849F61A0D9AAE005D86B3 /* RegistrationVC_736h.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationVC_736h.xib; sourceTree = "<group>"; };
 		AE7849F91A0DBE8A005D86B3 /* RegistrationVC_667h.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationVC_667h.xib; sourceTree = "<group>"; };
@@ -603,7 +601,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE3D969E1A13A16B00BA4743 /* FacebookSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1650,7 +1647,6 @@
 		AEF03AC11A128B3A00C5422B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				AE3D969D1A13A16B00BA4743 /* FacebookSDK.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -2061,7 +2057,6 @@
 					"$(inherited)",
 					"/Users/alexanderbukov/Documents/PROGECTS/ODESK/MainandMe/iOS7/mamios/MainandMe/3rd/facebook-ios-sdk-3.20",
 					/Users/applenberry/Documents/FacebookSDK,
-					/Users/alexanderbukov/Documents/FacebookSDK,
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MainAndMeios7/Supporting Files/MainAndMe-Prefix.pch";
 				INFOPLIST_FILE = "MainAndMeios7/Supporting Files/Info.plist";
@@ -2082,7 +2077,6 @@
 					"$(inherited)",
 					"/Users/alexanderbukov/Documents/PROGECTS/ODESK/MainandMe/iOS7/mamios/MainandMe/3rd/facebook-ios-sdk-3.20",
 					/Users/applenberry/Documents/FacebookSDK,
-					/Users/alexanderbukov/Documents/FacebookSDK,
 				);
 				GCC_PREFIX_HEADER = "$(SRCROOT)/MainAndMeios7/Supporting Files/MainAndMe-Prefix.pch";
 				INFOPLIST_FILE = "MainAndMeios7/Supporting Files/Info.plist";
