@@ -59,8 +59,6 @@
     
     self.navigationItem.leftBarButtonItem = anchorLeftButton;
     
-    self.searchTypeView = [SearchTypeView loadViewFromXIB];
-    [self.view addSubview:_searchTypeView];
     
     [self configSearchBar];
     [self loadData];
@@ -76,14 +74,16 @@
 #pragma mark _______________________ Private Methods ________________________
 
 - (void)loadData{
-    _tableArray = @[@"Roslindale, MA",
-                    @"Berkely, CA",
-                    @"Boulder, CO",
-                    @"Madison, NJ",
-                    @"Beaujolais Wine",
-                    @"Cory's Clothing",
-                    @"Dennis Haircutters",
-                    @"Elizabeth's Backery"];
+    _tableArray = @[
+                    @{@"name":@"Roslindale, MA", @"isViewed": [NSNumber numberWithBool:YES]},
+                    @{@"name":@"Berkely, CA", @"isViewed": [NSNumber numberWithBool:YES]},
+                    @{@"name":@"Boulder, CO", @"isViewed": [NSNumber numberWithBool:YES]},
+                    @{@"name":@"Madison, NJ", @"isViewed": [NSNumber numberWithBool:YES]},
+                    @{@"name":@"Beaujolais Wine", @"isViewed": [NSNumber numberWithBool:NO]},
+                    @{@"name":@"Cory's Clothing", @"isViewed": [NSNumber numberWithBool:NO]},
+                    @{@"name":@"Dennis Haircutters", @"isViewed": [NSNumber numberWithBool:NO]},
+                    @{@"name":@"Elizabeth's Backery", @"isViewed": [NSNumber numberWithBool:NO]}
+                    ];
 }
 
 - (void)updateViews{
@@ -98,7 +98,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _tableArray.count;
+    return [_tableArray count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -110,37 +110,23 @@
         cell = [PlacesFollowCell loadViewFromXIB];
     }
     
-    // Configure the cell...
+    NSDictionary* itemDict = [_tableArray safeDictionaryObjectAtIndex:indexPath.row];
     
-    cell.nameLabel.text = [_tableArray safeStringObjectAtIndex:indexPath.row];
-    cell.arrowImageView.hidden = YES;
+    cell.nameLabel.text = [itemDict safeStringObjectForKey:@"name"];
+    BOOL isViewed = [[itemDict safeNumberObjectForKey:@"isViewed"] boolValue];
     
-    if ([cell.nameLabel.text isEqualToString:@"Roslindale, MA"]) {
+    if (!isViewed) {
+        [cell setBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
+        cell.arrowImageView.hidden = YES;
+        cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
+    }else{
         [cell setBackgroundColor:[UIColor colorWithRed:255/255.f green:252/255.f blue:171/255.f alpha:1.0]];
         cell.arrowImageView.hidden = NO;
         cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
     }
     
-    if ([cell.nameLabel.text isEqualToString:@"Berkely, CA"]) {
-        cell.arrowImageView.hidden = NO;
-        cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
-        [cell setBackgroundColor:[UIColor colorWithRed:255/255.f green:252/255.f blue:171/255.f alpha:1.0]];
-    }
     
-    if ([cell.nameLabel.text isEqualToString:@"Boulder, CO"]) {
-        cell.arrowImageView.hidden = NO;
-        cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
-        [cell setBackgroundColor:[UIColor colorWithRed:255/255.f green:252/255.f blue:171/255.f alpha:1.0]];
-    }
-    
-    if ([cell.nameLabel.text isEqualToString:@"Madison, NJ"]) {
-        cell.arrowImageView.hidden = NO;
-        cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
-        [cell setBackgroundColor:[UIColor colorWithRed:255/255.f green:252/255.f blue:171/255.f alpha:1.0]];
-    }
-
-        
-    return cell;
+     return cell;
 }
 
 #pragma mark - Table view delegate
