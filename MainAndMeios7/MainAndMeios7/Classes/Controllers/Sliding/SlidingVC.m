@@ -86,7 +86,9 @@
 - (void)checkIsLoggedIn{
     
     if ([CommonManager shared].isLoggedIn) {
-        
+        [[LayoutManager shared] profileNVC];
+        [LayoutManager shared].profileVC.userID = [CommonManager shared].userId;
+        [[LayoutManager shared].profileVC view];
     }else{
         NSLog(@"Need registration");
         [self showRegistratioVC];
@@ -108,6 +110,11 @@
         
         
     } success:^(UIViewController *registrationVC, NSString *token) {
+        
+        [[LayoutManager shared] profileNVC];
+        [LayoutManager shared].profileVC.userID = [CommonManager shared].userId;
+        [[LayoutManager shared].profileVC view];
+        
         [registrationVC.navigationController dismissViewControllerAnimated:YES completion:^{}];
         
     } failure:^(UIViewController *registrationVC, NSError *error) {

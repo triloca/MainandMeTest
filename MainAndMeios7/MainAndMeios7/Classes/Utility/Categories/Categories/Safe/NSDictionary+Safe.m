@@ -15,7 +15,11 @@
     if (key == nil) {
         return nil;
     }
-    return [self objectForKey:key];
+    id obj = [self objectForKey:key];
+    if ([obj isKindOfClass:[NSNull class]]) {
+        return nil;
+    }
+    return obj;
 }
 
 - (id)safeStringObjectForKey:(id)key{

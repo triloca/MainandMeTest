@@ -305,7 +305,7 @@
 
     
     if (paginURL == nil) {
-        paginURL = [NSString stringWithFormat:@"%@/friends?fields=name,picture,birthday,location", userID];
+        paginURL = [NSString stringWithFormat:@"%@/taggable_friends?fields=name,picture,birthday,location", userID];
     }
     
     [FBRequestConnection startWithGraphPath:paginURL
@@ -349,7 +349,7 @@
     [FBRequestConnection startWithGraphPath:path
                           completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                               if (!error) {
-                                  // Sucess! Include your code to handle the results here
+                                  // Success! Include your code to handle the results here
                                   NSLog(@"user events: %@", result);
                                   success(); //! TODO add result
                               } else {
@@ -410,7 +410,7 @@
     [FBRequestConnection startWithGraphPath:@"me/events?fields=cover,name,start_time"
                           completionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
                               if (!error) {
-                                  // Sucess! Include your code to handle the results here
+                                  // Success! Include your code to handle the results here
                                   NSLog(@"user events: %@", result);
                               } else {
                                   // An error occurred, we need to handle the error

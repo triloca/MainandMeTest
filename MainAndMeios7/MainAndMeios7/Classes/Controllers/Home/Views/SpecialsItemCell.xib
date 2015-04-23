@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SpecialsItemCell" id="gTV-IL-0wX" customClass="SpecialsItemCell">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="416"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="240" height="416"/>
+                <subviews>
+                    <webView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="zns-tq-g30">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="416"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="delegate" destination="gTV-IL-0wX" id="7Lf-Aa-FlP"/>
+                        </connections>
+                    </webView>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="mcJ-ea-sRj">
+                        <rect key="frame" x="110" y="198" width="20" height="20"/>
+                    </activityIndicatorView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n1g-fL-v4I">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="416"/>
+                        <gestureRecognizers/>
+                        <state key="normal">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="didClickCoverButton:" destination="gTV-IL-0wX" eventType="touchUpInside" id="CvI-mg-tC6"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="zns-tq-g30" secondAttribute="trailing" id="1Ik-B4-2ej"/>
+                <constraint firstAttribute="trailing" secondItem="n1g-fL-v4I" secondAttribute="trailing" id="Gay-3P-1LR"/>
+                <constraint firstItem="zns-tq-g30" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ML4-i7-M74"/>
+                <constraint firstAttribute="centerX" secondItem="n1g-fL-v4I" secondAttribute="centerX" id="Pgc-AE-Eke"/>
+                <constraint firstAttribute="bottom" secondItem="n1g-fL-v4I" secondAttribute="bottom" id="QY7-Xr-T7T"/>
+                <constraint firstItem="n1g-fL-v4I" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Raf-kc-4a0"/>
+                <constraint firstAttribute="centerX" secondItem="mcJ-ea-sRj" secondAttribute="centerX" id="TOY-Ne-YQT"/>
+                <constraint firstAttribute="bottom" secondItem="zns-tq-g30" secondAttribute="bottom" id="aIW-9I-AQA"/>
+                <constraint firstItem="n1g-fL-v4I" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="afj-dV-wYu"/>
+                <constraint firstItem="zns-tq-g30" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="cj5-Pp-T8P"/>
+                <constraint firstAttribute="centerY" secondItem="mcJ-ea-sRj" secondAttribute="centerY" id="gv9-cH-QNk"/>
+            </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="Pgc-AE-Eke"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="activityIndicator" destination="mcJ-ea-sRj" id="GDZ-JV-Ue2"/>
+                <outlet property="coverButton" destination="n1g-fL-v4I" id="eY4-kP-UPs"/>
+                <outlet property="webView" destination="zns-tq-g30" id="p1m-qX-rTl"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+</document>

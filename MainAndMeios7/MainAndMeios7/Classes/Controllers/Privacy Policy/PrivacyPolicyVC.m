@@ -11,6 +11,7 @@
 
 @interface PrivacyPolicyVC ()
 @property (strong, nonatomic) IBOutlet UITextView *textView;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
 
@@ -31,6 +32,8 @@
     }];
     
     self.navigationItem.leftBarButtonItem = anchorLeftButton;
+    
+    [_webView loadRequest:[NSURLRequest requestWithURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"privacy" ofType:@"html"]isDirectory:NO]]];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -59,4 +62,14 @@
  // Pass the selected object to the new view controller.
  }
  */
+
+- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType{
+    if ( navigationType == UIWebViewNavigationTypeLinkClicked ) {
+        [[UIApplication sharedApplication] openURL:[request URL]];
+        return NO;
+    }
+    
+    return YES;
+}
+
 @end

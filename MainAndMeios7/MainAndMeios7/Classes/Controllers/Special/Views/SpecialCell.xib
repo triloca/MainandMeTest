@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SpecialCell" id="gTV-IL-0wX" customClass="SpecialCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="424"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="424"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3Uf-KT-e1a">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="424"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </imageView>
+                    <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5RS-cf-IOo">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="424"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="delegate" destination="gTV-IL-0wX" id="ynI-nl-9Sp"/>
+                        </connections>
+                    </webView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="3Uf-KT-e1a" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="86U-dD-3OC"/>
+                <constraint firstItem="5RS-cf-IOo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="BsQ-4c-GV4"/>
+                <constraint firstAttribute="trailing" secondItem="3Uf-KT-e1a" secondAttribute="trailing" id="CVD-97-Zhf"/>
+                <constraint firstAttribute="bottom" secondItem="3Uf-KT-e1a" secondAttribute="bottom" id="GwP-kZ-YLR"/>
+                <constraint firstItem="5RS-cf-IOo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="N3T-LS-iEA"/>
+                <constraint firstItem="3Uf-KT-e1a" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="WnK-Cb-37Z"/>
+                <constraint firstAttribute="trailing" secondItem="5RS-cf-IOo" secondAttribute="trailing" id="Xr1-i6-UDT"/>
+                <constraint firstAttribute="bottom" secondItem="5RS-cf-IOo" secondAttribute="bottom" id="aNK-Ox-1Ky"/>
+            </constraints>
+            <size key="customSize" width="320" height="424"/>
+            <connections>
+                <outlet property="imageView" destination="3Uf-KT-e1a" id="yu0-ka-yDz"/>
+                <outlet property="webView" destination="5RS-cf-IOo" id="KRY-3s-Kfa"/>
+            </connections>
+            <point key="canvasLocation" x="250" y="255"/>
+        </collectionViewCell>
+    </objects>
+</document>

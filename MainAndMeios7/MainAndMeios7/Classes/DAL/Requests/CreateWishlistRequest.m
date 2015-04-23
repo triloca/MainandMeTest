@@ -22,7 +22,8 @@
 - (NSMutableDictionary *) userRequestDictionary {
     NSMutableDictionary *dict = [super userRequestDictionary];
     
-    [dict safeSetObject:_name forKey:@"product_list[name]"];
+    NSString* product_list = [@"product_list[name]" stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    [dict safeSetObject:_name forKey:product_list];
     
     return dict;
 }

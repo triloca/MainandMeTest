@@ -8,11 +8,13 @@
 
 #import "LeftMenuVC.h"
 #import "LeftMenuCell.h"
+#import "GetNotificationsRequest.h"
 
 @interface LeftMenuVC ()
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray* tableArray;
+@property (assign, nonatomic) NSInteger notificationCount;
 
 @end
 
@@ -21,6 +23,10 @@
 
 #pragma mark _______________________ Class Methods _________________________
 #pragma mark ____________________________ Init _____________________________
+
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -32,23 +38,33 @@
     [super viewDidLoad];
     _tableView.tableFooterView = [UIView new];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveCampaignNotification:) name:kNewCampaignNotification object:nil];
+
     [self loadData];
     [self updateViews];
     
 }
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+   
+    [self loadNotificationCount];
+}
+
 #pragma mark _______________________ Privat Methods(view)___________________
 #pragma mark _______________________ Privat Methods ________________________
 
 - (void)loadData{
     _tableArray = @[@"Specials & Events",
+                    @"Home",
                     @"Search",
                     @"Find stores by name",
                     @"My wishlists",
                     @"People I follow",
-                    @"Places I follow",
+                    //@"Places I follow",
                     @"Notifications",
                     @"Edit my profile",
-                    @"Invite friends",
+                    //@"Invite friends",
                     @"About Main and Me",
                     @"Privacy Policy",
                     @"Log out"];
@@ -85,10 +101,19 @@
     
     cell.nameLabel.text = [_tableArray safeStringObjectAtIndex:indexPath.row];
     
+    if ([cell.nameLabel.text isEqualToString:@"Specials & Events"]) {
+        cell.contentView.backgroundColor = [UIColor colorWithRed:1.000f green:0.984f blue:0.686f alpha:1.00f];
+    }else{
+        cell.contentView.backgroundColor = [UIColor whiteColor];
+    }
+    
     if ([cell.nameLabel.text isEqualToString:@"Notifications"]) {
         cell.badgeView.hidden = NO;
         
-        [cell setupBageString:@"12"];
+       NSInteger count = [ProximityKitManager shared].compaignArray.count;
+        count += _notificationCount;
+        
+        [cell setupBageString:[NSString stringWithFormat:@"%d", count]];
         
     }else{
         cell.badgeView.hidden = YES;
@@ -106,42 +131,77 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+ 
     switch (indexPath.row) {
         case 0:{
-            
-            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+ 
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].specialNVC;
             [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
             
             break;
         }
         case 1:{
             
-            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].shopCategoryNVC;
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+            [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+            
+            break;
+        }
+        case 2:{
+            
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].searchNVC;
+            [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+            
+            break;
+        }
+        case 3:{
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].storesByNameNVC;
+            [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+            
+            break;
+        }
+        case 4:{
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].myWishlistNVC;
             [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
             
             break;
         }
         case 5:{
-            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].placesFollowNVC;
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].peopleFollowNVC;
             [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
             
             break;
         }
-        case 10:{
+        case 6:{
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].notificationsNVC;
+            [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+            
+            break;
+        }
+        case 7:{
+            //ProfileVC* vc =
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].profileNVC;
+            [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+            
+            break;
+        }
+        case 8:{
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].aboutNVC;
+            [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+            
+            break;
+        }
+        case 9:{
             [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].privacyPolicyNVC;
             [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
             
             break;
         }
-            
-        case 11:{
-            
+        case 10:{
             [[CommonManager shared] logout];
             [LayoutManager createSlidingVC];
             break;
         }
-            
         default:
             break;
     }
@@ -151,6 +211,25 @@
 
 
 #pragma mark _______________________ Public Methods ________________________
+
+- (void)loadNotificationCount{
+
+    GetNotificationsRequest *request = [[GetNotificationsRequest alloc] init];
+
+    [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _request) {
+        
+       _notificationCount = request.notifications.count;
+        [self.tableView reloadData];
+        
+    } failure:^(id _request, NSError *error) {
+       
+    }];
+}
+
 #pragma mark _______________________ Notifications _________________________
+
+- (void)didReceiveCampaignNotification:(NSNotification*)notification{
+    [self updateViews];
+}
 
 @end

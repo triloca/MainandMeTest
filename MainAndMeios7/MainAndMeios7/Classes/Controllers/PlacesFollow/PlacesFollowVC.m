@@ -59,16 +59,18 @@
     
     self.navigationItem.leftBarButtonItem = anchorLeftButton;
     
-    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_az_button"] landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(sortButtonAction)];
+
     [self configSearchBar];
     [self loadData];
     [self updateViews];
-   
+    [self.tableView registerNib:[UINib nibWithNibName:@"PlacesFollowCell" bundle:nil] forCellReuseIdentifier:@"PlacesFollowCell"];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
- 
+    
 }
 
 #pragma mark _______________________ Private Methods ________________________
@@ -106,36 +108,31 @@
     
     PlacesFollowCell *cell = [tableView dequeueReusableCellWithIdentifier:kPlacesFollowCellIdentifier];
     
-    if (cell == nil){
-        cell = [PlacesFollowCell loadViewFromXIB];
-    }
-    
     NSDictionary* itemDict = [_tableArray safeDictionaryObjectAtIndex:indexPath.row];
     
-    cell.nameLabel.text = [itemDict safeStringObjectForKey:@"name"];
+    cell.titleLabel.text = [itemDict safeStringObjectForKey:@"name"];
     BOOL isViewed = [[itemDict safeNumberObjectForKey:@"isViewed"] boolValue];
     
-    if (!isViewed) {
-        [cell setBackgroundColor:[UIColor colorWithWhite:0.95 alpha:1]];
-        cell.arrowImageView.hidden = YES;
-        cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
-    }else{
-        [cell setBackgroundColor:[UIColor colorWithRed:255/255.f green:252/255.f blue:171/255.f alpha:1.0]];
-        cell.arrowImageView.hidden = NO;
-        cell.nameLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
-    }
+    cell.backlighted = isViewed;
+    if (isViewed)
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    else
+        cell.accessoryType = UITableViewCellAccessoryNone;
+
     
     
-     return cell;
+    return cell;
 }
 
 #pragma mark - Table view delegate
 
 
-
-
 - (void)anchorRight {
     [self.slidingViewController anchorTopViewToRightAnimated:YES];
+}
+
+- (void) sortButtonAction {
+    
 }
 
 - (void)configSearchBar {

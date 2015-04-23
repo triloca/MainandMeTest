@@ -19,6 +19,13 @@
 
 @property (strong, nonatomic) NSDictionary* storeDict;
 
+@property (copy, nonatomic) void (^didClickStoreButton)(HomeItemCell* cell, UIButton* sender, NSDictionary* productDict);
+@property (copy, nonatomic) void (^didClickPriceButton)(HomeItemCell* cell, UIButton* sender, NSDictionary* productDict);
+
+
+
+@property (weak, nonatomic, readonly) UIButton *storeButton;
+
 
 + (CGFloat)cellHeghtForStore:(NSDictionary*)storeDict;
 

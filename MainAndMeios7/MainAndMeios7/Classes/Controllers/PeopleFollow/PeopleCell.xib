@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="PeopleCell" rowHeight="44" id="KGk-i7-Jjw" customClass="PeopleCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OVh-ya-xJk">
+                        <rect key="frame" x="7" y="0.0" width="43" height="43"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="OVh-ya-xJk" secondAttribute="height" multiplier="1:1" id="mpT-GD-G5g"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cory's Clothing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p0C-mP-TWf">
+                        <rect key="frame" x="58" y="0.0" width="262" height="43"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="18"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="OVh-ya-xJk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="7" id="0FQ-Fp-AjV"/>
+                    <constraint firstItem="p0C-mP-TWf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6gB-BN-pKF"/>
+                    <constraint firstItem="OVh-ya-xJk" firstAttribute="width" secondItem="OVh-ya-xJk" secondAttribute="height" multiplier="1:1" id="7hl-qz-Baw"/>
+                    <constraint firstAttribute="bottom" secondItem="OVh-ya-xJk" secondAttribute="bottom" id="8Kr-Vh-DoV"/>
+                    <constraint firstAttribute="trailing" secondItem="p0C-mP-TWf" secondAttribute="trailing" id="ETS-aX-304"/>
+                    <constraint firstAttribute="bottom" secondItem="p0C-mP-TWf" secondAttribute="bottom" constant="1" id="QoM-Ig-zZ4"/>
+                    <constraint firstItem="OVh-ya-xJk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="h44-c3-86J"/>
+                    <constraint firstItem="OVh-ya-xJk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="wsY-Fx-Cpq"/>
+                    <constraint firstItem="p0C-mP-TWf" firstAttribute="leading" secondItem="OVh-ya-xJk" secondAttribute="trailing" constant="8" id="y4w-mI-b8i"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="peopleImageView" destination="OVh-ya-xJk" id="4nD-1Z-ej4"/>
+                <outlet property="titleLabel" destination="p0C-mP-TWf" id="h77-Wg-l7x"/>
+            </connections>
+            <point key="canvasLocation" x="187" y="374"/>
+        </tableViewCell>
+    </objects>
+</document>

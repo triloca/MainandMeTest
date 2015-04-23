@@ -13,7 +13,7 @@
 
 //request
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSNumber *userId;
+@property (strong, nonatomic) NSString *userId;
 
 
 @end

@@ -11,9 +11,11 @@
 @interface LoadProductById : ServiceRequest
 
 //request
-@property (strong, nonatomic) NSString *productId;
+@property (strong, nonatomic) NSNumber *productId;
 
 //response
 @property (strong, nonatomic) NSDictionary *product;
+
+- (id) initWithProductId: (NSNumber *) productId;
 
 @end

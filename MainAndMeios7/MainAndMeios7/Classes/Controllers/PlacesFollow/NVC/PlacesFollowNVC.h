@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseNavigationController.h"
 
-@interface PlacesFollowNVC : UINavigationController
+@interface PlacesFollowNVC : BaseNavigationController
 
 @end

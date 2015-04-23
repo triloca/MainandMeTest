@@ -138,8 +138,7 @@
         
         
         [[CommonManager shared] setupApiToken:_loginRequest.apiToken];
-        [[CommonManager shared] setupUserId:[_loginRequest.user safeStringObjectForKey:@"id"]];
-        
+        [[CommonManager shared] setupUserId:[[_loginRequest.user safeNumberObjectForKey:@"id"] stringValue]];
         
         NSString *apiToken = _loginRequest.apiToken;
         NSLog(@"login completed: %@", apiToken);
@@ -153,8 +152,14 @@
         NSLog(@"login failed: %@", error);
         NSLog(@"Response: %@", request.response);
         
-        if (_successBlock) {
-            _successBlock(self, nil);
+        if ([request.response isKindOfClass:[NSDictionary class]]) {
+            NSDictionary* response = (NSDictionary*)request.response;
+            [[AlertManager shared] showOkAlertWithTitle:[response safeStringObjectForKey:@"message"]];
+        }
+        
+        
+        if (_failureBlock) {
+            _failureBlock(self, error);
         }
 
         

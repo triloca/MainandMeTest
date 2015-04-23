@@ -7,11 +7,12 @@
 //
 
 #import "ServiceRequest.h"
+#import "AuthenticatedRequest.h"
 
-@interface LoadWishistRequest : ServiceRequest
+@interface LoadAllWishistsRequest : AuthenticatedRequest
 
 //request
-@property (strong, nonatomic) NSNumber *userId;
+@property (strong, nonatomic) NSString *userId;
 
 //response
 @property (strong, nonatomic) NSArray *wishlist;

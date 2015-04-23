@@ -137,6 +137,8 @@
             [self notify:REGION_CHANGED_NOTIFICATION_NAME withObject:self.currentLocation];
         }
     }
+    
+    [self stop];
 }
 
 

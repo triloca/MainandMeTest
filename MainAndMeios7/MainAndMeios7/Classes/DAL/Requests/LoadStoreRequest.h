@@ -16,4 +16,6 @@
 
 //response
 @property (strong, nonatomic) NSDictionary *storeDetails;
+
+- (id) initWithStoreId: (NSNumber *) storeId;
 @end

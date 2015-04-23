@@ -10,4 +10,6 @@
 
 @interface LeftMenuVC : UIViewController
 
+- (void)loadNotificationCount;
+
 @end

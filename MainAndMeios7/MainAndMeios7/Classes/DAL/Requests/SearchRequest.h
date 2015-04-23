@@ -31,10 +31,14 @@ typedef enum {
 //request
 @property (assign, nonatomic) SearchType searchType;
 @property (assign, nonatomic) SearchFilter searchFilter;
-@property CLLocationCoordinate2D coordinate;
+@property (strong, nonatomic) CLLocation* location;
 @property NSString *city;
 @property NSString *state;
 @property NSUInteger page;
+@property NSUInteger perPage;
+
+@property (strong, nonatomic) NSString* name;
+
 @property (strong, nonatomic) NSString* searchKey;
 
 //response

@@ -36,7 +36,21 @@
         }
         
         if ([responseDictionary objectForKey:@"errors"]) {
-            return [RequestError requestErrorWithCode:httpResponse.statusCode description:responseDictionary[@"errors"]];
+            id error =responseDictionary[@"errors"];
+            NSString *key = nil;
+            if ([error isKindOfClass:[NSDictionary class]]) {
+                key = [[error allKeys] lastObject];
+                error = [error objectForKey:key];
+            }
+            
+            if ([error isKindOfClass:[NSArray class]])
+                error = [error lastObject];
+            
+            if ([key isValidate]) {
+                error = [NSString stringWithFormat:@"%@ %@", key, [error description]];
+            }
+
+            return [RequestError requestErrorWithCode:httpResponse.statusCode description:error];
         }
     }
     return nil;

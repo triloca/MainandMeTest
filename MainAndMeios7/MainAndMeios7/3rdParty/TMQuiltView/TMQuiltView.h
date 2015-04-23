@@ -43,6 +43,7 @@ typedef enum {
 @optional
 
 - (void)quiltView:(TMQuiltView *)quiltView didSelectCellAtIndexPath:(NSIndexPath *)indexPath;
+- (void)quiltView:(TMQuiltView *)quiltView commitEditingForRowAtIndexPath: (NSIndexPath *) indexPath;
 
 // Must return a number of column greater than 0. Otherwise a default value is used.
 - (NSInteger)quiltViewNumberOfColumns:(TMQuiltView *)quiltView;
@@ -57,8 +58,11 @@ typedef enum {
 
 @interface TMQuiltView : UIScrollView
 
-@property (nonatomic, assign) id<TMQuiltViewDataSource> dataSource;
-@property (nonatomic, assign) id<TMQuiltViewDelegate> delegate;
+@property (nonatomic, assign) IBOutlet id<TMQuiltViewDataSource> dataSource;
+@property (nonatomic, assign) IBOutlet id<TMQuiltViewDelegate> delegate;
+@property (nonatomic) BOOL editing;
+
+- (void) setEditing:(BOOL)editing animated: (BOOL) animated;
 
 // Returns the cell if it's visible and indexPath is valid. Returns nil otherwise
 - (TMQuiltViewCell *)cellAtIndexPath:(NSIndexPath*)indexPath;
@@ -79,6 +83,7 @@ typedef enum {
 - (void)insertCellAtIndexPath:(NSIndexPath *)indexPaths;
 - (void)deleteCellAtIndexPath:(NSIndexPath *)indexPaths;
 - (void)moveCellAtIndexPath:(NSIndexPath *)indexPath toIndexPath:(NSIndexPath *)newIndexPath;
+
 
 // Returns the height of a cell
 - (CGFloat)heightForCellAtIndexPath:(NSIndexPath *)indexPath;

@@ -10,12 +10,19 @@
 
 @implementation LoadProductById
 
+- (id) initWithProductId: (NSNumber *) productId {
+    if (self = [super init]) {
+        self.productId = productId;
+    }
+    return self;
+}
+
 - (NSString *) method {
     return @"GET";
 }
 
 - (NSString *) path {
-    return [NSString stringWithFormat:@"products/%@", _productId];
+    return [NSString stringWithFormat:@"products/%@", [_productId stringValue]];
 }
 
 - (void) processResponse:(NSObject *)response {

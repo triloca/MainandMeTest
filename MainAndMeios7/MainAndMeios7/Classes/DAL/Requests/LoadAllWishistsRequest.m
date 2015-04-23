@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Uniprog. All rights reserved.
 //
 
-#import "LoadWishistRequest.h"
+#import "LoadAllWishistsRequest.h"
 
-@implementation LoadWishistRequest
+@implementation LoadAllWishistsRequest
 
 - (NSString *) method {
     return @"GET";

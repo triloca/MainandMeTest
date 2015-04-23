@@ -7,9 +7,13 @@
 //
 
 #import "HomeItemCell.h"
+#import "NSString+Price.h"
 
 @interface HomeItemCell ()
 
+@property (weak, nonatomic) IBOutlet UILabel *storeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *storeButton;
+@property (weak, nonatomic) IBOutlet UIButton *priceButton;
 
 @end
 
@@ -29,7 +33,7 @@
     }else{
         imageHeight = [[imagesDict safeNumberObjectForKey:@"height_300"] floatValue];
     }
-    return imageHeight + 218 - 148;
+    return imageHeight + 218 - 148 + 20;
 }
 
 
@@ -44,7 +48,7 @@
     [super layoutSubviews];
     
     CGRect rc = _mainImageView.frame;
-    rc.size.height = self.frame.size.height - (218 - 148);
+    rc.size.height = self.frame.size.height - (218 - 148 + 20);
     _mainImageView.frame = rc;
 }
 
@@ -123,11 +127,33 @@
     _itemNameLabel.text = [storeDict safeStringObjectForKey:@"category"];
 
     NSString* price = [storeDict safeStringObjectForKey:@"price"];
-    if (price.length == 0) {
-        price = @"---";
+    if (price.length == 0 || [price isEqualToString:@"0.0"]) {
+        //price = @"Call for price";
+        _priceButton.hidden = NO;
+    }else{
+        _priceButton.hidden = YES;
     }
-    _userNameLabel.text = price;
+
+    _userNameLabel.text = [price priceString];
     
+    
+    NSDictionary *underlineAttribute = @{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)};
+    _storeLabel.attributedText = [[NSAttributedString alloc] initWithString:[storeDict safeStringObjectForKey:@"store_name"]
+                                                                 attributes:underlineAttribute];
+}
+
+- (IBAction)storeButtonClicked:(id)sender {
+    if (_didClickStoreButton) {
+        _didClickStoreButton(self, sender, _storeDict);
+    }
+}
+
+
+- (IBAction)priceButtonClicked:(id)sender {
+    if (_didClickPriceButton) {
+        _didClickPriceButton(self, sender, _storeDict);
+    }
+
 }
 
 @end

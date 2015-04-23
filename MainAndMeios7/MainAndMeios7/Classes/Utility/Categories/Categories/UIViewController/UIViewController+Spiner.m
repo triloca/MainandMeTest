@@ -214,7 +214,7 @@ static char kUNSpinerNameDictionaryObjectKey;
     self.un_spinerBackgroundView.frame = self.view.bounds;
     self.un_spinerBackgroundView.backgroundColor = [UIColor colorWithWhite:1 alpha:0.2];
     self.un_spinerBackgroundView.userInteractionEnabled = YES;
-    
+    self.un_spinerBackgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:self.un_spinerBackgroundView];
     
     [self.view bringSubviewToFront:self.un_spinerBackgroundView];

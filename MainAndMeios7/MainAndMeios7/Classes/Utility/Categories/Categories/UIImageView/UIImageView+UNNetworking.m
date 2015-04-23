@@ -566,7 +566,7 @@ static dispatch_queue_t file_queue() {
     
     self = [super init];
     if (self) {
-        self.cachePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library"]
+        self.cachePath = [[NSHomeDirectory() stringByAppendingPathComponent:@"Library/Caches"]
                           stringByAppendingPathComponent:kUNFileCacheName];
         
         //! Create file cache path if necessray
@@ -576,9 +576,25 @@ static dispatch_queue_t file_queue() {
                                       withIntermediateDirectories:YES 
                                                        attributes:nil 
                                                             error:nil];
+            //! Remove iCloud sync
+            NSURL *url = [NSURL fileURLWithPath:self.cachePath];
+            [self addSkipBackupAttributeToItemAtURL:url];
         }
     }
     return self;
+}
+
+- (BOOL)addSkipBackupAttributeToItemAtURL:(NSURL *)URL
+{
+    assert([[NSFileManager defaultManager] fileExistsAtPath: [URL path]]);
+    
+    NSError *error = nil;
+    BOOL success = [URL setResourceValue: [NSNumber numberWithBool: YES]
+                                  forKey: NSURLIsExcludedFromBackupKey error: &error];
+    if(!success){
+        NSLog(@"Error excluding %@ from backup %@", [URL lastPathComponent], error);
+    }
+    return success;
 }
 
 //! Return YES and begin asinc. loading image.

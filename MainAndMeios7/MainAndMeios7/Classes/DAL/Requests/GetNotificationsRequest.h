@@ -11,6 +11,8 @@
 @interface GetNotificationsRequest : AuthenticatedRequest
 
 
+@property (strong, nonatomic) NSArray *allNotifications;
 @property (strong, nonatomic) NSArray *notifications;
+
 
 @end

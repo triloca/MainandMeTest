@@ -15,6 +15,7 @@
         self.page = 1;
         self.searchType = type;
         self.searchFilter = filter;
+        self.perPage = kPerPagePropertyValue;
     }
     return self;
 }
@@ -91,12 +92,17 @@
 - (NSDictionary *) requestDictionary {
     NSMutableDictionary *dict = [NSMutableDictionary new];
     [dict safeSetObject:@(_page) forKey:@"page"];
-    [dict safeSetObject:@(kPerPagePropertyValue) forKey:@"per_page"];
+    [dict safeSetObject:@(_perPage) forKey:@"per_page"];
     [dict safeSetObject:_searchKey forKey:@"keywords"];
+    [dict safeSetObject:_name forKey:@"name"];
     
     if (_searchFilter != SearchFilterNewlyAll) {
-        [dict safeSetObject:@(_coordinate.latitude) forKey:@"lat"];
-        [dict safeSetObject:@(_coordinate.longitude) forKey:@"lng"];
+        
+        if (_location) {
+            [dict safeSetObject:@(_location.coordinate.latitude) forKey:@"lat"];
+            [dict safeSetObject:@(_location.coordinate.longitude) forKey:@"lng"];
+        }
+        
         [dict safeSetObject:_city forKey:@"city"];
         [dict safeSetObject:_state forKey:@"state"];
     }

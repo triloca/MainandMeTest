@@ -19,9 +19,22 @@
     return @"notifications";
 }
 
-- (void) processResponse:(NSObject *)response {
+- (void) processResponse:(NSArray *)response {
     if ([response isKindOfClass:[NSArray class]]) {
-        self.notifications = (NSArray *) response;
+        
+        NSMutableArray* temp = [NSMutableArray arrayWithArray:response];
+        for (id obj in response) {
+            if ([obj isKindOfClass:[NSDictionary class]]) {
+                if ([[obj safeNumberObjectForKey:@"read"] intValue] == 1) {
+                    [temp removeObject:obj];
+                }
+            }
+        }
+        
+        self.notifications = [NSArray arrayWithArray:temp];
+
+        
+        self.allNotifications = (NSArray *) response;
     }
 }
 

@@ -12,7 +12,7 @@
 
 //request
 @property (strong, nonatomic) NSString *categoryId;
-@property (strong, nonatomic) NSDictionary *communityId;
+@property (strong, nonatomic) NSString *communityId;
 
 //response
 @property (strong, nonatomic) NSArray *stores;

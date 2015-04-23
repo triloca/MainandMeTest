@@ -11,7 +11,7 @@
 @interface LoadProductsRequest : ServiceRequest
 
 //request
-@property (strong, nonatomic) NSDictionary *communityId;
+@property (strong, nonatomic) NSString *communityId;
 //optional
 @property (strong, nonatomic) NSString *keywords;
 

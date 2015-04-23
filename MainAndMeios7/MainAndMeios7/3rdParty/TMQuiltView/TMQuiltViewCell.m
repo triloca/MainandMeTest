@@ -19,6 +19,9 @@
 
 #import "TMQuiltViewCell.h"
 
+@interface TMQuiltViewCell ()
+@end
+
 @implementation TMQuiltViewCell
 
 @synthesize reuseIdentifier = _reuseIdentifier;
@@ -30,15 +33,95 @@
     [super dealloc];
 }
 
-- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier
-{
+- (void) initialize {
+    if (! self.editingButton) {
+        self.editingButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        UIImage *img = [UIImage imageNamed:@"remove_x3_50"];
+        [_editingButton setImage:img forState:UIControlStateNormal];
+        [_editingButton setFrame:CGRectMake(0, 0, img.size.width / 2, img.size.height / 2)];
+        [self addSubview:_editingButton];
+    }
+    self.editing = NO;
+}
+
+- (id)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     self = [super init];
     if (self) {
         _reuseIdentifier = [reuseIdentifier retain];
+        [self initialize];
     }
     return self;
 }
 
+- (void) layoutSubviews {
+    [super layoutSubviews];
+    CGFloat w = _editingButton.frame.size.width;
+    CGFloat h = _editingButton.frame.size.height;
+    CGFloat x = self.frame.size.width - w - 5;
+    CGFloat y = 0 + 5;
+    _editingButton.frame = CGRectMake(x, y, w, h);
+}
+
+- (id) initWithCoder:(NSCoder *)aDecoder {
+    if (self = [super initWithCoder:aDecoder]) {
+        [self initialize];
+    }
+    return self;
+}
+
+- (id) initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self initialize];
+    }
+    return self;
+}
+
+- (void) setEditing:(BOOL)editing {
+    if (_editing == editing && editing == YES)
+        return;
+    
+    _editing = editing;
+    if (_editing) {
+        [self startJiggling:1];
+        _editingButton.alpha = 1;
+    } else {
+        [self stopJiggling];
+        _editingButton.alpha = 0;
+    }
+}
+//
+//- (void) startJiggling: (int) not {
+//        CABasicAnimation* anim = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+//        [anim setToValue:[NSNumber numberWithFloat:-M_PI/64]];
+//        [anim setFromValue:[NSNumber numberWithDouble:M_PI/64]];
+//        [anim setDuration:0.2];
+//        [anim setRepeatCount:NSUIntegerMax];
+//        [anim setAutoreverses:YES];
+//        [self.layer addAnimation:anim forKey:@"SpringboardShake"];
+//}
+
+#define degreesToRadians(x) (M_PI * (x) / 180.0)
+#define kAnimationRotateDeg 0.1
+#define kAnimationTranslateX 0.0
+#define kAnimationTranslateY 0.0
+
+- (void)startJiggling:(NSInteger)count {
+    CGAffineTransform leftWobble = CGAffineTransformMakeRotation(degreesToRadians( kAnimationRotateDeg * (count%2 ? +1 : -1 ) ));
+    CGAffineTransform rightWobble = CGAffineTransformMakeRotation(degreesToRadians( kAnimationRotateDeg * (count%2 ? -1 : +1 ) ));
+    self.transform = leftWobble;  // starting point
+    
+    [UIView animateWithDuration:0.1
+                          delay:(count * 0.08)
+                        options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionRepeat | UIViewAnimationOptionAutoreverse
+                     animations:^{ self.transform = rightWobble; }
+                     completion:nil];
+}
+
+- (void)stopJiggling {
+    self.clipsToBounds = YES;
+    [self.layer removeAllAnimations];
+    self.transform = CGAffineTransformIdentity;  // Set it straight
+}
 
 - (void)setReuseIdentifier:(NSString *)reuseIdentifier{
     _reuseIdentifier = [reuseIdentifier retain];

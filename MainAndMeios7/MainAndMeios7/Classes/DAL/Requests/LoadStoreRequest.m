@@ -10,6 +10,13 @@
 
 @implementation LoadStoreRequest
 
+- (id) initWithStoreId: (NSNumber *) storeId {
+    if (self = [super init]) {
+        self.storeId = storeId;
+    }
+    return self;
+}
+
 - (NSString *) method {
     return @"GET";
 }

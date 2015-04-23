@@ -23,6 +23,8 @@
 
 @property (nonatomic, readonly) NSString *reuseIdentifier;
 @property (nonatomic, assign) BOOL selected;
+@property (nonatomic, assign) BOOL editing;
+@property (strong, nonatomic) UIButton *editingButton;
 
 - (id)initWithReuseIdentifier:(NSString *)reuseIdentifier;
 - (void)setReuseIdentifier:(NSString *)reuseIdentifier;

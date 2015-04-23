@@ -6,7 +6,8 @@
 //  Copyright (c) 2014 Uniprog. All rights reserved.
 //
 
-#define kAppColorGreen [UIColor colorWithRed:42/255.f green:189/255.f blue:121/255.f alpha:1];
+#define kAppColorGreen [UIColor colorWithRed:42/255.f green:189/255.f blue:121/255.f alpha:1]
+#define kAppColorYellow [UIColor colorWithRed:255/255.f green:251/255.f blue:155/255.f alpha:1]
 
 @interface CommonManager : NSObject
 

@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "JSCustomBadge.h"
+#import "HighlightingTableViewCell.h"
 
-@interface PlacesFollowCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@interface PlacesFollowCell : HighlightingTableViewCell
+
 @property (weak, nonatomic) IBOutlet UIImageView *arrowImageView;
 
 

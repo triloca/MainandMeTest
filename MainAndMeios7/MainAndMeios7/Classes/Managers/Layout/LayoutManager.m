@@ -7,6 +7,7 @@
 //
 
 #import "LayoutManager.h"
+#import "SpecialDetailsVC.h"
 
 
 @interface LayoutManager()
@@ -98,6 +99,49 @@
 
 }
 
+- (BaseNavigationController *) myWishlistNVC {
+    if (_myWishlistNVC == nil) {
+        self.myWishlistVC = [MyWishlistVC loadFromXIB_Or_iPhone5_XIB];
+        _myWishlistVC.userId = [CommonManager shared].userId;
+        self.myWishlistNVC = [[BaseNavigationController alloc] initWithRootViewController:_myWishlistVC];
+    }
+    return _myWishlistNVC;
+}
+
+- (BaseNavigationController *) storesByNameNVC {
+    if (_storesByNameNVC == nil) {
+        self.storesByNameVC = [StoresByNameVC loadFromXIB_Or_iPhone5_XIB];
+        self.storesByNameNVC = [[BaseNavigationController alloc] initWithRootViewController:_storesByNameVC];
+    }
+    return _storesByNameNVC;
+}
+
+- (BaseNavigationController *) notificationsNVC {
+    if (_notificationsNVC == nil) {
+        self.notificationsVC = [NotificationsVC loadFromXIB_Or_iPhone5_XIB];
+        self.notificationsNVC = [[BaseNavigationController alloc] initWithRootViewController:_notificationsVC];
+    }
+    return _notificationsNVC;
+}
+
+- (ProfileNVC *) profileNVC {
+    if (_profileNVC == nil) {
+        self.profileVC = [ProfileVC loadFromXIB_Or_iPhone5_XIB];
+        self.profileVC.isMenu = YES;
+        self.profileVC.isEditable =YES;
+        self.profileNVC = [[ProfileNVC alloc] initWithRootViewController:_profileVC];
+    }
+    return _profileNVC;
+}
+
+- (AboutNVC *) aboutNVC {
+    if (_aboutNVC == nil) {
+        self.aboutVC = [AboutVC loadFromXIB_Or_iPhone5_XIB];
+        self.aboutNVC = [[AboutNVC alloc] initWithRootViewController:_aboutVC];
+    }
+    return _aboutNVC;
+}
+
 - (ShopCategoryNVC*)shopCategoryNVC{
     if (_shopCategoryNVC == nil) {
         self.shopCategoryVC = [ShopCategoryVC loadFromXIB_Or_iPhone5_XIB];
@@ -105,6 +149,15 @@
     }
     return _shopCategoryNVC;
 }
+
+- (SearchNVC*)searchNVC{
+    if (_searchNVC == nil) {
+        self.searchVC = [SearchVC loadFromXIB_Or_iPhone5_XIB];
+        self.searchNVC = [[SearchNVC alloc] initWithRootViewController:_searchVC];
+    }
+    return _searchNVC;
+}
+
 
 - (PrivacyPolicyNVC*)privacyPolicyNVC{
     if (_privacyPolicyNVC == nil) {
@@ -114,13 +167,29 @@
     return _privacyPolicyNVC;
 }
 
-- (PlacesFollowNVC*)placesFollowNVC{
-    if (_placesFollowNVC == nil) {
-        self.placesFollowVC = [PlacesFollowVC loadFromXIB_Or_iPhone5_XIB];
-        self.placesFollowNVC = [[PlacesFollowNVC alloc] initWithRootViewController:_placesFollowVC];
+- (PeopleFollowNVC*) peopleFollowNVC{
+    if (_peopleFollowNVC == nil) {
+        self.peopleFollowVC = [PeopleFollowVC loadFromXIB_Or_iPhone5_XIB];
+        self.peopleFollowNVC = [[PeopleFollowNVC alloc] initWithRootViewController:_peopleFollowVC];
     }
-    return _placesFollowNVC;
+    return _peopleFollowNVC;
 }
+
+- (SpecialNVC*)specialNVC{
+    if (_specialNVC == nil) {
+        self.specialVC = [SpecialVC loadFromXIB_Or_iPhone5_XIB];
+        self.specialNVC = [[SpecialNVC alloc] initWithRootViewController:_specialVC];
+    }
+    return _specialNVC;
+}
+
+- (void)showSpecialDetails:(CKCampaign*)compaign{
+    
+    SpecialDetailsVC* specialDetailsVC = [SpecialDetailsVC loadFromXIBForScrrenSizes];
+    specialDetailsVC.campaign = compaign;
+    [[LayoutManager shared].rootNVC pushViewController:specialDetailsVC animated:YES];
+}
+
 #pragma mark _______________________ Notifications _________________________
 
 

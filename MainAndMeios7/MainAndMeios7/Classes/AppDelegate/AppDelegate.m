@@ -25,7 +25,7 @@
 #import "AddDeviceTokenRequest.h"
 #import "GetNotificationsRequest.h"
 #import "RemoveNotificationRequest.h"
-#import "LoadWishistRequest.h"
+#import "LoadAllWishistsRequest.h"
 #import "LoadStoreCommentsForUser.h"
 #import "LikeProductRequest.h"
 #import "CreateWishlistRequest.h"
@@ -43,6 +43,10 @@
 #import "FollowStoreRequest.h"
 #import "RateStoreRequest.h"
 
+#import "ProximityKitManager.h"
+
+#import "SearchManager.h"
+
 @interface AppDelegate ()
 
 @end
@@ -56,6 +60,7 @@
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
    
     [ReachabilityManager shared];
+    [SearchManager shared];
 
     [LayoutManager application:application didFinishLaunchingWithOptions:launchOptions];
 //    [[LocationManager sharedManager] setUpdatePeriod:10];//10 seconds
@@ -84,10 +89,16 @@
 //        NSString *locationName = [NSString stringWithFormat:@"%@", [dict objectForKey:(NSString *) kABPersonAddressStreetKey]];
     }];
     
-    [[LocationManager sharedManager] updateWithCompletionBlock:^(CLLocation * loc) {
-        NSLog(@"Forced udpate location: %@", loc);
-    }];
+//    [[LocationManager sharedManager] updateWithCompletionBlock:^(CLLocation * loc) {
+//        NSLog(@"Forced udpate location: %@", loc);
+//    }];
+//    
+    [LocationManager sharedManager].updatePeriod = 10 * 60;
+    [[LocationManager sharedManager] start];
     
+    
+    [[ProximityKitManager shared] application:application didFinishLaunchingWithOptions:launchOptions];
+
     
 //    RegistrationRequest *request = [[RegistrationRequest alloc] init];
 //    request.username = @"test12";
