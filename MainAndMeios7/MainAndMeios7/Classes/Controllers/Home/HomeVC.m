@@ -463,7 +463,20 @@ typedef enum {
         };
     }
     
-    [_coverView setupCampaign:[[ProximityKitManager shared].activeCampaigns firstObject]];
+    
+    if ([[ProximityKitManager shared].activeCampaigns firstObject]) {
+        [_coverView setupCampaign:[[ProximityKitManager shared].activeCampaigns firstObject]];
+    }else{
+        
+        [[ProximityKitManager shared].campaignKitManager syncWithCompletionHandler:^(UIBackgroundFetchResult res) {
+            if ([[ProximityKitManager shared].activeCampaigns firstObject]) {
+                [_coverView setupCampaign:[[ProximityKitManager shared].activeCampaigns firstObject]];
+            }else{
+                [self removeCoverViewAnimated:YES];
+            }
+        }];
+    }
+    
     
     _coverView.alpha = 0;
     _coverView.frame = CGRectMake(0, CGRectGetMaxY(_searchBar.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(_searchBar.frame) - 20);

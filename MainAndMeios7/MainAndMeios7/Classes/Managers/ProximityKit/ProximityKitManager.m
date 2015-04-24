@@ -43,6 +43,10 @@
    		// your initialization here
         self.compaignArray = [NSMutableArray new];
         [self loadArchive];
+        
+        self.campaignKitManager = [CKManager managerWithDelegate:self];
+        [self.campaignKitManager start];
+
     }
     return self;
 }
@@ -193,9 +197,6 @@
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
     }
 #endif
-    
-    self.campaignKitManager = [CKManager managerWithDelegate:self];
-    [self.campaignKitManager start];
     
 }
 

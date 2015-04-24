@@ -13,6 +13,8 @@
 
 @interface ProximityKitManager : NSObject
 
+@property (strong, nonatomic, readonly) CKManager* campaignKitManager;
+
 @property (strong, nonatomic) NSMutableArray* compaignArray;
 
 + (ProximityKitManager*)shared;
