@@ -331,6 +331,10 @@
 		AEA4DF0B1A32D67A00C463E0 /* remove_x2_50.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA4DF091A32D67A00C463E0 /* remove_x2_50.png */; };
 		AEB1D9991AE9D0AC0064E913 /* HomeCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB1D9971AE9D0AC0064E913 /* HomeCoverView.m */; };
 		AEB1D99A1AE9D0AC0064E913 /* HomeCoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB1D9981AE9D0AC0064E913 /* HomeCoverView.xib */; };
+		AEB1D99E1AEA0C9E0064E913 /* ProductCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB1D99C1AEA0C9E0064E913 /* ProductCell.m */; };
+		AEB1D99F1AEA0C9E0064E913 /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB1D99D1AEA0C9E0064E913 /* ProductCell.xib */; };
+		AEB1D9A31AEA0DE10064E913 /* ProductView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB1D9A11AEA0DE10064E913 /* ProductView.m */; };
+		AEB1D9A41AEA0DE10064E913 /* ProductView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB1D9A21AEA0DE10064E913 /* ProductView.xib */; };
 		AEBA4F371A68879C00A334F9 /* StateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA4F321A68879C00A334F9 /* StateCell.m */; };
 		AEBA4F381A68879C00A334F9 /* StateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEBA4F331A68879C00A334F9 /* StateCell.xib */; };
 		AEBA4F391A68879C00A334F9 /* StateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA4F351A68879C00A334F9 /* StateVC.m */; };
@@ -892,6 +896,12 @@
 		AEB1D9961AE9D0AC0064E913 /* HomeCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCoverView.h; sourceTree = "<group>"; };
 		AEB1D9971AE9D0AC0064E913 /* HomeCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCoverView.m; sourceTree = "<group>"; };
 		AEB1D9981AE9D0AC0064E913 /* HomeCoverView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCoverView.xib; sourceTree = "<group>"; };
+		AEB1D99B1AEA0C9E0064E913 /* ProductCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCell.h; sourceTree = "<group>"; };
+		AEB1D99C1AEA0C9E0064E913 /* ProductCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCell.m; sourceTree = "<group>"; };
+		AEB1D99D1AEA0C9E0064E913 /* ProductCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductCell.xib; sourceTree = "<group>"; };
+		AEB1D9A01AEA0DE10064E913 /* ProductView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductView.h; sourceTree = "<group>"; };
+		AEB1D9A11AEA0DE10064E913 /* ProductView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductView.m; sourceTree = "<group>"; };
+		AEB1D9A21AEA0DE10064E913 /* ProductView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductView.xib; sourceTree = "<group>"; };
 		AEBA4F311A68879C00A334F9 /* StateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = StateCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEBA4F321A68879C00A334F9 /* StateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = StateCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEBA4F331A68879C00A334F9 /* StateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StateCell.xib; sourceTree = "<group>"; };
@@ -1765,6 +1775,12 @@
 		AEA1744D1A0722B800448D1A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AEB1D9A01AEA0DE10064E913 /* ProductView.h */,
+				AEB1D9A11AEA0DE10064E913 /* ProductView.m */,
+				AEB1D9A21AEA0DE10064E913 /* ProductView.xib */,
+				AEB1D99B1AEA0C9E0064E913 /* ProductCell.h */,
+				AEB1D99C1AEA0C9E0064E913 /* ProductCell.m */,
+				AEB1D99D1AEA0C9E0064E913 /* ProductCell.xib */,
 				AEF9A1391AE9C34F006A1E4C /* Cover */,
 				A451742D1A18B01000C24574 /* SpecialsView */,
 				AEBCF9031A170427006AF720 /* Horisontal */,
@@ -2730,6 +2746,7 @@
 				AE784A661A0F22DF005D86B3 /* signin_email_passwd.png in Resources */,
 				AE7849F81A0D9AAE005D86B3 /* RegistrationVC_736h.xib in Resources */,
 				AE784A671A0F22DF005D86B3 /* signin_email_passwd@2x.png in Resources */,
+				AEB1D9A41AEA0DE10064E913 /* ProductView.xib in Resources */,
 				AEA175CF1A0759F200448D1A /* home_cell_back.png in Resources */,
 				AEA175481A0722B900448D1A /* SearchTypeView.xib in Resources */,
 				AE73986B1A255F93004CB0B4 /* Pharmacy.png in Resources */,
@@ -2761,6 +2778,7 @@
 				AE73986D1A255F93004CB0B4 /* Travel.png in Resources */,
 				314A4F111A0BE7900003B4A9 /* singup_user_logo.png in Resources */,
 				314A4F0C1A0BE7900003B4A9 /* singup_email_logo@2x.png in Resources */,
+				AEB1D99F1AEA0C9E0064E913 /* ProductCell.xib in Resources */,
 				AEBCF92D1A182D36006AF720 /* store_follow_button@2x.png in Resources */,
 				314A4F0B1A0BE7900003B4A9 /* singup_email_logo.png in Resources */,
 				A45DF01C1A154A5900DB50D7 /* MyWishlistVC.xib in Resources */,
@@ -2945,6 +2963,7 @@
 				AEA1756B1A0722B900448D1A /* LoadStoresRequest.m in Sources */,
 				AEA175561A0722B900448D1A /* AuthenticatedRequest.m in Sources */,
 				AEA175721A0722B900448D1A /* RegistrationRequest.m in Sources */,
+				AEB1D9A31AEA0DE10064E913 /* ProductView.m in Sources */,
 				AEBA4F461A69D7AB00A334F9 /* AddressCell.m in Sources */,
 				A45174411A18C23C00C24574 /* PeopleFollowVC.m in Sources */,
 				AEA1758A1A0722B900448D1A /* NSDictionary+Safe.m in Sources */,
@@ -3011,6 +3030,7 @@
 				AE784A251A0E72BC005D86B3 /* PrivacyPolicyVC.m in Sources */,
 				AEBA4F391A68879C00A334F9 /* StateVC.m in Sources */,
 				AE6F71FB1A303BE7007CD88F /* SBJsonParser.m in Sources */,
+				AEB1D99E1AEA0C9E0064E913 /* ProductCell.m in Sources */,
 				AECC46EC1A0B2D76003339E6 /* RegistrationCell.m in Sources */,
 				A44DD97F1A07F05E006E695E /* FollowStoreRequest.m in Sources */,
 				A4F4ED6C1A2E690D00F5B632 /* WishlistDetailsVC.m in Sources */,

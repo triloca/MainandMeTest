@@ -31,6 +31,7 @@
 #import "StateVC.h"
 
 #import "HomeCoverView.h"
+#import "ProductCell.h"
 
 typedef enum {
     ScreenStateStore = 0,
@@ -44,7 +45,14 @@ typedef enum {
     
 } ListStyle;
 
-@interface HomeVC () <TMQuiltViewDataSource, TMQuiltViewDelegate, HorisontalListViewDelegate>
+static NSString *kProductCellIdentifier = @"ProductCell";
+
+@interface HomeVC ()
+<TMQuiltViewDataSource,
+TMQuiltViewDelegate,
+HorisontalListViewDelegate,
+UITableViewDataSource,
+UITableViewDelegate>
 
 @property (strong, nonatomic) SearchTypeView *searchTypeView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -53,6 +61,8 @@ typedef enum {
 
 @property (strong, nonatomic) TMQuiltView *quiltView;
 @property (strong, nonatomic) NSMutableArray* collectionArray;
+
+@property (strong, nonatomic) UITableView* tableView;
 
 @property (strong, nonatomic) HomeHorisontalListView* homeHorisontalListView;
 
@@ -106,9 +116,10 @@ typedef enum {
     
     [_searchTypeView selectStorefronts];
 
-    [self setupCollection];
+    [self setupCollectionView];
+    //[self setupCollection];
     
-    [self setupHorisontalView];
+    //[self setupHorisontalView];
     
     [self setupSpecialsView];
     
@@ -148,7 +159,8 @@ typedef enum {
 
     [self updateByListStyle];
     
-    [_quiltView reloadData];
+    [_tableView reloadData];
+    //[_quiltView reloadData];
     
     
 
@@ -180,6 +192,7 @@ typedef enum {
     
     [self updateSearchTypeViewFrame];
     [self configureCollectionFrame];
+    [self configureCollectionViewFrame];
     [self configureHorisontalViewFrame];
 
 }
@@ -227,6 +240,17 @@ typedef enum {
     _searchBar.frame = rc;
 }
 
+- (void)setupCollectionView{
+    
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectZero];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    _tableView.tableFooterView = [UIView new];
+    [self.view addSubview:_tableView];
+    _tableView.backgroundColor = [UIColor colorWithRed:0.949f green:0.949f blue:0.949f alpha:1.00f];
+    
+}
 
 - (void)setupCollection{
     
@@ -238,6 +262,16 @@ typedef enum {
     _quiltView.backgroundColor = [UIColor colorWithRed:0.949f green:0.949f blue:0.949f alpha:1.00f];
 
 }
+
+- (void)configureCollectionViewFrame{
+    
+    CGRect rc = self.view.frame;
+    rc.origin.y = CGRectGetMaxY(_searchBar.frame);
+    rc.size.height -= rc.origin.y;
+    self.tableView.frame = rc;
+    
+}
+
 
 - (void)configureCollectionFrame{
     
@@ -440,7 +474,7 @@ typedef enum {
     _searchTypeView.didSelectSpecials = ^(SearchTypeView* view, UIButton* button){
         [wSelf.searchBar resignFirstResponder];
         wSelf.collectionArray = [NSMutableArray new];
-        [wSelf.quiltView reloadData];
+        //[wSelf.quiltView reloadData];
         wSelf.quiltView.hidden = YES;
         wSelf.homeHorisontalListView.hidden = YES;
         wSelf.specialsView.hidden = NO;
@@ -563,7 +597,8 @@ typedef enum {
         
         if (_page == 1) {
             self.collectionArray = [NSMutableArray new];
-            [self.quiltView reloadData];
+            //[self.quiltView reloadData];
+            [self.tableView reloadData];
             
             _homeHorisontalListView.tableArray = _collectionArray;
             [_homeHorisontalListView.collectionView setContentOffset:CGPointZero animated:NO];
@@ -578,7 +613,8 @@ typedef enum {
         
         _homeHorisontalListView.tableArray = _collectionArray;
         [_homeHorisontalListView reloadData];
-        [_quiltView reloadData];
+        //[_quiltView reloadData];
+        [self.tableView reloadData];
         
         self.searchOperation = nil;
 
@@ -592,7 +628,8 @@ typedef enum {
         _homeHorisontalListView.tableArray = _collectionArray;
         [_homeHorisontalListView reloadData];
 
-        [_quiltView reloadData];
+        //[_quiltView reloadData];
+        [_tableView reloadData];
         NSLog(@"error: %@", error);
         self.searchOperation = nil;
     }];
@@ -925,6 +962,130 @@ typedef enum {
    CGFloat height = [HomeStoreCell cellHeghtForStore:storeDict];
     
     return height;
+}
+
+
+#pragma mark - Table view data source
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return tableView.frame.size.width / 3 + 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+        NSInteger count = [_collectionArray count];
+        NSInteger temp = count % 3;
+        NSInteger rowsCount = count / 3;
+        if (temp > 0) {
+            rowsCount++;
+        }
+        return rowsCount;
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ProductCell* cell = [self productCellForIndexPath:indexPath];
+    return cell;
+}
+
+- (ProductCell*)productCellForIndexPath:(NSIndexPath*)indexPath{
+    ProductCell *cell = [_tableView dequeueReusableCellWithIdentifier:kProductCellIdentifier];
+    
+    if (cell == nil){
+        cell = [ProductCell loadViewFromXIB];
+        //cell.transform = CGAffineTransformMake(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f);
+        
+        cell.didClickAtIndex = ^(NSInteger selectedIndex){
+            NSDictionary* itemData = [_collectionArray safeDictionaryObjectAtIndex:selectedIndex];
+            
+//            if (_controllerState == ControllerStateStores) {
+//                [self showStoreDetailWithData:itemData];
+//            }else if(_controllerState == ControllerStateProducts){
+//                [self showProductDetailsWithData:itemData];
+//            }
+        };
+    }
+    
+    // Configure the cell...
+    
+    NSInteger index = indexPath.row * 3;
+    
+    if ([_collectionArray count] > index) {
+        NSDictionary* object = [_collectionArray safeDictionaryObjectAtIndex:index];
+        NSString* imageUrl = nil;
+        
+        imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
+        
+        if (_screenState == ScreenStateStore) {
+            cell.firstView.textLabel.text = [object safeStringObjectForKey:@"name"];
+            cell.firstView.backgroundColor = [UIColor whiteColor];
+        }else if(_screenState == ScreenStateItem){
+            cell.firstView.textLabel.text = @"";
+            cell.firstView.backgroundColor = [UIColor clearColor];
+        }
+        
+        [cell.firstView setImageURLString:imageUrl];
+        cell.firstView.hidden = NO;
+        
+    }else{
+        cell.firstView.hidden = YES;
+    }
+    cell.firstView.coverButton.tag = index;
+    
+    if ([_collectionArray count] > index + 1) {
+        NSDictionary* object = [_collectionArray safeDictionaryObjectAtIndex:index + 1];
+        NSString* imageUrl = nil;
+        
+        imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
+        if (_screenState == ScreenStateStore) {
+            cell.secondView.textLabel.text = [object safeStringObjectForKey:@"name"];
+            cell.secondView.backgroundColor = [UIColor whiteColor];
+        }else if(_screenState == ScreenStateItem){
+            cell.secondView.textLabel.text = @"";
+            cell.secondView.backgroundColor = [UIColor clearColor];
+        }
+        
+        [cell.secondView setImageURLString:imageUrl];
+        cell.secondView.hidden = NO;
+    }else{
+        cell.secondView.hidden = YES;
+    }
+    cell.secondView.coverButton.tag = index + 1;
+    
+    if ([_collectionArray count] > index + 2) {
+        NSDictionary* object = [_collectionArray safeDictionaryObjectAtIndex:index + 2];
+        NSString* imageUrl = nil;
+        
+        imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
+        if (_screenState == ScreenStateStore) {
+            cell.thirdView.textLabel.text = [object safeStringObjectForKey:@"name"];
+            cell.thirdView.backgroundColor = [UIColor whiteColor];
+        }else if(_screenState == ScreenStateItem){
+            cell.thirdView.textLabel.text = @"";
+            cell.thirdView.backgroundColor = [UIColor clearColor];
+        }
+        
+        [cell.thirdView setImageURLString:imageUrl];
+        cell.thirdView.hidden = NO;
+    }else{
+        cell.thirdView.hidden = YES;
+    }
+    cell.thirdView.coverButton.tag = index + 2;
+    
+    return cell;
+}
+
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
 #pragma mark _______________________ Public Methods ________________________
