@@ -54,7 +54,7 @@
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * 2, self.scrollView.frame.size.height);
  
     self.spinnerView.center = self.scrollView.center;
-    
+    self.blurEffectView.frame = self.bounds;
 }
 
 

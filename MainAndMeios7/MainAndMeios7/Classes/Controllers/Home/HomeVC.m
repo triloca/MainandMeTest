@@ -252,6 +252,15 @@ UITableViewDelegate>
     [self.view addSubview:_tableView];
     _tableView.backgroundColor = [UIColor colorWithRed:0.949f green:0.949f blue:0.949f alpha:1.00f];
     
+    __weak HomeVC* wSelf = self;
+//    [_tableView addPullToRefreshWithActionHandler:^{
+//        
+//    }];
+    
+    [_tableView addInfiniteScrollingWithActionHandler:^{
+        [wSelf searchRequest];
+    }];
+    
 }
 
 - (void)setupCollection{
@@ -599,6 +608,7 @@ UITableViewDelegate>
             _screenState = ScreenStateStore;
         }
         
+        [self.tableView.infiniteScrollingView stopAnimating];
         [_quiltView.infiniteScrollingView stopAnimating];
         
         if (_page == 1) {
@@ -629,6 +639,8 @@ UITableViewDelegate>
          [self hideSpinnerWithName:@""];
         
         [_quiltView.infiniteScrollingView stopAnimating];
+        [self.tableView.infiniteScrollingView stopAnimating];
+        
         _page = 1;
         self.collectionArray = [NSMutableArray new];
         _homeHorisontalListView.tableArray = _collectionArray;
