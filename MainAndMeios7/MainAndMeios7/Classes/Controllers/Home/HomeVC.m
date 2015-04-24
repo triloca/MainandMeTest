@@ -183,6 +183,7 @@ UITableViewDelegate>
 //    [self updateSearchTypeViewFrame];
 //    [self configureCollectionFrame];
 //    [self configureHorisontalViewFrame];
+    [self updateCoverViewFrames];
 
 }
 
@@ -513,7 +514,7 @@ UITableViewDelegate>
     
     
     _coverView.alpha = 0;
-    _coverView.frame = CGRectMake(0, CGRectGetMaxY(_searchBar.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(_searchBar.frame) - 20);
+    [self updateCoverViewFrames];
     [self.view addSubview:_coverView];
     
     [UIView animateWithDuration:animated ? 0.3 : 0
@@ -535,6 +536,10 @@ UITableViewDelegate>
                          [self.coverView removeFromSuperview];
                         self.coverView = nil;
                      }];
+}
+
+- (void)updateCoverViewFrames{
+    _coverView.frame = CGRectMake(0, CGRectGetMaxY(_searchBar.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(_searchBar.frame));
 }
 
 #pragma mark _______________________ Privat Methods ________________________

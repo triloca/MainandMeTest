@@ -16,6 +16,8 @@
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerView;
 
+@property (strong, nonatomic) UIVisualEffectView *blurEffectView;
+
 @end
 
 
@@ -33,6 +35,15 @@
     _webView.scrollView.minimumZoomScale = 0.3; // set as you want.
 
     //[_webView.scrollView setZoomScale:0.86 animated:NO];
+    
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        self.blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        _blurEffectView.alpha = 0.5;
+        [_blurEffectView setFrame:self.bounds];
+        [self addSubview:_blurEffectView];
+        [self sendSubviewToBack:_blurEffectView];
+    }
 }
 
 
@@ -43,6 +54,7 @@
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * 2, self.scrollView.frame.size.height);
  
     self.spinnerView.center = self.scrollView.center;
+    
 }
 
 
