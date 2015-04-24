@@ -24,4 +24,6 @@
 - (void)showIBeaconController:(CKCampaign*)campaign;
 - (void)deleteCompaign:(CKCampaign*)obj;
 
+- (NSArray*)activeCampaigns;
+
 @end

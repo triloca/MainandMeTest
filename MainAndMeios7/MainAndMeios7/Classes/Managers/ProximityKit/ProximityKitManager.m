@@ -215,6 +215,10 @@
 
 }
 
+- (NSArray*)activeCampaigns{
+    return self.campaignKitManager.activeCampaigns;
+}
+
 #pragma mark _______________________ Notifications _________________________
 
 - (void)sendNewCampaignNotification:(CKCampaign*)campaign{

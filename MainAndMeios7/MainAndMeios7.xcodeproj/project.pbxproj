@@ -329,6 +329,8 @@
 		AEA4DF071A32B90400C463E0 /* EditProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA4DF061A32B90400C463E0 /* EditProfileRequest.m */; };
 		AEA4DF0A1A32D67A00C463E0 /* remove_x1_51.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA4DF081A32D67A00C463E0 /* remove_x1_51.png */; };
 		AEA4DF0B1A32D67A00C463E0 /* remove_x2_50.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA4DF091A32D67A00C463E0 /* remove_x2_50.png */; };
+		AEB1D9991AE9D0AC0064E913 /* HomeCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB1D9971AE9D0AC0064E913 /* HomeCoverView.m */; };
+		AEB1D99A1AE9D0AC0064E913 /* HomeCoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEB1D9981AE9D0AC0064E913 /* HomeCoverView.xib */; };
 		AEBA4F371A68879C00A334F9 /* StateCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA4F321A68879C00A334F9 /* StateCell.m */; };
 		AEBA4F381A68879C00A334F9 /* StateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEBA4F331A68879C00A334F9 /* StateCell.xib */; };
 		AEBA4F391A68879C00A334F9 /* StateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBA4F351A68879C00A334F9 /* StateVC.m */; };
@@ -887,6 +889,9 @@
 		AEA4DF061A32B90400C463E0 /* EditProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = EditProfileRequest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEA4DF081A32D67A00C463E0 /* remove_x1_51.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remove_x1_51.png; sourceTree = "<group>"; };
 		AEA4DF091A32D67A00C463E0 /* remove_x2_50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = remove_x2_50.png; sourceTree = "<group>"; };
+		AEB1D9961AE9D0AC0064E913 /* HomeCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeCoverView.h; sourceTree = "<group>"; };
+		AEB1D9971AE9D0AC0064E913 /* HomeCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeCoverView.m; sourceTree = "<group>"; };
+		AEB1D9981AE9D0AC0064E913 /* HomeCoverView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeCoverView.xib; sourceTree = "<group>"; };
 		AEBA4F311A68879C00A334F9 /* StateCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = StateCell.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEBA4F321A68879C00A334F9 /* StateCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = StateCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEBA4F331A68879C00A334F9 /* StateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StateCell.xib; sourceTree = "<group>"; };
@@ -1760,6 +1765,7 @@
 		AEA1744D1A0722B800448D1A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AEF9A1391AE9C34F006A1E4C /* Cover */,
 				A451742D1A18B01000C24574 /* SpecialsView */,
 				AEBCF9031A170427006AF720 /* Horisontal */,
 				AE784A441A0F1273005D86B3 /* HomeItemCell.h */,
@@ -2580,6 +2586,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		AEF9A1391AE9C34F006A1E4C /* Cover */ = {
+			isa = PBXGroup;
+			children = (
+				AEB1D9961AE9D0AC0064E913 /* HomeCoverView.h */,
+				AEB1D9971AE9D0AC0064E913 /* HomeCoverView.m */,
+				AEB1D9981AE9D0AC0064E913 /* HomeCoverView.xib */,
+			);
+			name = Cover;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2778,6 +2794,7 @@
 				314A4F011A0BE7900003B4A9 /* signup_back@2x.png in Resources */,
 				AEBA4F471A69D7AB00A334F9 /* AddressCell.xib in Resources */,
 				A41B97C61A12ADF50013E30A /* nav_map_button.png in Resources */,
+				AEB1D99A1AE9D0AC0064E913 /* HomeCoverView.xib in Resources */,
 				A45DF0301A1558D600DB50D7 /* NotificationsVC.xib in Resources */,
 				314A4F121A0BE7900003B4A9 /* singup_user_logo@2x.png in Resources */,
 				A451744D1A18C3FE00C24574 /* PeopleCell.xib in Resources */,
@@ -2916,6 +2933,7 @@
 				A4F4ED701A2E6AF000F5B632 /* LoadWishlistDetailsRequest.m in Sources */,
 				A45174781A1A936D00C24574 /* AFPropertyListRequestOperation.m in Sources */,
 				AEA175361A0722B900448D1A /* ECSlidingSegue.m in Sources */,
+				AEB1D9991AE9D0AC0064E913 /* HomeCoverView.m in Sources */,
 				A44DD98B1A07FDE4006E695E /* UploadStoreRequest.m in Sources */,
 				A45174791A1A936D00C24574 /* AFURLConnectionOperation.m in Sources */,
 				AECBF25E1A14591600D20C5D /* FHSStream.m in Sources */,

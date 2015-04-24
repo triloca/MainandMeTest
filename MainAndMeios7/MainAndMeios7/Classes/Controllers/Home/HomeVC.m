@@ -30,6 +30,8 @@
 #import "SearchManager.h"
 #import "StateVC.h"
 
+#import "HomeCoverView.h"
+
 typedef enum {
     ScreenStateStore = 0,
     ScreenStateItem,
@@ -63,6 +65,8 @@ typedef enum {
 @property (assign, nonatomic) ScreenState screenState;
 @property (assign, nonatomic) ListStyle listStyle;
 
+@property (strong, nonatomic) HomeCoverView* coverView;
+
 @end
 
 @implementation HomeVC
@@ -84,6 +88,8 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];// To test
     
     __weak HomeVC* wSelf = self;
     
@@ -121,6 +127,8 @@ typedef enum {
     
     self.automaticallyAdjustsScrollViewInsets = NO;
 
+    [self addCoverViewAnimated:YES];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -440,6 +448,46 @@ typedef enum {
         [wSelf updateSpecials];
         
     };
+}
+
+
+#pragma mark  Cover View
+- (void)addCoverViewAnimated:(BOOL)animated{
+
+    __weak HomeVC* wSelf = self;
+    
+    if (self.coverView == nil) {
+        self.coverView = [HomeCoverView loadViewFromXIB];
+        self.coverView.didFinishViewing = ^(HomeCoverView* view){
+            [wSelf removeCoverViewAnimated:YES];
+        };
+    }
+    
+    [_coverView setupCampaign:[[ProximityKitManager shared].activeCampaigns firstObject]];
+    
+    _coverView.alpha = 0;
+    _coverView.frame = CGRectMake(0, CGRectGetMaxY(_searchBar.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(_searchBar.frame) - 20);
+    [self.view addSubview:_coverView];
+    
+    [UIView animateWithDuration:animated ? 0.3 : 0
+                     animations:^{
+                         _coverView.alpha = 1;
+                     }
+                     completion:^(BOOL finished) {
+                         
+                     }];
+}
+
+- (void)removeCoverViewAnimated:(BOOL)animated{
+    
+    [UIView animateWithDuration:animated ? 0.3 : 0
+                     animations:^{
+                         _coverView.alpha = 0;
+                     }
+                     completion:^(BOOL finished) {
+                         [self.coverView removeFromSuperview];
+                        self.coverView = nil;
+                     }];
 }
 
 #pragma mark _______________________ Privat Methods ________________________
