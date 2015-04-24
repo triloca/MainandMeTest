@@ -59,6 +59,12 @@
 - (void) layoutSubviews {
     [super layoutSubviews];
 
+    CGFloat componentWidth = self.frame.size.width / 3;
+    
+    _firstView.frame = CGRectMake(0, 0, componentWidth, componentWidth);
+    _secondView.frame = CGRectMake(componentWidth, 0, componentWidth, componentWidth);
+    _thirdView.frame = CGRectMake(componentWidth * 2, 0, componentWidth, componentWidth);
+    
 }
 
 

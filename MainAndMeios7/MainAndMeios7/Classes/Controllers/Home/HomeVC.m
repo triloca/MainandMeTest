@@ -247,6 +247,7 @@ UITableViewDelegate>
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.tableFooterView = [UIView new];
     [self.view addSubview:_tableView];
     _tableView.backgroundColor = [UIColor colorWithRed:0.949f green:0.949f blue:0.949f alpha:1.00f];
@@ -1029,10 +1030,10 @@ UITableViewDelegate>
         
         if (_screenState == ScreenStateStore) {
             cell.firstView.textLabel.text = [object safeStringObjectForKey:@"name"];
-            cell.firstView.backgroundColor = [UIColor whiteColor];
+            //cell.firstView.backgroundColor = [UIColor whiteColor];
         }else if(_screenState == ScreenStateItem){
             cell.firstView.textLabel.text = @"";
-            cell.firstView.backgroundColor = [UIColor clearColor];
+            //cell.firstView.backgroundColor = [UIColor clearColor];
         }
         
         [cell.firstView setImageURLString:imageUrl];
@@ -1050,10 +1051,10 @@ UITableViewDelegate>
         imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
         if (_screenState == ScreenStateStore) {
             cell.secondView.textLabel.text = [object safeStringObjectForKey:@"name"];
-            cell.secondView.backgroundColor = [UIColor whiteColor];
+            //cell.secondView.backgroundColor = [UIColor whiteColor];
         }else if(_screenState == ScreenStateItem){
             cell.secondView.textLabel.text = @"";
-            cell.secondView.backgroundColor = [UIColor clearColor];
+            //cell.secondView.backgroundColor = [UIColor clearColor];
         }
         
         [cell.secondView setImageURLString:imageUrl];
@@ -1070,10 +1071,10 @@ UITableViewDelegate>
         imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
         if (_screenState == ScreenStateStore) {
             cell.thirdView.textLabel.text = [object safeStringObjectForKey:@"name"];
-            cell.thirdView.backgroundColor = [UIColor whiteColor];
+            //cell.thirdView.backgroundColor = [UIColor whiteColor];
         }else if(_screenState == ScreenStateItem){
             cell.thirdView.textLabel.text = @"";
-            cell.thirdView.backgroundColor = [UIColor clearColor];
+            //cell.thirdView.backgroundColor = [UIColor clearColor];
         }
         
         [cell.thirdView setImageURLString:imageUrl];
