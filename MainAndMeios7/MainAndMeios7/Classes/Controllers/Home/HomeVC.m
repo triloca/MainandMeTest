@@ -1114,17 +1114,17 @@ UITableViewDelegate>
     NSDictionary *keyInfo = [notification userInfo];
     CGRect keyboardFrame = [[keyInfo objectForKey:@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
     //convert it to the same view coords as the tableView it might be occluding
-    keyboardFrame = [self.quiltView convertRect:keyboardFrame fromView:nil];
+    keyboardFrame = [self.tableView convertRect:keyboardFrame fromView:nil];
     //calculate if the rects intersect
-    CGRect intersect = CGRectIntersection(keyboardFrame, self.quiltView.bounds);
+    CGRect intersect = CGRectIntersection(keyboardFrame, self.tableView.bounds);
     if (!CGRectIsNull(intersect)) {
         //yes they do - adjust the insets on tableview to handle it
         //first get the duration of the keyboard appearance animation
         NSTimeInterval duration = [[keyInfo objectForKey:@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
         //change the table insets to match - animated to the same duration of the keyboard appearance
         [UIView animateWithDuration:duration animations:^{
-            self.quiltView.contentInset = UIEdgeInsetsMake(0, 0, intersect.size.height, 0);
-            self.quiltView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, intersect.size.height, 0);
+            self.tableView.contentInset = UIEdgeInsetsMake(0, 0, intersect.size.height, 0);
+            self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, intersect.size.height, 0);
         }];
     }
 }
@@ -1134,8 +1134,8 @@ UITableViewDelegate>
     NSTimeInterval duration = [[keyInfo objectForKey:@"UIKeyboardAnimationDurationUserInfoKey"] doubleValue];
     //clear the table insets - animated to the same duration of the keyboard disappearance
     [UIView animateWithDuration:duration animations:^{
-        self.quiltView.contentInset = UIEdgeInsetsZero;
-        self.quiltView.scrollIndicatorInsets = UIEdgeInsetsZero;
+        self.tableView.contentInset = UIEdgeInsetsZero;
+        self.tableView.scrollIndicatorInsets = UIEdgeInsetsZero;
     }];
 }
 
