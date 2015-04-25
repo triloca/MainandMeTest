@@ -70,19 +70,24 @@
     if (_didSelectSpecials) {
         _didSelectSpecials(self, sender);
     }
+    self.oldSearchType = SearchTypeSpecials;
+    
 }
 - (IBAction)itemsButtonUp:(UIButton *)sender {
     if (_didSelectItems) {
         _didSelectItems(self, sender);
     }
+    self.oldSearchType = SearchTypeItems;
 }
 - (IBAction)storefrontsButtonUp:(UIButton *)sender {
     if (_didSelectStorefronts) {
         _didSelectStorefronts(self, sender);
     }
+    self.oldSearchType = SearchTypeStorefronts;
 }
 
 - (void)moveBorderToButton:(UIButton*)sender{
+    _borderImageView.hidden = NO;
     CGRect rc = _borderImageView.frame;
     rc.size.width = sender.frame.size.width;
     _borderImageView.frame = rc;
@@ -118,6 +123,7 @@
 }
 
 - (void)updateState{
+    
     switch (_searchType) {
         case SearchTypeSpecials:
             [self moveBorderToButton:_specialsButton];
@@ -132,6 +138,17 @@
         default:
             break;
     }
+    
+    if (_hideTriger) {
+        _borderImageView.hidden = YES;
+        //[self unselectAll];
+    }
+}
+
+
+- (void)setHideTriger:(BOOL)hideTriger{
+    _hideTriger = hideTriger;
+    [self updateState];
 }
 
 @end

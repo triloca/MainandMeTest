@@ -18,6 +18,9 @@
 
 @property (strong, nonatomic) UIVisualEffectView *blurEffectView;
 
+@property (weak, nonatomic) IBOutlet UIButton *sponsorButton;
+
+
 @end
 
 
@@ -51,8 +54,12 @@
 - (void) layoutSubviews {
     [super layoutSubviews];
     
+    
+    
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * 2, self.scrollView.frame.size.height);
  
+    self.webView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height - _sponsorButton.frame.size.height);
+    
     self.spinnerView.center = self.scrollView.center;
     self.blurEffectView.frame = self.bounds;
 }
@@ -147,5 +154,18 @@
 //    NSLog(@"Dragging - You are now on page %i",page);
 //    
 //}
+
+
+- (IBAction)sponsorButtonClicked:(UIButton *)sender {
+    if (_didClickSponsorButton) {
+        _didClickSponsorButton(self, sender);
+    }
+}
+
+- (void)scrollOutAnimated:(BOOL)animated{
+
+    CGFloat pageWidth = _scrollView.frame.size.width;
+    [self.scrollView setContentOffset:CGPointMake(pageWidth, 0) animated:animated];
+}
 
 @end

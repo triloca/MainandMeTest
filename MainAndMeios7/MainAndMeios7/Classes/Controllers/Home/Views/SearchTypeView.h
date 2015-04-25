@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 
 typedef enum {
-    SearchTypeSpecials = 0,
+    SearchTypeStorefronts = 0,
     SearchTypeItems,
-    SearchTypeStorefronts
+    SearchTypeSpecials
 } ViewSearchType;
 
 
@@ -21,9 +21,15 @@ typedef enum {
 @property (copy, nonatomic) void (^didSelectStorefronts)(SearchTypeView* view, UIButton* button);
 
 @property (assign, nonatomic, readonly) ViewSearchType searchType;
+@property (assign, nonatomic) BOOL hideTriger;
+
+@property (assign, nonatomic) ViewSearchType oldSearchType;
+
 
 - (void)selectSpecials;
 - (void)selectItems;
 - (void)selectStorefronts;
+
+- (void)unselectAll;
 
 @end

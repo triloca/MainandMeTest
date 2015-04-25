@@ -112,9 +112,12 @@ UITableViewDelegate>
     
     [self setupSearchTypeView];
     
+    
     [self configSearchBar];
     
     [_searchTypeView selectStorefronts];
+    self.searchTypeView.hideTriger = YES;
+    [self.searchTypeView unselectAll];
 
     [self setupCollectionView];
     //[self setupCollection];
@@ -253,9 +256,9 @@ UITableViewDelegate>
     _tableView.backgroundColor = [UIColor colorWithRed:0.949f green:0.949f blue:0.949f alpha:1.00f];
     
     __weak HomeVC* wSelf = self;
-//    [_tableView addPullToRefreshWithActionHandler:^{
-//        
-//    }];
+    [_tableView addPullToRefreshWithActionHandler:^{
+        [wSelf startSearch];
+    }];
     
     [_tableView addInfiniteScrollingWithActionHandler:^{
         [wSelf searchRequest];
@@ -467,31 +470,59 @@ UITableViewDelegate>
     [self.view addSubview:_searchTypeView];
     
     _searchTypeView.didSelectItems = ^(SearchTypeView* view, UIButton* button){
-        [wSelf.searchBar resignFirstResponder];
-        [wSelf startSearch];
-        wSelf.quiltView.hidden = NO;
-        wSelf.homeHorisontalListView.hidden = YES;
-        wSelf.specialsView.hidden = YES;
+        view.hideTriger = NO;
+        
+        if (view.oldSearchType == SearchTypeItems) {
+        }else{
+            [wSelf.searchBar resignFirstResponder];
+            [wSelf startSearch];
+            wSelf.quiltView.hidden = NO;
+            wSelf.homeHorisontalListView.hidden = YES;
+            wSelf.specialsView.hidden = YES;
+        }
+        
+        if (wSelf.coverView) {
+            [wSelf.coverView scrollOutAnimated:YES];
+            [wSelf removeCoverViewAnimated:YES];
+        }
+        
     };
     
     _searchTypeView.didSelectStorefronts = ^(SearchTypeView* view, UIButton* button){
-        [wSelf.searchBar resignFirstResponder];
-        [wSelf startSearch];
-        wSelf.quiltView.hidden = NO;
-        wSelf.homeHorisontalListView.hidden = YES;
-        wSelf.specialsView.hidden = YES;
+        view.hideTriger = NO;
+        if (view.oldSearchType == SearchTypeStorefronts) {
+        }else{
+            [wSelf.searchBar resignFirstResponder];
+            [wSelf startSearch];
+            wSelf.quiltView.hidden = NO;
+            wSelf.homeHorisontalListView.hidden = YES;
+            wSelf.specialsView.hidden = YES;
+        }
+        if (wSelf.coverView) {
+            [wSelf.coverView scrollOutAnimated:YES];
+            [wSelf removeCoverViewAnimated:YES];
+        }
     };
     
     _searchTypeView.didSelectSpecials = ^(SearchTypeView* view, UIButton* button){
-        [wSelf.searchBar resignFirstResponder];
-        wSelf.collectionArray = [NSMutableArray new];
-        //[wSelf.quiltView reloadData];
-        wSelf.quiltView.hidden = YES;
-        wSelf.homeHorisontalListView.hidden = YES;
-        wSelf.specialsView.hidden = NO;
+        view.hideTriger = NO;
+        if (view.oldSearchType == SearchTypeSpecials) {
+        }else{
+            [wSelf.searchBar resignFirstResponder];
+            wSelf.collectionArray = [NSMutableArray new];
+            //[wSelf.quiltView reloadData];
+            [wSelf.tableView reloadData];
+            wSelf.quiltView.hidden = YES;
+            wSelf.homeHorisontalListView.hidden = YES;
+            wSelf.specialsView.hidden = NO;
+            
+            [wSelf updateSpecials];
+        }
         
-        [wSelf updateSpecials];
-        
+        if (wSelf.coverView) {
+            [wSelf.coverView scrollOutAnimated:YES];
+            [wSelf removeCoverViewAnimated:YES];
+        }
     };
 }
 
@@ -505,6 +536,12 @@ UITableViewDelegate>
         self.coverView = [HomeCoverView loadViewFromXIB];
         self.coverView.didFinishViewing = ^(HomeCoverView* view){
             [wSelf removeCoverViewAnimated:YES];
+        };
+        
+        self.coverView.didClickSponsorButton = ^(HomeCoverView* view, UIButton* button){
+        
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].searchNVC;
+            [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
         };
     }
     
@@ -538,7 +575,7 @@ UITableViewDelegate>
 
 - (void)removeCoverViewAnimated:(BOOL)animated{
     
-    [UIView animateWithDuration:animated ? 0.3 : 0
+    [UIView animateWithDuration:animated ? 0.6 : 0
                      animations:^{
                          _coverView.alpha = 0;
                      }
@@ -609,7 +646,8 @@ UITableViewDelegate>
         }
         
         [self.tableView.infiniteScrollingView stopAnimating];
-        [_quiltView.infiniteScrollingView stopAnimating];
+        [self.tableView.pullToRefreshView stopAnimating];
+        //[_quiltView.infiniteScrollingView stopAnimating];
         
         if (_page == 1) {
             self.collectionArray = [NSMutableArray new];
@@ -638,8 +676,9 @@ UITableViewDelegate>
         NSLog(@"Fail: %@", error);
          [self hideSpinnerWithName:@""];
         
-        [_quiltView.infiniteScrollingView stopAnimating];
+        //[_quiltView.infiniteScrollingView stopAnimating];
         [self.tableView.infiniteScrollingView stopAnimating];
+        [self.tableView.pullToRefreshView stopAnimating];
         
         _page = 1;
         self.collectionArray = [NSMutableArray new];

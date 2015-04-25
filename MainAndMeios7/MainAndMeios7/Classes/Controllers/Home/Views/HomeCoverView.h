@@ -9,5 +9,9 @@
 
 @interface HomeCoverView : UIView
 @property (copy, nonatomic) void (^didFinishViewing)(HomeCoverView* view);
+@property (copy, nonatomic) void (^didClickSponsorButton)(HomeCoverView* view, UIButton* button);
+
 - (void)setupCampaign:(CKCampaign*)campaign;
+- (void)scrollOutAnimated:(BOOL)animated;
+
 @end
