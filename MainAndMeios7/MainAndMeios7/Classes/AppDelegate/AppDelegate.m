@@ -58,6 +58,7 @@
     // Override point for customization after application launch.
     
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
+
    
     [ReachabilityManager shared];
     [SearchManager shared];

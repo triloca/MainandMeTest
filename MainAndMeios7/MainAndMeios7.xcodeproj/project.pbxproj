@@ -112,6 +112,8 @@
 		AE05EFB51A4E31B500BF81B7 /* SpecialCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05EFB31A4E31B500BF81B7 /* SpecialCell.m */; };
 		AE05EFB61A4E31B500BF81B7 /* SpecialCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE05EFB41A4E31B500BF81B7 /* SpecialCell.xib */; };
 		AE05EFBA1A4E339D00BF81B7 /* SpecialNVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE05EFB91A4E339D00BF81B7 /* SpecialNVC.m */; };
+		AE09498E1AEB543900675838 /* scope_bar_background2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AE09498D1AEB543900675838 /* scope_bar_background2@2x.png */; };
+		AE0949921AEB54CE00675838 /* CustomSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0949911AEB54CE00675838 /* CustomSearchBar.m */; };
 		AE3D97081A14324500BA4743 /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3D97021A14324500BA4743 /* FacebookManager.m */; };
 		AE3D970A1A1432CA00BA4743 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE3D97091A1432CA00BA4743 /* CoreLocation.framework */; };
 		AE3D970C1A1432D500BA4743 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE3D970B1A1432D500BA4743 /* UIKit.framework */; };
@@ -545,6 +547,9 @@
 		AE05EFB41A4E31B500BF81B7 /* SpecialCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpecialCell.xib; path = Views/SpecialCell.xib; sourceTree = "<group>"; };
 		AE05EFB81A4E339D00BF81B7 /* SpecialNVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = SpecialNVC.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE05EFB91A4E339D00BF81B7 /* SpecialNVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SpecialNVC.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		AE09498D1AEB543900675838 /* scope_bar_background2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "scope_bar_background2@2x.png"; sourceTree = "<group>"; };
+		AE0949901AEB54CE00675838 /* CustomSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomSearchBar.h; path = Views/CustomSearchBar.h; sourceTree = "<group>"; };
+		AE0949911AEB54CE00675838 /* CustomSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomSearchBar.m; path = Views/CustomSearchBar.m; sourceTree = "<group>"; };
 		AE34D82F19F01CD60045AB20 /* MainAndMeios7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MainAndMeios7.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE3D97011A14324500BA4743 /* FacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookManager.h; sourceTree = "<group>"; };
 		AE3D97021A14324500BA4743 /* FacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookManager.m; sourceTree = "<group>"; };
@@ -1299,6 +1304,15 @@
 			path = NVC;
 			sourceTree = "<group>";
 		};
+		AE09498F1AEB54A800675838 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AE0949901AEB54CE00675838 /* CustomSearchBar.h */,
+				AE0949911AEB54CE00675838 /* CustomSearchBar.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		AE34D82619F01CD60045AB20 = {
 			isa = PBXGroup;
 			children = (
@@ -1697,6 +1711,7 @@
 		AEA1742E1A0722B800448D1A /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				AE09498F1AEB54A800675838 /* Views */,
 				AEA174421A0722B800448D1A /* AppDelegate */,
 				AEA174451A0722B800448D1A /* Controllers */,
 				AEA1746A1A0722B800448D1A /* DAL */,
@@ -2346,6 +2361,7 @@
 		AEA1751F1A0722B900448D1A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				AE09498D1AEB543900675838 /* scope_bar_background2@2x.png */,
 				A45174231A17E7E200C24574 /* horisontal_gradient.png */,
 				A45174241A17E7E200C24574 /* horisontal_gradient@2x.png */,
 				AEA175CD1A0759F200448D1A /* home_cell_back.png */,
@@ -2749,6 +2765,7 @@
 				AEB1D9A41AEA0DE10064E913 /* ProductView.xib in Resources */,
 				AEA175CF1A0759F200448D1A /* home_cell_back.png in Resources */,
 				AEA175481A0722B900448D1A /* SearchTypeView.xib in Resources */,
+				AE09498E1AEB543900675838 /* scope_bar_background2@2x.png in Resources */,
 				AE73986B1A255F93004CB0B4 /* Pharmacy.png in Resources */,
 				A457C37B1A0FEB6000AF733D /* nav_title_down_arrow.png in Resources */,
 				A45174421A18C23C00C24574 /* PeopleFollowVC.xib in Resources */,
@@ -3042,6 +3059,7 @@
 				AEA175961A0722B900448D1A /* UITextView+Size.m in Sources */,
 				AE6F71F81A303BE7007CD88F /* NSString+SBJSON.m in Sources */,
 				AEA1755A1A0722B900448D1A /* ForgotPasswordRequest.m in Sources */,
+				AE0949921AEB54CE00675838 /* CustomSearchBar.m in Sources */,
 				A4DFFD871A30E25E002FA947 /* FollowingsRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
