@@ -45,6 +45,10 @@ MFMessageComposeViewControllerDelegate>
 
 @implementation ProductDetailsVC
 
+- (void)dealloc{
+
+}
+
 #pragma mark - Init
 
 - (id) initWithProduct: (NSDictionary *) product {
@@ -73,6 +77,8 @@ MFMessageComposeViewControllerDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    self.product = [self.productsArray safeDictionaryObjectAtIndex:self.index];
+    
     self.phone = nil;
     self.phoneButton.enabled = YES;
 
@@ -97,16 +103,28 @@ MFMessageComposeViewControllerDelegate>
     
     
     _priceLabel.text = [price priceString];
-
-    NSDictionary* imagesDict = [_product safeDictionaryObjectForKey:@"image"];
-    
-    NSString* mainImageURL = @"";
-    mainImageURL = [imagesDict safeStringObjectForKey:@"full"];
-
-    [self setupImageURL:mainImageURL];
     
     [self loadStoreInfoComletion:^{}];
     
+    
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self.view addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [self.view addGestureRecognizer:recognizer];
+
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    NSDictionary* imagesDict = [_product safeDictionaryObjectForKey:@"image"];
+    NSString* mainImageURL = @"";
+    mainImageURL = [imagesDict safeStringObjectForKey:@"full"];
+    
+    [self setupImageURL:mainImageURL];
 }
 
 - (void)setupImageURL:(NSString*)urlString{
@@ -116,7 +134,7 @@ MFMessageComposeViewControllerDelegate>
     NSURLRequest* request = [NSURLRequest requestWithURL:url
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData
                                          timeoutInterval:30];
-    
+    NSLog([_imageView description]);
     [_spinnerView startAnimating];
     [_imageView setImageWithURLRequest:request
                           placeholderImage:nil
@@ -148,7 +166,8 @@ MFMessageComposeViewControllerDelegate>
 #pragma mark - Actions
 
 - (void) backAction: (id) sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [UIImageView clearMemoryImageCache];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)callButtonClicked:(id)sender {
@@ -265,6 +284,53 @@ MFMessageComposeViewControllerDelegate>
 - (IBAction)callForPriceButton:(id)sender {
     [self callButtonClicked:nil];
 }
+
+
+- (void)handleGesture:(UISwipeGestureRecognizer *)recognizer{
+    if([recognizer direction] == UISwipeGestureRecognizerDirectionLeft){
+        //Swipe from right to left
+        //Do your functions here
+        
+        if (self.index + 1 >= self.productsArray.count) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            return;
+        }
+        
+        
+        ProductDetailsVC *vc = [ProductDetailsVC loadFromXIBForScrrenSizes];
+        vc.productsArray = self.productsArray;
+        vc.index = self.index + 1;;
+
+        [self.navigationController pushViewController:vc animated:YES];
+        
+        
+        NSLog(@"Swipe from right to left");
+    }else if([recognizer direction] == UISwipeGestureRecognizerDirectionRight){
+        //Swipe from left to right
+        //Do your functions here
+        
+        if (self.index <= 0) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            return;
+        }
+        
+        ProductDetailsVC *vc = [ProductDetailsVC loadFromXIBForScrrenSizes];
+        vc.productsArray = self.productsArray;
+        vc.index = self.index - 1;
+        
+        NSMutableArray* navArray = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+        
+        [navArray insertObject:vc atIndex:navArray.count - 1];
+        self.navigationController.viewControllers = [NSArray arrayWithArray:navArray];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        NSLog(@"Swipe from left to right");
+        
+    }
+}
+
+
 
 #pragma mark - UIActionSheet Delegate
 

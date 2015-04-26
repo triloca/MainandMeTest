@@ -12,4 +12,7 @@
 
 @property (strong, nonatomic) NSDictionary* storeDict;
 
+@property (strong, nonatomic) NSArray* storesArray;
+@property (assign, nonatomic) NSInteger index;
+
 @end

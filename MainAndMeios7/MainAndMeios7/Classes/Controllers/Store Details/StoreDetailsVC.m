@@ -66,6 +66,8 @@ MFMessageComposeViewControllerDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    self.storeDict = [self.storesArray safeDictionaryObjectAtIndex:self.index];
+    
     UIButton* menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [menuButton setImage:[UIImage imageNamed:@"nav_back_button.png"] forState:UIControlStateNormal];
     menuButton.frame = CGRectMake(0, 0, 40, 40);
@@ -81,6 +83,15 @@ MFMessageComposeViewControllerDelegate>
     [self setupNavigationTitle];
     _titleTextLable.text = [_storeDict safeStringObjectForKey:@"name"];
 
+    
+    UISwipeGestureRecognizer *recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionRight)];
+    [self.view addGestureRecognizer:recognizer];
+    
+    recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
+    [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
+    [self.view addGestureRecognizer:recognizer];
+    
     [self setupCollection];
     
     [self setupStoreDetailsView];
@@ -96,6 +107,7 @@ MFMessageComposeViewControllerDelegate>
     [self updatePhoneButton];
     
  }
+
 
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
@@ -520,10 +532,57 @@ MFMessageComposeViewControllerDelegate>
     
 }
 
+
+- (void)handleGesture:(UISwipeGestureRecognizer *)recognizer{
+    if([recognizer direction] == UISwipeGestureRecognizerDirectionLeft){
+        //Swipe from right to left
+        //Do your functions here
+        
+        if (self.index + 1 >= self.storesArray.count) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            return;
+        }
+        
+        StoreDetailsVC* storeDetailsVC = [StoreDetailsVC loadFromXIBForScrrenSizes];
+        storeDetailsVC.storesArray = self.storesArray;
+        storeDetailsVC.index = self.index + 1;
+        
+//        StoreDetailsVC* storeDetailsVC = [StoreDetailsVC loadFromXIBForScrrenSizes];
+//        storeDetailsVC.storeDict = self.storeDict;
+        [self.navigationController pushViewController:storeDetailsVC animated:YES];
+
+        
+        NSLog(@"Swipe from right to left");
+    }else if([recognizer direction] == UISwipeGestureRecognizerDirectionRight){
+        //Swipe from left to right
+        //Do your functions here
+        
+        if (self.index <= 0) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            return;
+        }
+        
+        StoreDetailsVC* storeDetailsVC = [StoreDetailsVC loadFromXIBForScrrenSizes];
+        storeDetailsVC.storesArray = self.storesArray;
+        storeDetailsVC.index = self.index - 1;
+        
+        NSMutableArray* navArray = [NSMutableArray arrayWithArray:self.navigationController.viewControllers];
+        
+        [navArray insertObject:storeDetailsVC atIndex:navArray.count - 1];
+        self.navigationController.viewControllers = [NSArray arrayWithArray:navArray];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+        
+        NSLog(@"Swipe from left to right");
+        
+    }
+}
+
 #pragma mark _______________________ Buttons Action ________________________
 
 - (void)backButtonClicked{
-    [self.navigationController popViewControllerAnimated:YES];
+    [UIImageView clearMemoryImageCache];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void) mapAction: (id) sender {

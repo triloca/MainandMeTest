@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="DINBek-Regular.ttf">
@@ -38,12 +38,16 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GyI-sn-Pk2">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="0.27000000000000002" colorSpace="calibratedWhite"/>
                 </imageView>
                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OkA-pl-ZDd">
                     <rect key="frame" x="0.0" y="369" width="320" height="199"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" misplaced="YES" image="horisontal_gradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="BbZ-gi-y0E">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="198"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="198" id="PTk-u3-e1O"/>
+                            </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pnw-pe-2wc">
                             <rect key="frame" x="279" y="157" width="33" height="42"/>
@@ -118,7 +122,6 @@
                         <constraint firstItem="yif-Nl-54B" firstAttribute="top" secondItem="L67-Jq-t0J" secondAttribute="bottom" constant="1" id="d64-mo-X7l"/>
                         <constraint firstItem="lu7-Ek-AyX" firstAttribute="leading" secondItem="sso-eZ-jIW" secondAttribute="trailing" constant="9" id="ex8-jL-RLK"/>
                         <constraint firstAttribute="trailing" secondItem="Rno-lE-EGK" secondAttribute="trailing" constant="190" id="g8v-5V-41e"/>
-                        <constraint firstItem="BbZ-gi-y0E" firstAttribute="top" secondItem="OkA-pl-ZDd" secondAttribute="top" id="gIn-VK-0q2"/>
                         <constraint firstItem="Pnw-pe-2wc" firstAttribute="leading" secondItem="lu7-Ek-AyX" secondAttribute="trailing" constant="3" id="gT4-g1-wqw"/>
                         <constraint firstAttribute="trailing" secondItem="Pnw-pe-2wc" secondAttribute="trailing" constant="8" id="iZj-0m-Ohe"/>
                         <constraint firstAttribute="trailing" secondItem="BbZ-gi-y0E" secondAttribute="trailing" id="qqH-qJ-Y4K"/>

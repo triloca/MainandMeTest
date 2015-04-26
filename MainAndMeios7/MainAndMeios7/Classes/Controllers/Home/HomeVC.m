@@ -140,6 +140,14 @@ UITableViewDelegate>
     
     [self updateByListStyle];
     
+    //! Add camera button
+    UIButton* customButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [customButton setBackgroundImage:[UIImage imageNamed:@"camera_icon.png"] forState:UIControlStateNormal];
+    customButton.frame = CGRectMake(0, 0, 40, 40);
+    [customButton addTarget:self action:@selector(cameraButtinCliced:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *barButton  = [[UIBarButtonItem alloc] initWithCustomView:customButton];
+    self.navigationItem.rightBarButtonItem = barButton;
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
 
     [self addCoverViewAnimated:YES];
@@ -295,9 +303,10 @@ UITableViewDelegate>
 
 - (void)updateByListStyle{
 
+    
     switch (_listStyle) {
         case ListStyleCollection:{
-            
+            break;
             UIButton* customButton = [UIButton buttonWithType:UIButtonTypeCustom];
             [customButton setImage:[UIImage imageNamed:@"nav_list_button.png"] forState:UIControlStateNormal];
             customButton.frame = CGRectMake(0, 0, 40, 40);
@@ -307,7 +316,7 @@ UITableViewDelegate>
             break;
         }
         case ListStyleHorisontal:{
-            
+            break;
             UIButton* customButton = [UIButton buttonWithType:UIButtonTypeCustom];
             [customButton setImage:[UIImage imageNamed:@"nav_collection_button.png"] forState:UIControlStateNormal];
             customButton.frame = CGRectMake(0, 0, 40, 40);
@@ -852,6 +861,11 @@ UITableViewDelegate>
 //}
 //
 #pragma mark _______________________ Buttons Action ________________________
+
+- (void)cameraButtinCliced:(UIButton*)button{
+
+}
+
 #pragma mark _______________________ Delegates _____________________________
 
 #pragma mark - Search Bar Delegate
@@ -1064,13 +1078,23 @@ UITableViewDelegate>
         //cell.transform = CGAffineTransformMake(0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f);
         
         cell.didClickAtIndex = ^(NSInteger selectedIndex){
-            NSDictionary* itemData = [_collectionArray safeDictionaryObjectAtIndex:selectedIndex];
+            //NSDictionary* itemDict = [_collectionArray safeDictionaryObjectAtIndex:selectedIndex];
             
-//            if (_controllerState == ControllerStateStores) {
-//                [self showStoreDetailWithData:itemData];
-//            }else if(_controllerState == ControllerStateProducts){
-//                [self showProductDetailsWithData:itemData];
-//            }
+            if (_screenState == ScreenStateItem) {
+                
+                ProductDetailsVC *vc = [ProductDetailsVC loadFromXIBForScrrenSizes];
+                vc.productsArray = _collectionArray;
+                vc.index = selectedIndex;
+
+                [self.navigationController pushViewController:vc animated:YES];
+                
+            }else if (_screenState == ScreenStateStore){
+                StoreDetailsVC* storeDetailsVC = [StoreDetailsVC loadFromXIBForScrrenSizes];
+                storeDetailsVC.storesArray = _collectionArray;
+                storeDetailsVC.index = selectedIndex;
+                //storeDetailsVC.storeDict = itemDict;
+                [self.navigationController pushViewController:storeDetailsVC animated:YES];
+            }
         };
     }
     

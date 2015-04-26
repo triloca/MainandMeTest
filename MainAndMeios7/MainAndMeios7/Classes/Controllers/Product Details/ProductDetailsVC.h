@@ -14,4 +14,7 @@
 
 - (id) initWithProduct: (NSDictionary *) product;
 
+@property (strong, nonatomic) NSArray* productsArray;
+@property (assign, nonatomic) NSInteger index;
+
 @end

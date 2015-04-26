@@ -124,6 +124,8 @@
 		AE3E41FE1A28372E0019F25D /* AboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E41F91A28372E0019F25D /* AboutVC.m */; };
 		AE3E41FF1A28372E0019F25D /* AboutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3E41FA1A28372E0019F25D /* AboutVC.xib */; };
 		AE3E42001A28372E0019F25D /* AboutNVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E41FD1A28372E0019F25D /* AboutNVC.m */; };
+		AE4046B31AEC86FE008D09A3 /* sopnsored_button.png in Resources */ = {isa = PBXBuildFile; fileRef = AE4046B21AEC86FE008D09A3 /* sopnsored_button.png */; };
+		AE4046B51AEC8DF2008D09A3 /* camera_icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AE4046B41AEC8DF2008D09A3 /* camera_icon.png */; };
 		AE6F71E71A3039AB007CD88F /* NSURLConnectionDelegateHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F71E41A3039AB007CD88F /* NSURLConnectionDelegateHandler.m */; };
 		AE6F71E81A3039AB007CD88F /* ProductDetailsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F71E61A3039AB007CD88F /* ProductDetailsManager.m */; };
 		AE6F71F71A303BE7007CD88F /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6F71EC1A303BE7007CD88F /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -567,6 +569,8 @@
 		AE3E41FA1A28372E0019F25D /* AboutVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutVC.xib; sourceTree = "<group>"; };
 		AE3E41FC1A28372E0019F25D /* AboutNVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AboutNVC.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE3E41FD1A28372E0019F25D /* AboutNVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AboutNVC.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		AE4046B21AEC86FE008D09A3 /* sopnsored_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sopnsored_button.png; sourceTree = "<group>"; };
+		AE4046B41AEC8DF2008D09A3 /* camera_icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = camera_icon.png; sourceTree = "<group>"; };
 		AE6F71E31A3039AB007CD88F /* NSURLConnectionDelegateHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSURLConnectionDelegateHandler.h; sourceTree = "<group>"; };
 		AE6F71E41A3039AB007CD88F /* NSURLConnectionDelegateHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSURLConnectionDelegateHandler.m; sourceTree = "<group>"; };
 		AE6F71E51A3039AB007CD88F /* ProductDetailsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductDetailsManager.h; sourceTree = "<group>"; };
@@ -2361,6 +2365,8 @@
 		AEA1751F1A0722B900448D1A /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				AE4046B41AEC8DF2008D09A3 /* camera_icon.png */,
+				AE4046B21AEC86FE008D09A3 /* sopnsored_button.png */,
 				AE09498D1AEB543900675838 /* scope_bar_background2@2x.png */,
 				A45174231A17E7E200C24574 /* horisontal_gradient.png */,
 				A45174241A17E7E200C24574 /* horisontal_gradient@2x.png */,
@@ -2689,6 +2695,7 @@
 				AE7398691A255F93004CB0B4 /* Fitness.png in Resources */,
 				314A4F0D1A0BE7900003B4A9 /* singup_key_logo.png in Resources */,
 				AEBCBAE31A442C1B00487E57 /* Shoes.png in Resources */,
+				AE4046B31AEC86FE008D09A3 /* sopnsored_button.png in Resources */,
 				AEA175531A0722B900448D1A /* SlidingVC.xib in Resources */,
 				AE05EFAB1A4E2EA400BF81B7 /* SpecialVC.xib in Resources */,
 				AEBCF8FB1A16FAF4006AF720 /* nav_collection_button@2x.png in Resources */,
@@ -2723,6 +2730,7 @@
 				AEBCBADF1A44292200487E57 /* flower.png in Resources */,
 				AE784A6F1A0F22DF005D86B3 /* signin_tw_button_back@2x.png in Resources */,
 				AEA175C21A073B7900448D1A /* HomeStoreCell.xib in Resources */,
+				AE4046B51AEC8DF2008D09A3 /* camera_icon.png in Resources */,
 				AE7849FA1A0DBE8A005D86B3 /* RegistrationVC_667h.xib in Resources */,
 				AEA1759B1A0722B900448D1A /* DINBek-Regular.ttf in Resources */,
 				AE73985D1A25578D004CB0B4 /* Food & Drink.png in Resources */,
