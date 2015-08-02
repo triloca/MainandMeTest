@@ -51,10 +51,6 @@
 						</object>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<object class="NSCustomResource" key="IBUIImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">store_blank_img.png</string>
-						</object>
 					</object>
 					<object class="IBUILabel" id="94421642">
 						<reference key="NSNextResponder" ref="743521074"/>
@@ -151,12 +147,24 @@
 						<string key="NSFrame">{{82, 0}, {23, 23}}</string>
 						<reference key="NSSuperview" ref="743521074"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView" ref="461972936"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<bool key="IBUIUserInteractionEnabled">NO</bool>
+						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
+					</object>
+					<object class="IBUIImageView" id="461972936">
+						<reference key="NSNextResponder" ref="743521074"/>
+						<int key="NSvFlags">-2147483383</int>
+						<string key="NSFrame">{{77, 77}, {23, 23}}</string>
+						<reference key="NSSuperview" ref="743521074"/>
+						<reference key="NSWindow"/>
+						<string key="NSReuseIdentifierKey">_NS:9</string>
+						<reference key="IBUIBackgroundColor" ref="765814299"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">badge_one.png</string>
+							<string key="NSResourceName">check_empty.png</string>
 						</object>
 					</object>
 				</array>
@@ -216,6 +224,14 @@
 					<int key="connectionID">20</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">selectedImageView</string>
+						<reference key="source" ref="743521074"/>
+						<reference key="destination" ref="461972936"/>
+					</object>
+					<int key="connectionID">22</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">coverButtonClicked:</string>
 						<reference key="source" ref="546926590"/>
@@ -271,6 +287,7 @@
 							<reference ref="692438342"/>
 							<reference ref="546926590"/>
 							<reference ref="86272183"/>
+							<reference ref="461972936"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -299,6 +316,11 @@
 						<reference key="object" ref="86272183"/>
 						<reference key="parent" ref="743521074"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">21</int>
+						<reference key="object" ref="461972936"/>
+						<reference key="parent" ref="743521074"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -307,7 +329,9 @@
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="10.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="19.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<string key="21.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="6.CustomClassName">ProductView</string>
+				<reference key="6.IBNSViewMetadataGestureRecognizers" ref="0"/>
 				<string key="6.IBPersistedLastKnownCanvasPosition">{415.5, 154.5}</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="7.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -318,7 +342,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">20</int>
+			<int key="maxID">22</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -330,6 +354,7 @@
 						<string key="badgeImageView">UIImageView</string>
 						<string key="coverButton">UIButton</string>
 						<string key="imageView">UIImageView</string>
+						<string key="selectedImageView">UIImageView</string>
 						<string key="textLabel">UILabel</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -347,6 +372,10 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="imageView">
 							<string key="name">imageView</string>
+							<string key="candidateClassName">UIImageView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="selectedImageView">
+							<string key="name">selectedImageView</string>
 							<string key="candidateClassName">UIImageView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="textLabel">
@@ -454,9 +483,9 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="badge_one.png">{46, 46}</string>
-			<string key="store_blank_img.png">{98, 104}</string>
-		</dictionary>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NS.key.0">check_empty.png</string>
+			<string key="NS.object.0">{44, 44}</string>
+		</object>
 	</data>
 </archive>

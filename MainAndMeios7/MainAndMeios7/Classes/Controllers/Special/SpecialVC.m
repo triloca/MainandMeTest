@@ -28,7 +28,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"SPECIALS & EVENTS" dropDownIndicator:NO clickCallback:nil];
+    __weak SpecialVC* wSelf = self;
+    
+    self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"SPECIALS & EVENTS" dropDownIndicator:NO clickCallback:^(CustomTitleView *titleView) {
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        [[LayoutManager shared] showHomeControllerAnimated:YES];
+        [wSelf.navigationController popToRootViewControllerAnimated:YES];
+
+    }];
     
 //    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_back_button"] landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
     
@@ -63,7 +70,7 @@
     
     self.navigationController.navigationBarHidden = NO;
 
-    self.tableArray = [ProximityKitManager shared].compaignArray;
+    self.tableArray = [ProximityKitManager shared].activeCampaigns;
     [_collectionView reloadData];
 
 }

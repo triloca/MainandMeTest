@@ -52,8 +52,13 @@
     
 //
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Read all" style:UIBarButtonItemStylePlain target:self action:@selector(readAllAction)];
-//    
+//
+    __weak ProfileVC* wSelf = self;
     self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"PROFILE" dropDownIndicator:NO clickCallback:^(CustomTitleView *titleView) {
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        [[LayoutManager shared] showHomeControllerAnimated:YES];
+        [wSelf.navigationController popToRootViewControllerAnimated:YES];
+
     }];
     
     

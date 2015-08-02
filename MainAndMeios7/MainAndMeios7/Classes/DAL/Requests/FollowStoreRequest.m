@@ -11,7 +11,12 @@
 @implementation FollowStoreRequest
 
 - (NSString *) method {
-    return @"POST";
+    
+    if (_unfollow) {
+        return @"DELETE";
+    }else{
+        return @"POST";
+    }
 }
 
 - (NSString *) path {

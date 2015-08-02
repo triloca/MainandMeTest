@@ -46,7 +46,12 @@
     
     [self showEditButton];
     
+    __weak NotificationsVC* wSelf = self;
     self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"NOTIFICATIONS" dropDownIndicator:NO clickCallback:^(CustomTitleView *titleView) {
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        [[LayoutManager shared] showHomeControllerAnimated:YES];
+        [wSelf.navigationController popToRootViewControllerAnimated:YES];
+
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveCampaignNotification:) name:kNewCampaignNotification object:nil];
@@ -219,14 +224,14 @@
 }
 
 - (void) showStore: (NSDictionary *) store {
-    StoreDetailsVC *vc = [StoreDetailsVC loadFromXIB_Or_iPhone5_XIB];
+    StoreDetailsVC *vc = [StoreDetailsVC loadFromXIBForScrrenSizes];
     vc.storeDict = store;
     [self.navigationController pushViewController:vc animated:YES];
 
 }
 
 - (void) showProduct: (NSDictionary *) product {
-    ProductDetailsVC *vc = [ProductDetailsVC loadFromXIB_Or_iPhone5_XIB];
+    ProductDetailsVC *vc = [ProductDetailsVC loadFromXIBForScrrenSizes];
     vc.product = product;
     [self.navigationController pushViewController:vc animated:YES];
 }

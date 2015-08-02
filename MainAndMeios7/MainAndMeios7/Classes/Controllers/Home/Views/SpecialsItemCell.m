@@ -144,7 +144,10 @@
     UIScrollView *scroll=[self.webView scrollView];
     [scroll setZoomScale:0.76 animated:NO];
 
-    
+//    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+//        [self performSelector:@selector(clearBackground:) withObject:webView afterDelay:0.1];
+//    }
+
     
 }
 
@@ -153,6 +156,55 @@
     NSLog(@"Webview request %@ failed to load with error: %@", webView.request, error);
 }
 
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    //[self listSubviewsOfView:self.webView];
+}
+
+- (void)clearBackground:(id)obj {
+    UIView *v = obj;
+    [self listSubviewsOfView:v];
+//    while (v) {
+//        //v.backgroundColor = [UIColor whiteColor];
+//        v = [v.subviews firstObject];
+//        NSLog(@"%@" , v.backgroundColor);
+//        
+//        if ([NSStringFromClass([v class]) isEqualToString:@"UIWebPDFView"]) {
+//            [v setBackgroundColor:[UIColor whiteColor]];
+//            
+//            // background set to white so fade view in and exit
+//            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
+//                             animations:^{
+//                                 v.alpha = 1.0;
+//                             }
+//                             completion:nil];
+//            return;
+//        }
+//    }
+}
+
+- (void)listSubviewsOfView:(UIView *)view {
+    
+    // Get the subviews of the view
+    NSArray *subviews = [view subviews];
+    
+    // Return if there are no subviews
+    if ([subviews count] == 0) return; // COUNT CHECK LINE
+    
+    for (UIView *subview in subviews) {
+        
+        // Do what you want to do with the subview
+        NSLog(@"%@", subview);
+        NSLog(@"+++++ backgroundColor = %@", subview.backgroundColor);
+        
+        [subview setBackgroundColor:[UIColor whiteColor]];
+        [subview.layer setBackgroundColor:[[UIColor whiteColor] CGColor]];
+        NSLog(@"+++++ backgroundColor = %@", subview.backgroundColor);
+        
+        // List the subviews of subview
+        [self listSubviewsOfView:subview];
+    }
+}
 
 -(void)zoomToFit
 {

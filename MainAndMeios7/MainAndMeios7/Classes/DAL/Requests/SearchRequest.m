@@ -109,6 +109,8 @@
     
     [dict safeSetObject:kRealtimePropertyValue forKey:@"realtime"];
 
+    [dict safeSetObject:[CommonManager shared].apiToken forKey:@"_token"];
+    
     return dict;
 }
 

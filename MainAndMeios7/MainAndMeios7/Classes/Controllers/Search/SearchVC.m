@@ -73,12 +73,21 @@ TMQuiltViewDelegate>
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    UIButton* menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [menuButton setImage:[UIImage imageNamed:@"menu_button.png"] forState:UIControlStateNormal];
-    menuButton.frame = CGRectMake(0, 0, 40, 40);
-    [menuButton addTarget:self action:@selector(anchorRight) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *anchorLeftButton  = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
-    self.navigationItem.leftBarButtonItem = anchorLeftButton;
+    if (_wasPushed) {
+        UIButton* menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [menuButton setImage:[UIImage imageNamed:@"nav_back_button.png"] forState:UIControlStateNormal];
+        menuButton.frame = CGRectMake(0, 0, 40, 40);
+        [menuButton addTarget:self action:@selector(backButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *anchorLeftButton  = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+        self.navigationItem.leftBarButtonItem = anchorLeftButton;
+    }else{
+        UIButton* menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [menuButton setImage:[UIImage imageNamed:@"menu_button.png"] forState:UIControlStateNormal];
+        menuButton.frame = CGRectMake(0, 0, 40, 40);
+        [menuButton addTarget:self action:@selector(anchorRight) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem *anchorLeftButton  = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
+        self.navigationItem.leftBarButtonItem = anchorLeftButton;
+    }
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_az_button"] landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(sortButtonAction)];
 
@@ -109,8 +118,6 @@ TMQuiltViewDelegate>
     [_quiltView layoutIfNeeded];
     [_quiltView reloadData];
     
-    
-
 }
 
 - (void)viewWillDisappear:(BOOL)animated{
@@ -218,9 +225,14 @@ TMQuiltViewDelegate>
 
 - (void)setupNavigationTitle{
     
+    __weak SearchVC* wSelf = self;
     self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"Search"
                                                          dropDownIndicator:NO
-                                                             clickCallback:^(CustomTitleView *titleView) {}];
+                                                             clickCallback:^(CustomTitleView *titleView) {
+                                                                 [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+                                                                 [[LayoutManager shared] showHomeControllerAnimated:YES];
+                                                                 [wSelf.navigationController popToRootViewControllerAnimated:YES];
+                                                             }];
 
 }
 

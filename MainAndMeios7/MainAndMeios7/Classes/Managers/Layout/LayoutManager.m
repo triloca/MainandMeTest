@@ -83,13 +83,13 @@
     
     
     //! First controller to show
-    [self shared].homeVC = [HomeVC loadFromXIB_Or_iPhone5_XIB];
+    [self shared].homeVC = [HomeVC loadFromXIBForScrrenSizes];
     [self shared].homeNVC = [[HomeNVC alloc] initWithRootViewController:[self shared].homeVC];
     
     [self shared].slidingVC.topViewController = [self shared].homeNVC;
     
     //! Left VC
-    [self shared].LeftMenuVC = [LeftMenuVC loadFromXIB_Or_iPhone5_XIB];
+    [self shared].LeftMenuVC = [LeftMenuVC loadFromXIBForScrrenSizes];
     [self shared].slidingVC.underLeftViewController = [self shared].LeftMenuVC;
     
     // enable swiping on the top view
@@ -101,7 +101,7 @@
 
 - (BaseNavigationController *) myWishlistNVC {
     if (_myWishlistNVC == nil) {
-        self.myWishlistVC = [MyWishlistVC loadFromXIB_Or_iPhone5_XIB];
+        self.myWishlistVC = [MyWishlistVC loadFromXIBForScrrenSizes];
         _myWishlistVC.userId = [CommonManager shared].userId;
         self.myWishlistNVC = [[BaseNavigationController alloc] initWithRootViewController:_myWishlistVC];
     }
@@ -109,16 +109,16 @@
 }
 
 - (BaseNavigationController *) storesByNameNVC {
-    if (_storesByNameNVC == nil) {
-        self.storesByNameVC = [StoresByNameVC loadFromXIB_Or_iPhone5_XIB];
+    //if (_storesByNameNVC == nil) {
+        self.storesByNameVC = [StoresByNameVC loadFromXIBForScrrenSizes];
         self.storesByNameNVC = [[BaseNavigationController alloc] initWithRootViewController:_storesByNameVC];
-    }
+    //}
     return _storesByNameNVC;
 }
 
 - (BaseNavigationController *) notificationsNVC {
     if (_notificationsNVC == nil) {
-        self.notificationsVC = [NotificationsVC loadFromXIB_Or_iPhone5_XIB];
+        self.notificationsVC = [NotificationsVC loadFromXIBForScrrenSizes];
         self.notificationsNVC = [[BaseNavigationController alloc] initWithRootViewController:_notificationsVC];
     }
     return _notificationsNVC;
@@ -126,7 +126,7 @@
 
 - (ProfileNVC *) profileNVC {
     if (_profileNVC == nil) {
-        self.profileVC = [ProfileVC loadFromXIB_Or_iPhone5_XIB];
+        self.profileVC = [ProfileVC loadFromXIBForScrrenSizes];
         self.profileVC.isMenu = YES;
         self.profileVC.isEditable =YES;
         self.profileNVC = [[ProfileNVC alloc] initWithRootViewController:_profileVC];
@@ -136,7 +136,7 @@
 
 - (AboutNVC *) aboutNVC {
     if (_aboutNVC == nil) {
-        self.aboutVC = [AboutVC loadFromXIB_Or_iPhone5_XIB];
+        self.aboutVC = [AboutVC loadFromXIBForScrrenSizes];
         self.aboutNVC = [[AboutNVC alloc] initWithRootViewController:_aboutVC];
     }
     return _aboutNVC;
@@ -144,7 +144,7 @@
 
 - (ShopCategoryNVC*)shopCategoryNVC{
     if (_shopCategoryNVC == nil) {
-        self.shopCategoryVC = [ShopCategoryVC loadFromXIB_Or_iPhone5_XIB];
+        self.shopCategoryVC = [ShopCategoryVC loadFromXIBForScrrenSizes];
         self.shopCategoryNVC = [[ShopCategoryNVC alloc] initWithRootViewController:_shopCategoryVC];
     }
     return _shopCategoryNVC;
@@ -152,7 +152,7 @@
 
 - (SearchNVC*)searchNVC{
     if (_searchNVC == nil) {
-        self.searchVC = [SearchVC loadFromXIB_Or_iPhone5_XIB];
+        self.searchVC = [SearchVC loadFromXIBForScrrenSizes];
         self.searchNVC = [[SearchNVC alloc] initWithRootViewController:_searchVC];
     }
     return _searchNVC;
@@ -161,23 +161,40 @@
 
 - (PrivacyPolicyNVC*)privacyPolicyNVC{
     if (_privacyPolicyNVC == nil) {
-        self.privacyPolicyVC = [PrivacyPolicyVC loadFromXIB_Or_iPhone5_XIB];
+        self.privacyPolicyVC = [PrivacyPolicyVC loadFromXIBForScrrenSizes];
         self.privacyPolicyNVC = [[PrivacyPolicyNVC alloc] initWithRootViewController:_privacyPolicyVC];
     }
     return _privacyPolicyNVC;
 }
 
+- (SponsoredByNVC*)sponsoredByNVC{
+    if (_sponsoredByNVC == nil) {
+        self.sponsoredByVC = [SponsoredByVC loadFromXIBForScrrenSizes];
+        self.sponsoredByNVC = [[SponsoredByNVC alloc] initWithRootViewController:_sponsoredByVC];
+    }
+    return _sponsoredByNVC;
+}
+
+
 - (PeopleFollowNVC*) peopleFollowNVC{
     if (_peopleFollowNVC == nil) {
-        self.peopleFollowVC = [PeopleFollowVC loadFromXIB_Or_iPhone5_XIB];
+        self.peopleFollowVC = [PeopleFollowVC loadFromXIBForScrrenSizes];
         self.peopleFollowNVC = [[PeopleFollowNVC alloc] initWithRootViewController:_peopleFollowVC];
     }
     return _peopleFollowNVC;
 }
 
+- (PlacesFollowNVC*) placesFollowNVC{
+    if (_peopleFollowNVC == nil) {
+        self.placesFollowVC = [PlacesFollowVC loadFromXIBForScrrenSizes];
+        self.placesFollowNVC = [[PlacesFollowNVC alloc] initWithRootViewController:_placesFollowVC];
+    }
+    return _placesFollowNVC;
+}
+
 - (SpecialNVC*)specialNVC{
     if (_specialNVC == nil) {
-        self.specialVC = [SpecialVC loadFromXIB_Or_iPhone5_XIB];
+        self.specialVC = [SpecialVC loadFromXIBForScrrenSizes];
         self.specialNVC = [[SpecialNVC alloc] initWithRootViewController:_specialVC];
     }
     return _specialNVC;
@@ -188,6 +205,10 @@
     SpecialDetailsVC* specialDetailsVC = [SpecialDetailsVC loadFromXIBForScrrenSizes];
     specialDetailsVC.campaign = compaign;
     [[LayoutManager shared].rootNVC pushViewController:specialDetailsVC animated:YES];
+}
+
+- (void)showHomeControllerAnimated:(BOOL)animated{
+    self.slidingVC.topViewController = self.homeNVC;
 }
 
 #pragma mark _______________________ Notifications _________________________

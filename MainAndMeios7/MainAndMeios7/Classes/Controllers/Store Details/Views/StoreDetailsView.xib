@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="DINBek-Regular.ttf">
@@ -83,6 +83,13 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqN-9W-KJW">
+                    <rect key="frame" x="0.0" y="430" width="320" height="1"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="x70-yF-mAm"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.40000000596046448" green="0.40000000596046448" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -99,11 +106,13 @@
                 <constraint firstAttribute="trailing" secondItem="Am3-F4-kcd" secondAttribute="trailing" id="MsI-Cl-ksx"/>
                 <constraint firstItem="qhi-3r-Bzv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="160" id="NXv-dA-87G"/>
                 <constraint firstAttribute="bottom" secondItem="CoR-2N-DAN" secondAttribute="bottom" id="Nes-hh-zLT"/>
+                <constraint firstItem="hqN-9W-KJW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="OFt-kf-66P"/>
                 <constraint firstItem="CoR-2N-DAN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="TFG-D3-DaU"/>
                 <constraint firstItem="cKp-c7-LF5" firstAttribute="top" secondItem="Am3-F4-kcd" secondAttribute="top" constant="52" id="Tcm-6c-p4T"/>
                 <constraint firstAttribute="trailing" secondItem="CoR-2N-DAN" secondAttribute="trailing" id="VQg-TF-pbR"/>
                 <constraint firstItem="cKp-c7-LF5" firstAttribute="width" secondItem="eYG-kL-lPd" secondAttribute="width" id="aAg-ye-62K"/>
                 <constraint firstAttribute="bottom" secondItem="o8y-Gf-8T8" secondAttribute="bottom" id="agM-Qr-gQP"/>
+                <constraint firstAttribute="bottom" secondItem="hqN-9W-KJW" secondAttribute="bottom" id="bZZ-6M-MNQ"/>
                 <constraint firstAttribute="trailing" secondItem="eYG-kL-lPd" secondAttribute="trailing" constant="92" id="bbn-8Z-tgm"/>
                 <constraint firstItem="o8y-Gf-8T8" firstAttribute="leading" secondItem="V0P-pB-NTX" secondAttribute="trailing" constant="2" id="cuV-zm-t0l"/>
                 <constraint firstAttribute="bottom" secondItem="eYG-kL-lPd" secondAttribute="bottom" constant="49" id="eZ7-Zr-GqC"/>
@@ -117,6 +126,7 @@
                 <constraint firstItem="CoR-2N-DAN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sRd-9B-Lkg"/>
                 <constraint firstAttribute="trailing" secondItem="o8y-Gf-8T8" secondAttribute="trailing" constant="11" id="vhe-sd-Fvp"/>
                 <constraint firstItem="o8y-Gf-8T8" firstAttribute="leading" secondItem="V0P-pB-NTX" secondAttribute="trailing" constant="2" id="zAN-eS-QpE"/>
+                <constraint firstAttribute="trailing" secondItem="hqN-9W-KJW" secondAttribute="trailing" id="zUC-xF-QoZ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

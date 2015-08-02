@@ -58,14 +58,15 @@
     _tableArray = @[@"Specials & Events",
                     @"Home",
                     @"Search",
-                    @"Find stores by name",
+                    @"All Places",
                     @"My wishlists",
-                    @"People I follow",
+                    @"Places I Follow",
                     //@"Places I follow",
                     @"Notifications",
                     @"Edit my profile",
                     //@"Invite friends",
                     @"About Main and Me",
+                    @"Our sponsor",
                     @"Privacy Policy",
                     @"Log out"];
 }
@@ -167,7 +168,7 @@
             break;
         }
         case 5:{
-            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].peopleFollowNVC;
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].placesFollowNVC;
             [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
             
             break;
@@ -192,12 +193,18 @@
             break;
         }
         case 9:{
-            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].privacyPolicyNVC;
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].sponsoredByNVC;
             [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
             
             break;
         }
         case 10:{
+            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].privacyPolicyNVC;
+            [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+            
+            break;
+        }
+        case 11:{
             [[CommonManager shared] logout];
             [LayoutManager createSlidingVC];
             break;

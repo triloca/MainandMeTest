@@ -13,6 +13,7 @@
 #import "LoginViaSocialRequest.h"
 #import "TwitterManager.h"
 #import "NSString+Email.h"
+#import "RegistrationVC.h"
 
 @interface LoginVC()
 
@@ -36,16 +37,31 @@
                     failure:(void (^)(LoginVC* loginVC, NSError* error))failure
             alreadyLoggedIn:(void (^)(LoginVC* loginVC, NSString* token))alreadyLoggedIn{
     
-    LoginVC* loginVC = [LoginVC loadFromXIB_Or_iPhone5_XIB];
+    LoginVC* loginVC = [LoginVC loadFromXIBForScrrenSizes];
     loginVC.successBlock = success;
     loginVC.failureBlock = failure;
     loginVC.alreadyLoggedInBlock = alreadyLoggedIn;
     
-    if ([[CommonManager shared] isLoggedIn]) {
-        alreadyLoggedIn(loginVC, [[CommonManager shared] apiToken]);
-    }else{
+    if ([[CommonManager shared] loginMethod] == LoginMethodNone) {
         presentation(loginVC);
+    }else{
+        
+        [loginVC loginWithLastMethod:[[CommonManager shared] loginMethod]
+                             success:^{
+                                 alreadyLoggedIn(loginVC, [[CommonManager shared] apiToken]);
+                             }
+                             failure:^(NSError *error) {
+                                 presentation(loginVC);
+                             }];
     }
+    
+    
+    ////
+//    if ([[CommonManager shared] isLoggedIn]) {
+//        alreadyLoggedIn(loginVC, [[CommonManager shared] apiToken]);
+//    }else{
+//        presentation(loginVC);
+//    }
 }
 
 #pragma mark ____________________________ Init _____________________________
@@ -167,6 +183,34 @@
     
 }
 
+- (void)authWithEmail:(NSString*)email
+                  pass:(NSString*)pass
+               success:(void(^)(LoginRequest* request, NSString* apiToken, NSDictionary *user))success
+               failure:(void(^)(LoginRequest *request, NSError *error))failure{
+    
+    LoginRequest *loginRequest = [[LoginRequest alloc] init];
+    loginRequest.email = email;
+    loginRequest.password = pass;
+    
+    [[MMServiceProvider sharedProvider] sendRequest:loginRequest success:^(LoginRequest *_loginRequest) {
+        
+        NSString *apiToken = _loginRequest.apiToken;
+        NSLog(@"login completed: %@", apiToken);
+        
+            success(_loginRequest, _loginRequest.apiToken, _loginRequest.user);
+        
+        
+    } failure:^(LoginRequest *request, NSError *error) {
+        NSLog(@"login failed: %@", error);
+        NSLog(@"Response: %@", request.response);
+        
+        failure(request, error);
+        
+    }];
+    
+}
+
+
 
 #pragma mark _______________________ Privat Methods(view)___________________
 //! Update views by model
@@ -206,7 +250,7 @@
 
 - (void)loginWithFB{
     
-    [[FacebookManager shared] loginWithReadPermissions:@[@"publish_stream",@"email"]
+    [[FacebookManager shared] loginWithReadPermissions:nil//@[@"publish_stream",@"email"]
                                           allowLoginUI:YES
                                                success:^(FBSession *session, FBSessionState status) {
                                                    
@@ -262,6 +306,13 @@
                                                 [[CommonManager shared] setupUserId:[[request.user safeNumberObjectForKey:@"id"] stringValue]];
                                                 [[CommonManager shared] setupApiToken:request.apiToken];
                                                 
+                                                //!
+                                                [[CommonManager shared] setLoginMethod:LoginMethodFB];
+                                                [[CommonManager shared] setupFbID:user_id];
+                                                [[CommonManager shared] setupUserName:userName];
+                                                [[CommonManager shared] setupEmail:email];
+                                                [[CommonManager shared] setupCredentialToken:[FBSession activeSession].accessTokenData.accessToken];
+                                                
                                                 NSLog(@"logged in");
                                                 
                                                 if (_successBlock) {
@@ -273,6 +324,7 @@
                                                 NSLog(@"Registration failed: %@", error);
                                                 NSLog(@"Response: %@", request.response);
                                                 
+                                                [[CommonManager shared] logout];
                                                 [self hideSpinnerWithName:@""];
                                                 [[AlertManager shared] showOkAlertWithTitle:@"Error"
                                                                                     message:error.localizedDescription];
@@ -332,6 +384,13 @@
                                                 
                                                 NSLog(@"logged in");
                                                 
+                                                [[CommonManager shared] setLoginMethod:LoginMethodTwitter];
+                                                [[CommonManager shared] setupEmail:email];
+                                                [[CommonManager shared] setupUserName:userName];
+                                                [[CommonManager shared] setupAuthenticatedID:user_id];
+                                                [[CommonManager shared] setupCredentialToken:tocken];
+                                                
+                                                
                                                 if (_successBlock) {
                                                     _successBlock(self, request.apiToken);
                                                 }
@@ -340,7 +399,7 @@
                                                 [self hideSpinnerWithName:@""];
                                                 NSLog(@"Registration failed: %@", error);
                                                 NSLog(@"Response: %@", request.response);
-                                                
+                                                [[CommonManager shared] logout];
                                                 [self hideSpinnerWithName:@""];
                                                 [[AlertManager shared] showOkAlertWithTitle:@"Error"
                                                                                     message:error.localizedDescription];
@@ -383,6 +442,107 @@
                                otherButtonTitles:nil];
 }
 
+
+- (void)loginWithLastMethod:(LoginMethod)method
+                    success:(void(^)())success
+                    failure:(void(^)(NSError *error))failure{
+
+    if (method == LoginMethodEmail) {
+        
+        [self authWithEmail:[CommonManager shared].email
+                       pass:[CommonManager shared].pass
+                    success:^(LoginRequest *request, NSString *apiToken, NSDictionary *user) {
+                        
+                        
+                        [[CommonManager shared] setupApiToken:apiToken];
+                        [[CommonManager shared] setupUserId:[[user safeNumberObjectForKey:@"id"] stringValue]];
+                        
+                        NSLog(@"login completed: %@", apiToken);
+                        success();
+                    }
+                    failure:^(LoginRequest *request, NSError *error) {
+                        failure(error);
+                    }];
+        
+    }else if (method == LoginMethodFB){
+    
+        LoginViaSocialRequest* authRequest = [[LoginViaSocialRequest alloc] init];
+        
+        authRequest.userId = [[CommonManager shared] fbID];
+        authRequest.username = [[CommonManager shared] userName];
+        authRequest.email = [[CommonManager shared] email];
+        authRequest.credentialToken = [[CommonManager shared] credentialToken];
+        authRequest.type = @"facebook";
+        
+        [[MMServiceProvider sharedProvider] sendRequest:authRequest
+                                                success:^(LoginViaSocialRequest *request) {
+                                                    NSLog(@"Registration complete! %@", request.response);
+                                                    
+                                                    [[CommonManager shared] setupUserId:[[request.user safeNumberObjectForKey:@"id"] stringValue]];
+                                                    [[CommonManager shared] setupApiToken:request.apiToken];
+                                                    
+                                                    NSLog(@"logged in");
+                                                    
+                                                    success();
+                                                    
+                                                } failure:^(LoginViaSocialRequest *request, NSError *error) {
+                                                    NSLog(@"Registration failed: %@", error);
+                                                    NSLog(@"Response: %@", request.response);
+                                                    
+                                                    [[CommonManager shared] logout];
+                                                    
+                                                    [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                        message:error.localizedDescription];
+                                                    
+                                                    failure(error);
+                                                    
+                                                }];
+
+        
+    }else if (method == LoginMethodTwitter){
+        
+        NSString* userName = [[CommonManager shared] userName];//[FHSTwitterEngine sharedEngine].authenticatedUsername;
+        NSString* user_id = [[CommonManager shared] authenticatedID];//[FHSTwitterEngine sharedEngine].authenticatedID;
+        NSString* tocken = [[CommonManager shared] credentialToken];//[FHSTwitterEngine sharedEngine].accessToken.key;
+        
+        LoginViaSocialRequest* authRequest = [[LoginViaSocialRequest alloc] init];
+        
+        authRequest.userId = user_id;
+        authRequest.username = userName;
+        authRequest.credentialToken = tocken;
+       
+        authRequest.email = [[CommonManager shared] email];
+
+        authRequest.type = @"twitter";
+        
+        [self showSpinnerWithName:@""];
+        [[MMServiceProvider sharedProvider] sendRequest:authRequest
+                                                success:^(LoginViaSocialRequest *request) {
+                                                    [self hideSpinnerWithName:@""];
+                                                    NSLog(@"Registration complete! %@", request.response);
+                                                    
+                                                    [[CommonManager shared] setupUserId:[[request.user safeNumberObjectForKey:@"id"] stringValue]];
+                                                    [[CommonManager shared] setupApiToken:request.apiToken];
+                                                    
+                                                    NSLog(@"logged in");
+                                                    
+                                                    success();
+                                                    
+                                                } failure:^(LoginViaSocialRequest *request, NSError *error) {
+                                                    [self hideSpinnerWithName:@""];
+                                                    NSLog(@"Registration failed: %@", error);
+                                                    NSLog(@"Response: %@", request.response);
+                                                    
+                                                    [self hideSpinnerWithName:@""];
+                                                    [[AlertManager shared] showOkAlertWithTitle:@"Error"
+                                                                                        message:error.localizedDescription];
+                                                    failure(error);
+                                                }];
+
+        
+    }
+}
+
 #pragma mark _______________________ Buttons Action ________________________
 
 - (IBAction)loginButtonClicked:(id)sender {
@@ -395,7 +555,44 @@
     
     if ([self isTextFieldsValid]) {
         [self hideKeyBoard];
-        [self loginWithEmail:_emailTextField.text pass:_passwordTextField.text];
+        
+        [self authWithEmail:_emailTextField.text
+                       pass:_passwordTextField.text
+                    success:^(LoginRequest *request, NSString *apiToken, NSDictionary *user) {
+                        
+                        [[CommonManager shared] setupApiToken:apiToken];
+                        [[CommonManager shared] setupUserId:[[user safeNumberObjectForKey:@"id"] stringValue]];
+                        [[CommonManager shared] setLoginMethod:LoginMethodEmail];
+                        NSLog(@"login completed: %@", apiToken);
+                        
+                        [[CommonManager shared] setupEmail:_emailTextField.text];
+                        [[CommonManager shared] setupPass:_passwordTextField.text];
+
+                        
+                        if (_successBlock) {
+                            _successBlock(self, apiToken);
+                        }
+
+                    }
+                    failure:^(LoginRequest *request, NSError *error) {
+                       
+                        NSLog(@"login failed: %@", error);
+                        NSLog(@"Response: %@", request.response);
+                        
+                        if ([request.response isKindOfClass:[NSDictionary class]]) {
+                            NSDictionary* response = (NSDictionary*)request.response;
+                            [[AlertManager shared] showOkAlertWithTitle:[response safeStringObjectForKey:@"message"]];
+                        }
+                        
+                        [[CommonManager shared] logout];
+                        
+                        if (_failureBlock) {
+                            _failureBlock(self, error);
+                        }
+                        
+                    }];
+        
+        //[self loginWithEmail:_emailTextField.text pass:_passwordTextField.text];
     }
 }
 
@@ -434,7 +631,50 @@
 }
 
 - (IBAction)signUpButtonClicked:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    
+    
+    [self showRegistratioVC];
+    
+    //[self.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (void)showRegistratioVC{
+    
+    [RegistrationVC registrationVCPresentation:^(UIViewController *registrationVC) {
+        
+//        UINavigationController* registrationNVC = [[UINavigationController alloc] initWithRootViewController:registrationVC];
+        
+        [registrationVC view];
+        
+//        [[LayoutManager shared].rootNVC presentViewController:registrationNVC
+//                                                     animated:NO
+//                                                   completion:^{}];
+        
+        [self.navigationController pushViewController:registrationVC
+                                             animated:YES];
+        
+    } success:^(UIViewController *registrationVC, NSString *token, NSDictionary* user) {
+        
+        
+        if (_successBlock) {
+            _successBlock(self, token);
+        }
+
+//        [[LayoutManager shared] profileNVC];
+//        [LayoutManager shared].profileVC.userID = [CommonManager shared].userId;
+//        [[LayoutManager shared].profileVC view];
+//        
+//        [[LayoutManager shared].homeVC didLoginSuccessfuly];
+//        
+//        [registrationVC.navigationController dismissViewControllerAnimated:YES completion:^{}];
+        
+    } failure:^(UIViewController *registrationVC, NSError *error) {
+        if (_failureBlock) {
+            _failureBlock(self, error);
+        }
+    }];
+    
 }
 
 #pragma mark _______________________ Delegates _____________________________

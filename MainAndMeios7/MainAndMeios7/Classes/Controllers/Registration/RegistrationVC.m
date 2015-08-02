@@ -92,8 +92,8 @@
 
 
 + (void)registrationVCPresentation:(void (^)(UIViewController* registrationVC))presentation
-                           success:(void (^)(UIViewController* registrationVC, NSString* token))success
-                           failure:(void (^)(UIViewController* registrationVC, NSError* error))failure;
+                           success:(void (^)(UIViewController* registrationVC, NSString* token, NSDictionary* user))success
+                           failure:(void (^)(UIViewController* registrationVC, NSError* error))failure
  {
     
     RegistrationVC* registrationVC = [RegistrationVC loadFromXIBForScrrenSizes];
@@ -167,6 +167,7 @@
 
 - (void)registrationAction{
 
+    [[CommonManager shared] logout];
     
     RegistrationRequest *request = [[RegistrationRequest alloc] init];
     request.username = _txtFullName.text;
@@ -176,11 +177,20 @@
     [self showSpinnerWithName:@""];
     [[MMServiceProvider sharedProvider] sendRequest:request success:^(RegistrationRequest *request) {
         [self hideSpinnerWithName:@""];
-        [[CommonManager shared] setupApiToken:request.api_token];
-        
+//        [[CommonManager shared] setupApiToken:request.api_token];
+//        
+//        [[CommonManager shared] setupUserId:[request.user safeStringObjectForKey:@"id"]];
+//        
+//        [[CommonManager shared] setupEmail:request.email];
+//        [[CommonManager shared] setupPass:request.password];
+//        [[CommonManager shared] setLoginMethod:LoginMethodEmail];
+
         
         [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
-            [self btnAlreadyRegistered:nil];
+//            if (_successBlock) {
+//                _successBlock(self, request.api_token, request.user);
+//            }
+            [self.navigationController popViewControllerAnimated:YES];
         }
                                                title:@"Success"
                                              message:@"You successfully signed up to use Main And Me"
@@ -195,6 +205,13 @@
         [self hideSpinnerWithName:@""];
         NSLog(@"Registration failed: %@", error);
         NSLog(@"Response: %@", request.response);
+        
+        NSString* message = @"Error";
+        
+        if ([request.response isKindOfClass:[NSDictionary class]]){
+            message = [(NSDictionary*)request.response safeStringObjectForKey:@"email"];
+        }
+        [[AlertManager shared] showOkAlertWithTitle:message];
     }];
 
 }
@@ -214,12 +231,15 @@
         [[CommonManager shared] setupApiToken:_loginRequest.apiToken];
         [[CommonManager shared] setupUserId:[_loginRequest.user safeStringObjectForKey:@"id"]];
         
-        
+        [[CommonManager shared] setupEmail:email];
+        [[CommonManager shared] setupPass:pass];
+        [[CommonManager shared] setLoginMethod:LoginMethodEmail];
+
         NSString *apiToken = _loginRequest.apiToken;
         NSLog(@"login completed: %@", apiToken);
         
         if (_successBlock) {
-            _successBlock(self, apiToken);
+            _successBlock(self, apiToken, nil);
         }
         
     } failure:^(LoginRequest *request, NSError *error) {
@@ -298,13 +318,15 @@
 -(IBAction)btnAlreadyRegistered:(id)sender
 {
     
-    LoginVC* loginVC = [LoginVC loadFromXIBForScrrenSizes];
-    
-    loginVC.successBlock = _successBlock;
-    loginVC.failureBlock = _failureBlock;
-    loginVC.alreadyLoggedInBlock = _alreadyLoggedInBlock;
-  
-    [self.navigationController pushViewController:loginVC animated:YES];
+//    LoginVC* loginVC = [LoginVC loadFromXIBForScrrenSizes];
+//    
+//    loginVC.successBlock = _successBlock;
+//    loginVC.failureBlock = _failureBlock;
+//    loginVC.alreadyLoggedInBlock = _alreadyLoggedInBlock;
+//  
+//    [self.navigationController pushViewController:loginVC animated:YES];
+
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 

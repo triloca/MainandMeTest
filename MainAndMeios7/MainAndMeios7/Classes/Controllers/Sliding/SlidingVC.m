@@ -8,7 +8,7 @@
 
 #import "SlidingVC.h"
 #import "RegistrationVC.h"
-
+#import "ProductDetailsManager.h"
 @interface SlidingVC ()
 
 @end
@@ -49,29 +49,35 @@
     
     self.anchorRightRevealAmount = 242;
     
-    [self checkIsLoggedIn];
+//    [self checkIsLoggedIn];
     
-//    [LoginVC loginVCPresentation:^(LoginVC *loginVC) {
-//        
-//        UINavigationController* loginNVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
-//        
-//        [loginVC view];
-//        
-//        [[LayoutManager shared].rootNVC presentViewController:loginNVC
-//                                                     animated:NO
-//                                                   completion:^{}];
-//        
-//    }
-//                         success:^(LoginVC *loginVC, NSString *token) {
-//                             [loginVC.navigationController dismissViewControllerAnimated:YES
-//                                                                              completion:^{}];
-//                         }
-//                         failure:^(LoginVC *loginVC, NSError *error) {
-//                             
-//                         }
-//                 alreadyLoggedIn:^(LoginVC *loginVC, NSString *token) {
-//                     
-//                 }];
+    [LoginVC loginVCPresentation:^(LoginVC *loginVC) {
+        
+        UINavigationController* loginNVC = [[UINavigationController alloc] initWithRootViewController:loginVC];
+        
+        [loginVC view];
+        
+        [[LayoutManager shared].rootNVC presentViewController:loginNVC
+                                                     animated:NO
+                                                   completion:^{}];
+        
+    }
+                         success:^(LoginVC *loginVC, NSString *token) {
+                             [loginVC.navigationController dismissViewControllerAnimated:YES
+                                                                              completion:^{}];
+                             [[LayoutManager shared] profileNVC];
+                             [LayoutManager shared].profileVC.userID = [CommonManager shared].userId;
+                             [[LayoutManager shared].profileVC view];
+                             
+                             [[LayoutManager shared].homeVC didLoginSuccessfuly];
+
+                         }
+                         failure:^(LoginVC *loginVC, NSError *error) {
+                             
+                         }
+                 alreadyLoggedIn:^(LoginVC *loginVC, NSString *token) {
+                     
+                 }];
     
 }
 
@@ -109,12 +115,14 @@
                                                    completion:^{}];
         
         
-    } success:^(UIViewController *registrationVC, NSString *token) {
+    } success:^(UIViewController *registrationVC, NSString *token, NSDictionary* user) {
         
         [[LayoutManager shared] profileNVC];
         [LayoutManager shared].profileVC.userID = [CommonManager shared].userId;
         [[LayoutManager shared].profileVC view];
         
+        [[LayoutManager shared].homeVC didLoginSuccessfuly];
+                
         [registrationVC.navigationController dismissViewControllerAnimated:YES completion:^{}];
         
     } failure:^(UIViewController *registrationVC, NSError *error) {

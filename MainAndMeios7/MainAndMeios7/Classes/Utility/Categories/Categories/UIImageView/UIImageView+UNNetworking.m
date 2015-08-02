@@ -214,12 +214,41 @@ static char kUNProgressObjectKey;
                         progress:progress];
 }
 
-
 //! Base method for loading image (from memory cache, file cache or network)
-- (void)setImageWithURLRequest:(NSURLRequest*)urlRequest 
+- (void)setImageWithURLRequest:(NSURLRequest*)urlRequest
               placeholderImage:(UIImage*)placeholderImage
                   failureImage:(UIImage*)failureImage
               progressViewSize:(CGSize)progressViewSize
+             progressViewStile:(UIProgressViewStyle)progressViewStile
+             progressTintColor:(UIColor*)progressTintColor
+                trackTintColor:(UIColor*)trackTintColor
+                    sizePolicy:(UNImageSizePolicy)sizePolicy
+                   cachePolicy:(UNImageCachePolicy)cachePolicy
+                       success:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, UIImage* image))success
+                       failure:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error))failure
+                      progress:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, float progress))progress{
+    
+    [self setImageWithURLRequest:urlRequest
+                placeholderImage:placeholderImage
+                    failureImage:failureImage
+                progressViewSize:progressViewSize
+                   imageViewSize:self.frame.size
+               progressViewStile:progressViewStile
+               progressTintColor:progressTintColor
+                  trackTintColor:trackTintColor
+                      sizePolicy:sizePolicy
+                     cachePolicy:cachePolicy
+                         success:success
+                         failure:failure
+                        progress:progress];
+}
+
+//! Base method for loading image (from memory cache, file cache or network)
+- (void)setImageWithURLRequest:(NSURLRequest*)urlRequest
+              placeholderImage:(UIImage*)placeholderImage
+                  failureImage:(UIImage*)failureImage
+              progressViewSize:(CGSize)progressViewSize
+                 imageViewSize:(CGSize)imageViewSize
              progressViewStile:(UIProgressViewStyle)progressViewStile
              progressTintColor:(UIColor*)progressTintColor
                 trackTintColor:(UIColor*)trackTintColor
@@ -237,7 +266,7 @@ static char kUNProgressObjectKey;
     
     //! Try to find image in memory cache
     UIImage *cachedImage = [[[self class] un_sharedImageCache] cachedImageForRequest:urlRequest 
-                                                                             forSize:self.frame.size
+                                                                             forSize:imageViewSize
                                                                           sizePolicy:sizePolicy
                                                                           withPolicy:cachePolicy];
     
@@ -254,7 +283,7 @@ static char kUNProgressObjectKey;
         //! Try to find image in file cache
         BOOL isCached = [[[self class] un_sharedFileCache] 
                          isCachedImageForRequest:urlRequest
-                         forSize:self.frame.size
+                         forSize:imageViewSize
                          sizePolicy:sizePolicy
                          withPolicy:cachePolicy 
                          completed:^(NSURLRequest *request, CGSize size, UIImage *image) {
@@ -271,7 +300,7 @@ static char kUNProgressObjectKey;
                                  [[[self class] un_sharedImageCache] cacheImage:image 
                                                                      forRequest:urlRequest 
                                                                      withPolicy:cachePolicy
-                                                                        forSize:self.frame.size 
+                                                                        forSize:imageViewSize
                                                                      sizePolicy:sizePolicy];
                              }
                          }];
@@ -331,14 +360,14 @@ static char kUNProgressObjectKey;
                 [[[self class] un_sharedImageCache] cacheImage:resImage 
                                                     forRequest:urlRequest
                                                     withPolicy:cachePolicy
-                                                       forSize:self.frame.size 
+                                                       forSize:imageViewSize
                                                     sizePolicy:sizePolicy];
                 
                 //! Save image to file cache if necessary
                 [[[self class] un_sharedFileCache] cacheImage:resImage 
                                                    forRequest:urlRequest 
                                                    withPolicy:cachePolicy
-                                                      forSize:self.frame.size 
+                                                      forSize:imageViewSize
                                                    sizePolicy:sizePolicy];     
                 return resImage;
             };

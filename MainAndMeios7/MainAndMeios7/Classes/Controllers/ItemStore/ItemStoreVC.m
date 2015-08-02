@@ -33,12 +33,18 @@
 
 #import "SearchManager.h"
 
+#import "ProductCell.h"
+
+static NSString *kProductCellIdentifier = @"ProductCell";
+
 @interface ItemStoreVC ()
 <TMQuiltViewDataSource,
 TMQuiltViewDelegate>
 
 @property (strong, nonatomic) TMQuiltView *quiltView;
 @property (strong, nonatomic) NSMutableArray* collectionArray;
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -67,7 +73,7 @@ TMQuiltViewDelegate>
 
     [self setupNavigationTitle];
  
-    [self setupCollection];
+    //[self setupCollection];
     
     
     self.collectionArray = [NSMutableArray new];
@@ -150,9 +156,14 @@ TMQuiltViewDelegate>
         titleString = [NSString stringWithFormat:@"%@", [_category safeStringObjectForKey:@"name"]];
     }
     
+    __weak ItemStoreVC* wSelf = self;
     self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:titleString
                                                          dropDownIndicator:NO
-                                                             clickCallback:^(CustomTitleView *titleView) {}];
+                                                             clickCallback:^(CustomTitleView *titleView) {
+                                                                 [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+                                                                 [[LayoutManager shared] showHomeControllerAnimated:YES];
+                                                                 [wSelf.navigationController popToRootViewControllerAnimated:YES];
+                                                             }];
 
 }
 
@@ -217,12 +228,13 @@ TMQuiltViewDelegate>
             
             self.collectionArray = [NSMutableArray new];
             
-            for (int i = 0; i < items.count && i < stores.count; i++) {
+            for (int i = 0; i < items.count || i < stores.count; i++) {
                 [_collectionArray safeAddObject:[stores safeObjectAtIndex:i]];
                 [_collectionArray safeAddObject:[items safeObjectAtIndex:i]];
             }
             
-            [_quiltView reloadData];
+            //[_quiltView reloadData];
+            [_tableView reloadData];
             
             if (_collectionArray.count > 0) {
                 [_quiltView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -237,7 +249,7 @@ TMQuiltViewDelegate>
     request.categoryId = [_category safeStringObjectForKey:@"id"];
     request.communityId = [SearchManager shared].communityID;
 //    request.page = 1;
-//    request.perPage = 20;
+    request.perPage = 100;
     
     [self showSpinnerWithName:@""];
     
@@ -300,11 +312,12 @@ TMQuiltViewDelegate>
                 [_collectionArray safeAddObject:[items safeObjectAtIndex:i]];
             }
             
-            [_quiltView reloadData];
+            //[_quiltView reloadData];
+            [_tableView reloadData];
             
-            if (_collectionArray.count > 0) {
-                [_quiltView setContentOffset:CGPointMake(0, 0) animated:YES];
-            }
+//            if (_collectionArray.count > 0) {
+//                [_quiltView setContentOffset:CGPointMake(0, 0) animated:YES];
+//            }
             
         }];
     }];
@@ -315,6 +328,7 @@ TMQuiltViewDelegate>
     
     LoadStoresRequest *request = [[LoadStoresRequest alloc] init];
     request.communityId = [SearchManager shared].communityID;
+    request.perPage = 100;
     //    request.page = 1;
     //    request.perPage = 20;
     
@@ -340,6 +354,7 @@ TMQuiltViewDelegate>
     
     LoadProductsRequest *request = [[LoadProductsRequest alloc] init];
     request.communityId = [SearchManager shared].communityID;
+    request.perPage = 100;
     [self showSpinnerWithName:@""];
     
     [[MMServiceProvider sharedProvider] sendRequest:request success:^(LoadProductsRequest* request) {
@@ -444,6 +459,141 @@ TMQuiltViewDelegate>
     CGFloat height = [HomeStoreCell cellHeghtForStore:storeDict];
     
     return height;
+}
+
+
+#pragma mark - Table view data source
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return tableView.frame.size.width / 3 + 1;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    NSInteger count = [_collectionArray count];
+    NSInteger temp = count % 3;
+    NSInteger rowsCount = count / 3;
+    if (temp > 0) {
+        rowsCount++;
+    }
+    
+    
+    return rowsCount;
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ProductCell* cell = [self productCellForIndexPath:indexPath];
+    return cell;
+}
+
+- (ProductCell*)productCellForIndexPath:(NSIndexPath*)indexPath{
+    ProductCell *cell = [_tableView dequeueReusableCellWithIdentifier:kProductCellIdentifier];
+    
+//    if (_isEditing) {
+//        [cell.firstView startVibration];
+//        [cell.secondView startVibration];
+//        [cell.thirdView startVibration];
+//    }else{
+//        [cell.firstView stopVibration];
+//        [cell.secondView stopVibration];
+//        [cell.thirdView stopVibration];
+//    }
+    
+    
+    if (cell == nil){
+        cell = [ProductCell loadViewFromXIB];
+        
+        cell.didClickAtIndex = ^(NSInteger selectedIndex){
+            NSDictionary* dict = [_collectionArray safeObjectAtIndex:selectedIndex];
+//
+            [self onClickWithItemDict:dict];
+            
+            //if (_isEditing) {
+//                //! Delete alert
+//                [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+//                    if (alertView.cancelButtonIndex == buttonIndex) {
+//                        
+//                    }else{
+//                        [_items removeObject:dict];
+//                        [_tableView reloadData];
+//                        [self updateEditButton];
+//                        [ProductDetailsManager deleteProduct:dict[@"id"] inWishlist:_wishlist[@"id"] success:nil failure:nil exception:nil];
+//                        
+//                    }
+//                }
+//                                                       title:@"Delete this photo?"
+//                                                     message:@""
+//                                           cancelButtonTitle:@"Cancel"
+//                                           otherButtonTitles:@"Delete", nil];
+//                
+//                
+//            }else{
+//                ProductDetailsVC *vc = [ProductDetailsVC loadFromXIB_Or_iPhone5_XIB];
+//                vc.product = dict;
+//                [self.navigationController pushViewController:vc animated:YES];
+//            }
+        };
+    }
+    
+    // Configure the cell...
+    
+    NSInteger index = indexPath.row * 3;
+    
+    if ([_collectionArray count] > index) {
+        NSDictionary* object = [_collectionArray safeDictionaryObjectAtIndex:index];
+        NSString* imageUrl = nil;
+        
+        imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
+        
+        [cell.firstView setImageURLString:imageUrl];
+        cell.firstView.hidden = NO;
+        
+    }else{
+        cell.firstView.hidden = YES;
+    }
+    cell.firstView.coverButton.tag = index;
+    
+    if ([_collectionArray count] > index + 1) {
+        NSDictionary* object = [_collectionArray safeDictionaryObjectAtIndex:index + 1];
+        NSString* imageUrl = nil;
+        
+        imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
+        
+        [cell.secondView setImageURLString:imageUrl];
+        cell.secondView.hidden = NO;
+    }else{
+        cell.secondView.hidden = YES;
+    }
+    cell.secondView.coverButton.tag = index + 1;
+    
+    if ([_collectionArray count] > index + 2) {
+        NSDictionary* object = [_collectionArray safeDictionaryObjectAtIndex:index + 2];
+        NSString* imageUrl = nil;
+        
+        imageUrl = [[object safeDictionaryObjectForKey:@"image"] safeStringObjectForKey:@"mid"];
+        
+        [cell.thirdView setImageURLString:imageUrl];
+        cell.thirdView.hidden = NO;
+    }else{
+        cell.thirdView.hidden = YES;
+    }
+    cell.thirdView.coverButton.tag = index + 2;
+    
+    return cell;
+}
+
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
 }
 
 #pragma mark _______________________ Public Methods ________________________

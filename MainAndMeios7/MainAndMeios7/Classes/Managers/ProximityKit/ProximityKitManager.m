@@ -220,6 +220,21 @@
     return self.campaignKitManager.activeCampaigns;
 }
 
+- (NSArray*)foundCampaigns{
+    return self.campaignKitManager.foundCampaigns;
+}
+
+- (void)addDeletedCompaign:(CKCampaign*)campaign{
+    NSMutableArray* temp = [NSMutableArray arrayWithArray:[self deletedCampaignIds]];
+    [temp addObject:campaign.id];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithArray:temp] forKey:@"kDeletedCampaignIds"];
+}
+
+- (NSArray*)deletedCampaignIds{
+    NSArray* objs = [[NSUserDefaults standardUserDefaults] arrayForKey:@"kDeletedCampaignIds"];
+    return objs;
+}
+
 #pragma mark _______________________ Notifications _________________________
 
 - (void)sendNewCampaignNotification:(CKCampaign*)campaign{

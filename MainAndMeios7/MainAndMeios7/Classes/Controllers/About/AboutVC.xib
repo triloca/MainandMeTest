@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AboutVC">
@@ -20,13 +20,16 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    <mutableString key="text">Welcome! Think of Main&amp;Me as a virtual Main Street for your town, where you can discover photos of the goods, services, and promotions hidden behind the brick-and-mortar facades of every business on your Main Street, all in this one place.
+                    <mutableString key="text">We love Main Street, so we created Main&amp;Me as the local tourism and shopping app that showcases your city's best products, sales and events...every day. It uses geo location to organize all the local businesses and events in a city into a single app, so you, as a tourist or resident, can keep your town in your pocket.
+Because it works in any place, you can use the same Main&amp;Me app you're using now to discover what's going on in hundreds of other cities across America (just tap the logo to try another city). We encourage you to use our camera feature to add photos of your own favorite local "finds" and help others discover the best your town offers, too.
 
-Tap the "Main" button to view your town by either storefronts or Items. Use the search function to search by category or keyword. Tap the "Me" button to see your wishlists and likes, or to change your settings. Use the camera function to add favorite items or stores that aren't yet on Main&amp;Me.
+Your town not on Main&amp;Me yet? Go to www.mainandme.com to get started uploading your photos of what your town offers, or email us at info@mainandme.com and we'll help.
 
-Your town not on Main&amp;Me yet? Email james@mainandme.com and we'll help get you started."</mutableString>
+Mary Pat &amp; James Akers
+Co-founders, Main&amp;Me</mutableString>
                     <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="15"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
                 </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

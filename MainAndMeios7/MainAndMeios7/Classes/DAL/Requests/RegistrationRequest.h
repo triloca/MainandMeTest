@@ -17,5 +17,6 @@
 
 @property (strong, nonatomic) NSString *responseEmail;
 @property (strong, nonatomic) NSString* api_token;
+@property (strong, nonatomic) NSDictionary* user;
 
 @end

@@ -45,7 +45,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"STORE ON MAP" dropDownIndicator:NO clickCallback:nil];
+    __weak StoreMapViewController* wSelf = self;
+    
+    self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"STORE ON MAP" dropDownIndicator:NO clickCallback:^(CustomTitleView *titleView) {
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        [[LayoutManager shared] showHomeControllerAnimated:YES];
+        [wSelf.navigationController popToRootViewControllerAnimated:YES];
+    }];
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_back_button"] landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(backButtonClicked:)];
 

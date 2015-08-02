@@ -27,5 +27,9 @@
 - (void)deleteCompaign:(CKCampaign*)obj;
 
 - (NSArray*)activeCampaigns;
+- (NSArray*)foundCampaigns;
+
+- (void)addDeletedCompaign:(CKCampaign*)campaign;
+- (NSArray*)deletedCampaignIds;
 
 @end

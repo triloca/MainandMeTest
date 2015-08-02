@@ -104,7 +104,32 @@
     //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     //     //   [self zoomToFit];
     //    });
+    
+//    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+//        [self performSelector:@selector(clearBackground:) withObject:webView afterDelay:0.1];
+//    }
 
+}
+
+
+- (void)clearBackground:(id)obj {
+    UIView *v = obj;
+    while (v) {
+        //v.backgroundColor = [UIColor whiteColor];
+        v = [v.subviews firstObject];
+        
+        if ([NSStringFromClass([v class]) isEqualToString:@"UIWebPDFView"]) {
+            [v setBackgroundColor:[UIColor whiteColor]];
+            
+            // background set to white so fade view in and exit
+            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveEaseOut
+                             animations:^{
+                                 v.alpha = 1.0;
+                             }
+                             completion:nil];
+            return;
+        }
+    }
 }
 
 - (void) webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {

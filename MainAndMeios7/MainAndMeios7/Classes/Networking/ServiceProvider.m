@@ -45,7 +45,7 @@
         
         NSURL *url = [self.baseURL URLByAppendingPathComponent:path]; //manually set params to the url
         url = [NSURL URLWithString:[[url absoluteString] stringByAppendingFormat:[path rangeOfString:@"?"].location == NSNotFound ? @"?%@" : @"&%@", AFQueryStringFromParametersWithEncoding(parameters, self.stringEncoding)]];
-
+        
         [request setURL:url];
         [request setValue:[NSString stringWithFormat:@"application/json"] forHTTPHeaderField:@"Content-Type"];
     } else {
@@ -54,6 +54,9 @@
         
 
     }
+    
+    NSLog(@"URL = %@", request);
+    
     return request;
 }
 
@@ -84,13 +87,13 @@
         [request setValue:[serviceRequest acceptableContentType] forHTTPHeaderField:@"Accept"];
         
     [self log:@"request url:%@", request.URL];
-    [self log:@"request headers:%@", request.allHTTPHeaderFields];
+    //[self log:@"request headers:%@", request.allHTTPHeaderFields];
     if (request.HTTPBody.length > 0)
         [self log:@"request body: %@", [[NSString alloc] initWithData:request.HTTPBody encoding:self.stringEncoding]];
     
     AFHTTPRequestOperation *operation = [self HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [self log:@"Response code: %d", operation.response.statusCode];
-        [self log:@"Response headers: %@", operation.response.allHeaderFields];
+        //[self log:@"Response headers: %@", operation.response.allHeaderFields];
         if (([operation.response.MIMEType hasPrefix:@"application"] || [operation.response.MIMEType hasPrefix:@"text"])) {
             [self log:@"Response body: %@", [[NSString alloc] initWithData:operation.responseData encoding:self.stringEncoding]];
         }

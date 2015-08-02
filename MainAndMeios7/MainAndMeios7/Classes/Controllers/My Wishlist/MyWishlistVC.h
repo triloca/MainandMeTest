@@ -10,5 +10,4 @@
 #import "WIshlistPickerVC.h"
 
 @interface MyWishlistVC : WishlistPickerVC
-
 @end

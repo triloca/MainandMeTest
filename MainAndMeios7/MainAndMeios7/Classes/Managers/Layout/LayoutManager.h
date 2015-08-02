@@ -47,6 +47,9 @@
 
 #import "LoginVC.h"
 
+#import "SponsoredByNVC.h"
+#import "SponsoredByVC.h"
+
 #import "ProximityKitManager.h"
 
 
@@ -97,6 +100,9 @@
 @property (strong, nonatomic) PrivacyPolicyVC *privacyPolicyVC;
 @property (strong, nonatomic) PrivacyPolicyNVC *privacyPolicyNVC;
 
+@property (strong, nonatomic) SponsoredByVC *sponsoredByVC;
+@property (strong, nonatomic) SponsoredByNVC *sponsoredByNVC;
+
 @property (strong, nonatomic) AboutVC *aboutVC;
 @property (strong, nonatomic) AboutNVC *aboutNVC;
 
@@ -118,5 +124,6 @@
 + (void)createSlidingVC;
 
 - (void)showSpecialDetails:(CKCampaign*)compaign;
+- (void)showHomeControllerAnimated:(BOOL)animated;
 
 @end

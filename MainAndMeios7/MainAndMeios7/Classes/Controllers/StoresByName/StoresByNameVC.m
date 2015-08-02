@@ -13,6 +13,8 @@
 #import "SVPullToRefresh.h"
 #import "StoreDetailsVC.h"
 #import "SearchManager.h"
+#import "LocationManager.h"
+#import "AllStoresRequest.h"
 
 @interface StoresByNameVC () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -47,11 +49,14 @@
     UIBarButtonItem *anchorLeftButton  = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     self.navigationItem.leftBarButtonItem = anchorLeftButton;
     
+    [self updateSrotButton];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_az_button"] landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(sortButtonAction)];
-    
+    __weak StoresByNameVC* wSelf = self;
+    self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"All places" dropDownIndicator:NO clickCallback:^(CustomTitleView *titleView) {
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        [[LayoutManager shared] showHomeControllerAnimated:YES];
+        [wSelf.navigationController popToRootViewControllerAnimated:YES];
 
-    self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"STORES BY NAME" dropDownIndicator:NO clickCallback:^(CustomTitleView *titleView) {
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -60,9 +65,9 @@
     
     [self.tableView registerNib:[UINib nibWithNibName:@"StoreCell" bundle:nil] forCellReuseIdentifier:@"StoreCell"];
     
-//    [self.tableView addInfiniteScrollingWithActionHandler:^{
-//        [self searchRequest];
-//    }];
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [self searchRequest];
+    }];
     
     [self startSearch];
     
@@ -77,6 +82,19 @@
     _sortType = !_sortType;
     [self sortData];
     [_tableView reloadData];
+    [self updateSrotButton];
+}
+
+- (void)updateSrotButton{
+
+    NSString* imageName;
+    if (_sortType) {
+        imageName = @"nav_az_button";
+    }else{
+        imageName = @"nav_za_button";
+    }
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:imageName] landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(sortButtonAction)];
 }
 
 #pragma mark - TableView
@@ -91,8 +109,8 @@
     [cell setStore:_tableArray[indexPath.row]];
 
     if ((indexPath.row == 4 || indexPath.row == 0) && 0) {
-        cell.backlighted = YES;
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        cell.backlighted = YES;
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else {
         cell.backlighted = NO;
         cell.accessoryType = UITableViewCellAccessoryNone;
@@ -137,20 +155,14 @@
         return;
     }
     
-    SearchRequest *searchRequest = [[SearchRequest alloc] initWithSearchType:SearchTypeStores searchFilter:SearchFilterRandom];
-    //searchRequest.coordinate = CLLocationCoordinate2DMake(42.283215, -71.123029);
-    
-    searchRequest.city = [SearchManager shared].city;
-    searchRequest.state = [SearchManager shared].state;
-    searchRequest.page = _page;
-    //searchRequest.searchKey = _searchBar.text;
-    searchRequest.name = _searchBar.text;
+    AllStoresRequest* allStoresRequest = [[AllStoresRequest alloc] initWithCommunity:[SearchManager shared].communityID];
+    allStoresRequest.page = _page;
     
     if (_page == 1) {
         [self showSpinnerWithName:@""];
     }
     
-    self.searchOperation = [[MMServiceProvider sharedProvider] sendRequest:searchRequest success:^(SearchRequest* request) {
+    self.searchOperation = [[MMServiceProvider sharedProvider] sendRequest:allStoresRequest success:^(SearchRequest* request) {
         NSLog(@"Succceess!");
         [self hideSpinnerWithName:@""];
         

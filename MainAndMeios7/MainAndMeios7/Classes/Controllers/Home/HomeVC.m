@@ -34,6 +34,20 @@
 #import "ProductCell.h"
 #import "CustomSearchBar.h"
 
+#import "AddPhotoViewController.h"
+#import "UIImage+Common.h"
+
+#import "CameraOverlayView.h"
+#import "PKImagePickerViewController.h"
+
+#import "SearchVC.h"
+#import "ProductDetailsManager.h"
+#import "LoadCommunityLocationRequest.h"
+#import "LocationManager.h"
+#import "ProductsStoresManager.h"
+
+#import "WishlistDetailsVC.h"
+
 typedef enum {
     ScreenStateStore = 0,
     ScreenStateItem,
@@ -53,7 +67,10 @@ static NSString *kProductCellIdentifier = @"ProductCell";
 TMQuiltViewDelegate,
 HorisontalListViewDelegate,
 UITableViewDataSource,
-UITableViewDelegate>
+UITableViewDelegate,
+UIActionSheetDelegate,
+UIImagePickerControllerDelegate,
+UINavigationControllerDelegate>
 
 @property (strong, nonatomic) SearchTypeView *searchTypeView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -152,6 +169,7 @@ UITableViewDelegate>
 
     [self addCoverViewAnimated:YES];
     
+    _searchBar.placeholder = @"Tap to start searching...";
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -174,8 +192,7 @@ UITableViewDelegate>
     [_tableView reloadData];
     //[_quiltView reloadData];
     
-    
-
+    [self updateSpecials];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -219,7 +236,6 @@ UITableViewDelegate>
 }
 
 #pragma mark _______________________ Privat Methods(view)___________________
-
 
 - (void)anchorRight {
     [self.slidingViewController anchorTopViewToRightAnimated:YES];
@@ -381,7 +397,8 @@ UITableViewDelegate>
 
 - (void)setupNavigationTitle{
     
-    NSString* title = [NSString stringWithFormat:@"%@, %@", [SearchManager shared].city, [SearchManager shared].state];
+    //NSString* title = [NSString stringWithFormat:@"%@, %@", [SearchManager shared].city, [SearchManager shared].state];
+    NSString* title = [NSString stringWithFormat:@"%@&Me", [SearchManager shared].city];
     
     self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:title
                                                          dropDownIndicator:NO
@@ -545,24 +562,25 @@ UITableViewDelegate>
             wSelf.searchTypeView.hideTriger = NO;
             [wSelf.searchTypeView selectStorefronts];
             
-            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].searchNVC;
-            [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+            SponsoredByVC* vc = [SponsoredByVC loadFromXIBForScrrenSizes];
+            vc.wasPushed = YES;
+            [wSelf.navigationController pushViewController:vc animated:YES];
         };
     }
     
     
-    if ([[ProximityKitManager shared].activeCampaigns firstObject]) {
-        [_coverView setupCampaign:[[ProximityKitManager shared].activeCampaigns firstObject]];
-    }else{
-        
-        [[ProximityKitManager shared].campaignKitManager syncWithCompletionHandler:^(UIBackgroundFetchResult res) {
-            if ([[ProximityKitManager shared].activeCampaigns firstObject]) {
-                [_coverView setupCampaign:[[ProximityKitManager shared].activeCampaigns firstObject]];
-            }else{
-                [self removeCoverViewAnimated:YES];
-            }
-        }];
-    }
+//    if ([[ProximityKitManager shared].activeCampaigns firstObject]) {
+//        [_coverView setupCampaign:[[ProximityKitManager shared].activeCampaigns firstObject]];
+//    }else{
+//        
+//        [[ProximityKitManager shared].campaignKitManager syncWithCompletionHandler:^(UIBackgroundFetchResult res) {
+//            if ([[ProximityKitManager shared].activeCampaigns firstObject]) {
+//                [_coverView setupCampaign:[[ProximityKitManager shared].activeCampaigns firstObject]];
+//            }else{
+//                [self removeCoverViewAnimated:YES];
+//            }
+//        }];
+//    }
     
     
     _coverView.alpha = 0;
@@ -594,10 +612,115 @@ UITableViewDelegate>
     _coverView.frame = CGRectMake(0, CGRectGetMaxY(_searchBar.frame), self.view.frame.size.width, self.view.frame.size.height - CGRectGetMaxY(_searchBar.frame));
 }
 
+-(void) displayImagePickerWithSource:(UIImagePickerControllerSourceType)src animated:(BOOL)animated{
+
+    
+    AddPhotoViewController* vc = [AddPhotoViewController loadFromXIBForScrrenSizes];
+    vc.didClickFinish = ^(AddPhotoViewController* view){
+        
+        [[LayoutManager shared].myWishlistNVC popToRootViewControllerAnimated:NO];
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].myWishlistNVC;
+        
+        MyWishlistVC* vc = (MyWishlistVC*)[LayoutManager shared].myWishlistNVC.viewControllers.firstObject;
+        vc.needOpenMyPhotos = YES;
+        [[LayoutManager shared].slidingVC resetTopViewAnimated:NO onComplete:^{}];
+        
+        [view dismissViewControllerAnimated:YES
+                                 completion:^{}];
+
+    };
+    
+
+    vc.didClickShare = ^(AddPhotoViewController* view, NSDictionary* prod, NSArray *wishlists){
+        
+        [[LayoutManager shared].myWishlistNVC popToRootViewControllerAnimated:NO];
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].myWishlistNVC;
+        
+        MyWishlistVC* vc = (MyWishlistVC*)[LayoutManager shared].myWishlistNVC.viewControllers.firstObject;
+        //vc.needOpenMyPhotos = YES;
+        
+        WishlistDetailsVC *wvc = [WishlistDetailsVC loadFromXIBForScrrenSizes];
+        wvc.wishlist = wishlists.firstObject;
+        [vc.navigationController pushViewController:wvc animated:NO];
+
+        
+        ProductDetailsVC* pvc = [ProductDetailsVC loadFromXIBForScrrenSizes];
+        pvc.product = prod;
+        pvc.needShowShareView = YES;
+        [vc.navigationController pushViewController:pvc animated:NO];
+        
+        [[LayoutManager shared].slidingVC resetTopViewAnimated:NO onComplete:^{}];
+
+        [view dismissViewControllerAnimated:YES
+                                 completion:^{}];
+        
+    };
+    
+    vc.didClickCancel = ^(AddPhotoViewController* view){
+        [view dismissViewControllerAnimated:YES
+                                 completion:^{}];
+    };
+
+
+    //PKImagePickerViewController* vc = [[PKImagePickerViewController alloc] init];
+    [[LayoutManager shared].rootNVC presentViewController:vc animated:animated completion:^{}];
+    
+    return;
+    
+    //@try {
+        if([UIImagePickerController isSourceTypeAvailable:src]) {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            picker.cameraCaptureMode = UIImagePickerControllerCameraCaptureModePhoto;
+            picker.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+            picker.showsCameraControls = NO;
+            picker.navigationBarHidden = YES;
+            picker.toolbarHidden = YES;
+            
+            CameraOverlayView* coverView = [CameraOverlayView loadViewFromXIB];
+            coverView.onCameraButton = ^(CameraOverlayView* view, UIButton* button){
+                [picker takePicture];
+            };
+            
+            coverView.onCancelButton = ^(CameraOverlayView* view, UIButton* button){
+                [picker dismissViewControllerAnimated:YES
+                                           completion:^{}];
+            };
+            
+            picker.cameraOverlayView = coverView;
+            
+            //[picker setSourceType:src];
+           // picker.showsCameraControls = NO;
+            //[picker setAllowsEditing:NO];
+            
+            [picker setDelegate:self];
+            [[LayoutManager shared].rootNVC presentViewController:picker animated:animated completion:^{}];
+            
+        }
+   // }
+//    @catch (NSException *e) {
+//        NSLog(@"UIImagePickerController NSException %@", e);
+//    }
+
+}
+
+
 #pragma mark _______________________ Privat Methods ________________________
 
 - (void)updateSpecials{
-    self.specialsView.items = [NSArray arrayWithArray:[ProximityKitManager shared].compaignArray];
+    
+    NSMutableArray* temp = [NSMutableArray arrayWithArray:[ProximityKitManager shared].activeCampaigns];
+    NSArray* deletedCampaignIds = [[ProximityKitManager shared] deletedCampaignIds];
+    
+    for (CKCampaign* obj in [ProximityKitManager shared].activeCampaigns) {
+        if ([deletedCampaignIds containsObject:obj.id]) {
+            [temp removeObject:obj];
+        }
+    }
+    
+    
+    self.specialsView.items = [NSArray arrayWithArray:temp];
+//[NSArray arrayWithArray:[ProximityKitManager shared].compaignArray];
 }
 
 
@@ -629,11 +752,13 @@ UITableViewDelegate>
     
     
     SearchRequest *searchRequest = [[SearchRequest alloc] initWithSearchType:searchType searchFilter:SearchFilterRandom];
-    searchRequest.location = [[CLLocation alloc] initWithLatitude:42.283215 longitude:-71.123029];
+    searchRequest.location = [SearchManager shared].communityLocation; //[[CLLocation alloc] initWithLatitude:42.283215 longitude:-71.123029];
     searchRequest.city = [SearchManager shared].city;
     searchRequest.state = [SearchManager shared].state;
     searchRequest.page = _page;
     searchRequest.searchKey = _searchBar.text;
+    
+    NSLog(@"city = %@, state = %@", [SearchManager shared].city, [SearchManager shared].state);
     
     if (_page == 1) {
         [self showSpinnerWithName:@""];
@@ -863,7 +988,23 @@ UITableViewDelegate>
 #pragma mark _______________________ Buttons Action ________________________
 
 - (void)cameraButtinCliced:(UIButton*)button{
+    
+    [self displayImagePickerWithSource:UIImagePickerControllerSourceTypeCamera animated:YES];
+    
+    return;
+    
+    UIActionSheet *shareActionSheet = [[UIActionSheet alloc]
+                                       initWithTitle:nil
+                                       delegate:self
+                                       cancelButtonTitle:@"Cancel"
+                                       destructiveButtonTitle:nil
+                                       otherButtonTitles:@"Take a New Photo",
+                                       @"Choose From Library",nil];
 
+    shareActionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
+    
+    
+    [shareActionSheet showInView:[LayoutManager shared].appDelegate.window];
 }
 
 #pragma mark _______________________ Delegates _____________________________
@@ -873,6 +1014,13 @@ UITableViewDelegate>
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)bar {
     // reset the shouldBeginEditing BOOL ivar to YES, but first take its value and use it to return it from the method call
+    
+    SearchVC* vc = [SearchVC loadFromXIBForScrrenSizes];
+    vc.wasPushed = YES;
+    
+    [self.navigationController pushViewController:vc animated:YES];
+    
+    return NO;
     BOOL boolToReturn = _searchShouldBeginEditing;
     _searchShouldBeginEditing = YES;
     return boolToReturn;
@@ -1174,7 +1322,154 @@ UITableViewDelegate>
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+
+#pragma mark - UIActionSheet Delegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    switch (buttonIndex) {
+        case 0:
+            [self displayImagePickerWithSource:UIImagePickerControllerSourceTypeCamera animated:YES];
+            break;
+        case 1:
+            [self displayImagePickerWithSource:UIImagePickerControllerSourceTypePhotoLibrary animated:YES];
+            break;
+        case 2:
+            break;
+        default:
+            break;
+    }
+}
+
+
+#pragma mark - UIImagePickerController Delegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+
+    // for iOS7
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    }
+    
+    //[self dismissViewControllerAnimated:YES completion:nil];
+    
+    UIImage *capturedImage = [info valueForKey:UIImagePickerControllerOriginalImage];
+   
+    UIImage *afterFixingOrientation = [capturedImage normalizedImage2];
+    
+    AddPhotoViewController* addPHotoVC = [AddPhotoViewController loadFromXIBForScrrenSizes];
+    
+    addPHotoVC.didClickCancel = ^(AddPhotoViewController* obj){
+        
+        [obj dismissViewControllerAnimated:YES completion:^{}];
+    };
+    
+    addPHotoVC.photoImage = afterFixingOrientation;
+    [picker pushViewController:addPHotoVC animated:YES];
+    
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [self dismissViewControllerAnimated:YES completion:nil];
+   
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        
+        [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    }
+}
+
 #pragma mark _______________________ Public Methods ________________________
+
+- (void)didLoginSuccessfuly{
+
+    [[ProductDetailsManager shared] trackLoginSuccess:^{
+        
+    }
+                                              failure:^(NSError *error, NSString *errorString) {
+                                                  
+                                              }
+                                            exception:^(NSString *exceptionString) {
+                                                
+                                            }];
+    
+    
+    
+    if ([SearchManager shared].cityWasSelected) {
+        
+    }else{
+        [self showSpinnerWithName:@"community"];
+        //CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(42.36, -71.06);
+        [[ProductsStoresManager shared] loadCommunitiesByLocation:[LocationManager sharedManager].currentLocation.coordinate
+                                                          success:^(NSArray *objects) {
+                                                              [self hideSpinnerWithName:@"community"];
+                                                              NSDictionary* obj = [objects firstObject];
+                                                              
+                                                              if (obj){
+                                                                  CLLocation* location = [[CLLocation alloc]initWithLatitude:[[obj safeNumberObjectForKey:@"lat"] floatValue]
+                                                                                                                   longitude:[[obj safeNumberObjectForKey:@"lng"] floatValue]];
+                                                                 
+                                                                  
+                                                                  [SearchManager shared].communityLocation = location;
+                                                                  [SearchManager shared].city = [obj safeStringObjectForKey:@"city"];
+                                                                  [SearchManager shared].state = [obj safeStringObjectForKey:@"state"];
+                                                                  [SearchManager shared].communityID = [[obj safeNSNumberObjectForKey:@"id"] stringValue];
+                                                                  
+                                                                  
+                                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"kCommunityChanged" object:nil];
+                                                              }
+                                                              
+                                                              
+                                                              [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                                                  if (alertView.cancelButtonIndex != buttonIndex) {
+                                                                      [self showAddressController];
+                                                                  }
+                                                                  [[SearchManager shared] setCityWasSelected:YES];
+                                                              }
+                                                                                                     title:@"Keep this city as your location, or change city?"
+                                                                                                   message:nil
+                                                                                         cancelButtonTitle:@"Keep"
+                                                                                         otherButtonTitles:@"Change", nil];
+                                                          }
+                                                          failure:^(NSError *error, NSString *errorString) {
+                                                              [self hideSpinnerWithName:@"community"];
+                                                              
+                                                              [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                                                  if (alertView.cancelButtonIndex != buttonIndex) {
+                                                                      [self showAddressController];
+                                                                  }
+                                                                  [[SearchManager shared] setCityWasSelected:YES];
+                                                              }
+                                                                                                     title:@"Keep this city as your location, or change city?"
+                                                                                                   message:nil
+                                                                                         cancelButtonTitle:@"Keep"
+                                                                                         otherButtonTitles:@"Change", nil];
+                                                              
+                                                          }
+                                                        exception:^(NSString *exceptionString) {
+                                                            [self hideSpinnerWithName:@"community"];
+                                                        }];
+        
+   
+    }
+
+
+}
+
+- (void)updateStore:(NSDictionary*)storeDict{
+    NSMutableArray* temp = [NSMutableArray arrayWithArray:_collectionArray];
+
+    for (NSDictionary* dict in _collectionArray) {
+        if ([[dict safeNSNumberObjectForKey:@"id"] isEqualToNumber:[storeDict safeNSNumberObjectForKey:@"id"]]) {
+            [temp replaceObjectAtIndex:[_collectionArray indexOfObjectIdenticalTo:dict] withObject:storeDict];
+        }
+    }
+
+    self.collectionArray = temp;
+    [self.tableView reloadData];
+}
+
 #pragma mark _______________________ Notifications _________________________
 
 - (void)keyboardWillShow:(NSNotification *)notification {

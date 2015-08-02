@@ -29,13 +29,18 @@
 
     __weak MyWishlistVC *wself = self;
     self.onSelectWishlistCallback = ^(NSDictionary *dict) {
-        WishlistDetailsVC *vc = [WishlistDetailsVC loadFromXIB_Or_iPhone5_XIB];
+        WishlistDetailsVC *vc = [WishlistDetailsVC loadFromXIBForScrrenSizes];
         vc.wishlist = dict;
         [wself.navigationController pushViewController:vc animated:YES];
     };
 }
 
+
+
 - (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 0) {
+        return NO;
+    }
     return YES;
 }
 

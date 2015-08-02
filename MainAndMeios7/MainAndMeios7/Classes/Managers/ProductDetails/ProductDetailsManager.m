@@ -9,6 +9,7 @@
 #import "ProductDetailsManager.h"
 #import "NSURLConnectionDelegateHandler.h"
 #import "JSON.h"
+#import "SearchManager.h"
 
 NSString * const kkServerBaseURL = @"http://www.mainandme.com/api/v1";
 
@@ -677,6 +678,39 @@ NSString * const kkServerBaseURL = @"http://www.mainandme.com/api/v1";
             NSString* messageString = [value safeStringObjectForKey:@"error"];
             failure(nil, messageString);
         }
+        
+    } failure:^(NSURLConnection *connection, NSError *error) {
+        failure(error, error.localizedDescription);
+    }eception:^(NSURLConnection *connection, NSString *exceptionMessage) {
+        exception(exceptionMessage);
+    }];
+    
+    NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
+    [connection start];
+    
+}
+
+
+
+- (void)trackLoginSuccess:(void(^)()) success
+                        failure:(void(^) (NSError* error, NSString* errorString)) failure
+                      exception:(void(^) (NSString* exceptionString))exception{
+    
+    NSString* urlString =
+    [NSString stringWithFormat:@"%@/login_trackers?_token=%@&community_id=%@", kkServerBaseURL, [CommonManager shared].apiToken, [SearchManager shared].communityID];
+    
+    urlString = [urlString stringByAddingPercentEscapesUsingEncoding: NSUTF8StringEncoding];
+    
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]
+                                                           cachePolicy:NSURLRequestReloadIgnoringLocalCacheData
+                                                       timeoutInterval:20];
+    [request setHTTPMethod:@"POST"];
+    
+    NSURLConnectionDelegateHandler* handler = [NSURLConnectionDelegateHandler handlerWithSuccess:^(NSURLConnection *connection, id data) {
+        NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", returnString);
+        //id value = [returnString JSONValue];
+            success();
         
     } failure:^(NSURLConnection *connection, NSError *error) {
         failure(error, error.localizedDescription);

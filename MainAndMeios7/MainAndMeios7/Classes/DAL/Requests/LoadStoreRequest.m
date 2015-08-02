@@ -22,7 +22,7 @@
 }
 
 - (NSString *) path {
-    return [NSString stringWithFormat:@"stores/%@", self.storeId];
+    return [NSString stringWithFormat:@"stores/%@?_token=%@", self.storeId, [CommonManager shared].apiToken];
 }
 
 - (void) processResponse:(NSObject *)response {

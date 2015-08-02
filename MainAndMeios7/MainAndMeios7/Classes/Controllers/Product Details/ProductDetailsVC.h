@@ -17,4 +17,6 @@
 @property (strong, nonatomic) NSArray* productsArray;
 @property (assign, nonatomic) NSInteger index;
 
+@property (assign, nonatomic) BOOL needShowShareView;
+
 @end

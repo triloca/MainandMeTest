@@ -48,8 +48,13 @@
     
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_az_button"] landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(sortButtonAction)];
     
-
+    __weak AddressVC* wSelf = self;
+    
     self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"SELECT STATE" dropDownIndicator:NO clickCallback:^(CustomTitleView *titleView) {
+//        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+//        [[LayoutManager shared] showHomeControllerAnimated:YES];
+        [wSelf.navigationController popToRootViewControllerAnimated:YES];
+
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];

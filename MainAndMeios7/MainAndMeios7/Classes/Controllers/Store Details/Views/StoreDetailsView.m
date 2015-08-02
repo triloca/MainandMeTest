@@ -46,8 +46,8 @@
                               failureImage:nil
                           progressViewSize:CGSizeMake(_storeImageView.frame.size.width - 16, 10)
                          progressViewStile:UIProgressViewStyleDefault
-                         progressTintColor:[UIColor colorWithRed:136/255.0f green:173/255.0f blue:230/255.0f alpha:1]
-                            trackTintColor:[UIColor whiteColor]
+                         progressTintColor:[UIColor whiteColor]
+                            trackTintColor:[UIColor greenColor]
                                 sizePolicy:UNImageSizePolicyScaleAspectFill
                                cachePolicy:UNImageCachePolicyMemoryAndFileCache
                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
@@ -77,15 +77,22 @@
     
     NSString* mainImageURL = @"";
     if (IS_IPHONE_6 || IS_IPHONE_6P) {
-        mainImageURL = [imagesDict safeStringObjectForKey:@"scale450"];
+        mainImageURL = [imagesDict safeStringObjectForKey:@"full"];
     }else{
-        mainImageURL = [imagesDict safeStringObjectForKey:@"scale300"];
+        mainImageURL = [imagesDict safeStringObjectForKey:@"full"];
     }
     
     [self setupImageURL:mainImageURL];
     
     _descriptionLabel.text = [storeDict safeStringObjectForKey:@"category"];
     _nameLabel.text = [storeDict safeStringObjectForKey:@"street"];
+    
+    
+    if ([[_storeDict safeNumberObjectForKey:@"is_following"] boolValue]) {
+        [_wishlistButton setImage:[UIImage imageNamed:@"store_unfollow_button.png"] forState:UIControlStateNormal];
+    }else{
+        [_wishlistButton setImage:[UIImage imageNamed:@"store_follow_button.png"] forState:UIControlStateNormal];
+    }
     
 }
 

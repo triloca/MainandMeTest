@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CustomAlertContentView">
+            <rect key="frame" x="0.0" y="0.0" width="290" height="132"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ila-Ws-x6g">
+                    <rect key="frame" x="8" y="8" width="274" height="22"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="22" id="E1r-aP-OhE"/>
+                        <constraint firstAttribute="width" constant="274" id="zDn-Vm-yTU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" preferredMaxLayoutWidth="274" translatesAutoresizingMaskIntoConstraints="NO" id="3ib-qg-Zf9">
+                    <rect key="frame" x="19" y="38" width="253" height="86"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="253" id="Xh5-Ns-rbj"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbN-dm-R3N">
+                    <rect key="frame" x="260" y="3" width="27" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="27" id="0ZP-7P-GLI"/>
+                        <constraint firstAttribute="height" constant="27" id="9Jl-GU-sDR"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="remove_x3_50_gray.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="closeButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="Ng6-wh-Qnk"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="3ib-qg-Zf9" firstAttribute="top" secondItem="Ila-Ws-x6g" secondAttribute="bottom" constant="8" id="D28-Tn-Q5I"/>
+                <constraint firstItem="Ila-Ws-x6g" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="FKE-cR-dkY"/>
+                <constraint firstAttribute="trailing" secondItem="3ib-qg-Zf9" secondAttribute="trailing" constant="18" id="KTp-Xf-VdR"/>
+                <constraint firstItem="3ib-qg-Zf9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="19" id="Ksy-8y-Y1l"/>
+                <constraint firstItem="bbN-dm-R3N" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="3" id="MIG-Sm-Wa8"/>
+                <constraint firstAttribute="bottom" secondItem="3ib-qg-Zf9" secondAttribute="bottom" constant="8" id="QN6-l4-HiX"/>
+                <constraint firstAttribute="trailing" secondItem="bbN-dm-R3N" secondAttribute="trailing" constant="3" id="dNV-Z1-Q98"/>
+                <constraint firstAttribute="trailing" secondItem="Ila-Ws-x6g" secondAttribute="trailing" constant="8" id="mgQ-ij-OJr"/>
+                <constraint firstItem="Ila-Ws-x6g" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="nM0-r8-7dq"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="closeButton" destination="bbN-dm-R3N" id="bcZ-Cg-rFX"/>
+                <outlet property="messageLabel" destination="3ib-qg-Zf9" id="Oi2-R1-lJs"/>
+                <outlet property="titleLabel" destination="Ila-Ws-x6g" id="ApM-ob-ZdQ"/>
+            </connections>
+            <point key="canvasLocation" x="413" y="81"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="remove_x3_50_gray.png" width="50" height="50"/>
+    </resources>
+</document>

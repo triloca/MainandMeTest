@@ -20,6 +20,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *sponsorButton;
 
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 
 @end
 
@@ -59,6 +60,8 @@
     self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width * 2, self.scrollView.frame.size.height);
  
     self.webView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height - _sponsorButton.frame.size.height);
+    
+    self.imageView.frame = CGRectMake(0, 0, self.contentView.frame.size.width, self.contentView.frame.size.height - _sponsorButton.frame.size.height);
     
     self.spinnerView.center = self.scrollView.center;
     self.blurEffectView.frame = self.bounds;

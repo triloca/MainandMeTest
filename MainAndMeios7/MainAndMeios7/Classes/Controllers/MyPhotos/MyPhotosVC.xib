@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MyPhotosVC">
+            <connections>
+                <outlet property="tableView" destination="0FT-nD-Rya" id="1Gj-sl-JXV"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="0FT-nD-Rya">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
+                    <color key="backgroundColor" red="0.92941176469999998" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="a3H-lx-Vxu"/>
+                        <outlet property="delegate" destination="-1" id="U2A-YP-Kgt"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iZD-h0-vTo">
+                    <rect key="frame" x="0.0" y="532" width="320" height="36"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAK-qv-qFT">
+                            <rect key="frame" x="144" y="-2" width="33" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="33" id="jQG-1y-lhM"/>
+                                <constraint firstAttribute="height" constant="42" id="w1H-Pf-Pqu"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="share_btn_grey.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onShareButton:" destination="-1" eventType="touchUpInside" id="ls4-uY-8rJ"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerY" secondItem="ZAK-qv-qFT" secondAttribute="centerY" constant="-1" id="AC4-zz-qlB"/>
+                        <constraint firstAttribute="centerX" secondItem="ZAK-qv-qFT" secondAttribute="centerX" constant="-0.5" id="VVP-Gb-PJV"/>
+                        <constraint firstAttribute="height" constant="36" id="Zdx-xh-riU"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="iZD-h0-vTo" secondAttribute="bottom" id="1aP-VT-DYv"/>
+                <constraint firstAttribute="trailing" secondItem="iZD-h0-vTo" secondAttribute="trailing" id="385-Vr-Ymk"/>
+                <constraint firstItem="iZD-h0-vTo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="OGc-6s-5sr"/>
+                <constraint firstItem="0FT-nD-Rya" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="cOF-o6-Pjl"/>
+                <constraint firstAttribute="trailing" secondItem="0FT-nD-Rya" secondAttribute="trailing" id="fiD-li-5Ds"/>
+                <constraint firstItem="iZD-h0-vTo" firstAttribute="top" secondItem="0FT-nD-Rya" secondAttribute="bottom" constant="8" id="iXK-kA-7WM"/>
+                <constraint firstItem="0FT-nD-Rya" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wD9-Tu-cXd"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <point key="canvasLocation" x="217" y="334"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="share_btn_grey.png" width="33" height="42"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

@@ -47,6 +47,8 @@
 
 #import "SearchManager.h"
 
+#import "PinterestManager.h"
+
 @interface AppDelegate ()
 
 @end
@@ -59,7 +61,9 @@
     
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
 
-   
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"WebKitDiskImageCacheEnabled"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     [ReachabilityManager shared];
     [SearchManager shared];
 
@@ -426,8 +430,8 @@
 {
     
     BOOL isFBManagerHandle = [[FacebookManager shared] handleOpenURL:url sourceApplication:sourceApplication];
-    
-    return isFBManagerHandle;
+    BOOL pin = [[PinterestManager shared] application:application handleOpenURL:url];
+    return isFBManagerHandle || pin;
 }
 
 @end

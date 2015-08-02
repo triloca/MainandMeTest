@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="Whitney-Bold.otf">
@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="backButton" destination="13N-Z0-xHe" id="f89-1y-ONo"/>
                 <outlet property="mapButton" destination="i05-um-FTe" id="3R3-L7-ju6"/>
+                <outlet property="tableView" destination="zdt-Gs-PXH" id="A9G-Um-afx"/>
                 <outlet property="titleTextLable" destination="2Bm-5n-zOL" id="LYC-90-2Oh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -55,6 +56,14 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="zdt-Gs-PXH">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="T5C-iO-CdG"/>
+                        <outlet property="delegate" destination="-1" id="pgf-B3-MgW"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="0.92941176469999998" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -66,7 +75,11 @@
                 <constraint firstItem="i05-um-FTe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="Zfw-j3-lG8"/>
                 <constraint firstItem="2Bm-5n-zOL" firstAttribute="bottom" secondItem="13N-Z0-xHe" secondAttribute="bottom" id="aog-v4-kRa"/>
                 <constraint firstItem="13N-Z0-xHe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="bHP-oD-bLJ"/>
+                <constraint firstItem="zdt-Gs-PXH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="eNa-hS-0oK"/>
+                <constraint firstItem="zdt-Gs-PXH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hSW-as-Uxy"/>
+                <constraint firstAttribute="trailing" secondItem="zdt-Gs-PXH" secondAttribute="trailing" id="ldW-oH-kKv"/>
                 <constraint firstAttribute="trailing" secondItem="i05-um-FTe" secondAttribute="trailing" constant="8" id="oRa-SL-qWT"/>
+                <constraint firstAttribute="bottom" secondItem="zdt-Gs-PXH" secondAttribute="bottom" id="vKe-cW-Ocr"/>
                 <constraint firstItem="2Bm-5n-zOL" firstAttribute="leading" secondItem="13N-Z0-xHe" secondAttribute="trailing" constant="8" id="zQp-Zr-dIX"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

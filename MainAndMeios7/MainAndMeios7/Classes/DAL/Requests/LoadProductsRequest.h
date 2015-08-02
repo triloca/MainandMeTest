@@ -15,6 +15,9 @@
 //optional
 @property (strong, nonatomic) NSString *keywords;
 
+@property NSUInteger perPage;
+
+
 //response
 @property (strong, nonatomic) NSArray *products;
 

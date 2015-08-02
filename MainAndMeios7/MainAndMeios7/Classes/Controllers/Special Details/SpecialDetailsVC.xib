@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SpecialDetailsVC">
@@ -17,17 +17,54 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lYd-Qq-p8f">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                     <color key="backgroundColor" red="0.92941176469999998" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="N76-h9-JiY"/>
                     </connections>
                 </webView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fD6-8v-TL8">
+                    <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OTX-a7-d5P">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                            <color key="backgroundColor" red="0.93333333330000001" green="0.93333333330000001" blue="0.93333333330000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="Zym-5C-qh6"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hA9-FM-tJA">
+                            <rect key="frame" x="144" y="3" width="33" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="33" id="FSN-e5-7Ls"/>
+                                <constraint firstAttribute="height" constant="42" id="jWQ-Sg-XJO"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="share_btn_grey.png">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="onSharingButton:" destination="-1" eventType="touchUpInside" id="An5-RK-1tA"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="OTX-a7-d5P" firstAttribute="top" secondItem="fD6-8v-TL8" secondAttribute="top" id="4t8-EF-GIm"/>
+                        <constraint firstAttribute="centerX" secondItem="hA9-FM-tJA" secondAttribute="centerX" constant="-0.5" id="LZy-My-99K"/>
+                        <constraint firstAttribute="height" constant="44" id="MOa-cM-LTa"/>
+                        <constraint firstAttribute="trailing" secondItem="OTX-a7-d5P" secondAttribute="trailing" id="RyH-kc-0kS"/>
+                        <constraint firstItem="OTX-a7-d5P" firstAttribute="leading" secondItem="fD6-8v-TL8" secondAttribute="leading" id="tA9-mu-u0E"/>
+                        <constraint firstItem="hA9-FM-tJA" firstAttribute="top" secondItem="fD6-8v-TL8" secondAttribute="top" constant="3" id="wqs-f4-gbk"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="fD6-8v-TL8" secondAttribute="bottom" id="0pX-fp-9QC"/>
+                <constraint firstAttribute="trailing" secondItem="fD6-8v-TL8" secondAttribute="trailing" id="AVZ-w1-ZXH"/>
+                <constraint firstItem="fD6-8v-TL8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Qdl-i3-djg"/>
                 <constraint firstItem="lYd-Qq-p8f" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="UgU-Ax-buV"/>
-                <constraint firstAttribute="bottom" secondItem="lYd-Qq-p8f" secondAttribute="bottom" id="Zup-qc-dUh"/>
+                <constraint firstAttribute="bottom" secondItem="lYd-Qq-p8f" secondAttribute="bottom" constant="44" id="Zup-qc-dUh"/>
                 <constraint firstItem="lYd-Qq-p8f" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wnn-7I-iQy"/>
                 <constraint firstAttribute="trailing" secondItem="lYd-Qq-p8f" secondAttribute="trailing" id="xSa-1r-TtO"/>
             </constraints>
@@ -36,6 +73,9 @@
             <point key="canvasLocation" x="217" y="309"/>
         </view>
     </objects>
+    <resources>
+        <image name="share_btn_grey.png" width="33" height="42"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

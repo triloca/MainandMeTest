@@ -19,9 +19,9 @@
 }
 
 - (NSDictionary *) requestDictionary {
-    if (self.communityId)
-        return @{@"community_id": _communityId};
-    return @{};
+
+    return @{@"community_id": _communityId,
+                 @"perPage":@(_perPage)};
 }
 
 - (void) processResponse:(NSObject *)response {

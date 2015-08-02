@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ShareView">
+            <rect key="frame" x="0.0" y="1" width="320" height="195"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Svd-vd-lHX">
+                    <rect key="frame" x="8" y="155" width="304" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Sue-z8-PFe"/>
+                        <constraint firstAttribute="width" constant="304" id="dYU-0v-Rut"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <state key="normal" title="Cancel">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onCanlceButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="KsC-m1-ZAA"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="share_back.png" translatesAutoresizingMaskIntoConstraints="NO" id="NYd-np-MwW">
+                    <rect key="frame" x="8" y="7" width="304" height="137"/>
+                    <rect key="contentStretch" x="0.5" y="0.5" width="0.0" height="0.0"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="137" id="CKe-a2-91O"/>
+                    </constraints>
+                </imageView>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbA-pX-UNd">
+                    <rect key="frame" x="8" y="12" width="304" height="128"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x15-wz-CPB">
+                            <rect key="frame" x="0.0" y="0.0" width="433" height="128"/>
+                            <subviews>
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9pE-5D-l7i">
+                                    <rect key="frame" x="11" y="21" width="60" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="aUB-E6-pI4"/>
+                                        <constraint firstAttribute="width" constant="60" id="txL-sI-TuJ"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <inset key="titleEdgeInsets" minX="0.0" minY="90" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="Message" backgroundImage="message_share_icon.png">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="shareButtonCliched:" destination="iN0-l3-epB" eventType="touchUpInside" id="uaj-hl-c01"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oIw-iy-8JC">
+                                    <rect key="frame" x="81" y="21" width="60" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="3Xg-BH-d8L"/>
+                                        <constraint firstAttribute="width" constant="60" id="ZOS-1e-q3j"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <inset key="titleEdgeInsets" minX="0.0" minY="90" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="Mail" backgroundImage="mail_share_icon.png">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="shareButtonCliched:" destination="iN0-l3-epB" eventType="touchUpInside" id="MwQ-au-SSI"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5pS-jT-sZa">
+                                    <rect key="frame" x="151" y="21" width="60" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="60" id="Bxc-Ey-nag"/>
+                                        <constraint firstAttribute="height" constant="60" id="qty-PF-e32"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <inset key="titleEdgeInsets" minX="0.0" minY="90" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="Facebook" backgroundImage="facebook_share_icon.png">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="shareButtonCliched:" destination="iN0-l3-epB" eventType="touchUpInside" id="GXj-oB-z9U"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vkr-Sn-Jom">
+                                    <rect key="frame" x="221" y="21" width="60" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="NGj-WA-8GJ"/>
+                                        <constraint firstAttribute="width" constant="60" id="YWK-rx-8gr"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <inset key="titleEdgeInsets" minX="0.0" minY="90" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="Twitter" backgroundImage="twitter_share_icon.png">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="shareButtonCliched:" destination="iN0-l3-epB" eventType="touchUpInside" id="llU-Rg-EE6"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gHH-V0-I8n">
+                                    <rect key="frame" x="291" y="21" width="60" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="Bq8-m5-uaG"/>
+                                        <constraint firstAttribute="width" constant="60" id="n2I-4d-Haf"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <inset key="titleEdgeInsets" minX="0.0" minY="90" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="Pinterest" backgroundImage="pinterest_share_icon.png">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="shareButtonCliched:" destination="iN0-l3-epB" eventType="touchUpInside" id="zUm-cH-WP8"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ElG-0e-DCF">
+                                    <rect key="frame" x="361" y="21" width="60" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="WlL-hM-I4A"/>
+                                        <constraint firstAttribute="width" constant="60" id="hp9-5j-Q5i"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                    <inset key="titleEdgeInsets" minX="0.0" minY="90" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" title="Instagram" backgroundImage="instagram_share_icon.png">
+                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="shareButtonCliched:" destination="iN0-l3-epB" eventType="touchUpInside" id="fOH-Lt-S8j"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="9pE-5D-l7i" firstAttribute="leading" secondItem="x15-wz-CPB" secondAttribute="leading" constant="11" id="6lN-Hg-7hO"/>
+                                <constraint firstItem="gHH-V0-I8n" firstAttribute="leading" secondItem="Vkr-Sn-Jom" secondAttribute="trailing" constant="10" id="Be2-kc-vZp"/>
+                                <constraint firstItem="Vkr-Sn-Jom" firstAttribute="leading" secondItem="5pS-jT-sZa" secondAttribute="trailing" constant="10" id="H6e-ov-ijQ"/>
+                                <constraint firstItem="oIw-iy-8JC" firstAttribute="leading" secondItem="9pE-5D-l7i" secondAttribute="trailing" constant="10" id="IWu-mS-7k7"/>
+                                <constraint firstItem="gHH-V0-I8n" firstAttribute="top" secondItem="x15-wz-CPB" secondAttribute="top" constant="21" id="KHQ-kb-WD3"/>
+                                <constraint firstAttribute="height" constant="128" id="M7Q-0b-Qcz"/>
+                                <constraint firstItem="9pE-5D-l7i" firstAttribute="top" secondItem="x15-wz-CPB" secondAttribute="top" constant="21" id="MDD-o6-v1V"/>
+                                <constraint firstItem="5pS-jT-sZa" firstAttribute="top" secondItem="x15-wz-CPB" secondAttribute="top" constant="21" id="WKe-sK-k54"/>
+                                <constraint firstItem="oIw-iy-8JC" firstAttribute="top" secondItem="x15-wz-CPB" secondAttribute="top" constant="21" id="bvu-Jx-RvO"/>
+                                <constraint firstAttribute="trailing" secondItem="ElG-0e-DCF" secondAttribute="trailing" priority="249" constant="12" id="cdD-JI-Oox"/>
+                                <constraint firstItem="ElG-0e-DCF" firstAttribute="leading" secondItem="gHH-V0-I8n" secondAttribute="trailing" constant="10" id="dQd-RF-wng"/>
+                                <constraint firstItem="5pS-jT-sZa" firstAttribute="leading" secondItem="oIw-iy-8JC" secondAttribute="trailing" constant="10" id="dey-QK-uX3"/>
+                                <constraint firstItem="ElG-0e-DCF" firstAttribute="top" secondItem="x15-wz-CPB" secondAttribute="top" constant="21" id="fhT-lA-nYA"/>
+                                <constraint firstItem="Vkr-Sn-Jom" firstAttribute="top" secondItem="x15-wz-CPB" secondAttribute="top" constant="21" id="z3F-jO-wBs"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="x15-wz-CPB" firstAttribute="top" secondItem="rbA-pX-UNd" secondAttribute="top" id="TZT-WN-uEo"/>
+                        <constraint firstItem="x15-wz-CPB" firstAttribute="leading" secondItem="rbA-pX-UNd" secondAttribute="leading" id="bwd-qg-qxG"/>
+                        <constraint firstAttribute="trailing" secondItem="x15-wz-CPB" secondAttribute="trailing" id="emJ-rC-c6D"/>
+                        <constraint firstAttribute="height" constant="128" id="vCi-8l-btr"/>
+                        <constraint firstAttribute="bottom" secondItem="x15-wz-CPB" secondAttribute="bottom" id="xZP-F0-woi"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Svd-vd-lHX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="LKv-Qn-IlZ"/>
+                <constraint firstItem="rbA-pX-UNd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Mad-Xz-XCZ"/>
+                <constraint firstItem="NYd-np-MwW" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="OzO-t4-bbD"/>
+                <constraint firstAttribute="trailing" secondItem="Svd-vd-lHX" secondAttribute="trailing" constant="8" id="SJl-Y8-dHj"/>
+                <constraint firstAttribute="bottom" secondItem="Svd-vd-lHX" secondAttribute="bottom" constant="10" id="Spq-V6-RVV"/>
+                <constraint firstItem="rbA-pX-UNd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="Tdb-iX-BZY"/>
+                <constraint firstItem="Svd-vd-lHX" firstAttribute="top" secondItem="NYd-np-MwW" secondAttribute="bottom" constant="11" id="ZzJ-1d-KaT"/>
+                <constraint firstAttribute="trailing" secondItem="rbA-pX-UNd" secondAttribute="trailing" constant="8" id="azh-yn-49P"/>
+                <constraint firstAttribute="trailing" secondItem="NYd-np-MwW" secondAttribute="trailing" constant="8" id="gSt-Uf-4Tb"/>
+                <constraint firstItem="NYd-np-MwW" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="7" id="tPJ-lx-Hl2"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="cancelButton" destination="Svd-vd-lHX" id="XJO-jT-3ha"/>
+                <outlet property="facebookButton" destination="Vkr-Sn-Jom" id="uzS-B7-U64"/>
+                <outlet property="instagramButton" destination="ElG-0e-DCF" id="2bl-kp-vf6"/>
+                <outlet property="mailButton" destination="oIw-iy-8JC" id="8NV-xT-qrI"/>
+                <outlet property="messageButton" destination="9pE-5D-l7i" id="yzb-Qp-cQ4"/>
+                <outlet property="pinterestButton" destination="gHH-V0-I8n" id="26y-ta-L71"/>
+                <outlet property="twitterButton" destination="5pS-jT-sZa" id="F1T-UY-RmO"/>
+            </connections>
+            <point key="canvasLocation" x="211" y="125.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="facebook_share_icon.png" width="120" height="120"/>
+        <image name="instagram_share_icon.png" width="465" height="463"/>
+        <image name="mail_share_icon.png" width="120" height="120"/>
+        <image name="message_share_icon.png" width="120" height="120"/>
+        <image name="pinterest_share_icon.png" width="120" height="119"/>
+        <image name="share_back.png" width="608" height="264"/>
+        <image name="twitter_share_icon.png" width="120" height="120"/>
+    </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

@@ -17,4 +17,6 @@
 //response
 @property (strong, nonatomic) NSArray *stores;
 
+@property (assign, nonatomic) NSInteger perPage;
+
 @end

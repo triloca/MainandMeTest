@@ -28,7 +28,11 @@
     [menuButton addTarget:self action:@selector(anchorRight) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *anchorLeftButton  = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     
+    __weak PrivacyPolicyVC* wSelf = self;
     self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"PRIVACY POLICY" dropDownIndicator:NO clickCallback:^(CustomTitleView *titleView) {
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        [[LayoutManager shared] showHomeControllerAnimated:YES];
+        [wSelf.navigationController popToRootViewControllerAnimated:YES];
     }];
     
     self.navigationItem.leftBarButtonItem = anchorLeftButton;

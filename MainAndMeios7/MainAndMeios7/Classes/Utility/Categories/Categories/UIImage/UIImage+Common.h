@@ -10,4 +10,6 @@
 
 @interface UIImage (Common)
 - (UIImage *)normalizedImage;
+-(UIImage*)rotatedUIImage;
+- (UIImage *)normalizedImage2;
 @end

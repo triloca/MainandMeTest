@@ -72,5 +72,9 @@
               failure:(void(^) (NSError* error, NSString* errorString)) failure
             exception:(void(^) (NSString* exceptionString))exception;
 
+- (void)trackLoginSuccess:(void(^)()) success
+                  failure:(void(^) (NSError* error, NSString* errorString)) failure
+                exception:(void(^) (NSString* exceptionString))exception;
+
 
 @end

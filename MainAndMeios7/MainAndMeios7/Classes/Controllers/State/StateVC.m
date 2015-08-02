@@ -41,14 +41,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_back_button"] landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
+//    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_back_button"] landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(backAction:)];
     
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.titleLabel.numberOfLines = 0;
+    [button setTitle:@"Change\nstate" forState:UIControlStateNormal];
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    button.titleLabel.font = [UIFont systemFontOfSize:13];
+    [button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [button sizeToFit];
+    button.backgroundColor = [UIColor clearColor];
+    [button addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
     
 //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_az_button"] landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(sortButtonAction)];
 //    
-
+    __weak StateVC* wSelf = self;
     self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"SELECT CITY"
                                                          dropDownIndicator:NO clickCallback:^(CustomTitleView *titleView) {
+                                                             
+                                                             [wSelf.navigationController popToRootViewControllerAnimated:YES];
     }];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -235,6 +248,28 @@
     }];
     _tableArray = [NSArray arrayWithArray:filterdMutableArray];
     [_tableView reloadData];
+}
+
+
+- (void)configSearchBar{
+    
+    UIView* topCoverView = [UIView new];
+    topCoverView.backgroundColor = [UIColor colorWithRed:0.929f green:0.925f blue:0.925f alpha:1.00f];
+    topCoverView.frame = CGRectMake(0, 0, _searchBar.frame.size.width, 1);
+    topCoverView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [_searchBar addSubview:topCoverView];
+    
+    UIView* bottomCoverView = [UIView new];
+    bottomCoverView.backgroundColor = [UIColor colorWithRed:0.929f green:0.925f blue:0.925f alpha:1.00f];
+    bottomCoverView.frame = CGRectMake(0, _searchBar.frame.size.height - 1, _searchBar.frame.size.width, 1);
+    bottomCoverView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [_searchBar addSubview:bottomCoverView];
+    
+    [_searchBar setSearchFieldBackgroundImage:[UIImage imageNamed:@"scope_bar_background.png"]forState:UIControlStateNormal];
+    
+    //    CGRect rc = _searchBar.frame;
+    //    rc.origin.y = CGRectGetMaxY(_searchTypeView.frame);
+    //    _searchBar.frame = rc;
 }
 
 #pragma mark - Search Bar Delegate

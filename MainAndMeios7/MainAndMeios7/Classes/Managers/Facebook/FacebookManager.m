@@ -167,10 +167,35 @@
 #pragma mark Logout
 - (void)logOut{
     FBLog(@"FB Start Logout");
+
     
-    [FBSession.activeSession closeAndClearTokenInformation];
+    NSHTTPCookieStorage* cookies = [NSHTTPCookieStorage sharedHTTPCookieStorage];
+    NSArray* facebookCookies = [cookies cookiesForURL:[NSURL URLWithString:@"http://login.facebook.com"]];
+    
+    for (NSHTTPCookie* cookie in facebookCookies) {
+        [cookies deleteCookie:cookie];
+    }
+    
+    [[FBRequest requestForMe] startWithCompletionHandler:
+     ^(FBRequestConnection *connection, NSDictionary<FBGraphUser> *aUser, NSError *error) {
+         if (!error) {
+             NSLog(@"User id %@",[aUser objectForKey:@"id"]);
+             [[FBRequest requestWithGraphPath:[NSString stringWithFormat:@"/%@/permissions", [aUser objectForKey:@"id"]]
+                                  parameters:nil
+                                  HTTPMethod:@"DELETE"] startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
+                 
+                 
+                 [FBSession.activeSession closeAndClearTokenInformation];
+                 [[FBSession activeSession] close];
+                 [[FBSession activeSession] closeAndClearTokenInformation];
+                 [FBSession setActiveSession:nil];
+
+                 
+             }];
+         }
+     }];
+    
     self.user = nil;
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:kFacebookManagerDidLogoutNotification
                                                         object:nil];
     FBLog(@"FB Did Logout");

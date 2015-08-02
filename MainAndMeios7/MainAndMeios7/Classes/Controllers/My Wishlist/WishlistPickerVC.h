@@ -20,4 +20,8 @@ typedef void (^WishListPickerCallback) (NSDictionary *dict);
 
 @property (strong, nonatomic) NSString *userId;
 
+@property (assign, nonatomic) BOOL hideMyPhotos;
+
+@property (assign, nonatomic) BOOL needOpenMyPhotos;
+
 @end

@@ -8,7 +8,21 @@
 
 #import "LoadProductsRequest.h"
 
+
+#define kPerPagePropertyValue 30
+
 @implementation LoadProductsRequest
+
+//self.perPage = kPerPagePropertyValue;
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.perPage = kPerPagePropertyValue;
+    }
+    return self;
+}
 
 - (NSString *) method {
     return @"GET";
@@ -23,6 +37,7 @@
     
     [dict safeSetObject:_communityId forKey:@"community_id"];
     [dict safeSetObject:_keywords forKey:@"keywords"];
+    [dict safeSetObject:@(_perPage) forKey:@"per_page"];
     
     return dict;
 }

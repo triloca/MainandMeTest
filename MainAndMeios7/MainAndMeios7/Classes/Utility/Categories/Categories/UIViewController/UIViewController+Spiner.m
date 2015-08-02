@@ -188,6 +188,8 @@ static char kUNSpinerNameDictionaryObjectKey;
     backgroundView.layer.cornerRadius = 10;
     backgroundView.center = CGPointMake(CGRectGetMidX(self.un_spinerView.bounds), CGRectGetMidY(self.un_spinerView.bounds));
     
+    self.un_spinerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin;
+    
     [self.un_spinerView addSubview:backgroundView];
     [self.un_spinerView sendSubviewToBack:backgroundView];
     

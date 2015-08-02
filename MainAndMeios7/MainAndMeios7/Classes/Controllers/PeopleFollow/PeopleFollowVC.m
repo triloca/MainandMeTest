@@ -40,7 +40,12 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_plus_button"] landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(plusButtonAction)];
     
-    self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"PEOPLE I FOLLOW" dropDownIndicator:NO clickCallback:^(CustomTitleView *titleView) {
+    __weak PeopleFollowVC* wSelf = self;
+    self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"Places I Follow" dropDownIndicator:NO clickCallback:^(CustomTitleView *titleView) {
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        [[LayoutManager shared] showHomeControllerAnimated:YES];
+        [wSelf.navigationController popToRootViewControllerAnimated:YES];
+
     }];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"PeopleCell" bundle:nil] forCellReuseIdentifier:@"PeopleCell"];
@@ -73,8 +78,8 @@
     [self endRefreshing];
     FollowingsRequest *request = [FollowingsRequest new];
     request.userId = [CommonManager shared].userId;
-    request.followableType = FollowableUser;
-    
+    request.followableType = FollowableStore;
+    //http://mainandme.com/api/v1/users/3/follows/followings/store?_token=n9Mn4Nr1Lgw8cxsgry9R
     __weak PeopleFollowVC *wself = self;
     [[MMServiceProvider sharedProvider] sendRequest:request success:^(FollowingsRequest *request) {
         wself.items = request.followings;

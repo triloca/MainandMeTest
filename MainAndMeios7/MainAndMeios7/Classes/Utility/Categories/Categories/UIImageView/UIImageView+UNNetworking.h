@@ -28,6 +28,22 @@ typedef enum {
 
 @interface UIImageView (UNNetworking)
 
+//! Base method for loading image (from memory cache, file cache or network)
+- (void)setImageWithURLRequest:(NSURLRequest*)urlRequest
+              placeholderImage:(UIImage*)placeholderImage
+                  failureImage:(UIImage*)failureImage
+              progressViewSize:(CGSize)progressViewSize
+                 imageViewSize:(CGSize)imageViewSize
+             progressViewStile:(UIProgressViewStyle)progressViewStile
+             progressTintColor:(UIColor*)progressTintColor
+                trackTintColor:(UIColor*)trackTintColor
+                    sizePolicy:(UNImageSizePolicy)sizePolicy
+                   cachePolicy:(UNImageCachePolicy)cachePolicy
+                       success:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, UIImage* image))success
+                       failure:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, NSError* error))failure
+                      progress:(void (^)(NSURLRequest* request, NSHTTPURLResponse* response, float progress))progress;
+
+
 //! Base method
 - (void)setImageWithURLRequest:(NSURLRequest *)urlRequest 
               placeholderImage:(UIImage *)placeholderImage

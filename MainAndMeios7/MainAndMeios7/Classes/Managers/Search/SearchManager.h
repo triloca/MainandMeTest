@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSString* stateName;
 @property (strong, nonatomic) NSString* communityID;
 @property (strong, nonatomic) CLLocation* communityLocation;
+@property (assign, nonatomic) BOOL cityWasSelected;
 
 
 - (void)loadCommunityValues;

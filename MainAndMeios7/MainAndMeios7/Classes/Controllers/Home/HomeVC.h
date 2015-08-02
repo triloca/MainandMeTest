@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeVC : UIViewController
-
+- (void)didLoginSuccessfuly;
+- (void)updateStore:(NSDictionary*)storeDict;
 @end

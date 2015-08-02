@@ -14,4 +14,5 @@
 
 @property (strong, nonatomic) NSDictionary *wishlist;
 
+@property (assign, nonatomic) BOOL needUpdateData;
 @end

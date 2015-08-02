@@ -11,5 +11,5 @@
 @interface FollowStoreRequest : AuthenticatedRequest
 
 @property (strong, nonatomic) NSString *storeId;
-
+@property (assign, nonatomic) BOOL unfollow;
 @end

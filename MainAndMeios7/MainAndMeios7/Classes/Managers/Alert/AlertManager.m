@@ -62,7 +62,7 @@ static char kAlertHandlerObjectKey;
               otherButtonTitles:nil];
 }
 
-- (void)showAlertWithCallBack:(void (^)(UIAlertView *alertView, NSInteger buttonIndex))callBack
+- (UIAlertView*)showAlertWithCallBack:(void (^)(UIAlertView *alertView, NSInteger buttonIndex))callBack
                         title:(NSString*)title
                       message:(NSString*)message
             cancelButtonTitle:(NSString*)cancelButtonTitle
@@ -92,7 +92,8 @@ static char kAlertHandlerObjectKey;
     
     objc_setAssociatedObject(alertView, &kAlertHandlerObjectKey, alertDelegateHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     [alertView show];
-
+    
+    return alertView;
 }
 
 

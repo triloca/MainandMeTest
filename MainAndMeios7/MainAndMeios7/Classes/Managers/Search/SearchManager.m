@@ -793,6 +793,8 @@ NSString * const kkkServerBaseURL = @"http://www.mainandme.com/api/v1";
     CLLocationDegrees lng = [[NSUserDefaults standardUserDefaults] doubleForKey:@"kLocationLng"];
     CLLocation *location = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
     self.communityLocation = location;
+    
+    self.cityWasSelected = [[NSUserDefaults standardUserDefaults] boolForKey:@"kCityWasSelected"];
 }
 
 
@@ -827,6 +829,12 @@ NSString * const kkkServerBaseURL = @"http://www.mainandme.com/api/v1";
     [[NSUserDefaults standardUserDefaults] setDouble:communityLocation.coordinate.latitude forKey:@"kLocationLat"];
     [[NSUserDefaults standardUserDefaults] setDouble:communityLocation.coordinate.longitude forKey:@"kLocationLng"];
     
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)setCityWasSelected:(BOOL)cityWasSelected{
+    _cityWasSelected = cityWasSelected;
+    [[NSUserDefaults standardUserDefaults] setBool:cityWasSelected forKey:@"kCityWasSelected"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

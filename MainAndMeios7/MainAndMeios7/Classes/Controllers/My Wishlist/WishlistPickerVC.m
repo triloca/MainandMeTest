@@ -17,6 +17,7 @@
 #import "ProductDetailsVC.h"
 #import "JSON.h"
 #import "NSURLConnectionDelegateHandler.h"
+#import "MyPhotosVC.h"
 
 
 @interface WishlistPickerVC ()
@@ -36,8 +37,12 @@
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_plus_button"] landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(addWishlistAction)];
     
-
+    __weak WishlistPickerVC* wSelf = self;
     self.navigationItem.titleView = [[CustomTitleView alloc] initWithTitle:@"MY WISHLISTS" dropDownIndicator:NO clickCallback:^(CustomTitleView *titleView) {
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        [[LayoutManager shared] showHomeControllerAnimated:YES];
+        [wSelf.navigationController popToRootViewControllerAnimated:YES];
+
     }];
     
     [self.tableView registerNib:[UINib nibWithNibName:@"WishlistCell" bundle:nil] forCellReuseIdentifier:@"WishlistCell"];
@@ -55,10 +60,18 @@
 
 }
 
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    
-    [self loadWishlists];
+//    if (_needOpenMyPhotos) {
+//        _needOpenMyPhotos = NO;
+//        
+//        MyPhotosVC* vc = [MyPhotosVC loadFromXIBForScrrenSizes];
+//        [self.navigationController pushViewController:vc animated:NO];
+//
+//    }else{
+        [self loadWishlists];
+    //}
 }
 
 - (void) reload {
@@ -70,8 +83,12 @@
 }
 
 
-- (void) loadFollowings {
+- (void)addMyFotosCell{
+    [self.items insertObject:@{@"My photos" : @"My photos"} atIndex:0];
+}
 
+- (void) loadFollowings {
+    return;
     [self showSpinnerWithName:@""];
     
     FollowingsRequest *request = [FollowingsRequest new];
@@ -92,22 +109,7 @@
 
 
 - (void) loadWishlists {
-//    LoadAllWishistsRequest *request = [[LoadAllWishistsRequest alloc] init];
-//    request.userId = _userId;
-    
-//    [ProductDetailsManager loadWishlistInfoForUser:_userId
-//                                           success:^(NSString *userId, NSArray *wishlist) {
-//                                               
-//                                           }
-//                                           failure:^(NSString *userId, NSError *error, NSString *errorString) {
-//                                               
-//                                           }
-//                                         exception:^(NSString *userId, NSString *exceptionString) {
-//                                             
-//                                         }];
-//    
-//    
-//    return;
+
     [self showSpinnerWithName:@""];
     
     NSString* urlString =
@@ -131,6 +133,24 @@
             [self endRefreshing];
             //[self loadFollowings];
             [self hideSpinnerWithName:@""];
+            
+            if (_needOpenMyPhotos) {
+                _needOpenMyPhotos = NO;
+                
+                if (self.onSelectWishlistCallback) {
+                    self.onSelectWishlistCallback(_items[0]); 
+                }
+            }else{
+            
+                static dispatch_once_t onceToken;
+                dispatch_once(&onceToken, ^{
+                    [_tableView setEditing:YES animated:YES];
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        [_tableView setEditing:NO animated:YES];
+                    });
+                });
+            }
+            
         }else{
             [[AlertManager shared] showOkAlertWithTitle:@"Error"];
             [self endRefreshing];
@@ -156,20 +176,16 @@
     NSURLConnection* connection = [NSURLConnection connectionWithRequest:request delegate:handler];
     [connection start];
 
-    
-//    [self showSpinnerWithName:@""];
-//    [[MMServiceProvider sharedProvider] sendRequest:request success:^(id _req) {
-//        self.items = [request.wishlist mutableCopy];
-//        [self loadFollowings];
-//        [self hideSpinnerWithName:@""];
-//    } failure:^(id _req, NSError *error) {
-//        [[AlertManager shared] showOkAlertWithTitle:@"Main and me" message:error.localizedDescription];
-//        [self loadFollowings];
-//        [self hideSpinnerWithName:@""];
-//    }];
 }
 
 - (void) loadTable {
+    
+    if (_hideMyPhotos) {
+        if (_items.count > 0) {
+            [_items removeObjectAtIndex:0];
+        }
+    }
+    
     [self.tableView reloadData];
     if (_items.count == 0) {
         [UIView animateWithDuration:0.3 animations:^() {
@@ -249,13 +265,14 @@
                                       [wself.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_items.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
                                       [wself.tableView endUpdates];
 
-//
-//                                      [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
-//                                      }
-//                                                                             title:@"Success"
-//                                                                           message:@"Wishlist created successfully"
-//                                                                 cancelButtonTitle:@"Ok"
-//                                                                 otherButtonTitles:nil];
+                                      NSString* message = [NSString stringWithFormat:@"You have added a wish list called %@", name];
+                                      
+                                      [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                      }
+                                                                             title:@"Success"
+                                                                           message:message
+                                                                 cancelButtonTitle:@"Ok"
+                                                                 otherButtonTitles:nil];
                                   }
                                   failure:^(NSError *error, NSString *errorString) {
                                       [self hideSpinnerWithName:@"MyWishlistViewController"];
@@ -276,7 +293,6 @@
 }
 
 
-
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return _items.count;
 }
@@ -284,16 +300,16 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     NSDictionary* item = [_items safeDictionaryObjectAtIndex:indexPath.row];
+    WishlistCell *cell = (WishlistCell *) [tableView dequeueReusableCellWithIdentifier:@"WishlistCell"];
+    cell.titleLabel.text = item[@"name"];
     
-    if ([item.allKeys containsObject:@"user_followings_count"]){
-        PeopleCell *cell = (PeopleCell *) [tableView dequeueReusableCellWithIdentifier:@"PeopleCell"];
-        [cell setUser:_items[indexPath.row]];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        return cell;
+    if (indexPath.row == 0 && !_hideMyPhotos){
+        cell.contentView.backgroundColor = [UIColor colorWithRed:1.000f green:0.984f blue:0.686f alpha:1.00f];
         
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        return cell;
     }else{
-        WishlistCell *cell = (WishlistCell *) [tableView dequeueReusableCellWithIdentifier:@"WishlistCell"];
-        cell.titleLabel.text = _items[indexPath.row][@"name"];
+        cell.contentView.backgroundColor = [UIColor whiteColor];
         return cell;
     }
 }
@@ -301,21 +317,25 @@
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSDictionary* item = [_items safeDictionaryObjectAtIndex:indexPath.row];
+  //  NSDictionary* item = [_items safeDictionaryObjectAtIndex:indexPath.row];
     
-    if ([item.allKeys containsObject:@"user_followings_count"]){
-        //[self wishlistActionForId:[item safeStringObjectForKey:@"id"]];
-    }else{
+//    if ([item.allKeys containsObject:@"My photos"]){
+//        
+//        MyPhotosVC* vc = [MyPhotosVC loadFromXIBForScrrenSizes];
+//        [self.navigationController pushViewController:vc animated:YES];
+//        
+//        
+//    }else{
         if (self.onSelectWishlistCallback) {
             self.onSelectWishlistCallback(_items[indexPath.row]);
         }
-    }
+   // }
 }
 
 
 - (void)wishlistActionForId:(NSString*)userId {
     
-    WishlistPickerVC *picker = [WishlistPickerVC loadFromXIB_Or_iPhone5_XIB];
+    WishlistPickerVC *picker = [WishlistPickerVC loadFromXIBForScrrenSizes];
     picker.userId = userId;
     picker.onSelectWishlistCallback = ^(NSDictionary *dict) {
 //        if (dict == nil) {
