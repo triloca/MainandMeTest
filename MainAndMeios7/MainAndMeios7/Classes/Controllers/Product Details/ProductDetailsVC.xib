@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="DINBek-Regular.ttf">
+        <array key="DINBek-Regular.ttf">
             <string>DINBek-Regular</string>
-        </mutableArray>
-        <mutableArray key="DINLight.ttf">
+        </array>
+        <array key="DINLight.ttf">
             <string>DIN-Light</string>
-        </mutableArray>
-        <mutableArray key="DINbek-Bold.ttf">
+        </array>
+        <array key="DINbek-Bold.ttf">
             <string>DINbekBold</string>
-            <string>DINbekBold</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductDetailsVC">
@@ -37,80 +40,80 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GyI-sn-Pk2">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                    <color key="backgroundColor" white="0.66666666666666663" alpha="0.27000000000000002" colorSpace="calibratedWhite"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GyI-sn-Pk2">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="580"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OkA-pl-ZDd">
-                    <rect key="frame" x="0.0" y="392" width="320" height="176"/>
+                    <rect key="frame" x="0.0" y="540" width="375" height="127"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="horisontal_gradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="BbZ-gi-y0E">
-                            <rect key="frame" x="0.0" y="-22" width="320" height="198"/>
+                            <rect key="frame" x="0.0" y="-71" width="375" height="198"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="198" id="PTk-u3-e1O"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pnw-pe-2wc">
-                            <rect key="frame" x="279" y="134" width="33" height="42"/>
+                            <rect key="frame" x="334" y="85" width="33" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="42" id="i2Z-Od-crl"/>
                                 <constraint firstAttribute="width" constant="33" id="laF-1b-i1I"/>
                             </constraints>
                             <state key="normal" image="item_det_share_btn.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="shareAction:" destination="-1" eventType="touchUpInside" id="drc-eE-Vwu"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sso-eZ-jIW">
-                            <rect key="frame" x="142" y="134" width="45" height="42"/>
+                            <rect key="frame" x="197" y="85" width="45" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="42" id="66b-dT-OfH"/>
                                 <constraint firstAttribute="width" constant="45" id="Wgm-U6-jV2"/>
                             </constraints>
                             <state key="normal" image="item_det_call_btn.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="callButtonClicked:" destination="-1" eventType="touchUpInside" id="trE-Mn-nZT"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lu7-Ek-AyX">
-                            <rect key="frame" x="196" y="134" width="80" height="42"/>
+                            <rect key="frame" x="251" y="85" width="80" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="dyp-6X-Knf"/>
                                 <constraint firstAttribute="height" constant="42" id="eVX-Qf-DLr"/>
                             </constraints>
                             <state key="normal" image="item_det_wishlist_btn.png">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="wishlistAction:" destination="-1" eventType="touchUpInside" id="2Rk-Mj-1V1"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yif-Nl-54B">
-                            <rect key="frame" x="8" y="137" width="147" height="0.0"/>
+                            <rect key="frame" x="8" y="88" width="202" height="0.0"/>
                             <fontDescription key="fontDescription" name="DIN-Light" family="DIN Light" pointSize="14"/>
-                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rno-lE-EGK">
-                            <rect key="frame" x="8" y="88" width="122" height="89"/>
+                            <rect key="frame" x="8" y="39" width="177" height="89"/>
                             <state key="normal">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="storeButtonClicked:" destination="-1" eventType="touchUpInside" id="FIM-nH-Er1"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L67-Jq-t0J">
-                            <rect key="frame" x="8" y="124" width="147" height="12"/>
+                            <rect key="frame" x="8" y="75" width="202" height="12"/>
                             <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="10"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -136,40 +139,40 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$24.38" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2W-Z3-Hvf">
-                    <rect key="frame" x="8" y="530" width="147" height="30"/>
+                    <rect key="frame" x="8" y="629" width="202" height="30"/>
                     <fontDescription key="fontDescription" name="DINbekBold" family="DINbek Bold" pointSize="18"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CGu-3N-eXg">
-                    <rect key="frame" x="8" y="492" width="147" height="21"/>
+                    <rect key="frame" x="8" y="590" width="202" height="22"/>
                     <fontDescription key="fontDescription" name="DINbekBold" family="DINbek Bold" pointSize="18"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="TOz-le-VeT">
-                    <rect key="frame" x="142" y="265" width="37" height="37"/>
-                    <color key="color" red="0.2156862745" green="0.73725490199999999" blue="0.4823529412" alpha="1" colorSpace="calibratedRGB"/>
+                    <rect key="frame" x="169.5" y="271" width="37" height="37"/>
+                    <color key="color" red="0.2156862745" green="0.73725490199999999" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </activityIndicatorView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="547-mU-IPf">
-                    <rect key="frame" x="8" y="530" width="147" height="30"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="8" y="629" width="202" height="30"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <state key="normal">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="callForPriceButton:" destination="-1" eventType="touchUpInside" id="qdt-v1-JLu"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ivc-Ej-qQf" customClass="StoreNamePickerView">
-                    <rect key="frame" x="0.0" y="568" width="320" height="216"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="0.0" y="667" width="375" height="216"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="216" id="0uD-er-baY"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="GyI-sn-Pk2" firstAttribute="centerY" secondItem="TOz-le-VeT" secondAttribute="centerY" constant="0.5" id="32q-uC-ch7"/>
                 <constraint firstAttribute="trailing" secondItem="OkA-pl-ZDd" secondAttribute="trailing" id="3eW-rW-xz2"/>
@@ -186,7 +189,8 @@
                 <constraint firstItem="L67-Jq-t0J" firstAttribute="top" secondItem="CGu-3N-eXg" secondAttribute="bottom" constant="3" id="MgE-LV-x0M"/>
                 <constraint firstItem="GyI-sn-Pk2" firstAttribute="centerX" secondItem="TOz-le-VeT" secondAttribute="centerX" id="MlK-r7-fyH"/>
                 <constraint firstItem="547-mU-IPf" firstAttribute="height" secondItem="r2W-Z3-Hvf" secondAttribute="height" id="NJC-Z6-8p2"/>
-                <constraint firstItem="OkA-pl-ZDd" firstAttribute="top" secondItem="CGu-3N-eXg" secondAttribute="top" constant="-100" id="RQ6-7h-wDY"/>
+                <constraint firstItem="OkA-pl-ZDd" firstAttribute="top" secondItem="GyI-sn-Pk2" secondAttribute="bottom" constant="-40" id="RCX-u1-KUl"/>
+                <constraint firstItem="OkA-pl-ZDd" firstAttribute="top" secondItem="CGu-3N-eXg" secondAttribute="top" constant="-50" id="RQ6-7h-wDY"/>
                 <constraint firstItem="547-mU-IPf" firstAttribute="top" secondItem="r2W-Z3-Hvf" secondAttribute="top" id="Yoe-0a-0Qh"/>
                 <constraint firstItem="547-mU-IPf" firstAttribute="leading" secondItem="r2W-Z3-Hvf" secondAttribute="leading" id="Z6v-j4-b9P"/>
                 <constraint firstItem="Ivc-Ej-qQf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="c8d-c0-Thd"/>
@@ -197,10 +201,8 @@
                 <constraint firstAttribute="bottom" secondItem="OkA-pl-ZDd" secondAttribute="bottom" id="gaq-3d-njM"/>
                 <constraint firstItem="547-mU-IPf" firstAttribute="width" secondItem="r2W-Z3-Hvf" secondAttribute="width" id="naR-HZ-Rh6"/>
                 <constraint firstItem="GyI-sn-Pk2" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="pCu-lw-cKu"/>
-                <constraint firstAttribute="bottom" secondItem="GyI-sn-Pk2" secondAttribute="bottom" id="zs3-8R-KA8"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <point key="canvasLocation" x="217" y="334"/>
         </view>
     </objects>
@@ -213,6 +215,6 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination" type="retina4_7.fullscreen"/>
     </simulatedMetricsContainer>
 </document>
