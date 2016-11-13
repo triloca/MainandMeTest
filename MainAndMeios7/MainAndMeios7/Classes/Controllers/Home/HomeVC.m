@@ -519,8 +519,16 @@ UINavigationControllerDelegate>
     
     _searchTypeView.didSelectSpecials = ^(SearchTypeView* view, UIButton* button){
         view.hideTriger = NO;
+        
         if (view.oldSearchType == SearchTypeSpecials) {
         }else{
+            [wSelf.searchBar resignFirstResponder];
+            [wSelf startSearch];
+            wSelf.quiltView.hidden = NO;
+            wSelf.homeHorisontalListView.hidden = YES;
+            wSelf.specialsView.hidden = YES;
+
+            /*
             [wSelf.searchBar resignFirstResponder];
             wSelf.collectionArray = [NSMutableArray new];
             //[wSelf.quiltView reloadData];
@@ -530,6 +538,7 @@ UINavigationControllerDelegate>
             wSelf.specialsView.hidden = NO;
             
             [wSelf updateSpecials];
+             */
         }
         
         if (wSelf.coverView) {

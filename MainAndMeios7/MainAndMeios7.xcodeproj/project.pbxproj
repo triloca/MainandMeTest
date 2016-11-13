@@ -84,7 +84,6 @@
 		AE3E41FF1A28372E0019F25D /* AboutVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE3E41FA1A28372E0019F25D /* AboutVC.xib */; };
 		AE3E42001A28372E0019F25D /* AboutNVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3E41FD1A28372E0019F25D /* AboutNVC.m */; };
 		AE53BD0A1B071149002F17A5 /* DINbek-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE53BC6D1B071149002F17A5 /* DINbek-Bold.ttf */; };
-		AE53BD0B1B071149002F17A5 /* DINBek-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE53BC6E1B071149002F17A5 /* DINBek-Regular.ttf */; };
 		AE53BD0C1B071149002F17A5 /* DINLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AE53BC6F1B071149002F17A5 /* DINLight.ttf */; };
 		AE53BD0D1B071149002F17A5 /* MyriadPro-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE53BC711B071149002F17A5 /* MyriadPro-Bold.otf */; };
 		AE53BD0E1B071149002F17A5 /* MyriadPro-BoldCond.otf in Resources */ = {isa = PBXBuildFile; fileRef = AE53BC721B071149002F17A5 /* MyriadPro-BoldCond.otf */; };
@@ -427,6 +426,7 @@
 		AEE9E8961B0841B1000654DD /* ShareView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEE9E8951B0841B1000654DD /* ShareView.xib */; };
 		AEEB2FCF1A17F3920089826D /* StoreDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AEEB2FCD1A17F3920089826D /* StoreDetailsVC.m */; };
 		AEEB2FD01A17F3920089826D /* StoreDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEEB2FCE1A17F3920089826D /* StoreDetailsVC.xib */; };
+		E8202F291DD80CBA00777AB0 /* dinbek-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E8202F281DD80CBA00777AB0 /* dinbek-regular.ttf */; };
 		E82C2E261B10E46F0096C45B /* CustomIOSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E82C2E251B10E46F0096C45B /* CustomIOSAlertView.m */; };
 		E82C2E2A1B110EBD0096C45B /* CustomAlertContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = E82C2E291B110EBD0096C45B /* CustomAlertContentView.m */; };
 		E82C2E2C1B110EC60096C45B /* CustomAlertContentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E82C2E2B1B110EC60096C45B /* CustomAlertContentView.xib */; };
@@ -585,7 +585,6 @@
 		AE3E41FC1A28372E0019F25D /* AboutNVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AboutNVC.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE3E41FD1A28372E0019F25D /* AboutNVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AboutNVC.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AE53BC6D1B071149002F17A5 /* DINbek-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DINbek-Bold.ttf"; sourceTree = "<group>"; };
-		AE53BC6E1B071149002F17A5 /* DINBek-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DINBek-Regular.ttf"; sourceTree = "<group>"; };
 		AE53BC6F1B071149002F17A5 /* DINLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DINLight.ttf; sourceTree = "<group>"; };
 		AE53BC711B071149002F17A5 /* MyriadPro-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-Bold.otf"; sourceTree = "<group>"; };
 		AE53BC721B071149002F17A5 /* MyriadPro-BoldCond.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MyriadPro-BoldCond.otf"; sourceTree = "<group>"; };
@@ -1088,6 +1087,7 @@
 		AEEB2FCC1A17F3920089826D /* StoreDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = StoreDetailsVC.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AEEB2FCD1A17F3920089826D /* StoreDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = StoreDetailsVC.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		AEEB2FCE1A17F3920089826D /* StoreDetailsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StoreDetailsVC.xib; sourceTree = "<group>"; };
+		E8202F281DD80CBA00777AB0 /* dinbek-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "dinbek-regular.ttf"; sourceTree = "<group>"; };
 		E82C2E241B10E46F0096C45B /* CustomIOSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomIOSAlertView.h; sourceTree = "<group>"; };
 		E82C2E251B10E46F0096C45B /* CustomIOSAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomIOSAlertView.m; sourceTree = "<group>"; };
 		E82C2E281B110EBD0096C45B /* CustomAlertContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomAlertContentView.h; path = Views/CustomAlertContentView.h; sourceTree = "<group>"; };
@@ -1458,8 +1458,8 @@
 		AE53BC6C1B071149002F17A5 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				E8202F281DD80CBA00777AB0 /* dinbek-regular.ttf */,
 				AE53BC6D1B071149002F17A5 /* DINbek-Bold.ttf */,
-				AE53BC6E1B071149002F17A5 /* DINBek-Regular.ttf */,
 				AE53BC6F1B071149002F17A5 /* DINLight.ttf */,
 				AE53BC701B071149002F17A5 /* Myriad Pro */,
 				AE53BC7B1B071149002F17A5 /* Whitney-Bold.otf */,
@@ -3175,7 +3175,6 @@
 				AE53BD0D1B071149002F17A5 /* MyriadPro-Bold.otf in Resources */,
 				AE53BD0C1B071149002F17A5 /* DINLight.ttf in Resources */,
 				A45DF0361A1558F000DB50D7 /* NotificationCell.xib in Resources */,
-				AE53BD0B1B071149002F17A5 /* DINBek-Regular.ttf in Resources */,
 				AE917AD81A22D1A700474492 /* StoreMapViewController.xib in Resources */,
 				AE53BD641B071149002F17A5 /* Fitness.png in Resources */,
 				AE53BD2C1B071149002F17A5 /* sopnsored_button.png in Resources */,
@@ -3226,6 +3225,7 @@
 				AE53BD491B071149002F17A5 /* privacy_policy@2x.png in Resources */,
 				AEB448BB1AF2EDA5000A943B /* AddPhotoViewController.xib in Resources */,
 				A46986981A1530A200E1E1DD /* StoreCell.xib in Resources */,
+				E8202F291DD80CBA00777AB0 /* dinbek-regular.ttf in Resources */,
 				AED33FA81A0F39ED00D706F7 /* LoginVC_736h.xib in Resources */,
 				AE53BD891B071149002F17A5 /* white_back_button@2x.png in Resources */,
 				AE7398471A2512FA004CB0B4 /* SearchVC.xib in Resources */,
