@@ -9,6 +9,8 @@
 #import "SlidingVC.h"
 #import "RegistrationVC.h"
 #import "ProductDetailsManager.h"
+#import "IntroViewController.h"
+
 @interface SlidingVC ()
 
 @end
@@ -48,6 +50,14 @@
     [super viewDidLoad];
     
     self.anchorRightRevealAmount = 242;
+    
+    
+    IntroViewController* introVC = [IntroViewController loadFromXIBForScrrenSizes];
+    [[LayoutManager shared].rootNVC presentViewController:introVC animated:NO completion:^{
+        
+    }];
+    
+    return;
     
 //    [self checkIsLoggedIn];
     
