@@ -48,6 +48,7 @@
 #import "SearchManager.h"
 
 #import "PinterestManager.h"
+#import "hipmob/HMService.h"
 
 @interface AppDelegate ()
 
@@ -58,6 +59,35 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    
+    ////!
+    // setup the Hipmob shared service
+    [[HMService sharedService] setup:APPID withLaunchOptions:launchOptions];
+    
+    NSUserDefaults * prefs = [NSUserDefaults standardUserDefaults];
+    if(![prefs valueForKey:@"userid"]){
+        [prefs setValue:[[NSUUID UUID] UUIDString] forKey:@"userid"];
+        [prefs synchronize];
+    }
+    [[HMService sharedService] setUser:[prefs valueForKey:@"userid"]];
+    
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        // use registerUserNotificationSettings
+        // iOS 8 Notifications
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    } else {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeAlert)];
+    }
+    // setup the article cache: this loads up all the helpdesk articles so they are available offline
+    [[HMService sharedService] setupArticleCache:NO forApp:APPID];
+    
+    // handle being launched from a Hipmob push notification
+    [[HMService sharedService] onLaunch:launchOptions];
+    
+    ////
     
     [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];
 
@@ -432,6 +462,23 @@
     BOOL isFBManagerHandle = [[FacebookManager shared] handleOpenURL:url sourceApplication:sourceApplication];
     BOOL pin = [[PinterestManager shared] application:application handleOpenURL:url];
     return isFBManagerHandle || pin;
+}
+
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)tokenValue {
+    // save the token: we'll need it for the Hipmob usage later
+    [[HMService sharedService] setPushToken:tokenValue];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    // will happen when run in simulator or if some other error occurs
+    NSLog(@"Error in registration: %@", error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    [[HMService sharedService] onPushNotificationReceived:userInfo];
 }
 
 @end

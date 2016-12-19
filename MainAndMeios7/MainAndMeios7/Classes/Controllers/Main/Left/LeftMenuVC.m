@@ -9,6 +9,7 @@
 #import "LeftMenuVC.h"
 #import "LeftMenuCell.h"
 #import "GetNotificationsRequest.h"
+#import "IntroPresentViewController.h"
 
 @interface LeftMenuVC ()
 
@@ -55,7 +56,7 @@
 #pragma mark _______________________ Privat Methods ________________________
 
 - (void)loadData{
-    _tableArray = @[@"Specials & Events",
+    _tableArray = @[@"\"Sales & Events\"",
                     @"Home",
                     @"Search",
                     @"All Places",
@@ -65,8 +66,8 @@
                     @"Notifications",
                     @"Edit my profile",
                     //@"Invite friends",
-                    @"About Main and Me",
-                    @"Our sponsor",
+                    @"\"Main&Me Tutorials\"",
+                    @"\"Sponsor page\"",
                     @"Privacy Policy",
                     @"Log out"];
 }
@@ -102,7 +103,7 @@
     
     cell.nameLabel.text = [_tableArray safeStringObjectAtIndex:indexPath.row];
     
-    if ([cell.nameLabel.text isEqualToString:@"Specials & Events"]) {
+    if ([cell.nameLabel.text isEqualToString:@"\"Sales & Events\""]) {
         cell.contentView.backgroundColor = [UIColor colorWithRed:1.000f green:0.984f blue:0.686f alpha:1.00f];
     }else{
         cell.contentView.backgroundColor = [UIColor whiteColor];
@@ -187,8 +188,8 @@
             break;
         }
         case 8:{
-            [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].aboutNVC;
-            [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+            
+            [self showIntroPresentationView];
             
             break;
         }
@@ -233,6 +234,67 @@
     }];
 }
 
+
+- (void)showIntroPresentationView{
+    IntroPresentViewController* introPresentViewController = [IntroPresentViewController loadFromXIBForScrrenSizes];
+    UINavigationController* navVC = [[UINavigationController alloc] initWithRootViewController:introPresentViewController];
+    navVC.navigationBarHidden = YES;
+    
+    introPresentViewController.didClickAddItem = ^(IntroPresentViewController* obj){
+        
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        HomeVC* homeVC = [LayoutManager shared].homeNVC.viewControllers.firstObject;
+        [homeVC removeCoverViewAnimated:NO];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        });
+        
+        [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{
+            [obj dismissViewControllerAnimated:YES completion:^{
+                [homeVC cameraButtinCliced:nil];
+            }];
+        }];
+        
+    };
+    
+    introPresentViewController.didClickAddLocalBussines = ^(IntroPresentViewController* obj){
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        HomeVC* homeVC = [LayoutManager shared].homeNVC.viewControllers.firstObject;
+        [homeVC removeCoverViewAnimated:NO];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [homeVC showAddressController];
+        });
+        
+        [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{
+            [obj dismissViewControllerAnimated:YES completion:^{}];
+        }];
+        
+    };
+    
+    introPresentViewController.didClickWindshop = ^(IntroPresentViewController* obj){
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        HomeVC* homeVC = [LayoutManager shared].homeNVC.viewControllers.firstObject;
+        [homeVC removeCoverViewAnimated:NO];
+        
+        [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{
+            [obj dismissViewControllerAnimated:YES completion:^{}];
+        }];
+    };
+    
+    [[LayoutManager shared].slidingVC presentViewController:navVC animated:YES completion:^{
+        
+    }];
+    
+    //[LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].aboutNVC;
+    //[[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+    
+
+}
 #pragma mark _______________________ Notifications _________________________
 
 - (void)didReceiveCampaignNotification:(NSNotification*)notification{

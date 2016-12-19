@@ -9,18 +9,28 @@
 #import "IntroViewController.h"
 #import "IntroCell.h"
 #import "IntroEndCell.h"
+#import "SMPageControl.h"
 
 
 @interface IntroViewController ()
 @property (strong, nonatomic) NSMutableArray* collectionArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSTimer *timer;
+    @property (weak, nonatomic) IBOutlet SMPageControl *pageControl;
 
 
 @end
 
 @implementation IntroViewController
 
+    + (BOOL)wasShown{
+        return [[NSUserDefaults standardUserDefaults] boolForKey:@"kIntroWasShown"];
+    }
+    
+    + (void)setWasShown:(BOOL)value{
+        [[NSUserDefaults standardUserDefaults] setBool:value forKey:@"kIntroWasShown"];
+    }
+    
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -31,43 +41,66 @@
     cellNib = [UINib nibWithNibName:@"IntroEndCell" bundle:nil];
     [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"IntroEndCell"];
 
-    
     self.collectionArray = @[].mutableCopy;
     [self.collectionArray addObject:@{@"CellType" : @"IntroCell",
                                       @"CellIdentifier" : @"IntroCell",
-                                      @"ImageName" : @"0-Main&Me Tutorial-TIFFs.002.tiff"}];
+                                      @"ImageName" : @"1-Welcome.png"}];
     
     [self.collectionArray addObject:@{@"CellType" : @"IntroCell",
                                       @"CellIdentifier" : @"IntroCell",
-                                      @"ImageName" : @"0-Main&Me Tutorial-TIFFs.003.tiff"}];
+                                      @"ImageName" : @"2-Windowshop.png"}];
     
     [self.collectionArray addObject:@{@"CellType" : @"IntroCell",
                                       @"CellIdentifier" : @"IntroCell",
-                                      @"ImageName" : @"0-Main&Me Tutorial-TIFFs.004.tiff"}];
+                                      @"ImageName" : @"3-Specials.png"}];
     
     [self.collectionArray addObject:@{@"CellType" : @"IntroCell",
                                       @"CellIdentifier" : @"IntroCell",
-                                      @"ImageName" : @"0-Main&Me Tutorial-TIFFs.005.tiff"}];
+                                      @"ImageName" : @"4-Events.png"}];
     
     [self.collectionArray addObject:@{@"CellType" : @"IntroCell",
                                       @"CellIdentifier" : @"IntroCell",
-                                      @"ImageName" : @"0-Main&Me Tutorial-TIFFs.006.tiff"}];
+                                      @"ImageName" : @"5-Exchange wishlists.png"}];
     
     [self.collectionArray addObject:@{@"CellType" : @"IntroCell",
                                       @"CellIdentifier" : @"IntroCell",
-                                      @"ImageName" : @"0-Main&Me Tutorial-TIFFs.007.tiff"}];
+                                      @"ImageName" : @"6-Add photos of finds.png"}];
     
     [self.collectionArray addObject:@{@"CellType" : @"IntroCell",
                                       @"CellIdentifier" : @"IntroCell",
-                                      @"ImageName" : @"0-Main&Me Tutorial-TIFFs.008.tiff"}];
+                                      @"ImageName" : @"7-Scavenger hunts.png"}];
+    
+    [self.collectionArray addObject:@{@"CellType" : @"IntroCell",
+                                      @"CellIdentifier" : @"IntroCell",
+                                      @"ImageName" : @"8-Browse any city.png"}];
     
     [self.collectionArray addObject:@{@"CellType" : @"IntroEndCell",
                                       @"CellIdentifier" : @"IntroEndCell",
-                                      @"ImageName" : @"0-Main&Me Tutorial-TIFFs.009.tiff"}];
+                                      @"ImageName" : @"9-End of tutorial.png"}];
 
     [self startTimer];
+    
+    //! Update page control view
+    self.pageControl.numberOfPages = self.collectionArray.count;
+    [self.pageControl setPageIndicatorImage:[UIImage imageNamed:@"pageDot"]];
+    [self.pageControl setCurrentPageIndicatorImage:[UIImage imageNamed:@"currentPageDot"]];
+
+    [self updatePageControl];
+
 }
 
+#pragma mark Page control
+- (void)updatePageControl{
+    NSInteger currentPage = (NSInteger)((self.collectionView.contentOffset.x + self.collectionView.frame.size.width / 2)/ self.collectionView.frame.size.width);
+    [self.pageControl setCurrentPage:currentPage];
+    
+    if (currentPage == self.collectionArray.count - 1) {
+        self.pageControl.alpha = 0;
+    }else{
+        self.pageControl.alpha = 1;
+    }
+}
+    
 - (void) startTimer {
     [self.timer invalidate];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:4 target:self selector:@selector(timerTick:) userInfo:nil repeats:YES];
@@ -107,7 +140,7 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    
+    __weak typeof(self) wSelf = self;
     NSDictionary* cellInfo = _collectionArray[indexPath.row];
     
     NSString *cellType = cellInfo[@"CellType"];
@@ -120,9 +153,43 @@
     
     if ([cellType isEqualToString:@"IntroEndCell"]) {
         IntroEndCell* introEndCell = (IntroEndCell*)cell;
+        
         introEndCell.didClickEndTutorial = ^(IntroEndCell* obj){
-            [self dismissViewControllerAnimated:YES completion:nil];
+            if (_didClickEndTutorial) {
+                _didClickEndTutorial(wSelf);
+            }
         };
+                
+        introEndCell.didClickSeeTowns = ^(IntroEndCell* obj){
+            if (_didClickSeeTowns) {
+                _didClickSeeTowns(wSelf);
+            }
+        };
+
+        introEndCell.didClickAddItem = ^(IntroEndCell* obj){
+            if (_didClickAddItem) {
+                _didClickAddItem(wSelf);
+            }
+        };
+
+        introEndCell.didClickAddLocalBussines = ^(IntroEndCell* obj){
+            if (_didClickAddLocalBussines) {
+                _didClickAddLocalBussines(wSelf);
+            }
+        };
+
+        introEndCell.didClickWindshop = ^(IntroEndCell* obj){
+            if (_didClickWindshop) {
+                _didClickWindshop(wSelf);
+            }
+        };
+
+        introEndCell.didClickSeeBenefits = ^(IntroEndCell* obj){
+            if (_didClickSeeBenefits) {
+                _didClickSeeBenefits(wSelf);
+            }
+        };
+
     }
     
     return cell;
@@ -141,6 +208,10 @@
     [self stopTimer];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    [self updatePageControl];
+}
 
 
 @end

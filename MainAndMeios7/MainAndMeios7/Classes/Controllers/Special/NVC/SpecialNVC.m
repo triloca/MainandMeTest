@@ -27,8 +27,8 @@
     [super viewWillAppear:animated];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     //! Add recognizer for finger action
-    [self.view addGestureRecognizer:self.slidingViewController.panGesture];
-    [self.view addGestureRecognizer:self.slidingViewController.resetTapGesture];
+    //[self.view addGestureRecognizer:self.slidingViewController.panGesture];
+    //[self.view addGestureRecognizer:self.slidingViewController.resetTapGesture];
     
     
 }
@@ -36,8 +36,8 @@
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
-    [self.view removeGestureRecognizer:self.slidingViewController.panGesture];
-    [self.view removeGestureRecognizer:self.slidingViewController.resetTapGesture];
+    //[self.view removeGestureRecognizer:self.slidingViewController.panGesture];
+    //[self.view removeGestureRecognizer:self.slidingViewController.resetTapGesture];
     
 }
 

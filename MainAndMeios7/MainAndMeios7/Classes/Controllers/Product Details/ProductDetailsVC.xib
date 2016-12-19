@@ -9,14 +9,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="DINBek-Regular.ttf">
-            <string>DINBek-Regular</string>
-        </array>
         <array key="DINLight.ttf">
             <string>DIN-Light</string>
         </array>
         <array key="DINbek-Bold.ttf">
             <string>DINbekBold</string>
+        </array>
+        <array key="dinbek-regular.ttf">
+            <string>DINBek-Regular</string>
         </array>
     </customFonts>
     <objects>
@@ -44,20 +44,20 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GyI-sn-Pk2">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="580"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="581"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OkA-pl-ZDd">
-                    <rect key="frame" x="0.0" y="540" width="375" height="127"/>
+                    <rect key="frame" x="0.0" y="541" width="375" height="126"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" image="horisontal_gradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="BbZ-gi-y0E">
-                            <rect key="frame" x="0.0" y="-71" width="375" height="198"/>
+                            <rect key="frame" x="0.0" y="-72" width="375" height="198"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="198" id="PTk-u3-e1O"/>
                             </constraints>
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pnw-pe-2wc">
-                            <rect key="frame" x="334" y="85" width="33" height="42"/>
+                            <rect key="frame" x="334" y="84" width="33" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="42" id="i2Z-Od-crl"/>
                                 <constraint firstAttribute="width" constant="33" id="laF-1b-i1I"/>
@@ -70,7 +70,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sso-eZ-jIW">
-                            <rect key="frame" x="197" y="85" width="45" height="42"/>
+                            <rect key="frame" x="197" y="84" width="45" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="42" id="66b-dT-OfH"/>
                                 <constraint firstAttribute="width" constant="45" id="Wgm-U6-jV2"/>
@@ -83,7 +83,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lu7-Ek-AyX">
-                            <rect key="frame" x="251" y="85" width="80" height="42"/>
+                            <rect key="frame" x="251" y="84" width="80" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="dyp-6X-Knf"/>
                                 <constraint firstAttribute="height" constant="42" id="eVX-Qf-DLr"/>
@@ -96,13 +96,13 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yif-Nl-54B">
-                            <rect key="frame" x="8" y="88" width="202" height="0.0"/>
+                            <rect key="frame" x="8" y="87" width="202" height="0.0"/>
                             <fontDescription key="fontDescription" name="DIN-Light" family="DIN Light" pointSize="14"/>
                             <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rno-lE-EGK">
-                            <rect key="frame" x="8" y="39" width="177" height="89"/>
+                            <rect key="frame" x="8" y="38" width="177" height="89"/>
                             <state key="normal">
                                 <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
@@ -111,7 +111,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L67-Jq-t0J">
-                            <rect key="frame" x="8" y="75" width="202" height="12"/>
+                            <rect key="frame" x="8" y="74" width="202" height="12"/>
                             <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="10"/>
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
@@ -145,13 +145,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CGu-3N-eXg">
-                    <rect key="frame" x="8" y="590" width="202" height="22"/>
+                    <rect key="frame" x="8" y="591" width="202" height="21"/>
                     <fontDescription key="fontDescription" name="DINbekBold" family="DINbek Bold" pointSize="18"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="TOz-le-VeT">
-                    <rect key="frame" x="169.5" y="271" width="37" height="37"/>
+                    <rect key="frame" x="170" y="272" width="37" height="37"/>
                     <color key="color" red="0.2156862745" green="0.73725490199999999" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </activityIndicatorView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="547-mU-IPf">

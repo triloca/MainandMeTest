@@ -1,28 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="DINBek-Regular.ttf">
-            <string>DINBek-Regular</string>
-        </mutableArray>
-        <mutableArray key="DINbek-Bold.ttf">
+        <array key="DINbek-Bold.ttf">
             <string>DINbekBold</string>
-        </mutableArray>
+        </array>
+        <array key="dinbek-regular.ttf">
+            <string>DINBek-Regular</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleAspectFit" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" id="iN0-l3-epB" customClass="StoreDetailsView">
+        <view clipsSubviews="YES" contentMode="scaleAspectFit" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" id="iN0-l3-epB" customClass="StoreDetailsView">
             <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="CoR-2N-DAN">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" translatesAutoresizingMaskIntoConstraints="NO" id="CoR-2N-DAN">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="431"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                 </imageView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="I0o-Bf-yAo">
+                    <rect key="frame" x="141.5" y="197" width="37" height="37"/>
+                    <color key="color" red="0.2156862745" green="0.73725490199999999" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </activityIndicatorView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="horisontal_gradient.png" translatesAutoresizingMaskIntoConstraints="NO" id="Am3-F4-kcd">
                     <rect key="frame" x="0.0" y="217" width="320" height="214"/>
                 </imageView>
@@ -33,7 +41,7 @@
                         <constraint firstAttribute="height" constant="40" id="w3h-rz-a6E"/>
                     </constraints>
                     <state key="normal" image="store_follow_button.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <variation key="default">
                         <mask key="constraints">
@@ -52,7 +60,7 @@
                         <constraint firstAttribute="width" constant="33" id="exK-LQ-uGG"/>
                     </constraints>
                     <state key="normal" image="item_det_share_btn.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="shareButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="dBp-Na-msu"/>
@@ -65,35 +73,36 @@
                         <constraint firstAttribute="height" constant="42" id="pkt-3Z-M60"/>
                     </constraints>
                     <state key="normal" image="item_det_call_btn.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <connections>
                         <action selector="callButtonClicked:" destination="iN0-l3-epB" eventType="touchUpInside" id="6XV-14-Asv"/>
                     </connections>
                 </button>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eYG-kL-lPd">
-                    <rect key="frame" x="8" y="369" width="220" height="13"/>
+                    <rect key="frame" x="8" y="370" width="220" height="12"/>
                     <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="10"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKp-c7-LF5">
-                    <rect key="frame" x="8" y="339" width="220" height="22"/>
+                    <rect key="frame" x="8" y="340" width="220" height="22"/>
                     <fontDescription key="fontDescription" name="DINbekBold" family="DINbek Bold" pointSize="18"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hqN-9W-KJW">
                     <rect key="frame" x="0.0" y="430" width="320" height="1"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="x70-yF-mAm"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.40000000596046448" green="0.40000000596046448" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.40000000596046448" green="0.40000000596046448" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="o8y-Gf-8T8" firstAttribute="leading" secondItem="V0P-pB-NTX" secondAttribute="trailing" constant="2" id="4fa-Ap-d3C"/>
+                <constraint firstItem="I0o-Bf-yAo" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="6CM-Sa-Qqv"/>
                 <constraint firstAttribute="bottom" secondItem="o8y-Gf-8T8" secondAttribute="bottom" constant="3" id="7mF-aT-5Yf"/>
                 <constraint firstItem="Am3-F4-kcd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="9rk-F2-zjO"/>
                 <constraint firstItem="o8y-Gf-8T8" firstAttribute="leading" secondItem="V0P-pB-NTX" secondAttribute="trailing" constant="-2" id="BOa-mf-nNS"/>
@@ -126,6 +135,7 @@
                 <constraint firstItem="CoR-2N-DAN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="sRd-9B-Lkg"/>
                 <constraint firstAttribute="trailing" secondItem="o8y-Gf-8T8" secondAttribute="trailing" constant="11" id="vhe-sd-Fvp"/>
                 <constraint firstItem="o8y-Gf-8T8" firstAttribute="leading" secondItem="V0P-pB-NTX" secondAttribute="trailing" constant="2" id="zAN-eS-QpE"/>
+                <constraint firstItem="I0o-Bf-yAo" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="zK4-hc-tKI"/>
                 <constraint firstAttribute="trailing" secondItem="hqN-9W-KJW" secondAttribute="trailing" id="zUC-xF-QoZ"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -154,6 +164,7 @@
                 <outlet property="gradientImageView" destination="Am3-F4-kcd" id="nwf-at-cEb"/>
                 <outlet property="nameLabel" destination="cKp-c7-LF5" id="8s5-UM-mKm"/>
                 <outlet property="shareButton" destination="V0P-pB-NTX" id="EJq-ef-rG7"/>
+                <outlet property="spinnerView" destination="I0o-Bf-yAo" id="cOO-1b-cbU"/>
                 <outlet property="storeImageView" destination="CoR-2N-DAN" id="uyV-Iv-TXN"/>
                 <outlet property="wishlistButton" destination="o8y-Gf-8T8" id="W6a-YM-WN7"/>
             </connections>

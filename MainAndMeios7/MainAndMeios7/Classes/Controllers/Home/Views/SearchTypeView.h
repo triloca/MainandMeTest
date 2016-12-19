@@ -25,11 +25,16 @@ typedef enum {
 
 @property (assign, nonatomic) ViewSearchType oldSearchType;
 
+@property (weak, nonatomic) IBOutlet UILabel *storesBadgeLabel;
+@property (weak, nonatomic) IBOutlet UIView *storebadgeContentView;
+
 
 - (void)selectSpecials;
 - (void)selectItems;
 - (void)selectStorefronts;
 
 - (void)unselectAll;
+
+- (void)setStoreBadgeNumber:(NSInteger)value;
 
 @end

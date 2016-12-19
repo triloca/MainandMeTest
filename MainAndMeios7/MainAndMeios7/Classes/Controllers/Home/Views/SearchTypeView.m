@@ -22,6 +22,8 @@
 
 
 - (void)awakeFromNib{
+    [super awakeFromNib];
+    
     [_specialsButton setTitleColor:[_specialsButton titleColorForState:UIControlStateSelected] forState:UIControlStateSelected | UIControlStateHighlighted];
     
     [_itemsButton setTitleColor:[_itemsButton titleColorForState:UIControlStateSelected] forState:UIControlStateSelected | UIControlStateHighlighted];
@@ -29,17 +31,23 @@
     [_storefrontsButton setTitleColor:[_storefrontsButton titleColorForState:UIControlStateSelected] forState:UIControlStateSelected | UIControlStateHighlighted];
     
     [self selectSpecials];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setStoreBageValueNotification:) name:@"kSetStoreBageValueNotification" object:nil];
+    
+    [self setStoreBadgeNumber:0];
 }
 
 - (void)layoutSubviews{
     [super layoutSubviews];
     [self updateState];
+    
+    self.storebadgeContentView.layer.cornerRadius = 2;
 }
 
 - (IBAction)specialsButtonDown:(UIButton *)sender {
     [self unselectAll];
     sender.selected = YES;
-    sender.titleLabel.font = [UIFont fontWithName:@"DINbek Bold" size:14];
+    sender.titleLabel.font = [UIFont fontWithName:@"AvenirNextCondensed-DemiBold" size:16];
     
     _searchType = SearchTypeSpecials;
 
@@ -49,7 +57,7 @@
 - (IBAction)itemsButtonDown:(UIButton *)sender {
     [self unselectAll];
     sender.selected = YES;
-    sender.titleLabel.font = [UIFont fontWithName:@"DINbek Bold" size:14];
+    sender.titleLabel.font = [UIFont fontWithName:@"AvenirNextCondensed-DemiBold" size:16];
 
     _searchType = SearchTypeItems;
     
@@ -59,7 +67,7 @@
 - (IBAction)storefrontButtonDown:(UIButton *)sender {
     [self unselectAll];
     sender.selected = YES;
-    sender.titleLabel.font = [UIFont fontWithName:@"DINbek Bold" size:14];
+    sender.titleLabel.font = [UIFont fontWithName:@"AvenirNextCondensed-DemiBold" size:16];
 
     _searchType = SearchTypeStorefronts;
     
@@ -102,10 +110,9 @@
     _specialsButton.selected = NO;
     _itemsButton.selected = NO;
     _storefrontsButton.selected = NO;
-    
-    _specialsButton.titleLabel.font = [UIFont fontWithName:@"DINBek" size:14];
-    _itemsButton.titleLabel.font = [UIFont fontWithName:@"DINBek" size:14];
-    _storefrontsButton.titleLabel.font = [UIFont fontWithName:@"DINBek" size:14];
+    _specialsButton.titleLabel.font = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:16];
+    _itemsButton.titleLabel.font = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:16];
+    _storefrontsButton.titleLabel.font = [UIFont fontWithName:@"AvenirNextCondensed-Regular" size:16];
 
 
 }
@@ -149,6 +156,29 @@
 - (void)setHideTriger:(BOOL)hideTriger{
     _hideTriger = hideTriger;
     [self updateState];
+}
+
+
+- (void)setStoreBadgeNumber:(NSInteger)value{
+
+    self.storesBadgeLabel.text = [NSString stringWithFormat:@"%d", value];
+    
+    if (value == 0) {
+        self.storebadgeContentView.hidden = YES;
+    }else{
+        self.storebadgeContentView.hidden = NO;
+    }
+    
+    [self layoutIfNeeded];
+}
+
+
+- (void)setStoreBageValueNotification:(NSNotification*)notif{
+
+    NSNumber* value = notif.object;
+    if ([value isKindOfClass:[NSNumber class]]) {
+        [self setStoreBadgeNumber:[value integerValue]];
+    }
 }
 
 @end

@@ -105,6 +105,9 @@
     
     [self SetViewFrames];
     
+    self.emailTextField.text = @"test@test.com";
+    self.passwordTextField.text = @"testtest";
+    
 }
 
 -(void)SetViewFrames{

@@ -48,6 +48,15 @@
 
 #import "WishlistDetailsVC.h"
 
+#import "StorefrontsHorisontalCollectionView.h"
+#import "StoreDataModel.h"
+
+#import "YourGPSCityViewController.h"
+#import "IntroViewController.h"
+
+#import "LoadSalesEventsRequest.h"
+#import "SalesAndEventsView.h"
+
 typedef enum {
     ScreenStateStore = 0,
     ScreenStateItem,
@@ -79,6 +88,8 @@ UINavigationControllerDelegate>
 
 @property (strong, nonatomic) TMQuiltView *quiltView;
 @property (strong, nonatomic) NSMutableArray* collectionArray;
+@property (strong, nonatomic) NSMutableArray* storesArray;
+@property (strong, nonatomic) NSMutableArray* salesAndEventsArray;
 
 @property (strong, nonatomic) UITableView* tableView;
 
@@ -94,6 +105,10 @@ UINavigationControllerDelegate>
 @property (assign, nonatomic) ListStyle listStyle;
 
 @property (strong, nonatomic) HomeCoverView* coverView;
+
+@property (strong, nonatomic) StorefrontsHorisontalCollectionView* storefrontsHorisontalCollectionView;
+
+@property (strong, nonatomic) SalesAndEventsView* salesAndEventsView;
 
 @end
 
@@ -138,7 +153,7 @@ UINavigationControllerDelegate>
     [self.searchTypeView unselectAll];
 
     [self setupCollectionView];
-    //[self setupCollection];
+    [self setupStorefrontHorisontalView];
     
     //[self setupHorisontalView];
     
@@ -169,7 +184,9 @@ UINavigationControllerDelegate>
 
     [self addCoverViewAnimated:YES];
     
-    _searchBar.placeholder = @"Tap to start searching...";
+    _searchBar.placeholder = @"Tap to search by keyword or category";
+    
+    [self setupSalesAndEvenysView];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -193,6 +210,7 @@ UINavigationControllerDelegate>
     //[_quiltView reloadData];
     
     [self updateSpecials];
+    [self loadSalesAndEvents];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -213,6 +231,13 @@ UINavigationControllerDelegate>
 //    [self configureCollectionFrame];
 //    [self configureHorisontalViewFrame];
     [self updateCoverViewFrames];
+    [self configureStorefrontCollectionViewFrame];
+
+    CGRect rc = _specialsView.frame;
+    rc.origin.y = CGRectGetMaxY(_searchBar.frame);
+    rc.size.height = self.view.frame.size.height - rc.origin.y;
+    self.salesAndEventsView.frame = rc;
+
 
 }
 
@@ -277,6 +302,14 @@ UINavigationControllerDelegate>
     
 }
 
+- (void)setupStorefrontHorisontalView{
+
+    self.storefrontsHorisontalCollectionView = [StorefrontsHorisontalCollectionView loadViewFromXIB];
+    _storefrontsHorisontalCollectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:_storefrontsHorisontalCollectionView];
+    _storefrontsHorisontalCollectionView.parrentVC = self;
+}
+
 - (void)setupCollection{
     
     self.quiltView = [[TMQuiltView alloc] initWithFrame:CGRectZero];
@@ -295,6 +328,14 @@ UINavigationControllerDelegate>
     rc.size.height -= rc.origin.y;
     self.tableView.frame = rc;
     
+}
+
+- (void)configureStorefrontCollectionViewFrame{
+    
+    CGRect rc = self.view.frame;
+    rc.origin.y = CGRectGetMaxY(_searchBar.frame);
+    rc.size.height -= rc.origin.y;
+    self.storefrontsHorisontalCollectionView.frame = rc;
 }
 
 
@@ -435,6 +476,27 @@ UINavigationControllerDelegate>
     [self.view addSubview:self.specialsView];
 }
 
+- (void)setupSalesAndEvenysView {
+    
+    __weak HomeVC* wSelf = self;
+    
+    self.salesAndEventsView = [SalesAndEventsView loadViewFromXIB];
+    
+    CGRect rc = _specialsView.frame;
+    rc.origin.y = CGRectGetMaxY(_searchBar.frame);
+    rc.size.height = self.view.frame.size.height - rc.origin.y;
+    self.salesAndEventsView.frame = rc;
+    [self.view addSubview:self.salesAndEventsView];
+    self.salesAndEventsView.hidden = YES;
+    
+    self.salesAndEventsView.didSelectItem = ^(SalesAndEventsView* sender, NSDictionary* cellInfo, NSArray* collectionArray){
+        SpecialVC* specialVC = [SpecialVC loadFromXIBForScrrenSizes];
+        specialVC.collectionArray = collectionArray;
+        specialVC.selectedIndex = [collectionArray indexOfObject:cellInfo];
+        [wSelf.navigationController pushViewController:specialVC animated:YES];
+    };
+}
+
 - (void)setupHorisontalView{
     
     __weak HomeVC* wSelf = self;
@@ -474,6 +536,38 @@ UINavigationControllerDelegate>
     [self.navigationController pushViewController:stateVC animated:YES];
 
 }
+    
+    - (void)showYourCityController{
+        YourGPSCityViewController* yourGPSCityVC = [YourGPSCityViewController loadFromXIBForScrrenSizes];
+        
+        yourGPSCityVC.didClickStartBrowsing = ^(YourGPSCityViewController* obj){
+            [[SearchManager shared] setCityWasSelected:YES];
+            [obj dismissViewControllerAnimated:YES completion:nil];
+        };
+        
+        yourGPSCityVC.didClickEditCity = ^(YourGPSCityViewController* obj){
+            [self showAddressController];
+            [obj dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+
+        };
+        
+        yourGPSCityVC.didClickBenefits = ^(YourGPSCityViewController* obj){
+            [obj dismissViewControllerAnimated:YES completion:^{
+                [[LayoutManager shared].LeftMenuVC showIntroPresentationView];
+            }];
+        };
+        
+        yourGPSCityVC.didClickWindowShop = ^(YourGPSCityViewController* obj){
+            [self removeCoverViewAnimated:NO];
+            [obj dismissViewControllerAnimated:YES completion:^{
+                
+            }];
+        };
+        
+        [self.navigationController presentViewController:yourGPSCityVC animated:YES completion:^{}];
+    }
 
 - (void)setupSearchTypeView{
     
@@ -492,6 +586,8 @@ UINavigationControllerDelegate>
             wSelf.quiltView.hidden = NO;
             wSelf.homeHorisontalListView.hidden = YES;
             wSelf.specialsView.hidden = YES;
+            wSelf.storefrontsHorisontalCollectionView.hidden = YES;
+            wSelf.salesAndEventsView.hidden = YES;
         }
         
         if (wSelf.coverView) {
@@ -510,6 +606,9 @@ UINavigationControllerDelegate>
             wSelf.quiltView.hidden = NO;
             wSelf.homeHorisontalListView.hidden = YES;
             wSelf.specialsView.hidden = YES;
+            wSelf.storefrontsHorisontalCollectionView.hidden = NO;
+            wSelf.salesAndEventsView.hidden = YES;
+
         }
         if (wSelf.coverView) {
             [wSelf.coverView scrollOutAnimated:YES];
@@ -523,22 +622,15 @@ UINavigationControllerDelegate>
         if (view.oldSearchType == SearchTypeSpecials) {
         }else{
             [wSelf.searchBar resignFirstResponder];
-            [wSelf startSearch];
-            wSelf.quiltView.hidden = NO;
-            wSelf.homeHorisontalListView.hidden = YES;
-            wSelf.specialsView.hidden = YES;
-
-            /*
-            [wSelf.searchBar resignFirstResponder];
-            wSelf.collectionArray = [NSMutableArray new];
-            //[wSelf.quiltView reloadData];
-            [wSelf.tableView reloadData];
+            //[wSelf startSearch];
             wSelf.quiltView.hidden = YES;
             wSelf.homeHorisontalListView.hidden = YES;
-            wSelf.specialsView.hidden = NO;
-            
-            [wSelf updateSpecials];
-             */
+            wSelf.specialsView.hidden = YES;
+            wSelf.storefrontsHorisontalCollectionView.hidden = YES;
+            wSelf.salesAndEventsView.hidden = NO;
+           [wSelf.salesAndEventsView loadDataComletion:^(NSError *error) {
+               
+           }];
         }
         
         if (wSelf.coverView) {
@@ -759,7 +851,6 @@ UINavigationControllerDelegate>
         searchType = SearchTypeProducts;
     }
     
-    
     SearchRequest *searchRequest = [[SearchRequest alloc] initWithSearchType:searchType searchFilter:SearchFilterRandom];
     searchRequest.location = [SearchManager shared].communityLocation; //[[CLLocation alloc] initWithLatitude:42.283215 longitude:-71.123029];
     searchRequest.city = [SearchManager shared].city;
@@ -780,37 +871,53 @@ UINavigationControllerDelegate>
         //! Set cell type
         if (searchRequest.searchType == SearchTypeProducts) {
             _screenState = ScreenStateItem;
-        }else if (searchRequest.searchType == SearchTypeStores){
-            _screenState = ScreenStateStore;
-        }
-        
-        [self.tableView.infiniteScrollingView stopAnimating];
-        [self.tableView.pullToRefreshView stopAnimating];
-        //[_quiltView.infiniteScrollingView stopAnimating];
-        
-        if (_page == 1) {
-            self.collectionArray = [NSMutableArray new];
-            //[self.quiltView reloadData];
+            [self.tableView.infiniteScrollingView stopAnimating];
+            [self.tableView.pullToRefreshView stopAnimating];
+            
+            if (_page == 1) {
+                self.collectionArray = [NSMutableArray new];
+                [self.tableView reloadData];
+            }
+            
+            if (request.objects.count > 0) {
+                [_collectionArray addObjectsFromArray:request.objects];
+                _page ++;
+            }
+            
             [self.tableView reloadData];
             
-            _homeHorisontalListView.tableArray = _collectionArray;
-            [_homeHorisontalListView.collectionView setContentOffset:CGPointZero animated:NO];
-            [_homeHorisontalListView reloadData];
+            self.searchOperation = nil;
+
+        }else if (searchRequest.searchType == SearchTypeStores){
+            _screenState = ScreenStateStore;
+            
+            [self.tableView.infiniteScrollingView stopAnimating];
+            [self.tableView.pullToRefreshView stopAnimating];
+            
+            if (_page == 1) {
+                self.storesArray = [NSMutableArray new];
+                self.storefrontsHorisontalCollectionView.collectionArray = self.storesArray;
+            }
+            
+            if (request.objects.count > 0) {
+                
+                NSMutableArray* temp = @[].mutableCopy;
+                for (NSDictionary* storeInfo in request.objects) {
+                    StoreDataModel* storeDataModel = [StoreDataModel new];
+                    storeDataModel.storeInfo = storeInfo;
+                    [temp addObject:storeDataModel];
+                }
+                [self.storesArray addObjectsFromArray:temp];
+                self.storefrontsHorisontalCollectionView.collectionArray = self.storesArray;
+                _page ++;
+            }
+            
+            [self.storefrontsHorisontalCollectionView reloadData];
+            
+            self.searchOperation = nil;
 
         }
         
-        if (request.objects.count > 0) {
-            [_collectionArray addObjectsFromArray:request.objects];
-            _page ++;
-        }
-        
-        _homeHorisontalListView.tableArray = _collectionArray;
-        [_homeHorisontalListView reloadData];
-        //[_quiltView reloadData];
-        [self.tableView reloadData];
-        
-        self.searchOperation = nil;
-
     } failure:^(id _request, NSError *error) {
         NSLog(@"Fail: %@", error);
          [self hideSpinnerWithName:@""];
@@ -956,6 +1063,44 @@ UINavigationControllerDelegate>
     
 }
 
+- (void)loadSalesAndEvents{
+    
+    if (![ReachabilityManager isReachable]) {
+        [[AlertManager shared] showOkAlertWithTitle:@"No Internet connection"];
+        return;
+    }
+    
+    
+    LoadSalesEventsRequest *productsRequest = [[LoadSalesEventsRequest alloc] init];
+    productsRequest.communityId = [SearchManager shared].communityID;
+    
+    [self showSpinnerWithName:@""];
+    [[MMServiceProvider sharedProvider] sendRequest:productsRequest success:^(LoadSalesEventsRequest *request) {
+        [self hideSpinnerWithName:@""];
+        NSLog(@"products: %@", request.events);
+        
+        self.salesAndEventsArray = [NSMutableArray arrayWithArray:request.events];
+        //[self.collectionView reloadData];
+        self.salesAndEventsView.collectionArray = [NSMutableArray arrayWithArray:request.events];
+        [self.salesAndEventsView.collectionView reloadData];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"kSetStoreBageValueNotification"
+                                                            object:@(self.salesAndEventsArray.count)];
+        
+    } failure:^(LoadSalesEventsRequest *request, NSError *error) {
+        [self hideSpinnerWithName:@""];
+        NSLog(@"Error: %@", error);
+        
+        self.salesAndEventsArray = [NSMutableArray new];
+        //[_quiltView reloadData];
+        //[self.collectionView reloadData];
+        [[AlertManager shared] showOkAlertWithTitle:@"Error" message:error.localizedDescription];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"kSetStoreBageValueNotification"
+                                                            object:@(0)];
+    }];
+    
+}
 
 //- (void)loadProducts{
 //
@@ -1393,6 +1538,8 @@ UINavigationControllerDelegate>
 
 - (void)didLoginSuccessfuly{
 
+    [IntroViewController setWasShown:YES];
+    
     [[ProductDetailsManager shared] trackLoginSuccess:^{
         
     }
@@ -1408,6 +1555,7 @@ UINavigationControllerDelegate>
     if ([SearchManager shared].cityWasSelected) {
         
     }else{
+        
         [self showSpinnerWithName:@"community"];
         //CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(42.36, -71.06);
         [[ProductsStoresManager shared] loadCommunitiesByLocation:[LocationManager sharedManager].currentLocation.coordinate
@@ -1429,7 +1577,8 @@ UINavigationControllerDelegate>
                                                                   [[NSNotificationCenter defaultCenter] postNotificationName:@"kCommunityChanged" object:nil];
                                                               }
                                                               
-                                                              
+                                                              [self showYourCityController];
+                                                              /*
                                                               [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
                                                                   if (alertView.cancelButtonIndex != buttonIndex) {
                                                                       [self showAddressController];
@@ -1440,6 +1589,7 @@ UINavigationControllerDelegate>
                                                                                                    message:nil
                                                                                          cancelButtonTitle:@"Keep"
                                                                                          otherButtonTitles:@"Change", nil];
+                                                               */
                                                           }
                                                           failure:^(NSError *error, NSString *errorString) {
                                                               [self hideSpinnerWithName:@"community"];

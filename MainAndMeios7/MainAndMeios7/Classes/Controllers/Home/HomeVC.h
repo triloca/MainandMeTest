@@ -11,4 +11,9 @@
 @interface HomeVC : UIViewController
 - (void)didLoginSuccessfuly;
 - (void)updateStore:(NSDictionary*)storeDict;
+
+- (void)removeCoverViewAnimated:(BOOL)animated;
+- (void)showAddressController;
+- (void)cameraButtinCliced:(UIButton*)button;
+
 @end

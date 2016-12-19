@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#define     APPID           @"2ea7d86854df4ca185af84e68ea72fe1" // production
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

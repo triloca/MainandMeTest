@@ -10,7 +10,7 @@
 
 @interface ProfileVC : UIViewController
 
-@property (strong, nonatomic) NSNumber* userID;
+@property (strong, nonatomic) NSString* userID;
 @property (strong, nonatomic) NSDictionary* user;
 @property (assign, nonatomic) BOOL isEditable;
 @property (assign, nonatomic) BOOL isMenu;

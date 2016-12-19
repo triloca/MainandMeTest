@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="olive-thin-webfont.ttf">
+            <string>Olive-Thin</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YourGPSCityViewController">
+            <connections>
+                <outlet property="cityAndMeButton" destination="zSM-K7-hfT" id="J29-PS-i0i"/>
+                <outlet property="cityLabel" destination="F4U-SY-QsB" id="JIP-Rp-hEH"/>
+                <outlet property="startBrowsingButton" destination="6lM-FM-7Yv" id="43j-2O-E8Z"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="10-Your GPS location.png" translatesAutoresizingMaskIntoConstraints="NO" id="2hz-9W-uVV">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" red="0.8862745098" green="0.1843137255" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lM-FM-7Yv">
+                    <rect key="frame" x="56" y="305" width="263" height="54"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="0.38656038850000002" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="startBrowsingButtonClicked:" destination="-1" eventType="touchUpInside" id="wwT-us-8BP"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ra4-8h-a1M">
+                    <rect key="frame" x="56" y="382" width="263" height="54"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="0.38656038850000002" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="editCityButtonClicked:" destination="-1" eventType="touchUpInside" id="qzu-85-Y4X"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOa-6q-Oa2">
+                    <rect key="frame" x="38" y="464" width="300" height="54"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="0.38656038850000002" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="windowShopButtonClicked:" destination="-1" eventType="touchUpInside" id="pej-bW-S99"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cPG-Ol-Mtp">
+                    <rect key="frame" x="38" y="554" width="300" height="53"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="0.38656038850000002" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <action selector="benefitsButtonClicked:" destination="-1" eventType="touchUpInside" id="pQD-91-8YB"/>
+                    </connections>
+                </button>
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zSM-K7-hfT">
+                    <rect key="frame" x="38" y="34" width="300" height="54"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="0.38656038850000002" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" name="Olive-Thin" family="Olive" pointSize="30"/>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="11" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="&lt;&lt;GPScity&gt;&gt;&amp;Me" backgroundImage="IntroButton"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="F4U-SY-QsB">
+                    <rect key="frame" x="57" y="122" width="262" height="153"/>
+                    <string key="text">According to our best GPS
+estimate, you appear to be in
+&lt;&lt;GPS city w/ state abbrev&gt;&gt;
+Is that correct?</string>
+                    <fontDescription key="fontDescription" name="Chalkduster" family="Chalkduster" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ON8-rJ-WCL">
+                    <rect key="frame" x="187" y="0.0" width="0.0" height="34"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" id="ZZL-Cy-IL6"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o7U-Zg-JOz">
+                    <rect key="frame" x="187" y="88" width="0.0" height="34"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" id="Yan-Pr-paa"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Auw-Xc-WB6">
+                    <rect key="frame" x="188" y="359" width="0.0" height="23"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" id="cmA-ck-vQI"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0sg-lx-ubO">
+                    <rect key="frame" x="188" y="436" width="0.0" height="28"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" id="5te-kK-8mv"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F8U-Wv-KIk">
+                    <rect key="frame" x="188" y="518" width="0.0" height="36"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" id="O6h-Ny-fsC"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9g9-Jb-aaX">
+                    <rect key="frame" x="188" y="275" width="0.0" height="30"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" id="NhK-Vv-5gD"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="F8U-Wv-KIk" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.055" id="3UY-Dg-lS6"/>
+                <constraint firstItem="o7U-Zg-JOz" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="6iC-8O-d8p"/>
+                <constraint firstAttribute="bottom" secondItem="2hz-9W-uVV" secondAttribute="bottom" id="833-hZ-GDW"/>
+                <constraint firstItem="2hz-9W-uVV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="83v-Nk-g6p"/>
+                <constraint firstItem="Ra4-8h-a1M" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9UF-5b-ESi"/>
+                <constraint firstItem="2hz-9W-uVV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="9fn-3A-Hk3"/>
+                <constraint firstItem="cPG-Ol-Mtp" firstAttribute="top" secondItem="F8U-Wv-KIk" secondAttribute="bottom" id="Cp3-uf-qtg"/>
+                <constraint firstItem="zSM-K7-hfT" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="E5s-tH-vt6"/>
+                <constraint firstItem="F8U-Wv-KIk" firstAttribute="top" secondItem="HOa-6q-Oa2" secondAttribute="bottom" id="FBe-qQ-GVz"/>
+                <constraint firstItem="Ra4-8h-a1M" firstAttribute="top" secondItem="Auw-Xc-WB6" secondAttribute="bottom" id="FHW-uv-AFN"/>
+                <constraint firstItem="6lM-FM-7Yv" firstAttribute="top" secondItem="9g9-Jb-aaX" secondAttribute="bottom" id="Hjl-xI-51d"/>
+                <constraint firstItem="HOa-6q-Oa2" firstAttribute="top" secondItem="0sg-lx-ubO" secondAttribute="bottom" id="MP5-cW-8NL"/>
+                <constraint firstItem="zSM-K7-hfT" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.08" id="Mf1-qe-g76"/>
+                <constraint firstItem="HOa-6q-Oa2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="O6V-Y6-nf2"/>
+                <constraint firstItem="Auw-Xc-WB6" firstAttribute="top" secondItem="6lM-FM-7Yv" secondAttribute="bottom" id="QZV-jO-OpV"/>
+                <constraint firstItem="ON8-rJ-WCL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Qg6-vE-6Tz"/>
+                <constraint firstItem="cPG-Ol-Mtp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="RPR-mG-qSt"/>
+                <constraint firstItem="F4U-SY-QsB" firstAttribute="top" secondItem="o7U-Zg-JOz" secondAttribute="bottom" id="RrC-yr-Rnx"/>
+                <constraint firstItem="9g9-Jb-aaX" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Tuv-Ub-jvK"/>
+                <constraint firstItem="ON8-rJ-WCL" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="WlM-7L-2fZ"/>
+                <constraint firstItem="F4U-SY-QsB" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="Wyf-99-waJ"/>
+                <constraint firstItem="9g9-Jb-aaX" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.045" id="ZFa-Bo-voZ"/>
+                <constraint firstItem="0sg-lx-ubO" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aZr-J2-AAI"/>
+                <constraint firstItem="9g9-Jb-aaX" firstAttribute="top" secondItem="F4U-SY-QsB" secondAttribute="bottom" id="cyB-Sa-mcH"/>
+                <constraint firstItem="6lM-FM-7Yv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="eTj-DO-uZX"/>
+                <constraint firstItem="0sg-lx-ubO" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.043" id="eqO-FE-zT9"/>
+                <constraint firstItem="ON8-rJ-WCL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="fNv-VJ-0ky"/>
+                <constraint firstItem="o7U-Zg-JOz" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="gOf-p5-V4x"/>
+                <constraint firstItem="o7U-Zg-JOz" firstAttribute="top" secondItem="zSM-K7-hfT" secondAttribute="bottom" id="gQg-4b-CPD"/>
+                <constraint firstItem="6lM-FM-7Yv" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="hgF-7x-BhJ"/>
+                <constraint firstItem="HOa-6q-Oa2" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.08" id="jsz-VZ-wJZ"/>
+                <constraint firstItem="Auw-Xc-WB6" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.035" id="kCh-pO-0Jx"/>
+                <constraint firstItem="Auw-Xc-WB6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="kMK-cH-H3X"/>
+                <constraint firstItem="HOa-6q-Oa2" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="lvJ-0f-nBc"/>
+                <constraint firstItem="Ra4-8h-a1M" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="m9i-yY-utr"/>
+                <constraint firstItem="F4U-SY-QsB" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nrA-Ia-28e"/>
+                <constraint firstAttribute="trailing" secondItem="2hz-9W-uVV" secondAttribute="trailing" id="pVJ-WL-jOb"/>
+                <constraint firstItem="cPG-Ol-Mtp" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.08" id="qVd-8A-yGd"/>
+                <constraint firstItem="F4U-SY-QsB" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.23" id="rWs-t5-YlK"/>
+                <constraint firstItem="Ra4-8h-a1M" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.08" id="tTJ-GY-BA6"/>
+                <constraint firstItem="0sg-lx-ubO" firstAttribute="top" secondItem="Ra4-8h-a1M" secondAttribute="bottom" id="tUs-Fy-VHG"/>
+                <constraint firstItem="6lM-FM-7Yv" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.08" id="u7Q-V9-W7y"/>
+                <constraint firstItem="F8U-Wv-KIk" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="uLL-To-YG2"/>
+                <constraint firstItem="zSM-K7-hfT" firstAttribute="top" secondItem="ON8-rJ-WCL" secondAttribute="bottom" id="vuF-vC-XEk"/>
+                <constraint firstItem="zSM-K7-hfT" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="x1Z-am-Vm8"/>
+                <constraint firstItem="cPG-Ol-Mtp" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="x6v-e0-mB6"/>
+            </constraints>
+            <point key="canvasLocation" x="24.5" y="51.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="10-Your GPS location.png" width="1242" height="2208"/>
+        <image name="IntroButton" width="492" height="97"/>
+    </resources>
+</document>

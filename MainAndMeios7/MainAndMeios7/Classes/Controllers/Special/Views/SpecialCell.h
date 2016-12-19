@@ -14,10 +14,10 @@
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;
-@property (strong, nonatomic) IBOutlet UIView *gradientView;
-@property (strong, readonly, nonatomic) NSDictionary *product;
+@property (strong, nonatomic) NSDictionary *cellInfo;
 
-- (void) setProduct: (NSDictionary *) product;
-- (void)setupCampaign:(CKCampaign*)campaign;
+@property (weak, nonatomic) IBOutlet UILabel *linkLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+
 
 @end

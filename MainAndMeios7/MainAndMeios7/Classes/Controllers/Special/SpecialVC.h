@@ -11,5 +11,6 @@
 
 @interface SpecialVC : UIViewController
 
-
+@property (strong, nonatomic) NSArray* collectionArray;
+@property (assign, nonatomic) NSInteger selectedIndex;
 @end

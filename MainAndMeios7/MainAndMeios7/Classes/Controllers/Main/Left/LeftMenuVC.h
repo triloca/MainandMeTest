@@ -11,5 +11,5 @@
 @interface LeftMenuVC : UIViewController
 
 - (void)loadNotificationCount;
-
+- (void)showIntroPresentationView;
 @end

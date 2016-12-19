@@ -49,7 +49,7 @@
     bottomCoverView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     [self addSubview:bottomCoverView];
     
-    [self setSearchFieldBackgroundImage:[UIImage imageNamed:@"scope_bar_background2.png"]forState:UIControlStateNormal];
+    [self setSearchFieldBackgroundImage:[UIImage imageNamed:@"scope_bar_background3.png"]forState:UIControlStateNormal];
 
 }
 

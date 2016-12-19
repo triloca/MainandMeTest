@@ -10,6 +10,7 @@
 
 @interface StoreDetailsView ()
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinnerView;
 
 @end
 
@@ -40,14 +41,14 @@
                                              cachePolicy:NSURLRequestReloadIgnoringCacheData
                                          timeoutInterval:30];
     
-    
+    [_spinnerView startAnimating];
     [_storeImageView setImageWithURLRequest:request
                           placeholderImage:nil
                               failureImage:nil
                           progressViewSize:CGSizeMake(_storeImageView.frame.size.width - 16, 10)
                          progressViewStile:UIProgressViewStyleDefault
                          progressTintColor:[UIColor whiteColor]
-                            trackTintColor:[UIColor greenColor]
+                            trackTintColor:[UIColor lightGrayColor]
                                 sizePolicy:UNImageSizePolicyScaleAspectFill
                                cachePolicy:UNImageCachePolicyMemoryAndFileCache
                                    success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
@@ -56,11 +57,11 @@
                                        NSLog(@"%@", NSStringFromCGSize(image.size));
                                        [self setNeedsUpdateConstraints];
                                        [self setNeedsLayout];
-                                       
+                                       [_spinnerView stopAnimating];
                                    }
                                    failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                                        NSLog(@"Image Failed");
-                                       
+                                       [_spinnerView stopAnimating];
                                    }
                                   progress:^(NSURLRequest *request, NSHTTPURLResponse *response, float progress) {
                                       

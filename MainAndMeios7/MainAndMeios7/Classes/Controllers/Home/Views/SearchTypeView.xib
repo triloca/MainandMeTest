@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="dinbek-regular.ttf">
-            <string>DINBek-Regular</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -20,10 +16,9 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bRH-pE-C09">
-                    <rect key="frame" x="115" y="8" width="90" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="14"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRH-pE-C09">
+                    <rect key="frame" x="112" y="8" width="96" height="30"/>
+                    <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="14"/>
                     <state key="normal" title="Items">
                         <color key="titleColor" red="0.086274509799999996" green="0.090196078430000007" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -40,10 +35,9 @@
                         <action selector="itemsButtonUp:" destination="iN0-l3-epB" eventType="touchUpOutside" id="A6B-Il-BvO"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="DVC-TN-D9X">
-                    <rect key="frame" x="213" y="8" width="99" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="14"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DVC-TN-D9X">
+                    <rect key="frame" x="216" y="8" width="96" height="30"/>
+                    <fontDescription key="fontDescription" name="AvenirNextCondensed-Regular" family="Avenir Next Condensed" pointSize="14"/>
                     <state key="normal" title="Storefronts">
                         <color key="titleColor" red="0.086274509799999996" green="0.090196078430000007" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -60,11 +54,10 @@
                         <action selector="storefrontsButtonUp:" destination="iN0-l3-epB" eventType="touchUpOutside" id="Dm2-9o-3eF"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="df0-XI-YDB">
-                    <rect key="frame" x="8" y="8" width="99" height="30"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" name="DINBek-Regular" family="DINBek" pointSize="14"/>
-                    <state key="normal" title="Sales &amp; Events">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="df0-XI-YDB">
+                    <rect key="frame" x="8" y="8" width="96" height="30"/>
+                    <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="13"/>
+                    <state key="normal" title="&quot;Sales &amp; Events&quot;">
                         <color key="titleColor" red="0.086274509799999996" green="0.090196078430000007" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
@@ -80,13 +73,49 @@
                         <action selector="specialsButtonUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="dWY-tp-TTa"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="enc-uu-XVF">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="enc-uu-XVF">
                     <rect key="frame" x="221" y="41" width="92" height="3"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.2156862745" green="0.73725490199999999" blue="0.4823529412" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </imageView>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g1M-k1-Pdf">
+                    <rect key="frame" x="96" y="2" width="16" height="13"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H19-9B-mG1">
+                            <rect key="frame" x="5" y="1" width="6" height="11"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.5490196078431373" green="0.21568627450980393" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="H19-9B-mG1" secondAttribute="trailing" constant="5" id="Bzs-tM-D5X"/>
+                        <constraint firstItem="H19-9B-mG1" firstAttribute="top" secondItem="g1M-k1-Pdf" secondAttribute="top" constant="1" id="MbP-mR-Xbu"/>
+                        <constraint firstAttribute="bottom" secondItem="H19-9B-mG1" secondAttribute="bottom" constant="1" id="UUF-vS-q0k"/>
+                        <constraint firstItem="H19-9B-mG1" firstAttribute="leading" secondItem="g1M-k1-Pdf" secondAttribute="leading" constant="5" id="kdi-ys-4eL"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="DVC-TN-D9X" firstAttribute="leading" secondItem="bRH-pE-C09" secondAttribute="trailing" constant="8" id="0gZ-Df-s36"/>
+                <constraint firstItem="df0-XI-YDB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="6xe-G1-O85"/>
+                <constraint firstItem="bRH-pE-C09" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="9ob-yR-ygq"/>
+                <constraint firstItem="df0-XI-YDB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="AmP-Wz-vhs"/>
+                <constraint firstItem="g1M-k1-Pdf" firstAttribute="centerX" secondItem="df0-XI-YDB" secondAttribute="trailing" id="EFK-wu-Yrk"/>
+                <constraint firstItem="g1M-k1-Pdf" firstAttribute="centerY" secondItem="df0-XI-YDB" secondAttribute="top" id="F2v-cJ-fHc"/>
+                <constraint firstAttribute="trailing" secondItem="DVC-TN-D9X" secondAttribute="trailing" constant="8" id="H0k-NZ-yr0"/>
+                <constraint firstAttribute="bottom" secondItem="df0-XI-YDB" secondAttribute="bottom" constant="6" id="NNO-RQ-4MB"/>
+                <constraint firstItem="DVC-TN-D9X" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="aBf-GP-2jh"/>
+                <constraint firstAttribute="bottom" secondItem="DVC-TN-D9X" secondAttribute="bottom" constant="6" id="hfo-pZ-0ma"/>
+                <constraint firstAttribute="bottom" secondItem="bRH-pE-C09" secondAttribute="bottom" constant="6" id="lRa-KK-oAQ"/>
+                <constraint firstItem="bRH-pE-C09" firstAttribute="width" secondItem="df0-XI-YDB" secondAttribute="width" priority="700" id="mEl-81-jgV"/>
+                <constraint firstItem="bRH-pE-C09" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="s9a-fe-c4Q"/>
+                <constraint firstItem="DVC-TN-D9X" firstAttribute="width" secondItem="df0-XI-YDB" secondAttribute="width" id="sHs-tj-hxl"/>
+                <constraint firstItem="bRH-pE-C09" firstAttribute="leading" secondItem="df0-XI-YDB" secondAttribute="trailing" constant="8" id="w3k-64-pjv"/>
+            </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
@@ -95,7 +124,9 @@
                 <outlet property="borderImageView" destination="enc-uu-XVF" id="xbK-3j-LJ3"/>
                 <outlet property="itemsButton" destination="bRH-pE-C09" id="SWv-jk-ECU"/>
                 <outlet property="specialsButton" destination="df0-XI-YDB" id="H0Q-1i-rJa"/>
+                <outlet property="storebadgeContentView" destination="g1M-k1-Pdf" id="gd0-qN-hFn"/>
                 <outlet property="storefrontsButton" destination="DVC-TN-D9X" id="dF1-2p-cDN"/>
+                <outlet property="storesBadgeLabel" destination="H19-9B-mG1" id="sGY-Pn-jxV"/>
             </connections>
             <point key="canvasLocation" x="178" y="102"/>
         </view>
