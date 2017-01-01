@@ -122,7 +122,7 @@
 }
 
 - (void)selectItems{
-     [self specialsButtonDown:_itemsButton];
+     [self itemsButtonDown:_itemsButton];
 }
 
 - (void)selectStorefronts{

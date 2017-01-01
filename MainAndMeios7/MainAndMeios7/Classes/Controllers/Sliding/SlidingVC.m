@@ -10,6 +10,7 @@
 #import "RegistrationVC.h"
 #import "ProductDetailsManager.h"
 #import "IntroViewController.h"
+#import "SearchManager.h"
 
 @interface SlidingVC ()
 
@@ -55,6 +56,28 @@
     
     //return;
     self.anchorRightRevealAmount = 242;
+    
+    [self showSpinnerWithName:@""];
+    [self showLoginSuccess:^(LoginVC *loginVC, NSString *token) {
+        [self hideSpinnerWithName:@""];
+        
+        [loginVC.navigationController dismissViewControllerAnimated:YES
+                                                         completion:^{}];
+        [[LayoutManager shared] profileNVC];
+        [LayoutManager shared].profileVC.userID = [CommonManager shared].userId;
+        [[LayoutManager shared].profileVC view];
+        
+        [[LayoutManager shared].homeVC didLoginSuccessfuly];
+        
+    }
+           alreadyLoggedIn:^(LoginVC *loginVC, NSString *token) {
+               [self hideSpinnerWithName:@""];
+               
+               [[LayoutManager shared].rootNVC popViewControllerAnimated:NO];
+               [[LayoutManager shared].homeVC didLoginSuccessfuly];
+           }];
+
+    return;
     
     if (![IntroViewController wasShown]) {
         IntroViewController* introVC = [IntroViewController loadFromXIBForScrrenSizes];
@@ -144,6 +167,19 @@
                 [LayoutManager shared].profileVC.userID = [CommonManager shared].userId;
                 [[LayoutManager shared].profileVC view];
                 
+                CLLocation* location = [[CLLocation alloc] initWithLatitude:[@"42.39179993" floatValue]
+                                                                 longitude:[@"-71.56089783" floatValue]];
+                [SearchManager shared].communityLocation = location;
+                [SearchManager shared].city = @"Hudson";
+                [SearchManager shared].state = @"MA";
+                [SearchManager shared].communityID = @"16744";
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"kCommunityChanged" object:nil];
+                [SearchManager shared].cityWasSelected = YES;
+                
+                [[LayoutManager shared].homeVC view];
+                [[LayoutManager shared].homeVC removeCoverViewAnimated:NO];
+                [[LayoutManager shared].homeVC.searchTypeView selectItems];
+
                 [[LayoutManager shared].homeVC didLoginSuccessfuly];
                 
             }

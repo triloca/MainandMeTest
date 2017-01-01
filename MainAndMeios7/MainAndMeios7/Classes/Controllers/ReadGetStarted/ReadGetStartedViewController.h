@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ReadGetStartedViewController : UIViewController
-
+@property (copy, nonatomic) void (^didClickHomeButton)(ReadGetStartedViewController* sender);
+@property (copy, nonatomic) void (^didClickPhotoButton)(ReadGetStartedViewController* sender);
 @end

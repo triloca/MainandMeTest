@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -41,20 +41,46 @@
                         <action selector="getStartedButtonClicked:" destination="-1" eventType="touchUpInside" id="cLS-tO-qA4"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iU4-Jh-uJd">
+                    <rect key="frame" x="0.0" y="0.0" width="75" height="53"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="53" id="sGk-3I-Twc"/>
+                    </constraints>
+                    <connections>
+                        <action selector="getStartedButtonClicked:" destination="-1" eventType="touchUpInside" id="Vyj-EE-3Mk"/>
+                        <action selector="homeButtonClicked:" destination="-1" eventType="touchUpInside" id="ikx-yL-e0O"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UGn-cO-m7w">
+                    <rect key="frame" x="300" y="0.0" width="75" height="53"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="53" id="oZS-l8-kKP"/>
+                    </constraints>
+                    <connections>
+                        <action selector="getStartedButtonClicked:" destination="-1" eventType="touchUpInside" id="RRO-kz-5iq"/>
+                        <action selector="photoButtonClicked:" destination="-1" eventType="touchUpInside" id="3ai-Hf-KuL"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="ajS-Le-Ujt" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.6" id="2d9-WD-8Uy"/>
                 <constraint firstItem="yeK-du-zXD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3Ef-FB-L2s"/>
+                <constraint firstAttribute="trailing" secondItem="UGn-cO-m7w" secondAttribute="trailing" id="3mE-F8-nEM"/>
                 <constraint firstItem="0gh-zz-p6M" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.4" id="QLi-D7-fhK"/>
+                <constraint firstItem="UGn-cO-m7w" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ya7-RX-fuh"/>
                 <constraint firstAttribute="trailing" secondItem="yeK-du-zXD" secondAttribute="trailing" id="YfC-bW-bft"/>
                 <constraint firstItem="0gh-zz-p6M" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="b5x-zO-SWG"/>
+                <constraint firstItem="ajS-Le-Ujt" firstAttribute="leading" secondItem="iU4-Jh-uJd" secondAttribute="trailing" id="cU0-3c-wZX"/>
                 <constraint firstAttribute="bottom" secondItem="0gh-zz-p6M" secondAttribute="bottom" constant="7" id="fFH-Lv-Z7E"/>
                 <constraint firstAttribute="bottom" secondItem="yeK-du-zXD" secondAttribute="bottom" id="gcD-uI-9kF"/>
                 <constraint firstItem="yeK-du-zXD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gfN-6G-PUb"/>
+                <constraint firstItem="iU4-Jh-uJd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="h93-pn-cit"/>
                 <constraint firstItem="ajS-Le-Ujt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="lGN-v3-7av"/>
                 <constraint firstItem="ajS-Le-Ujt" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="qSa-qn-ddo"/>
+                <constraint firstItem="UGn-cO-m7w" firstAttribute="leading" secondItem="ajS-Le-Ujt" secondAttribute="trailing" id="qYR-tE-rOO"/>
+                <constraint firstItem="iU4-Jh-uJd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="tV3-rb-fBZ"/>
             </constraints>
             <connections>
                 <outletCollection property="gestureRecognizers" destination="rdn-iB-JUV" appends="YES" id="rl1-3G-vnY"/>

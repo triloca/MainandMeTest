@@ -15,4 +15,18 @@
     // Initialization code
 }
 
+
+- (IBAction)chatButtonClicked:(id)sender {
+    if (_didClickChatButton) {
+        _didClickChatButton(self);
+    }
+}
+
+- (IBAction)homeButtonClicked:(id)sender {
+    if (_didClickHomeButton) {
+        _didClickHomeButton(self);
+    }
+
+}
+
 @end

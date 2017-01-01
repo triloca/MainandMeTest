@@ -16,5 +16,6 @@
 @property (copy, nonatomic) void (^didClickAddLocalBussines)(IntroPresentViewController* obj);
 @property (copy, nonatomic) void (^didClickWindshop)(IntroPresentViewController* obj);
 @property (copy, nonatomic) void (^didClickChat)(IntroPresentViewController* obj);
+@property (copy, nonatomic) void (^didClickHome)(IntroPresentViewController* obj);
 
 @end

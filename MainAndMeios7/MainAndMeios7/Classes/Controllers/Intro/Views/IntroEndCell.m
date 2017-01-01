@@ -48,4 +48,10 @@
     }
 }
     
+- (IBAction)backButtonClicked:(id)sender {
+    if (_didClickBack) {
+        _didClickBack(self);
+    }
+}
+
 @end

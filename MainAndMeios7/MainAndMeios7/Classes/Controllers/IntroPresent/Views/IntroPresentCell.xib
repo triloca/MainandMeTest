@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="olive-thin-webfont.ttf">
+            <string>Olive-Thin</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -22,13 +27,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="306" height="366"/>
                         <color key="backgroundColor" red="0.8862745098" green="0.1843137255" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBV-GN-Xed">
+                        <rect key="frame" x="0.0" y="0.0" width="54" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="38" id="LfB-eG-tkk"/>
+                            <constraint firstAttribute="width" constant="54" id="rvJ-jO-chh"/>
+                        </constraints>
+                        <connections>
+                            <action selector="homeButtonClicked:" destination="gTV-IL-0wX" eventType="touchUpInside" id="aOl-Hf-QOk"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PKA-5f-Jid">
+                        <rect key="frame" x="252" y="8" width="54" height="38"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="38" id="CDx-Sa-Vad"/>
+                            <constraint firstAttribute="width" constant="54" id="bmz-d8-Ekn"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Olive-Thin" family="Olive" pointSize="28"/>
+                        <state key="normal" title="Chat">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                        <connections>
+                            <action selector="chatButtonClicked:" destination="gTV-IL-0wX" eventType="touchUpInside" id="lr8-0n-vDC"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="PKA-5f-Jid" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="8" id="5Lz-IN-ksa"/>
+                <constraint firstItem="EBV-GN-Xed" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="CP0-od-VkI"/>
                 <constraint firstItem="Jsj-kN-gjn" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="GCu-Bm-k03"/>
                 <constraint firstAttribute="bottom" secondItem="Jsj-kN-gjn" secondAttribute="bottom" id="IOk-PO-QBW"/>
                 <constraint firstAttribute="trailing" secondItem="Jsj-kN-gjn" secondAttribute="trailing" id="TSW-Y5-x88"/>
+                <constraint firstAttribute="trailing" secondItem="PKA-5f-Jid" secondAttribute="trailing" id="nKM-zw-WSo"/>
                 <constraint firstItem="Jsj-kN-gjn" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ov0-uh-tLh"/>
+                <constraint firstItem="EBV-GN-Xed" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="q3e-SY-pou"/>
             </constraints>
             <size key="customSize" width="306" height="366"/>
             <connections>

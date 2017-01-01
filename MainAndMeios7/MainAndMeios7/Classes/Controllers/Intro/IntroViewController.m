@@ -78,7 +78,7 @@
                                       @"CellIdentifier" : @"IntroEndCell",
                                       @"ImageName" : @"9-End of tutorial.png"}];
 
-    [self startTimer];
+    //[self startTimer];
     
     //! Update page control view
     self.pageControl.numberOfPages = self.collectionArray.count;
@@ -151,6 +151,24 @@
     
     cell.contentImageView.image = [UIImage imageNamed:imageName];
     
+    if ([cellType isEqualToString:@"IntroCell"]) {
+        
+        if (indexPath.row == 0){
+            cell.skipButton.hidden = NO;
+        }else{
+            cell.skipButton.hidden = YES;
+        }
+            
+        
+        cell.didClickEndTutorial = ^(IntroCell* obj){
+            NSIndexPath* iP = [NSIndexPath indexPathForItem:self.collectionArray.count - 1 inSection:0];
+
+            [self.collectionView scrollToItemAtIndexPath:iP
+                                   atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+                                           animated:YES];
+        };
+    }
+    
     if ([cellType isEqualToString:@"IntroEndCell"]) {
         IntroEndCell* introEndCell = (IntroEndCell*)cell;
         
@@ -189,6 +207,15 @@
                 _didClickSeeBenefits(wSelf);
             }
         };
+        
+        introEndCell.didClickBack = ^(IntroEndCell* obj){
+            NSIndexPath* iP = [NSIndexPath indexPathForItem:self.collectionArray.count - 2 inSection:0];
+            
+            [self.collectionView scrollToItemAtIndexPath:iP
+                                        atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally
+                                                animated:YES];
+        };
+
 
     }
     

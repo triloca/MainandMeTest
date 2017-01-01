@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -25,14 +25,14 @@
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tY0-8p-rlJ">
                         <rect key="frame" x="50" y="19" width="234" height="46"/>
-                        <color key="backgroundColor" white="0.66666666669999997" alpha="0.38656038850000002" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>
                             <action selector="endTutorialButtonClicked:" destination="Nw0-Po-axP" eventType="touchUpInside" id="nuu-4b-gdn"/>
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKS-ga-YMl">
                         <rect key="frame" x="17" y="192" width="301" height="46"/>
-                        <color key="backgroundColor" white="0.66666666669999997" alpha="0.38656038850000002" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>
                             <action selector="seeTownsButtonClicked:" destination="Nw0-Po-axP" eventType="touchUpInside" id="zhk-FZ-GIO"/>
                         </connections>
@@ -53,7 +53,7 @@
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bJe-b2-RrM">
                         <rect key="frame" x="50" y="262" width="234" height="46"/>
-                        <color key="backgroundColor" white="0.66666666669999997" alpha="0.38656038850000002" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>
                             <action selector="addItemButtonClicked:" destination="Nw0-Po-axP" eventType="touchUpInside" id="xun-Gd-lsZ"/>
                         </connections>
@@ -67,7 +67,7 @@
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J0q-FF-hvL">
                         <rect key="frame" x="50" y="332" width="234" height="46"/>
-                        <color key="backgroundColor" white="0.66666666669999997" alpha="0.38656038850000002" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>
                             <action selector="addLocalBussines:" destination="Nw0-Po-axP" eventType="touchUpInside" id="Yk6-62-ZGl"/>
                         </connections>
@@ -81,7 +81,7 @@
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w3A-wU-onm">
                         <rect key="frame" x="33" y="402" width="268" height="46"/>
-                        <color key="backgroundColor" white="0.66666666669999997" alpha="0.38656038850000002" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>
                             <action selector="windshopButtonClicked:" destination="Nw0-Po-axP" eventType="touchUpInside" id="n2Y-rS-c8R"/>
                         </connections>
@@ -95,7 +95,7 @@
                     </view>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p4C-Y0-v1o">
                         <rect key="frame" x="50" y="480" width="234" height="46"/>
-                        <color key="backgroundColor" white="0.66666666669999997" alpha="0.38656038850000002" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <connections>
                             <action selector="seeBenefitsButtonClicked:" destination="Nw0-Po-axP" eventType="touchUpInside" id="tjT-DZ-s2d"/>
                         </connections>

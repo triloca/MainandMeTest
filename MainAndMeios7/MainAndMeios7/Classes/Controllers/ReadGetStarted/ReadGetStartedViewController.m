@@ -58,5 +58,16 @@
             
         } forApp:APPID];
 }
+- (IBAction)homeButtonClicked:(id)sender {
+    if (_didClickHomeButton) {
+        _didClickHomeButton(self);
+    }
+}
+
+- (IBAction)photoButtonClicked:(id)sender {
+    if (_didClickPhotoButton) {
+        _didClickPhotoButton(self);
+    }
+}
 
 @end

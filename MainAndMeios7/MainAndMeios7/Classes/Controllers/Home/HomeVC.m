@@ -8,8 +8,6 @@
 
 #import "HomeVC.h"
 #import "UIFont+All.h"
-#import "SearchTypeView.h"
-#import "SearchTypeView.h"
 #import "TMQuiltView.h"
 #import "HomeStoreCell.h"
 #import "HomeItemCell.h"
@@ -56,6 +54,7 @@
 
 #import "LoadSalesEventsRequest.h"
 #import "SalesAndEventsView.h"
+#import "IntroPresentViewController.h"
 
 typedef enum {
     ScreenStateStore = 0,
@@ -81,7 +80,6 @@ UIActionSheetDelegate,
 UIImagePickerControllerDelegate,
 UINavigationControllerDelegate>
 
-@property (strong, nonatomic) SearchTypeView *searchTypeView;
 @property (weak, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (assign, nonatomic) BOOL searchShouldBeginEditing;
 
@@ -143,34 +141,6 @@ UINavigationControllerDelegate>
     UIBarButtonItem *anchorLeftButton  = [[UIBarButtonItem alloc] initWithCustomView:menuButton];
     self.navigationItem.leftBarButtonItem = anchorLeftButton;
     
-    [self setupSearchTypeView];
-    
-    
-    [self configSearchBar];
-    
-    [_searchTypeView selectStorefronts];
-    self.searchTypeView.hideTriger = YES;
-    [self.searchTypeView unselectAll];
-
-    [self setupCollectionView];
-    [self setupStorefrontHorisontalView];
-    
-    //[self setupHorisontalView];
-    
-    [self setupSpecialsView];
-    
-    
-    self.collectionArray = [NSMutableArray new];
-    
-    [_quiltView addInfiniteScrollingWithActionHandler:^{
-        [wSelf searchRequest];
-    }];
-    
-    [self startSearch];
-    
-    _searchShouldBeginEditing = YES;
-    
-    [self updateByListStyle];
     
     //! Add camera button
     UIButton* customButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -182,9 +152,33 @@ UINavigationControllerDelegate>
     
     self.automaticallyAdjustsScrollViewInsets = NO;
 
-    [self addCoverViewAnimated:YES];
     
+    [self setupSearchTypeView];
+    [self.searchTypeView unselectAll];
+    [self.searchTypeView selectStorefronts];
+    
+    [self configSearchBar];
+
+    [self setupCollectionView];
+    [self setupStorefrontHorisontalView];
+    
+    [self setupSpecialsView];
+    
+    self.collectionArray = [NSMutableArray new];
+    
+    [_quiltView addInfiniteScrollingWithActionHandler:^{
+        [wSelf searchRequest];
+    }];
+    
+    [self startSearch];
+    
+    _searchShouldBeginEditing = YES;
     _searchBar.placeholder = @"Tap to search by keyword or category";
+
+    
+    //[self updateByListStyle];
+    
+    [self addCoverViewAnimated:YES];
     
     [self setupSalesAndEvenysView];
 }
@@ -568,6 +562,77 @@ UINavigationControllerDelegate>
         
         [self.navigationController presentViewController:yourGPSCityVC animated:YES completion:^{}];
     }
+
+
+- (void)showIntroPresentationView{
+    IntroPresentViewController* introPresentViewController = [IntroPresentViewController loadFromXIBForScrrenSizes];
+    UINavigationController* navVC = [[UINavigationController alloc] initWithRootViewController:introPresentViewController];
+    navVC.navigationBarHidden = YES;
+    
+    introPresentViewController.didClickAddItem = ^(IntroPresentViewController* obj){
+        
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        HomeVC* homeVC = [LayoutManager shared].homeNVC.viewControllers.firstObject;
+        [homeVC removeCoverViewAnimated:NO];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        });
+        
+        [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{
+            [obj dismissViewControllerAnimated:YES completion:^{
+                [homeVC cameraButtinCliced:nil];
+            }];
+        }];
+        
+    };
+    
+    introPresentViewController.didClickAddLocalBussines = ^(IntroPresentViewController* obj){
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        HomeVC* homeVC = [LayoutManager shared].homeNVC.viewControllers.firstObject;
+        [homeVC removeCoverViewAnimated:NO];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [homeVC showAddressController];
+        });
+        
+        [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{
+            [obj dismissViewControllerAnimated:YES completion:^{}];
+        }];
+        
+    };
+    
+    introPresentViewController.didClickWindshop = ^(IntroPresentViewController* obj){
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        HomeVC* homeVC = [LayoutManager shared].homeNVC.viewControllers.firstObject;
+        [homeVC removeCoverViewAnimated:NO];
+        
+        [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{
+            [obj dismissViewControllerAnimated:YES completion:^{}];
+        }];
+    };
+    
+    introPresentViewController.didClickHome = ^(IntroPresentViewController* obj){
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+        [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+        
+        [obj dismissViewControllerAnimated:YES completion:^{}];
+        
+    };
+    
+    
+    [[LayoutManager shared].slidingVC presentViewController:navVC animated:YES completion:^{
+        
+    }];
+    
+    //[LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].aboutNVC;
+    //[[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+    
+    
+}
 
 - (void)setupSearchTypeView{
     
@@ -1537,8 +1602,6 @@ UINavigationControllerDelegate>
 #pragma mark _______________________ Public Methods ________________________
 
 - (void)didLoginSuccessfuly{
-
-    [IntroViewController setWasShown:YES];
     
     [[ProductDetailsManager shared] trackLoginSuccess:^{
         
@@ -1551,6 +1614,80 @@ UINavigationControllerDelegate>
                                             }];
     
     
+    if (![IntroViewController wasShown] || 1) {
+        IntroViewController* introVC = [IntroViewController loadFromXIBForScrrenSizes];
+        [[LayoutManager shared].rootNVC  pushViewController:introVC animated:NO];
+        
+        introVC.didClickEndTutorial = ^(IntroViewController* obj){
+            
+            return;
+            
+            [IntroViewController setWasShown:YES];
+            [[LayoutManager shared].rootNVC  popViewControllerAnimated:NO];
+
+            
+            [self removeCoverViewAnimated:NO];
+            [self.searchTypeView selectItems];
+            [self.searchTypeView itemsButtonUp:nil];
+            [self startSearch];
+            
+        };
+        
+        introVC.didClickSeeTowns = ^(IntroViewController* obj){
+            
+            [obj.navigationController popViewControllerAnimated:NO];
+
+            [self checkCommunity];
+        };
+        
+        introVC.didClickAddItem = ^(IntroViewController* obj){
+                           [[LayoutManager shared] profileNVC];
+            [obj.navigationController popViewControllerAnimated:NO];
+            [self cameraButtinCliced:nil];
+            
+        };
+        
+        introVC.didClickAddLocalBussines = ^(IntroViewController* obj){
+          
+                [[LayoutManager shared] profileNVC];
+                [LayoutManager shared].profileVC.userID = [CommonManager shared].userId;
+                [[LayoutManager shared].profileVC view];
+                
+                [[LayoutManager shared].homeVC didLoginSuccessfuly];
+            
+        };
+        
+        introVC.didClickWindshop = ^(IntroViewController* obj){
+                [[LayoutManager shared] profileNVC];
+                [LayoutManager shared].profileVC.userID = [CommonManager shared].userId;
+                [[LayoutManager shared].profileVC view];
+                
+                CLLocation* location = [[CLLocation alloc] initWithLatitude:[@"42.39179993" floatValue]
+                                                                  longitude:[@"-71.56089783" floatValue]];
+                [SearchManager shared].communityLocation = location;
+                [SearchManager shared].city = @"Hudson";
+                [SearchManager shared].state = @"MA";
+                [SearchManager shared].communityID = @"16744";
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"kCommunityChanged" object:nil];
+                [SearchManager shared].cityWasSelected = YES;
+                
+                [[LayoutManager shared].homeVC view];
+                [[LayoutManager shared].homeVC removeCoverViewAnimated:NO];
+                [[LayoutManager shared].homeVC.searchTypeView selectItems];
+                
+            [obj.navigationController popViewControllerAnimated:NO];
+            
+        };
+        
+        introVC.didClickSeeBenefits = ^(IntroViewController* obj){
+            [obj.navigationController popViewControllerAnimated:NO];
+            [self showIntroPresentationView];
+        };
+    }else{
+    
+    }
+    
+    return;
     
     if ([SearchManager shared].cityWasSelected) {
         
@@ -1575,9 +1712,10 @@ UINavigationControllerDelegate>
                                                                   
                                                                   
                                                                   [[NSNotificationCenter defaultCenter] postNotificationName:@"kCommunityChanged" object:nil];
+                                                                  [SearchManager shared].cityWasSelected = YES;
                                                               }
                                                               
-                                                              [self showYourCityController];
+                                                              //[self showYourCityController];
                                                               /*
                                                               [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
                                                                   if (alertView.cancelButtonIndex != buttonIndex) {
@@ -1613,6 +1751,74 @@ UINavigationControllerDelegate>
    
     }
 
+
+}
+
+- (void)checkCommunity{
+    if ([SearchManager shared].cityWasSelected) {
+        [[LayoutManager shared].rootNVC.presentedViewController dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+        [self showYourCityController];
+    }else{
+        
+        [self showSpinnerWithName:@"community"];
+        //CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(42.36, -71.06);
+        [[ProductsStoresManager shared] loadCommunitiesByLocation:[LocationManager sharedManager].currentLocation.coordinate
+                                                          success:^(NSArray *objects) {
+                                                              [self hideSpinnerWithName:@"community"];
+                                                              NSDictionary* obj = [objects firstObject];
+                                                              
+                                                              if (obj){
+                                                                  CLLocation* location = [[CLLocation alloc]initWithLatitude:[[obj safeNumberObjectForKey:@"lat"] floatValue]
+                                                                                                                   longitude:[[obj safeNumberObjectForKey:@"lng"] floatValue]];
+                                                                  
+                                                                  
+                                                                  [SearchManager shared].communityLocation = location;
+                                                                  [SearchManager shared].city = [obj safeStringObjectForKey:@"city"];
+                                                                  [SearchManager shared].state = [obj safeStringObjectForKey:@"state"];
+                                                                  [SearchManager shared].communityID = [[obj safeNSNumberObjectForKey:@"id"] stringValue];
+                                                                  
+                                                                  
+                                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"kCommunityChanged" object:nil];
+                                                                  [SearchManager shared].cityWasSelected = YES;
+                                                              }
+                                                              
+                                                              [self showYourCityController];
+                                                              /*
+                                                               [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                                               if (alertView.cancelButtonIndex != buttonIndex) {
+                                                               [self showAddressController];
+                                                               }
+                                                               [[SearchManager shared] setCityWasSelected:YES];
+                                                               }
+                                                               title:@"Keep this city as your location, or change city?"
+                                                               message:nil
+                                                               cancelButtonTitle:@"Keep"
+                                                               otherButtonTitles:@"Change", nil];
+                                                               */
+                                                          }
+                                                          failure:^(NSError *error, NSString *errorString) {
+                                                              [self hideSpinnerWithName:@"community"];
+                                                              
+                                                              [[AlertManager shared] showAlertWithCallBack:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                                                                  if (alertView.cancelButtonIndex != buttonIndex) {
+                                                                      [self showAddressController];
+                                                                  }
+                                                                  [[SearchManager shared] setCityWasSelected:YES];
+                                                              }
+                                                                                                     title:@"Keep this city as your location, or change city?"
+                                                                                                   message:nil
+                                                                                         cancelButtonTitle:@"Keep"
+                                                                                         otherButtonTitles:@"Change", nil];
+                                                              
+                                                          }
+                                                        exception:^(NSString *exceptionString) {
+                                                            [self hideSpinnerWithName:@"community"];
+                                                        }];
+        
+        
+    }
 
 }
 

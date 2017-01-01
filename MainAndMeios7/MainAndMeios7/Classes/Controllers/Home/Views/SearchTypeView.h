@@ -33,6 +33,10 @@ typedef enum {
 - (void)selectItems;
 - (void)selectStorefronts;
 
+- (IBAction)specialsButtonUp:(UIButton *)sender;
+- (IBAction)itemsButtonUp:(UIButton *)sender;
+- (IBAction)storefrontsButtonUp:(UIButton *)sender;
+
 - (void)unselectAll;
 
 - (void)setStoreBadgeNumber:(NSInteger)value;

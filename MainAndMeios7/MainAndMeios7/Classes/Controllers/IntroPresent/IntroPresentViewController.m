@@ -14,6 +14,7 @@
 #import "hipmob/HMService.h"
 #import "AppDelegate.h"
 
+
 @interface IntroPresentViewController ()
 @property (strong, nonatomic) NSMutableArray* collectionArray;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -131,6 +132,28 @@
     }
 }
 
+- (IBAction)showChat{
+    
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
+    
+    // open a chat view
+    [[HMService sharedService] openChatWithPush:self withSetup:^(HMContentChatViewController * controller){
+        // set the title of the chat window
+        controller.title = @"Chat with an Operator";
+        [self.navigationController setNavigationBarHidden:NO animated:NO];
+        
+        //controller.navigationBar.barTintColor = [UIColor redColor];
+        
+        //controller.chatView.sentTextColor = [UIColor redColor];
+        
+        //controller.chatView.sendMedia.hidden = YES;
+        
+        //[controller.chatView setCustomData:@"Timestamp" forKey:@"Joined"];
+        //[controller.chatView setCustomData:@"$100K" forKey:@"Budget"];
+        
+    } forApp:APPID];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -153,14 +176,35 @@
     NSString *cellIdentifier = cellInfo[@"CellIdentifier"];
     NSString* imageName = cellInfo[@"ImageName"];
     
-    IntroPresentCell *cell = (IntroPresentCell *) [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
-    
-    cell.contentImageView.image = [UIImage imageNamed:imageName];
     
     
+    
+    if ([cellType isEqualToString:@"IntroPresentCell"]) {
+        IntroPresentCell *cell = (IntroPresentCell *) [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+        
+        cell.contentImageView.image = [UIImage imageNamed:imageName];
+        
+        cell.didClickHomeButton = ^(IntroPresentCell* sender){
+            if (self.didClickHome) {
+                self.didClickHome(self);
+            }
+        };
+        
+        cell.didClickChatButton = ^(IntroPresentCell* sender){
+            [self showChat];
+        };
+        
+        [cell setNeedsLayout];
+        [cell layoutIfNeeded];
+        
+        return cell;
+
+    }else
+
     if ([cellType isEqualToString:@"IntroPresentEndCell"]) {
-        IntroPresentEndCell* introEndCell = (IntroPresentEndCell*)cell;
-                
+        IntroPresentEndCell *introEndCell = (IntroPresentEndCell *) [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
+        introEndCell.contentImageView.image = [UIImage imageNamed:imageName];
+        
         introEndCell.didClickEndTutorial = ^(IntroPresentEndCell* obj){
             [wSelf dismissViewControllerAnimated:YES completion:^{}];
         };
@@ -208,13 +252,16 @@
             } forApp:APPID];
 
         };
+        
+        [introEndCell setNeedsLayout];
+        [introEndCell layoutIfNeeded];
+        
+        return introEndCell;
+
 
     }
     
-    [cell setNeedsLayout];
-    [cell layoutIfNeeded];
-    
-    return cell;
+    return nil;
     
 }
 

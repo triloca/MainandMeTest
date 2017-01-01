@@ -11,7 +11,9 @@
 @interface IntroEndCell : UICollectionViewCell
     @property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
     @property (copy, nonatomic) void (^didClickEndTutorial)(IntroEndCell* obj);
-    
+    @property (copy, nonatomic) void (^didClickBack)(IntroEndCell* obj);
+
+
     @property (copy, nonatomic) void (^didClickSeeTowns)(IntroEndCell* obj);
     @property (copy, nonatomic) void (^didClickAddItem)(IntroEndCell* obj);
     @property (copy, nonatomic) void (^didClickAddLocalBussines)(IntroEndCell* obj);

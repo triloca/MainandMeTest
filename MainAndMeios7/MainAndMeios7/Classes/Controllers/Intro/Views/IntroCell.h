@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface IntroCell : UICollectionViewCell
+
+@property (weak, nonatomic) IBOutlet UIButton *skipButton;
+
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
+@property (copy, nonatomic) void (^didClickEndTutorial)(IntroCell* obj);
 
 @end

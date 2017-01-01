@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,7 +23,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="idf-kB-OgX">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <rect key="frame" x="0.0" y="-10" width="375" height="677"/>
                     <color key="backgroundColor" red="0.49411764705882355" green="0.49411764705882355" blue="0.49411764705882355" alpha="1" colorSpace="calibratedRGB"/>
                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fEM-id-A18">
                         <size key="itemSize" width="50" height="50"/>
@@ -57,7 +57,7 @@
                 <constraint firstItem="d8k-vJ-t3w" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="GcF-GS-pb8"/>
                 <constraint firstAttribute="bottom" secondItem="5e0-f9-wJe" secondAttribute="bottom" id="MKh-Jl-cF7"/>
                 <constraint firstItem="5e0-f9-wJe" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.06" id="Q0m-jL-Cd2"/>
-                <constraint firstItem="idf-kB-OgX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Qdd-Xn-qhD"/>
+                <constraint firstItem="idf-kB-OgX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="-10" id="Qdd-Xn-qhD"/>
                 <constraint firstAttribute="bottom" secondItem="idf-kB-OgX" secondAttribute="bottom" id="SIa-Mh-uQT"/>
                 <constraint firstItem="5e0-f9-wJe" firstAttribute="top" secondItem="d8k-vJ-t3w" secondAttribute="bottom" id="fjQ-rB-UMr"/>
                 <constraint firstAttribute="trailing" secondItem="idf-kB-OgX" secondAttribute="trailing" id="lzs-tq-Nxh"/>

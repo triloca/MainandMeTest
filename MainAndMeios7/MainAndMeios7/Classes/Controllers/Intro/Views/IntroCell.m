@@ -14,5 +14,10 @@
     [super awakeFromNib];
     // Initialization code
 }
+- (IBAction)skipButonClicked:(id)sender {
+    if (_didClickEndTutorial) {
+        _didClickEndTutorial(self);
+    }
+}
 
 @end

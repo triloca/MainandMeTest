@@ -11,4 +11,7 @@
 @interface IntroPresentCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *contentImageView;
 
+@property (copy, nonatomic) void (^didClickChatButton)(IntroPresentCell* sender);
+
+@property (copy, nonatomic) void (^didClickHomeButton)(IntroPresentCell* sender);
 @end

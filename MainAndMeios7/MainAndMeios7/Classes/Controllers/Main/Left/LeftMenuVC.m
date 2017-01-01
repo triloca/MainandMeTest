@@ -10,6 +10,7 @@
 #import "LeftMenuCell.h"
 #import "GetNotificationsRequest.h"
 #import "IntroPresentViewController.h"
+#import "ReadGetStartedViewController.h"
 
 @interface LeftMenuVC ()
 
@@ -56,18 +57,17 @@
 #pragma mark _______________________ Privat Methods ________________________
 
 - (void)loadData{
-    _tableArray = @[@"\"Sales & Events\"",
+    _tableArray = @[@"Sales & Events",
                     @"Home",
                     @"Search",
                     @"All Places",
                     @"My wishlists",
                     @"Places I Follow",
-                    //@"Places I follow",
                     @"Notifications",
                     @"Edit my profile",
-                    //@"Invite friends",
-                    @"\"Main&Me Tutorials\"",
-                    @"\"Sponsor page\"",
+                    @"Benefits to towns",
+                    @"Get started",
+                    @"Sponsor page",
                     @"Privacy Policy",
                     @"Log out"];
 }
@@ -193,19 +193,25 @@
             
             break;
         }
+            
         case 9:{
+            [self showReadGetStartedView];
+            
+            break;
+        }
+        case 10:{
             [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].sponsoredByNVC;
             [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
             
             break;
         }
-        case 10:{
+        case 11:{
             [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].privacyPolicyNVC;
             [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
             
             break;
         }
-        case 11:{
+        case 12:{
             [[CommonManager shared] logout];
             [LayoutManager createSlidingVC];
             break;
@@ -234,6 +240,104 @@
     }];
 }
 
+- (void)showReadGetStartedView{
+    ReadGetStartedViewController* readGetStartedViewController = [ReadGetStartedViewController loadFromXIBForScrrenSizes];
+
+    UINavigationController* navVC = [[UINavigationController alloc] initWithRootViewController:readGetStartedViewController];
+    navVC.navigationBarHidden = YES;
+    
+    
+    readGetStartedViewController.didClickHomeButton = ^(ReadGetStartedViewController* sender){
+        
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+        [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+        
+        [sender dismissViewControllerAnimated:YES completion:^{
+            
+        }];
+    };
+    
+    readGetStartedViewController.didClickPhotoButton = ^(ReadGetStartedViewController* sender){
+       
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        HomeVC* homeVC = [LayoutManager shared].homeNVC.viewControllers.firstObject;
+        [homeVC removeCoverViewAnimated:NO];
+        [[LayoutManager shared].slidingVC anchorTopViewToLeftAnimated:NO];
+
+        [sender dismissViewControllerAnimated:YES completion:^{
+        }];
+        
+        [[LayoutManager shared].homeVC cameraButtinCliced:nil];
+
+    };
+
+    
+    readGetStartedViewController.didClickHomeButton = ^(ReadGetStartedViewController* sender){
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+        [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+        
+        [sender dismissViewControllerAnimated:YES completion:^{}];
+    };
+    
+    /*
+    introPresentViewController.didClickAddItem = ^(IntroPresentViewController* obj){
+        
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        HomeVC* homeVC = [LayoutManager shared].homeNVC.viewControllers.firstObject;
+        [homeVC removeCoverViewAnimated:NO];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        });
+        
+        [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{
+            [obj dismissViewControllerAnimated:YES completion:^{
+                [homeVC cameraButtinCliced:nil];
+            }];
+        }];
+        
+    };
+    
+    introPresentViewController.didClickAddLocalBussines = ^(IntroPresentViewController* obj){
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        HomeVC* homeVC = [LayoutManager shared].homeNVC.viewControllers.firstObject;
+        [homeVC removeCoverViewAnimated:NO];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [homeVC showAddressController];
+        });
+        
+        [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{
+            [obj dismissViewControllerAnimated:YES completion:^{}];
+        }];
+        
+    };
+    
+    introPresentViewController.didClickWindshop = ^(IntroPresentViewController* obj){
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+        [[LayoutManager shared].homeNVC popToRootViewControllerAnimated:NO];
+        HomeVC* homeVC = [LayoutManager shared].homeNVC.viewControllers.firstObject;
+        [homeVC removeCoverViewAnimated:NO];
+        
+        [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{
+            [obj dismissViewControllerAnimated:YES completion:^{}];
+        }];
+    };
+    
+     */
+    
+    [[LayoutManager shared].slidingVC presentViewController:navVC animated:YES completion:^{
+        
+    }];
+    
+    //[LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].aboutNVC;
+    //[[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+    
+    
+}
 
 - (void)showIntroPresentationView{
     IntroPresentViewController* introPresentViewController = [IntroPresentViewController loadFromXIBForScrrenSizes];
@@ -285,6 +389,15 @@
             [obj dismissViewControllerAnimated:YES completion:^{}];
         }];
     };
+    
+    introPresentViewController.didClickHome = ^(IntroPresentViewController* obj){
+        [LayoutManager shared].slidingVC.topViewController = [LayoutManager shared].homeNVC;
+        [[LayoutManager shared].slidingVC resetTopViewAnimated:YES onComplete:^{}];
+        
+        [obj dismissViewControllerAnimated:YES completion:^{}];
+
+    };
+
     
     [[LayoutManager shared].slidingVC presentViewController:navVC animated:YES completion:^{
         

@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SearchTypeView.h"
 
 @interface HomeVC : UIViewController
+
+@property (strong, nonatomic) SearchTypeView *searchTypeView;
+
 - (void)didLoginSuccessfuly;
 - (void)updateStore:(NSDictionary*)storeDict;
 
